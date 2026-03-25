@@ -74,6 +74,8 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
   .logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; color: var(--warm-white); text-decoration: none; }
   .logo-icon { font-size: 22px; }
   .header-tag { font-size: 12px; color: var(--peach); font-weight: 500; opacity: 0.85; }
+  .header-back { font-size: 12px; color: var(--peach); font-weight: 600; text-decoration: none; opacity: 0.85; transition: opacity 0.15s; }
+  .header-back:hover { opacity: 1; }
 
   /* ── VOORTGANGSBALK ── */
   .progress-track { height: 4px; background: var(--cream); }
@@ -207,6 +209,7 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
     <span class="logo-icon">🧠</span>Umely
   </a>
   <span class="header-tag">[MODULE_TITEL]</span>
+  <a class="header-back" href="/modules.html">← Bibliotheek</a>
 </header>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 

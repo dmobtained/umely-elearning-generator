@@ -28,6 +28,7 @@ const SYSTEM_PROMPT = `Je bent een AI-agent van Umely — "Jouw vaste AI-partner
 - Lettertype: 'Inter', system-ui, sans-serif
 - Knoppen: background linear-gradient(135deg, #FF8514, #FF4D00), border-radius 50px, color white, font-weight 700
 - Header/Footer achtergrond: #27292D (Charcoal), witte/peach tekst
+- Header bevat rechts altijd een "← Bibliotheek" link naar /modules.html (kleur: #FFD7AD, font-weight 600)
 - Badges: background #F7E6C2, color #FF4D00
 - VERBODEN: blauw, paars, of #FF5A1F als primaire kleur
 
