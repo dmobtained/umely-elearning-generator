@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-learning Bibliotheek | Umely</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF5A1F;
+    --orange-dark: #E04A10;
+    --black: #0F0F0F;
+    --white: #FFFFFF;
+    --gray-light: #F5F5F5;
+    --gray-text: #4A4A4A;
+    --gray-border: #E8E8E8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--gray-light); color: var(--gray-text); min-height: 100vh; }
+
+  header {
+    background: var(--white); border-bottom: 1px solid var(--gray-border);
+    padding: 0 32px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; color: var(--black); text-decoration: none; }
+  .header-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-sm {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700;
+    cursor: pointer; text-decoration: none; border: none;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--orange); color: white; }
+  .btn-primary:hover { background: var(--orange-dark); }
+  .btn-ghost { background: var(--white); color: var(--orange); border: 2px solid var(--orange); }
+  .btn-ghost:hover { background: #FFF0EB; }
+
+  main { max-width: 1000px; margin: 0 auto; padding: 48px 20px; }
+
+  .page-header { margin-bottom: 36px; }
+  .page-header h1 { font-size: 32px; font-weight: 800; color: var(--black); margin-bottom: 8px; }
+  .page-header p { font-size: 15px; color: var(--gray-text); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .module-card {
+    background: var(--white); border: 1px solid var(--gray-border);
+    border-radius: 14px; padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    display: flex; flex-direction: column; gap: 12px;
+    transition: box-shadow 0.2s, transform 0.15s;
+    text-decoration: none; color: inherit;
+  }
+  .module-card:hover { box-shadow: 0 6px 24px rgba(255,90,31,0.13); transform: translateY(-2px); }
+
+  .module-icon { font-size: 32px; }
+  .module-title { font-size: 17px; font-weight: 700; color: var(--black); line-height: 1.3; }
+  .module-date { font-size: 12px; color: #aaa; }
+  .module-badge {
+    display: inline-block; padding: 3px 12px;
+    background: #FFF0EB; color: var(--orange);
+    border-radius: 50px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    align-self: flex-start;
+  }
+  .module-footer {
+    margin-top: auto; padding-top: 12px;
+    border-top: 1px solid var(--gray-border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .module-link {
+    font-size: 13px; font-weight: 700; color: var(--orange);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .btn-delete {
+    background: none; border: none; cursor: pointer;
+    color: #ccc; font-size: 16px; padding: 4px 6px; border-radius: 6px;
+    transition: color 0.15s, background 0.15s; line-height: 1;
+  }
+  .btn-delete:hover { color: #EF4444; background: #FEF2F2; }
+
+  .empty-state { text-align: center; padding: 80px 20px; }
+  .empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
+  .empty-state h2 { font-size: 22px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
+  .empty-state p { color: var(--gray-text); margin-bottom: 24px; }
+
+  .loading { text-align: center; padding: 80px; color: var(--gray-text); font-size: 15px; }
+
+  footer { border-top: 1px solid var(--gray-border); padding: 24px 32px; text-align: center; background: var(--white); margin-top: 64px; }
+  footer p { font-size: 13px; color: var(--gray-text); }
+  footer a { color: var(--orange); font-weight: 600; text-decoration: none; }
+
+  @media(max-width:600px) {
+    .grid { grid-template-columns: 1fr; }
+    main { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <span>🧠</span>Umely
+  </a>
+  <div class="header-actions">
+    <a class="btn-sm btn-ghost" href="/">+ Nieuwe e-learning</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>📚 E-learning Bibliotheek</h1>
+    <p>Alle gegenereerde e-learning modules, direct te openen in je browser.</p>
+  </div>
+
+  <div id="grid" class="loading">Modules laden...</div>
+</main>
+
+<footer>
+  <p>🧠 <strong>Umely</strong> — Jouw vaste AI-partner | <a href="https://umely.ai" target="_blank">umely.ai</a></p>
+</footer>
+
+<script>
+const icons = ['📘','🎯','🧠','🚀','💡','🌿','📈','🤝','🔥','⚙️','💻','🍷','🦁'];
+
+async function loadModules() {
+  const grid = document.getElementById('grid');
+  try {
+    const res = await fetch('/api/modules');
+    const modules = await res.json();
+
+    if (modules.length === 0) {
+      grid.className = '';
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">📭</div>
+          <h2>Nog geen modules</h2>
+          <p>Genereer je eerste e-learning via de homepage.</p>
+          <a href="/" class="btn-sm btn-primary" style="display:inline-flex;align-items:center;gap:6px;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:700;background:#FF5A1F;color:white;text-decoration:none;">✨ Maak eerste e-learning</a>
+        </div>`;
+      return;
+    }
+
+    grid.className = 'grid';
+    grid.innerHTML = modules.map((m, i) => {
+      const icon = icons[i % icons.length];
+      const dateFormatted = new Date(m.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+      return `
+        <div class="module-card" style="cursor:default">
+          <div class="module-icon">${icon}</div>
+          <div class="module-badge">Umely E-learning</div>
+          <a class="module-title" href="${m.url}" target="_blank" style="color:var(--black);text-decoration:none;">${m.title}</a>
+          <div class="module-date">Aangemaakt op ${dateFormatted}</div>
+          <div class="module-footer">
+            <a class="module-link" href="${m.url}" target="_blank">Bekijk module →</a>
+            <button class="btn-delete" title="Verwijder module" onclick="deleteModule('${m.slug}', '${m.title.replace(/'/g, "\\'")}', this)">🗑</button>
+          </div>
+        </div>`;
+    }).join('');
+  } catch (e) {
+    grid.innerHTML = '<div class="empty-state"><p>Kon modules niet laden. Is de server actief?</p></div>';
+  }
+}
+
+async function deleteModule(slug, title, btn) {
+  if (!confirm(`Weet je zeker dat je "${title}" wilt verwijderen?`)) return;
+  btn.disabled = true;
+  btn.textContent = '⏳';
+  try {
+    const res = await fetch(`/api/modules/${slug}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error(`Server gaf ${res.status} terug`);
+    // Remove the card from DOM
+    btn.closest('.module-card').remove();
+    // Show empty state if no cards left
+    const grid = document.getElementById('grid');
+    if (grid.querySelectorAll('.module-card').length === 0) {
+      grid.className = '';
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">📭</div>
+          <h2>Nog geen modules</h2>
+          <p>Genereer je eerste e-learning via de homepage.</p>
+          <a href="/" class="btn-sm btn-primary" style="display:inline-flex;align-items:center;gap:6px;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:700;background:#FF5A1F;color:white;text-decoration:none;">✨ Maak eerste e-learning</a>
+        </div>`;
+    }
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = '🗑';
+    alert('Fout: ' + e.message);
+  }
+}
+
+loadModules();
+</script>
+</body>
+</html>
