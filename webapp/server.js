@@ -106,6 +106,11 @@ app.post('/generate', async (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
 
+  // Keep-alive ping elke 20 seconden
+  const keepAlive = setInterval(() => {
+    res.write(': ping\n\n');
+  }, 20000);
+
   try {
     const stream = await client.messages.stream({
       model: 'claude-opus-4-6',
@@ -151,8 +156,10 @@ app.post('/generate', async (req, res) => {
     } else {
       res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
     }
+    clearInterval(keepAlive);
     res.end();
   } catch (err) {
+    clearInterval(keepAlive);
     console.error(err);
     res.write(`data: ${JSON.stringify({ error: err.message })}\n\n`);
     res.end();
