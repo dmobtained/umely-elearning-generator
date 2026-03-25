@@ -77,12 +77,14 @@
     font-size: 13px; font-weight: 700; color: var(--orange);
     display: flex; align-items: center; gap: 4px;
   }
-  .btn-delete {
+  .card-actions { display: flex; gap: 4px; }
+  .btn-delete, .btn-rename {
     background: none; border: none; cursor: pointer;
     color: #ccc; font-size: 16px; padding: 4px 6px; border-radius: 6px;
     transition: color 0.15s, background 0.15s; line-height: 1;
   }
   .btn-delete:hover { color: #EF4444; background: #FEF2F2; }
+  .btn-rename:hover { color: var(--orange); background: #FFF0EB; }
 
   .empty-state { text-align: center; padding: 80px 20px; }
   .empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
@@ -158,12 +160,41 @@ async function loadModules() {
           <div class="module-date">Aangemaakt op ${dateFormatted}</div>
           <div class="module-footer">
             <a class="module-link" href="${m.url}" target="_blank">Bekijk module →</a>
-            <button class="btn-delete" title="Verwijder module" onclick="deleteModule('${m.slug}', '${m.title.replace(/'/g, "\\'")}', this)">🗑</button>
+            <div class="card-actions">
+              <button class="btn-rename" title="Naam wijzigen" onclick="renameModule('${m.slug}', this)">✏️</button>
+              <button class="btn-delete" title="Verwijder module" onclick="deleteModule('${m.slug}', '${m.title.replace(/'/g, "\\'")}', this)">🗑</button>
+            </div>
           </div>
         </div>`;
     }).join('');
   } catch (e) {
     grid.innerHTML = '<div class="empty-state"><p>Kon modules niet laden. Is de server actief?</p></div>';
+  }
+}
+
+async function renameModule(slug, btn) {
+  const card = btn.closest('.module-card');
+  const titleEl = card.querySelector('.module-title');
+  const currentTitle = titleEl.textContent;
+
+  const newTitle = prompt('Nieuwe naam voor deze e-learning:', currentTitle);
+  if (!newTitle || newTitle.trim() === currentTitle) return;
+
+  btn.disabled = true;
+  btn.textContent = '⏳';
+  try {
+    const res = await fetch(`/api/modules/${slug}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: newTitle.trim() })
+    });
+    if (!res.ok) throw new Error(`Server gaf ${res.status} terug`);
+    titleEl.textContent = newTitle.trim();
+  } catch (e) {
+    alert('Fout: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✏️';
   }
 }
 

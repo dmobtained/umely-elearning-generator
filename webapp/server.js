@@ -11,6 +11,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
+// In-memory job store
+const jobs = {};
+
 const SYSTEM_PROMPT = `Je bent een AI-agent van Umely — "Jouw vaste AI-partner." Jouw taak: automatisch complete, interactieve e-learning modules genereren vanuit transcripties of samenvattingen.
 
 ## Umely Huisstijl (EXACT overnemen)
@@ -55,6 +58,77 @@ Elke e-learning MOET bevatten:
 
 Genereer ALLEEN de volledige HTML — geen uitleg, geen markdown, geen code blocks. Begin direct met <!DOCTYPE html>.`;
 
+// ── Start genereren (geeft direct jobId terug) ──
+app.post('/generate', async (req, res) => {
+  const { transcription } = req.body;
+  if (!transcription || transcription.trim().length < 10) {
+    return res.status(400).json({ error: 'Transcriptie is te kort of leeg.' });
+  }
+
+  const jobId = Date.now().toString(36) + Math.random().toString(36).slice(2);
+  jobs[jobId] = { status: 'generating', progress: 0 };
+  res.json({ jobId });
+
+  // Genereer op de achtergrond
+  (async () => {
+    try {
+      const stream = await client.messages.stream({
+        model: 'claude-opus-4-6',
+        max_tokens: 32000,
+        system: SYSTEM_PROMPT,
+        messages: [{
+          role: 'user',
+          content: `Genereer een complete interactieve e-learning op basis van de volgende transcriptie:\n\n${transcription}`
+        }]
+      });
+
+      let fullHtml = '';
+      let chars = 0;
+      for await (const event of stream) {
+        if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
+          fullHtml += event.delta.text;
+          chars += event.delta.text.length;
+          jobs[jobId].progress = Math.min(95, Math.round(chars / 300));
+        }
+      }
+
+      if (fullHtml.includes('<!DOCTYPE html>')) {
+        const titleMatch = fullHtml.match(/<title>([^<]+)<\/title>/i);
+        const rawTitle = titleMatch
+          ? titleMatch[1].replace(' | Umely E-learning', '').trim()
+          : 'elearning';
+        const slug = rawTitle
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/gi, '-')
+          .replace(/^-|-$/g, '')
+          .slice(0, 40);
+        const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        const filename = `elearning-${slug}-${date}.html`;
+
+        await supabase.from('modules').insert({ filename, title: rawTitle, html: fullHtml });
+
+        jobs[jobId] = {
+          status: 'done',
+          slug: filename.replace('.html', ''),
+          url: `/modules/${filename.replace('.html', '')}`
+        };
+      } else {
+        jobs[jobId] = { status: 'error', error: 'Gegenereerde output is ongeldig.' };
+      }
+    } catch (err) {
+      console.error(err);
+      jobs[jobId] = { status: 'error', error: err.message };
+    }
+  })();
+});
+
+// ── Poll job status ──
+app.get('/api/job/:jobId', (req, res) => {
+  const job = jobs[req.params.jobId];
+  if (!job) return res.status(404).json({ error: 'Job niet gevonden' });
+  res.json(job);
+});
+
 // ── API: lijst van alle modules ──
 app.get('/api/modules', async (req, res) => {
   const { data, error } = await supabase
@@ -84,92 +158,25 @@ app.get('/modules/:slug', async (req, res) => {
   res.send(data.html);
 });
 
-// ── Verwijder een module ──
-app.delete('/api/modules/:slug', async (req, res) => {
+// ── Hernoem een module ──
+app.patch('/api/modules/:slug', async (req, res) => {
   const filename = req.params.slug + '.html';
-  const { error } = await supabase
-    .from('modules')
-    .delete()
-    .eq('filename', filename);
+  const { title } = req.body;
+  if (!title || !title.trim()) return res.status(400).json({ error: 'Titel mag niet leeg zijn.' });
+  const { error } = await supabase.from('modules').update({ title: title.trim() }).eq('filename', filename);
   if (error) return res.status(500).json({ error: error.message });
   res.json({ ok: true });
 });
 
-// ── Generate endpoint (streaming) ──
-app.post('/generate', async (req, res) => {
-  const { transcription } = req.body;
-  if (!transcription || transcription.trim().length < 10) {
-    return res.status(400).json({ error: 'Transcriptie is te kort of leeg.' });
-  }
-
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.setHeader('X-Accel-Buffering', 'no');
-  res.flushHeaders();
-
-  // Keep-alive ping elke 20 seconden
-  const keepAlive = setInterval(() => {
-    res.write(': ping\n\n');
-  }, 20000);
-
-  try {
-    const stream = await client.messages.stream({
-      model: 'claude-opus-4-6',
-      max_tokens: 32000,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: `Genereer een complete interactieve e-learning op basis van de volgende transcriptie:\n\n${transcription}`
-        }
-      ]
-    });
-
-    let fullHtml = '';
-    for await (const event of stream) {
-      if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
-        fullHtml += event.delta.text;
-        res.write(`data: ${JSON.stringify({ chunk: event.delta.text })}\n\n`);
-      }
-    }
-
-    // Opslaan in Supabase
-    if (fullHtml.includes('<!DOCTYPE html>')) {
-      const titleMatch = fullHtml.match(/<title>([^<]+)<\/title>/i);
-      const rawTitle = titleMatch
-        ? titleMatch[1].replace(' | Umely E-learning', '').trim()
-        : 'elearning';
-      const slug = rawTitle
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/gi, '-')
-        .replace(/^-|-$/g, '')
-        .slice(0, 40);
-      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      const filename = `elearning-${slug}-${date}.html`;
-
-      await supabase.from('modules').insert({
-        filename,
-        title: rawTitle,
-        html: fullHtml
-      });
-
-      res.write(`data: ${JSON.stringify({ done: true, slug: filename.replace('.html', ''), url: `/modules/${filename.replace('.html', '')}` })}\n\n`);
-    } else {
-      res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
-    }
-    clearInterval(keepAlive);
-    res.end();
-  } catch (err) {
-    clearInterval(keepAlive);
-    console.error(err);
-    res.write(`data: ${JSON.stringify({ error: err.message })}\n\n`);
-    res.end();
-  }
+// ── Verwijder een module ──
+app.delete('/api/modules/:slug', async (req, res) => {
+  const filename = req.params.slug + '.html';
+  const { error } = await supabase.from('modules').delete().eq('filename', filename);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Umely E-learning Generator draait op http://localhost:${PORT}`);
-  console.log(`Module bibliotheek:            http://localhost:${PORT}/modules`);
 });
