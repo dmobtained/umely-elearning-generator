@@ -360,7 +360,7 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
     <div class="card">
       <div class="badge">Afsluitquiz</div>
       <h2>🏁 Test je kennis</h2>
-      <p>Beantwoord alle vragen. Je hebt minimaal <strong>70%</strong> nodig om je certificaat te ontvangen.</p>
+      <p>Beantwoord alle vragen. Je hebt minimaal <strong>80%</strong> nodig om je certificaat te ontvangen.</p>
       <div id="fqContainer" style="margin-top:24px"></div>
       <div class="btn-row">
         <button class="btn" onclick="submitFQ()">Verstuur antwoorden</button>
@@ -382,8 +382,10 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
         <h2>Certificaat behaald!</h2>
         <p style="font-size:16px;margin-top:8px"><strong>[MODULE_TITEL]</strong></p>
         <p>Je hebt deze Umely module succesvol afgerond.</p>
-        <p style="margin-top:12px;font-size:13px;color:var(--gray-text)">— Umely — umely.ai —</p>
-        <button class="btn" style="margin-top:20px" onclick="downloadCert()">⬇ Download certificaat (PDF)</button>
+        <p style="margin-top:4px;font-size:13px;color:var(--gray-text)" id="certDate"></p>
+        <div class="btn-row" style="justify-content:center;margin-top:20px">
+          <button class="btn" onclick="downloadCert()">⬇ Download certificaat</button>
+        </div>
       </div>
       <div class="btn-row" style="justify-content:center;margin-top:28px">
         <button class="btn btn-ghost" onclick="location.reload()">Opnieuw proberen</button>
@@ -549,11 +551,14 @@ function submitFQ() {
   goTo(6);
   document.getElementById('scoreNum').textContent = pct + '%';
   const msg = document.getElementById('resultMsg');
-  if (pct >= 70) {
+  if (pct >= 80) {
     msg.innerHTML = '<p style="color:#15803D;font-weight:600;font-size:16px;margin-top:8px">🎉 Gefeliciteerd! Je hebt het certificaat behaald.</p>';
-    document.getElementById('certBlock').style.display = 'block';
+    const certBlock = document.getElementById('certBlock');
+    certBlock.style.display = 'block';
+    const d = new Date();
+    document.getElementById('certDate').textContent = 'Behaald op ' + d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
   } else {
-    msg.innerHTML = `<p style="color:#991B1B;font-weight:600;font-size:16px;margin-top:8px">Je scoorde ${pct}%. Je hebt minimaal 70% nodig. Probeer het opnieuw!</p>`;
+    msg.innerHTML = `<p style="color:#991B1B;font-weight:600;font-size:16px;margin-top:8px">Je scoorde ${pct}%. Je hebt minimaal 80% nodig voor het certificaat. Probeer het opnieuw!</p>`;
   }
 }
 </script>

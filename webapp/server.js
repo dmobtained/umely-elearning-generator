@@ -3,10 +3,15 @@ const express = require('express');
 const Anthropic = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
+const multer = require('multer');
+const pdfParse = require('pdf-parse');
+const mammoth = require('mammoth');
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 3 });
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
@@ -40,7 +45,7 @@ Elke e-learning MOET bevatten:
 3. Drag-and-drop oefening — minstens 1 (in module 2)
 4. Voortgangsbalk — bovenaan, toont % voltooid
 5. Afsluitquiz — 5 vragen, directe feedback
-6. Resultaatscherm — score + certificaat bij ≥70% met downloadknop
+6. Resultaatscherm — score + certificaat bij ≥80% met downloadknop (printbaar PDF)
 
 ## Kwaliteitseisen
 - Één volledig werkend HTML-bestand (geen backend nodig)
@@ -125,6 +130,33 @@ app.post('/generate', async (req, res) => {
       jobs[jobId] = { status: 'error', error: err.message };
     }
   })();
+});
+
+// ── Bestand uploaden en tekst extraheren ──
+app.post('/extract-text', upload.single('file'), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'Geen bestand ontvangen.' });
+  const { mimetype, originalname, buffer } = req.file;
+  try {
+    let text = '';
+    if (mimetype === 'application/pdf' || originalname.endsWith('.pdf')) {
+      const data = await pdfParse(buffer);
+      text = data.text;
+    } else if (
+      mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+      originalname.endsWith('.docx')
+    ) {
+      const result = await mammoth.extractRawText({ buffer });
+      text = result.value;
+    } else {
+      text = buffer.toString('utf-8');
+    }
+    text = text.trim();
+    if (text.length < 50) return res.status(400).json({ error: 'Bestand bevat te weinig tekst.' });
+    res.json({ text });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Kon tekst niet lezen uit bestand.' });
+  }
 });
 
 // ── Poll job status ──

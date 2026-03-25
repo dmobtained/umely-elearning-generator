@@ -53,6 +53,28 @@
   label { display: block; font-size: 14px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
   .hint { font-size: 12px; color: var(--gray-text); margin-bottom: 12px; font-weight: 400; }
 
+  /* FILE UPLOAD */
+  .upload-area {
+    border: 2px dashed var(--gray-border); border-radius: 10px;
+    padding: 20px; text-align: center; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    margin-bottom: 12px;
+  }
+  .upload-area:hover, .upload-area.drag-over { border-color: var(--amber); background: #FFF7F2; }
+  .upload-area p { font-size: 13px; color: var(--gray-text); margin: 0; }
+  .upload-area strong { color: var(--amber); }
+  #fileInput { display: none; }
+  .file-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--cream); color: var(--flame); border-radius: 50px;
+    padding: 4px 12px; font-size: 12px; font-weight: 700; margin-top: 8px;
+  }
+  .file-badge button { background: none; border: none; cursor: pointer; color: var(--flame); font-size: 14px; line-height: 1; padding: 0 0 0 4px; }
+
+  .divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+  .divider hr { flex: 1; border: none; border-top: 1px solid var(--gray-border); }
+  .divider span { font-size: 12px; color: #aaa; font-weight: 600; white-space: nowrap; }
+
   textarea {
     width: 100%; height: 220px; padding: 16px;
     border: 2px solid var(--gray-border); border-radius: 10px;
@@ -116,8 +138,17 @@
   .error-box {
     background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px;
     padding: 14px 18px; margin-top: 16px; display: none;
+    display: none; flex-direction: column; gap: 10px;
   }
   .error-box p { font-size: 14px; color: #991B1B; font-weight: 500; margin: 0; }
+  .btn-retry {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700;
+    cursor: pointer; border: none; background: #991B1B; color: white;
+    transition: opacity 0.15s;
+  }
+  .btn-retry:hover { opacity: 0.85; }
 
   footer { padding: 24px 32px; text-align: center; background: var(--gradient); margin-top: 64px; }
   footer p { font-size: 13px; color: rgba(255,255,255,0.85); }
@@ -141,12 +172,23 @@
 <main>
   <div class="hero">
     <h1>Genereer een <span>e-learning</span><br>in één klik</h1>
-    <p>Plak een transcriptie of samenvatting en Umely genereert automatisch een complete interactieve e-learning module.</p>
+    <p>Plak een transcriptie of upload een bestand en Umely genereert automatisch een complete interactieve e-learning module.</p>
   </div>
 
   <div class="card">
-    <label for="transcription">Transcriptie of samenvatting</label>
-    <p class="hint">Plak hier de tekst van een video, training of document. Minimaal 100 woorden.</p>
+    <label>Transcriptie of samenvatting</label>
+
+    <!-- Bestand uploaden -->
+    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+      <p>📎 <strong>Klik om een bestand te uploaden</strong> of sleep het hiernaartoe</p>
+      <p style="margin-top:4px;font-size:11px;color:#aaa;">PDF, DOCX of TXT — max 20 MB</p>
+      <div id="fileBadge" style="display:none"></div>
+    </div>
+    <input type="file" id="fileInput" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+
+    <div class="divider"><hr><span>of plak tekst</span><hr></div>
+
+    <p class="hint">Minimaal 100 woorden voor een goede e-learning.</p>
     <textarea
       id="transcription"
       placeholder="Plak hier je transcriptie...&#10;&#10;Bijvoorbeeld: een samenvatting van een YouTube-video, een training of een intern document."
@@ -168,6 +210,7 @@
 
     <div class="error-box" id="errorBox">
       <p id="errorMsg"></p>
+      <button class="btn-retry" onclick="retryGenerate()">🔄 Probeer opnieuw</button>
     </div>
   </div>
 
@@ -208,6 +251,50 @@ const progressMessages = [
 let progressIndex = 0;
 let progressInterval;
 
+// ── BESTAND UPLOADEN ──
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+uploadArea.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadArea.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) handleFile(file);
+});
+fileInput.addEventListener('change', () => {
+  if (fileInput.files[0]) handleFile(fileInput.files[0]);
+});
+
+async function handleFile(file) {
+  const badge = document.getElementById('fileBadge');
+  badge.style.display = 'block';
+  badge.innerHTML = `<span class="file-badge">⏳ ${file.name} laden...</span>`;
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const res = await fetch('/extract-text', { method: 'POST', body: formData });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Kon bestand niet lezen');
+    document.getElementById('transcription').value = data.text;
+    badge.innerHTML = `<span class="file-badge">📄 ${file.name} <button onclick="clearFile()" title="Verwijder bestand">✕</button></span>`;
+  } catch (err) {
+    badge.innerHTML = '';
+    badge.style.display = 'none';
+    showError('Bestand lezen mislukt: ' + err.message);
+  }
+  fileInput.value = '';
+}
+
+function clearFile() {
+  document.getElementById('fileBadge').style.display = 'none';
+  document.getElementById('transcription').value = '';
+}
+
+// ── VOORTGANG ──
 function startProgress() {
   progressIndex = 0;
   document.getElementById('progressText').textContent = progressMessages[0];
@@ -221,6 +308,7 @@ function stopProgress() {
   clearInterval(progressInterval);
 }
 
+// ── GENEREREN ──
 async function generate() {
   const transcription = document.getElementById('transcription').value.trim();
   if (transcription.length < 50) {
@@ -228,7 +316,6 @@ async function generate() {
     return;
   }
 
-  // Reset UI
   hideError();
   document.getElementById('result').style.display = 'none';
   document.getElementById('status').style.display = 'block';
@@ -238,7 +325,6 @@ async function generate() {
   startProgress();
 
   try {
-    // Stap 1: start de job
     const response = await fetch('/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -252,7 +338,6 @@ async function generate() {
 
     const { jobId } = await response.json();
 
-    // Stap 2: poll de status
     await new Promise((resolve, reject) => {
       pollInterval = setInterval(async () => {
         try {
@@ -267,18 +352,13 @@ async function generate() {
 
           if (job.status === 'done') {
             clearInterval(pollInterval);
-
-            // Haal de gegenereerde HTML op via de module URL
             const htmlRes = await fetch(job.url);
             generatedHTML = await htmlRes.text();
-
-            // Toon de module link
             document.getElementById('moduleUrl').style.display = 'block';
             document.getElementById('moduleUrlText').textContent = job.url;
             document.getElementById('moduleUrlLink').href = job.url;
             document.getElementById('moduleLink').href = job.url;
             document.getElementById('moduleLink').style.display = 'inline-flex';
-
             resolve();
           }
         } catch (e) {
@@ -304,11 +384,15 @@ async function generate() {
   }
 }
 
+function retryGenerate() {
+  hideError();
+  generate();
+}
+
 function showResult() {
   const resultEl = document.getElementById('result');
   resultEl.style.display = 'block';
 
-  // Stel download knop in
   document.getElementById('downloadBtn').onclick = () => {
     const blob = new Blob([generatedHTML], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
@@ -339,7 +423,7 @@ function togglePreview() {
 function showError(msg) {
   const box = document.getElementById('errorBox');
   document.getElementById('errorMsg').textContent = msg;
-  box.style.display = 'block';
+  box.style.display = 'flex';
 }
 
 function hideError() {
