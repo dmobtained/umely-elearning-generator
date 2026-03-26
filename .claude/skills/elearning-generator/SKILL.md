@@ -44,36 +44,42 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --orange: #FF5A1F;
-    --orange-dark: #E04A10;
-    --black: #0F0F0F;
+    --amber: #FF8514;
+    --flame: #FF4D00;
+    --gold: #FFD964;
+    --charcoal: #27292D;
+    --warm-white: #FFF8F2;
     --white: #FFFFFF;
-    --gray-light: #F5F5F5;
+    --cream: #F7E6C2;
+    --peach: #FFD7AD;
     --gray-text: #4A4A4A;
-    --gray-border: #E8E8E8;
+    --gray-border: #EDE0D4;
     --green: #22C55E;
     --red: #EF4444;
+    --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
     --radius-btn: 50px;
     --radius-card: 12px;
     --shadow: 0 2px 16px rgba(0,0,0,0.07);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--white); color: var(--gray-text); line-height: 1.6; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); line-height: 1.6; }
 
   /* ── HEADER ── */
   header {
     position: sticky; top: 0; z-index: 100;
-    background: var(--white); border-bottom: 1px solid var(--gray-border);
+    background: var(--gradient); border-bottom: none;
     padding: 0 32px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; color: var(--black); text-decoration: none; }
+  .logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; color: white; text-decoration: none; }
   .logo-icon { font-size: 22px; }
-  .header-tag { font-size: 12px; color: var(--gray-text); font-weight: 500; opacity: 0.7; }
+  .header-tag { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500; }
+  .header-back { font-size: 12px; color: rgba(255,255,255,0.9); font-weight: 600; text-decoration: none; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; transition: background 0.15s; }
+  .header-back:hover { background: rgba(255,255,255,0.35); }
 
   /* ── VOORTGANGSBALK ── */
-  .progress-track { height: 4px; background: var(--gray-border); }
-  .progress-fill { height: 4px; background: var(--orange); width: 0%; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+  .progress-track { height: 4px; background: var(--cream); }
+  .progress-fill { height: 4px; background: var(--gradient); width: 0%; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
 
   /* ── LAYOUT ── */
   .page { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
@@ -82,19 +88,19 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
 
   /* ── KAARTEN ── */
   .card { background: var(--white); border: 1px solid var(--gray-border); border-radius: var(--radius-card); padding: 36px; box-shadow: var(--shadow); margin-bottom: 24px; }
-  .card-gray { background: var(--gray-light); border: none; }
+  .card-gray { background: var(--cream); border: none; }
 
   /* ── TYPOGRAFIE ── */
-  h1 { font-size: 32px; font-weight: 800; color: var(--black); line-height: 1.2; margin-bottom: 16px; }
-  h2 { font-size: 22px; font-weight: 700; color: var(--black); margin-bottom: 14px; }
-  h3 { font-size: 16px; font-weight: 600; color: var(--black); margin-bottom: 10px; }
+  h1 { font-size: 32px; font-weight: 800; color: var(--charcoal); line-height: 1.2; margin-bottom: 16px; }
+  h2 { font-size: 22px; font-weight: 700; color: var(--charcoal); margin-bottom: 14px; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
   p { font-size: 15px; line-height: 1.75; color: var(--gray-text); margin-bottom: 14px; }
   p:last-child { margin-bottom: 0; }
 
   /* ── BADGE ── */
   .badge {
     display: inline-block; padding: 4px 14px;
-    background: #FFF0EB; color: var(--orange);
+    background: var(--cream); color: var(--flame);
     border-radius: 50px; font-size: 12px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.5px;
     margin-bottom: 16px;
@@ -103,37 +109,37 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
   /* ── LEERDOELEN ── */
   .goals { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
   .goals li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; }
-  .goals li::before { content: "✓"; background: var(--orange); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .goals li::before { content: "✓"; background: var(--gradient); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 
   /* ── KNOPPEN ── */
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 28px; background: var(--orange); color: white;
+    padding: 14px 28px; background: var(--gradient); color: white;
     border: none; border-radius: var(--radius-btn);
     font-size: 15px; font-weight: 700; cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    transition: opacity 0.2s, transform 0.1s;
     text-decoration: none;
   }
-  .btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; pointer-events: none; }
   .btn:active { transform: translateY(0); }
-  .btn-ghost { background: transparent; color: var(--orange); border: 2px solid var(--orange); }
-  .btn-ghost:hover { background: #FFF0EB; }
+  .btn-ghost { background: transparent; color: var(--flame); border: 2px solid var(--amber); }
+  .btn-ghost:hover { background: var(--peach); }
   .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 
   /* ── INFOBLOK ── */
-  .info-block { background: #FFF0EB; border-left: 4px solid var(--orange); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 20px 0; }
-  .info-block p { color: var(--black); font-size: 14px; margin: 0; }
+  .info-block { background: var(--peach); border-left: 4px solid var(--flame); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 20px 0; }
+  .info-block p { color: var(--charcoal); font-size: 14px; margin: 0; }
 
   /* ── QUIZ ── */
-  .quiz-q { font-size: 16px; font-weight: 600; color: var(--black); margin-bottom: 14px; }
+  .quiz-q { font-size: 16px; font-weight: 600; color: var(--charcoal); margin-bottom: 14px; }
   .options { display: flex; flex-direction: column; gap: 10px; }
   .option {
     padding: 13px 18px; border: 2px solid var(--gray-border); border-radius: 10px;
     cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s;
     background: var(--white);
   }
-  .option:hover { border-color: var(--orange); background: #FFF0EB; color: var(--black); }
+  .option:hover { border-color: var(--amber); background: var(--peach); color: var(--charcoal); }
   .option.correct { border-color: var(--green); background: #F0FDF4; color: #15803D; pointer-events: none; }
   .option.wrong { border-color: var(--red); background: #FEF2F2; color: #991B1B; pointer-events: none; }
   .option.disabled { pointer-events: none; opacity: 0.6; }
@@ -148,9 +154,9 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
   .dnd-pool { display: flex; flex-direction: column; gap: 8px; }
   .dnd-pool-label, .dnd-col-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-text); margin-bottom: 4px; }
   .drag-chip {
-    padding: 10px 16px; background: white; border: 2px solid var(--orange);
+    padding: 10px 16px; background: white; border: 2px solid var(--amber);
     border-radius: 8px; cursor: grab; font-size: 13px; font-weight: 600;
-    color: var(--orange); transition: opacity 0.2s, transform 0.15s;
+    color: var(--flame); transition: opacity 0.2s, transform 0.15s;
     user-select: none;
   }
   .drag-chip:active { cursor: grabbing; transform: scale(0.97); }
@@ -162,27 +168,27 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
     padding: 8px; display: flex; flex-direction: column; gap: 6px;
     transition: border-color 0.15s, background 0.15s;
   }
-  .drop-area.over { border-color: var(--orange); background: #FFF7F4; }
+  .drop-area.over { border-color: var(--amber); background: var(--peach); }
   .drop-area .drag-chip { color: #15803D; border-color: var(--green); background: #F0FDF4; cursor: default; }
   .dnd-check-btn { margin-top: 12px; }
 
   /* ── AFSLUITQUIZ ── */
-  .fq-item { background: var(--gray-light); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .fq-item { background: var(--warm-white); border: 1px solid var(--gray-border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
   .fq-item .options { margin-top: 12px; }
 
   /* ── SCORE ── */
   .score-ring { text-align: center; margin: 24px 0; }
-  .score-number { font-size: 72px; font-weight: 800; color: var(--orange); line-height: 1; }
+  .score-number { font-size: 72px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
   .score-label { font-size: 14px; color: var(--gray-text); margin-top: 4px; }
 
   /* ── CERTIFICAAT ── */
   .cert {
-    border: 3px solid var(--orange); border-radius: 16px; padding: 40px;
-    text-align: center; background: linear-gradient(135deg, #FFF7F4 0%, white 100%);
+    border: 3px solid var(--amber); border-radius: 16px; padding: 40px;
+    text-align: center; background: linear-gradient(135deg, var(--cream) 0%, white 100%);
     margin-top: 24px;
   }
   .cert-icon { font-size: 56px; margin-bottom: 12px; }
-  .cert h2 { color: var(--orange); font-size: 26px; }
+  .cert h2 { color: var(--flame); font-size: 26px; }
   .cert p { color: var(--gray-text); margin: 8px 0 0; }
 
   /* ── TIJDSINDICATIE ── */
@@ -190,9 +196,9 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
   .meta-item { font-size: 13px; color: var(--gray-text); display: flex; align-items: center; gap: 6px; }
 
   /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--gray-border); padding: 24px 32px; text-align: center; }
-  footer p { font-size: 13px; color: var(--gray-text); margin: 0; }
-  footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+  footer { background: var(--gradient); padding: 24px 32px; text-align: center; margin-top: 0; }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.85); margin: 0; }
+  footer a { color: white; text-decoration: none; font-weight: 700; }
 
   @media(max-width:600px){ .card { padding: 24px 18px; } h1 { font-size: 24px; } }
 </style>
@@ -204,6 +210,7 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
     <span class="logo-icon">🧠</span>Umely
   </a>
   <span class="header-tag">[MODULE_TITEL]</span>
+  <a class="header-back" href="/modules.html">← Bibliotheek</a>
 </header>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
@@ -354,7 +361,7 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
     <div class="card">
       <div class="badge">Afsluitquiz</div>
       <h2>🏁 Test je kennis</h2>
-      <p>Beantwoord alle vragen. Je hebt minimaal <strong>70%</strong> nodig om je certificaat te ontvangen.</p>
+      <p>Beantwoord alle vragen. Je hebt minimaal <strong>80%</strong> nodig om je certificaat te ontvangen.</p>
       <div id="fqContainer" style="margin-top:24px"></div>
       <div class="btn-row">
         <button class="btn" onclick="submitFQ()">Verstuur antwoorden</button>
@@ -376,7 +383,10 @@ Gebruik onderstaande template. Vervang ALLE [PLACEHOLDERS] met echte inhoud uit 
         <h2>Certificaat behaald!</h2>
         <p style="font-size:16px;margin-top:8px"><strong>[MODULE_TITEL]</strong></p>
         <p>Je hebt deze Umely module succesvol afgerond.</p>
-        <p style="margin-top:12px;font-size:13px;color:var(--gray-text)">— Umely — umely.ai —</p>
+        <p style="margin-top:4px;font-size:13px;color:var(--gray-text)" id="certDate"></p>
+        <div class="btn-row" style="justify-content:center;margin-top:20px">
+          <button class="btn" onclick="downloadCert()">⬇ Download certificaat</button>
+        </div>
       </div>
       <div class="btn-row" style="justify-content:center;margin-top:28px">
         <button class="btn btn-ghost" onclick="location.reload()">Opnieuw proberen</button>
@@ -456,6 +466,60 @@ function checkDnd() {
   fb.className = 'feedback-box show ' + (correct === total ? 'correct' : 'wrong');
 }
 
+// ── CERTIFICAAT DOWNLOAD ──
+function downloadCert() {
+  const score = document.getElementById('scoreNum').textContent;
+  const date = new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+  const moduleTitle = document.title.replace(' | Umely E-learning', '');
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Certificaat — ${moduleTitle}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .cert {
+    width: 794px; min-height: 560px; border: 4px solid #FF8514;
+    border-radius: 20px; padding: 60px 72px; text-align: center;
+    background: linear-gradient(135deg, #FFF7F4 0%, #fff 60%);
+    box-shadow: 0 8px 40px rgba(255,90,31,0.12); position: relative;
+  }
+  .cert::before {
+    content: ''; position: absolute; inset: 10px;
+    border: 1.5px solid #FFD4C2; border-radius: 14px; pointer-events: none;
+  }
+  .logo { font-size: 22px; font-weight: 800; color: #0F0F0F; margin-bottom: 32px; }
+  .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #FF8514; margin-bottom: 12px; }
+  .title { font-size: 34px; font-weight: 800; color: #0F0F0F; line-height: 1.2; margin-bottom: 24px; }
+  .divider { width: 80px; height: 3px; background: #FF8514; margin: 0 auto 24px; border-radius: 2px; }
+  .body-text { font-size: 16px; color: #4A4A4A; line-height: 1.7; margin-bottom: 8px; }
+  .score-badge { display: inline-block; background: #FF8514; color: white; font-size: 28px; font-weight: 800; border-radius: 50px; padding: 10px 32px; margin: 20px 0; }
+  .date { font-size: 14px; color: #888; margin-top: 32px; }
+  .footer-logo { margin-top: 40px; font-size: 13px; color: #aaa; }
+  @media print { body { margin: 0; } .cert { box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="cert">
+  <div class="logo">🧠 Umely</div>
+  <div class="label">Certificaat van voltooiing</div>
+  <div class="divider"></div>
+  <div class="title">${moduleTitle}</div>
+  <div class="body-text">Hiermee wordt bevestigd dat de deelnemer</div>
+  <div class="body-text">de Umely e-learning module succesvol heeft afgerond</div>
+  <div class="body-text">met een eindscore van:</div>
+  <div class="score-badge">${score}</div>
+  <div class="date">Behaald op ${date}</div>
+  <div class="footer-logo">🧠 Umely — Jouw vaste AI-partner · umely.ai</div>
+</div>
+<script>window.onload = function(){ window.print(); }<\/script>
+</body></html>`);
+  win.document.close();
+}
+
 // ── AFSLUITQUIZ ──
 const FQ = [
   { q: "[FQ1_VRAAG]", opts: ["[FQ1_A]", "[FQ1_B]", "[FQ1_C]", "[FQ1_D]"], correct: 1 },
@@ -479,8 +543,8 @@ function buildFQ() {
 function selFQ(qi, ai, el) {
   const item = el.closest('.fq-item');
   item.querySelectorAll('.option').forEach(o => { o.style.background=''; o.style.borderColor=''; });
-  el.style.background = '#FFF0EB';
-  el.style.borderColor = 'var(--orange)';
+  el.style.background = 'var(--peach)';
+  el.style.borderColor = 'var(--amber)';
   fqAnswers[qi] = ai;
 }
 function submitFQ() {
@@ -490,11 +554,14 @@ function submitFQ() {
   goTo(6);
   document.getElementById('scoreNum').textContent = pct + '%';
   const msg = document.getElementById('resultMsg');
-  if (pct >= 70) {
+  if (pct >= 80) {
     msg.innerHTML = '<p style="color:#15803D;font-weight:600;font-size:16px;margin-top:8px">🎉 Gefeliciteerd! Je hebt het certificaat behaald.</p>';
-    document.getElementById('certBlock').style.display = 'block';
+    const certBlock = document.getElementById('certBlock');
+    certBlock.style.display = 'block';
+    const d = new Date();
+    document.getElementById('certDate').textContent = 'Behaald op ' + d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
   } else {
-    msg.innerHTML = `<p style="color:#991B1B;font-weight:600;font-size:16px;margin-top:8px">Je scoorde ${pct}%. Je hebt minimaal 70% nodig. Probeer het opnieuw!</p>`;
+    msg.innerHTML = `<p style="color:#991B1B;font-weight:600;font-size:16px;margin-top:8px">Je scoorde ${pct}%. Je hebt minimaal 80% nodig voor het certificaat. Probeer het opnieuw!</p>`;
   }
 }
 </script>
@@ -511,6 +578,6 @@ Controleer vóór opslaan:
 - [ ] Quiz-antwoorden zijn inhoudelijk correct
 - [ ] DnD items hebben logische categorieën die uit de transcriptie komen
 - [ ] Leerdoelen sluiten aan bij de module-inhoud
-- [ ] Oranje kleur (#FF5A1F) is de primaire kleur — GEEN blauw
+- [ ] Oranje kleur (#FF8514) is de primaire kleur — GEEN blauw
 - [ ] Umely logo + branding correct in header en footer
 - [ ] Bestand opent foutloos in browser
