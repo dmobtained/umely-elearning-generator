@@ -185,7 +185,7 @@
 <body>
 
 <!-- Auth overlay -->
-<div id="authOverlay">
+<div id="authOverlay" style="display:flex;">
   <div class="auth-card">
     <div class="auth-logo">
       <span class="auth-icon">🧠</span>
@@ -243,22 +243,27 @@ let _supabase = null;
 let _session = null;
 
 async function initAuth() {
-  const config = await fetch('/api/config').then(r => r.json());
-  _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+  try {
+    const config = await fetch('/api/config').then(r => r.json());
+    _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
-  const { data: { session } } = await _supabase.auth.getSession();
-  _session = session;
-  if (session) {
-    showApp(session);
-    loadModules();
-  } else {
+    const { data: { session } } = await _supabase.auth.getSession();
+    _session = session;
+    if (session) {
+      showApp(session);
+      loadModules();
+    } else {
+      showLogin();
+    }
+
+    _supabase.auth.onAuthStateChange((_event, session) => {
+      _session = session;
+      if (session) { showApp(session); loadModules(); } else showLogin();
+    });
+  } catch (e) {
+    console.error('Auth initialisatie mislukt:', e);
     showLogin();
   }
-
-  _supabase.auth.onAuthStateChange((_event, session) => {
-    _session = session;
-    if (session) { showApp(session); loadModules(); } else showLogin();
-  });
 }
 
 function showLogin() {
