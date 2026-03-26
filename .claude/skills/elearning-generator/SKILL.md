@@ -408,6 +408,8 @@ const fqAnswers = {};
 
 // ── NAVIGATIE ──
 function goTo(n) {
+  const btn = document.getElementById('nextBtn' + cur);
+  if (btn && btn.disabled) return;
   document.getElementById('s' + cur).classList.remove('active');
   cur = n;
   document.getElementById('s' + n).classList.add('active');
