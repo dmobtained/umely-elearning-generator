@@ -4,43 +4,58 @@ Je genereert één volledig werkend HTML-bestand op basis van een transcriptie.
 Je output is ALTIJD alleen HTML. Begin direct met <!DOCTYPE html> en eindig met </html>.
 Geen uitleg, geen markdown, geen backticks eromheen.
 
+TAALREGEL: Gebruik NOOIT lange streepjes (m-dashes: —). Schrijf in plaats daarvan een punt,
+komma of een nieuwe zin. Gebruik ook geen gedachtestreepjes als structuurelement in zinnen.
+
 ════════════════════════════════════════════════════
 STAP 1 — ANALYSEER DE TRANSCRIPTIE
 ════════════════════════════════════════════════════
-Lees de transcriptie volledig. Identificeer 4 tot 6 kernthema's — dit worden de modules.
-Noteer concrete termen, definities en voorbeelden die je kunt gebruiken voor quizvragen.
+Lees de transcriptie volledig. Identificeer 4 tot 6 kernthema's. Dit worden de modules.
+Noteer concrete termen, definities en voorbeelden die je kunt gebruiken voor interacties.
 Gebruik GEEN placeholder tekst. Elke zin in de output komt uit de transcriptie.
 
 ════════════════════════════════════════════════════
-STAP 2 — BEPAAL DE STRUCTUUR VOOR JE BEGINT MET SCHRIJVEN
+STAP 2 — STRUCTUUR EN DIVERSITEIT
 ════════════════════════════════════════════════════
-Voordat je ook maar één regel HTML schrijft, doe je dit mentaal:
 
-1. Tel het aantal modules dat je gaat maken (minimum 4, maximum 6).
-   Stel je maakt er 5 — dan zijn je schermen:
-   screen-welcome, screen-module-1, screen-module-2, screen-module-3,
-   screen-module-4, screen-module-5, screen-drag, screen-quiz, screen-result
+BELANGRIJK: Elke module heeft een GEVARIEERDE opbouw. Gebruik NOOIT altijd dezelfde
+structuur van "één alinea gevolgd door één vraag". Wissel af en maak elke module uniek.
 
-2. Schrijf de SCHERMEN-array op basis van dat getal:
-   - 4 modules → ['screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-drag','screen-quiz','screen-result']
-   - 5 modules → voeg 'screen-module-5' toe vóór 'screen-drag'
-   - 6 modules → voeg ook 'screen-module-6' toe
+STRUCTUURVARIANTEN per module (kies per module de meest passende):
 
-3. Noteer voor elke module welk scherm erna komt (dit heb je nodig in elke kennischeck).
+Variant A: Meerdere alinea's, dan een interactie
+  - 2 of 3 alinea's leerstof
+  - Daarna één rijke interactie (niet altijd meerkeuzevraag)
+
+Variant B: Stapsgewijze opbouw met tussenvragen
+  - Alinea 1, dan korte vraag
+  - Alinea 2, dan een andere interactievorm
+  - Afsluiting met visueel element
+
+Variant C: Visueel eerst, tekst daarna
+  - Begin met een interactief diagram of flashcard-set
+  - Daarna verdiepende uitleg
+  - Afsluiting met kennischeck
 
 SCHERMVOLGORDE (altijd in deze volgorde):
-- id="screen-welcome"     → Welkomstscherm
-- id="screen-module-1"    → Module 1
-- id="screen-module-2"    → Module 2
-- id="screen-module-3"    → Module 3
-- id="screen-module-4"    → Module 4
-  (optioneel: screen-module-5, screen-module-6)
-- id="screen-drag"        → Drag-and-drop oefening
-- id="screen-quiz"        → Afsluitquiz (5 vragen)
-- id="screen-result"      → Resultaatscherm
+- id="screen-welcome"     Welkomstscherm
+- id="screen-module-1"    Module 1
+- id="screen-module-2"    Module 2
+  (minimaal 4 modules, maximaal 6)
+- id="screen-drag"        Drag-and-drop oefening
+- id="screen-quiz"        Afsluitquiz (5 vragen)
+- id="screen-result"      Resultaatscherm
 
-NAVIGATIEREGEL: Alle knoppen gebruiken onclick="goTo('screen-id')".
-goTo() wordt EENMALIG gedefinieerd in stap 4. NOOIT hier al definiëren.
+Navigatie via goTo() — definieer altijd exact deze functie onderaan de body:
+
+function goTo(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  const target = document.getElementById(screenId);
+  if (target) { target.style.display = 'block'; window.scrollTo(0, 0); }
+  updateProgress(screenId);
+}
+
+Alle knoppen gebruiken onclick="goTo('screen-id')".
 
 ════════════════════════════════════════════════════
 STAP 3 — UMELY HUISSTIJL (kopieer dit letterlijk)
@@ -116,6 +131,14 @@ header {
   text-decoration: none;
 }
 .logo span { color: var(--amber); }
+.header-title {
+  font-family: var(--font-h);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--fg);
+  opacity: 0.7;
+  text-align: center;
+}
 .header-back {
   font-size: 0.8rem;
   color: var(--fg);
@@ -125,12 +148,13 @@ header {
 }
 .header-back:hover { opacity: 1; }
 
-HEADER HTML (altijd exact zo):
+HEADER HTML (altijd exact zo, met moduletitel zichtbaar in het midden):
 
 <header>
   <div class="header-inner">
     <a class="logo" href="#"><img src="/logo.png" alt="Umely" style="height:32px;"></a>
-    <a class="header-back" href="/modules.html">← Bibliotheek</a>
+    <span class="header-title" id="header-module-title"></span>
+    <a class="header-back" href="/modules.html">Bibliotheek</a>
   </div>
   <div style="max-width:860px;margin:0.75rem auto 0;background:var(--peach);border-radius:50px;height:6px;overflow:hidden;">
     <div id="progressBar" style="height:100%;background:var(--gradient);border-radius:50px;transition:width 0.4s ease;width:0%;"></div>
@@ -265,7 +289,7 @@ TIJDSBADGE:
   margin-bottom: 1.5rem;
 }
 
-MODULE-HEADERS (warm gradient, charcoal tekst — NOOIT oranje achtergrond met witte tekst):
+MODULE-HEADERS (warm gradient, charcoal tekst):
 
 .module-header {
   background: var(--gradient-warm);
@@ -288,7 +312,7 @@ MODULE-HEADERS (warm gradient, charcoal tekst — NOOIT oranje achtergrond met w
   margin: 0;
 }
 
-CONTENT-KAARTEN (warm wit, peach rand):
+CONTENT-KAARTEN:
 
 .content-card {
   background: var(--bg);
@@ -300,7 +324,7 @@ CONTENT-KAARTEN (warm wit, peach rand):
 .content-card p { margin-bottom: 0.75rem; }
 .content-card p:last-child { margin-bottom: 0; }
 
-KENNISCHECK (donkere kaart per module):
+KENNISCHECK (donkere kaart):
 
 .kennischeck {
   background: var(--fg);
@@ -347,12 +371,111 @@ KENNISCHECK (donkere kaart per module):
   margin-top: 0.75rem;
 }
 
-FEEDBACK-KLEUREN (enige uitzondering op Umely-palet, alleen voor correct/fout):
+FEEDBACK-KLEUREN:
 
 .correct { background: rgba(34,197,94,0.15) !important; border-color: #22c55e !important; }
 .fout    { background: rgba(239,68,68,0.15) !important;  border-color: #ef4444 !important; }
 .kc-feedback.correct { display: block; color: #16a34a; background: rgba(34,197,94,0.12); border: 1px solid #22c55e; }
 .kc-feedback.fout    { display: block; color: #dc2626; background: rgba(239,68,68,0.12);  border: 1px solid #ef4444; }
+
+FLASHCARD CSS:
+
+.flashcard-set { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0; }
+.flashcard {
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  flex: 1;
+  min-width: 140px;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.flashcard:hover { border-color: var(--amber); }
+.flashcard .fc-term {
+  font-family: var(--font-h);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.flashcard .fc-uitleg {
+  font-size: 0.85rem;
+  color: rgba(255,248,242,0.85);
+  display: none;
+  line-height: 1.5;
+}
+.flashcard.open .fc-uitleg { display: block; }
+.flashcard .fc-hint {
+  font-size: 0.75rem;
+  color: var(--amber);
+  margin-top: 0.5rem;
+}
+.flashcard.open .fc-hint { display: none; }
+
+INVULVELD CSS:
+
+.invul-wrap { margin: 1.25rem 0; }
+.invul-zin {
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--fg);
+}
+.invul-input {
+  border: none;
+  border-bottom: 2px solid var(--amber);
+  background: transparent;
+  font-family: var(--font-b);
+  font-size: 1rem;
+  color: var(--fg);
+  padding: 0 0.25rem;
+  width: 140px;
+  outline: none;
+}
+.invul-input.correct-input { border-color: #22c55e; color: #16a34a; }
+.invul-input.fout-input { border-color: #ef4444; color: #dc2626; }
+.invul-feedback { font-size: 0.85rem; margin-top: 0.5rem; min-height: 1.2rem; }
+
+KLIKBAAR DIAGRAM CSS:
+
+.diagram-wrap { position: relative; margin: 1.25rem 0; }
+.diagram-svg-container { position: relative; }
+.diagram-hotspot {
+  position: absolute;
+  width: 28px; height: 28px;
+  background: var(--gradient);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-h);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  transition: transform 0.2s;
+  z-index: 10;
+}
+.diagram-hotspot:hover { transform: scale(1.2); }
+.diagram-popup {
+  display: none;
+  position: absolute;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  max-width: 220px;
+  z-index: 20;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.diagram-popup.zichtbaar { display: block; }
+.diagram-popup .popup-titel {
+  font-family: var(--font-h);
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+}
 
 SCHERM-CONTAINER:
 
@@ -468,55 +591,57 @@ footer {
 footer strong { color: var(--gold); }
 footer a { color: var(--peach); }
 
-FOOTER HTML (altijd exact zo):
+FOOTER HTML:
 
 <footer>
   <strong>🧠 Umely</strong> — Jouw vaste AI-partner<br>
   <a href="mailto:info@umely.ai">info@umely.ai</a> · umely.ai
 </footer>
 
-RESPONSIVE (altijd toevoegen):
+RESPONSIVE:
 
 @media (max-width: 600px) {
   .welcome-hero h1 { font-size: 1.6rem; }
   .screen { padding: 0 1rem 3rem; }
   .btn-wrap { flex-direction: column; }
   .btn { text-align: center; }
+  .flashcard-set { flex-direction: column; }
 }
 
 ════════════════════════════════════════════════════
 STAP 4 — JAVASCRIPT LOGICA
 ════════════════════════════════════════════════════
 
-⚠ ABSOLUTE REGELS — overtreden hiervan breekt de module volledig:
+⚠ ABSOLUTE REGELS:
+1. Alle functies ALTIJD op TOP-LEVEL. NOOIT binnen DOMContentLoaded.
+2. DOMContentLoaded roept alleen functies AAN. Het definieert ze NIET.
+3. SCHERMEN-array bevat ALLE screen-IDs inclusief extra modules.
 
-1. ALLE functies (goTo, updateProgress, checkKC, resetKC, laadQuizVraag,
-   beantwoordQuiz, volgendeQuizVraag, toonResultaat, herstart, dragStart,
-   dragOver, dragLeave, drop, resetDragDrop) worden ALTIJD op TOP-LEVEL
-   gedefinieerd — NOOIT binnen DOMContentLoaded of binnen een andere functie.
-   Reden: onclick-attributen in HTML kunnen ALLEEN top-level functies aanroepen.
-   Een functie binnen DOMContentLoaded is onzichtbaar voor onclick en crasht.
+NAVIGATIE + VOORTGANG:
 
-2. DOMContentLoaded staat ALTIJD onderaan het script, na alle functies.
-   Het ROEPT functies AAN — het DEFINIEERT ze NIET.
-
-3. De SCHERMEN-array bevat PRECIES de screen-IDs die je hebt aangemaakt.
-   Gebruik de array die je in stap 2 hebt bepaald.
-
-────────────────────────────────────────────────────
-NAVIGATIE + VOORTGANG
-────────────────────────────────────────────────────
-
-// ⚠ Pas deze array aan op je werkelijke modules (zie stap 2)
-// Voorbeeld met 4 modules:
 const SCHERMEN = ['screen-welcome','screen-module-1','screen-module-2',
   'screen-module-3','screen-module-4','screen-drag','screen-quiz','screen-result'];
+
+const MODULE_TITELS = {
+  'screen-welcome': '',
+  'screen-module-1': 'Module 1',
+  'screen-module-2': 'Module 2',
+  'screen-module-3': 'Module 3',
+  'screen-module-4': 'Module 4',
+  'screen-drag': 'Oefening',
+  'screen-quiz': 'Afsluitquiz',
+  'screen-result': 'Resultaat'
+};
 
 function goTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
   const target = document.getElementById(screenId);
   if (target) { target.style.display = 'block'; window.scrollTo(0, 0); }
   updateProgress(screenId);
+  const titleEl = document.getElementById('header-module-title');
+  if (titleEl && MODULE_TITELS[screenId] !== undefined) {
+    titleEl.textContent = MODULE_TITELS[screenId];
+  }
 }
 
 function updateProgress(screenId) {
@@ -526,32 +651,26 @@ function updateProgress(screenId) {
   document.getElementById('progressLabel').textContent = pct + '% voltooid';
 }
 
-────────────────────────────────────────────────────
-KENNISCHECK — gedrag per module
-────────────────────────────────────────────────────
+KENNISCHECK — gedrag:
+- Bij CORRECT: groene feedback met uitleg waarom het correct is + "Volgende" knop
+- Bij FOUT: rode feedback met uitleg van het juiste antwoord + "Probeer opnieuw" EN "Volgende" knop
+- ALTIJD een uitleg tonen. Nooit alleen "Correct" of "Niet correct"
 
-Gedrag na klikken op een antwoord:
-- Bij CORRECT: toon groene feedback + altijd de "Volgende →" knop
-- Bij FOUT: toon rode feedback + twee knoppen: "↩ Probeer opnieuw" EN "Volgende →"
-- De "Volgende →" knop verschijnt dus ALTIJD, ongeacht of het antwoord goed of fout is.
-
-function checkKC(nr, el, isCorrect, volgendeScherm) {
+function checkKC(nr, el, isCorrect, volgendeScherm, uitleg) {
   document.querySelectorAll('#kc-' + nr + ' .kc-optie').forEach(o => o.style.pointerEvents = 'none');
   el.classList.add(isCorrect ? 'correct' : 'fout');
   const fb = document.getElementById('kc-feedback-' + nr);
-  const btnStijl = 'background:linear-gradient(90deg,#FF8514,#FF4D00);color:white;border:none;border-radius:50px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;';
-  const volgendeKnop = '<button style="' + btnStijl + '" onclick="goTo(\'' + volgendeScherm + '\')">Volgende →</button>';
+  const btnStijl = 'background:linear-gradient(90deg,#FF8514,#FF4D00);color:white;border:none;border-radius:50px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.9rem;';
+  const volgendeKnop = '<button style="' + btnStijl + '" onclick="goTo(\'' + volgendeScherm + '\')">Volgende</button>';
   if (isCorrect) {
     fb.className = 'kc-feedback correct';
-    fb.innerHTML = '<span>✓ Correct!</span>'
-      + '<div class="kc-knoppen">'
-      + volgendeKnop
-      + '</div>';
+    fb.innerHTML = '<strong>Correct!</strong> ' + uitleg
+      + '<div class="kc-knoppen">' + volgendeKnop + '</div>';
   } else {
     fb.className = 'kc-feedback fout';
-    fb.innerHTML = '<span>✗ Niet correct.</span>'
+    fb.innerHTML = '<strong>Niet correct.</strong> ' + uitleg
       + '<div class="kc-knoppen">'
-      + '<button style="' + btnStijl + '" onclick="resetKC(' + nr + ')">↩ Probeer opnieuw</button>'
+      + '<button style="' + btnStijl + 'background:#27292D;" onclick="resetKC(' + nr + ')">Probeer opnieuw</button>'
       + volgendeKnop
       + '</div>';
   }
@@ -567,9 +686,43 @@ function resetKC(nr) {
   fb.innerHTML = '';
 }
 
-────────────────────────────────────────────────────
-QUIZ (5 vragen)
-────────────────────────────────────────────────────
+FLASHCARD FUNCTIE:
+
+function toggleFlashcard(el) {
+  el.classList.toggle('open');
+}
+
+INVULVELD FUNCTIE:
+
+function checkInvul(inputId, correctAntwoord, feedbackId) {
+  const input = document.getElementById(inputId);
+  const feedback = document.getElementById(feedbackId);
+  const waarde = input.value.trim().toLowerCase();
+  const correct = correctAntwoord.toLowerCase();
+  if (waarde === correct || waarde.includes(correct) || correct.includes(waarde)) {
+    input.classList.add('correct-input');
+    input.classList.remove('fout-input');
+    feedback.textContent = 'Correct!';
+    feedback.style.color = '#16a34a';
+  } else {
+    input.classList.add('fout-input');
+    input.classList.remove('correct-input');
+    feedback.textContent = 'Het juiste antwoord is: ' + correctAntwoord;
+    feedback.style.color = '#dc2626';
+  }
+}
+
+DIAGRAM POPUP FUNCTIE:
+
+function togglePopup(popupId) {
+  document.querySelectorAll('.diagram-popup').forEach(p => {
+    if (p.id !== popupId) p.classList.remove('zichtbaar');
+  });
+  const popup = document.getElementById(popupId);
+  if (popup) popup.classList.toggle('zichtbaar');
+}
+
+QUIZ:
 
 let quizScore = 0, quizHuidig = 0;
 
@@ -608,17 +761,15 @@ function beantwoordQuiz(gekozen, btn) {
   if (isCorrect) quizScore++;
   const fb = document.getElementById('quiz-feedback');
   fb.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'fout');
-  fb.textContent = (isCorrect ? '✓ Correct! ' : '✗ Niet helemaal. ') + v.uitleg;
+  fb.textContent = (isCorrect ? 'Correct! ' : 'Niet helemaal. ') + v.uitleg;
   const volgende = document.getElementById('quiz-volgende-btn');
   volgende.style.display = 'inline-block';
-  volgende.textContent = quizHuidig < quizVragen.length - 1 ? 'Volgende vraag →' : 'Bekijk resultaat →';
+  volgende.textContent = quizHuidig < quizVragen.length - 1 ? 'Volgende vraag' : 'Bekijk resultaat';
 }
 
 function volgendeQuizVraag() { quizHuidig++; laadQuizVraag(); }
 
-────────────────────────────────────────────────────
-RESULTAAT
-────────────────────────────────────────────────────
+RESULTAAT:
 
 function toonResultaat() {
   goTo('screen-result');
@@ -634,11 +785,8 @@ function toonResultaat() {
   }
 }
 
-────────────────────────────────────────────────────
-HERSTART — reset ALLES
-────────────────────────────────────────────────────
+HERSTART:
 
-// Herstart reset de quiz, de drag-and-drop én navigeert terug naar het begin.
 function herstart() {
   quizScore = 0;
   quizHuidig = 0;
@@ -647,9 +795,7 @@ function herstart() {
   goTo('screen-welcome');
 }
 
-────────────────────────────────────────────────────
-DRAG-AND-DROP (native HTML5 + touch fallback)
-────────────────────────────────────────────────────
+DRAG-AND-DROP:
 
 let gesleeptItem = null;
 
@@ -669,7 +815,6 @@ function drop(e, zone, correctId) {
   gesleeptItem = null;
 }
 
-// Reset: zet alle drag-items terug in de broncontainer, verwijder correct/fout-classes van zones
 function resetDragDrop() {
   const bron = document.getElementById('drag-bron');
   if (!bron) return;
@@ -695,43 +840,112 @@ document.addEventListener('touchend', e => {
   gesleeptItem = null;
 });
 
-────────────────────────────────────────────────────
-INIT — altijd als laatste, onderaan het script
-────────────────────────────────────────────────────
+INIT:
 
-// ⚠ DOMContentLoaded roept alleen functies AAN — het definieert NIETS.
 document.addEventListener('DOMContentLoaded', () => {
   goTo('screen-welcome');
   laadQuizVraag();
 });
 
 ════════════════════════════════════════════════════
-STAP 5 — VERPLICHTE HTML-TEMPLATES (kopieer exact)
+STAP 5 — INTERACTIEVE COMPONENTEN (gebruik ze gevarieerd)
 ════════════════════════════════════════════════════
 
-KENNISCHECK HTML (per module — vervang N door modulenummer, VOLGENDE door het volgende screen-id):
+Kies per module de meest passende interactievorm op basis van de inhoud.
+Gebruik NOOIT in elke module dezelfde vorm. Varieer altijd.
 
-⚠ De broncontainer voor drag-and-drop moet id="drag-bron" hebben zodat resetDragDrop() werkt.
+COMPONENT 1 — KENNISCHECK (meerkeuzevraag met uitleg):
 
 <div id="kc-N" class="kennischeck">
-  <h3>✔ Kennischeck</h3>
-  <p class="kc-vraag">Vraagtekst hier?</p>
+  <h3>Kennischeck</h3>
+  <p class="kc-vraag">Vraagtekst?</p>
   <div class="kc-opties">
-    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE')">Antwoord A</button>
-    <button class="kc-optie" onclick="checkKC(N, this, true,  'screen-VOLGENDE')">Antwoord B (correct)</button>
-    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE')">Antwoord C</button>
-    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE')">Antwoord D</button>
+    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE', 'Uitleg waarom dit fout is.')">Antwoord A</button>
+    <button class="kc-optie" onclick="checkKC(N, this, true, 'screen-VOLGENDE', 'Uitleg waarom dit correct is.')">Antwoord B</button>
+    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE', 'Uitleg waarom dit fout is.')">Antwoord C</button>
+    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE', 'Uitleg waarom dit fout is.')">Antwoord D</button>
   </div>
   <div id="kc-feedback-N" class="kc-feedback"></div>
 </div>
 
-Regels:
-- id="kc-N" op de wrapper — N is het modulenummer (1, 2, 3, 4...)
-- id="kc-feedback-N" op het feedback-element — zelfde N
-- Altijd precies 1 correct antwoord (true), de rest false
-- Het 4e argument is het screen-ID van het VOLGENDE scherm
+COMPONENT 2 — FLASHCARDS (klik om uitleg te zien):
 
-DRAG-AND-DROP HTML (de broncontainer MOET id="drag-bron" hebben):
+<div class="content-card">
+  <h3>Klik op een begrip voor de uitleg</h3>
+  <div class="flashcard-set">
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">Begrip 1</div>
+      <div class="fc-uitleg">Uitleg van begrip 1 in 1-2 zinnen.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">Begrip 2</div>
+      <div class="fc-uitleg">Uitleg van begrip 2 in 1-2 zinnen.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">Begrip 3</div>
+      <div class="fc-uitleg">Uitleg van begrip 3 in 1-2 zinnen.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
+    </div>
+  </div>
+</div>
+
+COMPONENT 3 — INVULVELD (woord invullen in een zin):
+
+<div class="kennischeck">
+  <h3>Vul het ontbrekende woord in</h3>
+  <div class="invul-wrap">
+    <p class="invul-zin">
+      Vul hier een zin in met een leeg veld:
+      <input class="invul-input" id="invul-1" type="text" placeholder="...">
+    </p>
+    <div class="invul-feedback" id="invul-feedback-1"></div>
+  </div>
+  <div class="btn-wrap" style="margin-top:1rem;">
+    <button class="btn" onclick="checkInvul('invul-1','correctwoord','invul-feedback-1')">Controleer</button>
+    <button class="btn btn-outline" onclick="goTo('screen-VOLGENDE')">Volgende</button>
+  </div>
+</div>
+
+COMPONENT 4 — KLIKBAAR DIAGRAM (SVG met hotspots):
+Bouw een SVG-schets van het onderwerp met genummerde hotspots die een popup tonen.
+Maak de SVG passend bij de inhoud van de module. Gebruik rechthoeken, pijlen en tekst.
+
+<div class="content-card">
+  <h3>Klik op de nummers voor uitleg</h3>
+  <div class="diagram-wrap">
+    <div class="diagram-svg-container" style="position:relative;">
+      <svg viewBox="0 0 600 300" style="width:100%;border-radius:8px;background:var(--cream);">
+        <rect x="50" y="100" width="160" height="50" rx="8" fill="#27292D"/>
+        <text x="130" y="130" text-anchor="middle" fill="#FFD964" font-family="Arimo" font-size="13" font-weight="700">Onderdeel A</text>
+        <rect x="380" y="100" width="160" height="50" rx="8" fill="#27292D"/>
+        <text x="460" y="130" text-anchor="middle" fill="#FFD964" font-family="Arimo" font-size="13" font-weight="700">Onderdeel B</text>
+        <line x1="210" y1="125" x2="380" y2="125" stroke="#FF8514" stroke-width="2" marker-end="url(#arrow)"/>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#FF8514"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="diagram-hotspot" style="top:28%;left:18%;" onclick="togglePopup('popup-1')">1</div>
+      <div class="diagram-popup" id="popup-1" style="top:55%;left:5%;">
+        <div class="popup-titel">Onderdeel A</div>
+        Uitleg van onderdeel A in 1-2 zinnen.
+      </div>
+      <div class="diagram-hotspot" style="top:28%;left:68%;" onclick="togglePopup('popup-2')">2</div>
+      <div class="diagram-popup" id="popup-2" style="top:55%;left:50%;">
+        <div class="popup-titel">Onderdeel B</div>
+        Uitleg van onderdeel B in 1-2 zinnen.
+      </div>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-VOLGENDE')">Volgende</button>
+  </div>
+</div>
+
+COMPONENT 5 — DRAG-AND-DROP (altijd in screen-drag):
 
 <div id="screen-drag" class="screen">
   <div class="module-header">
@@ -757,15 +971,15 @@ DRAG-AND-DROP HTML (de broncontainer MOET id="drag-bron" hebben):
     </div>
   </div>
   <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-quiz')">Naar de quiz →</button>
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de quiz</button>
   </div>
 </div>
 
-QUIZ HTML (exact dit, altijd in screen-quiz):
+QUIZ HTML:
 
 <div id="screen-quiz" class="screen">
   <div class="quiz-header">
-    <h2>🧠 Afsluitquiz</h2>
+    <h2>Afsluitquiz</h2>
   </div>
   <div class="content-card">
     <div id="quiz-voortgang" class="quiz-voortgang">Vraag 1 van 5</div>
@@ -773,61 +987,55 @@ QUIZ HTML (exact dit, altijd in screen-quiz):
     <div id="quiz-opties" class="quiz-opties"></div>
     <div id="quiz-feedback" class="quiz-feedback"></div>
     <div class="btn-wrap">
-      <button id="quiz-volgende-btn" class="btn" style="display:none;" onclick="volgendeQuizVraag()">Volgende vraag →</button>
+      <button id="quiz-volgende-btn" class="btn" style="display:none;" onclick="volgendeQuizVraag()">Volgende vraag</button>
     </div>
   </div>
 </div>
 
-RESULTAAT HTML (exact dit — vervang [MODULETITEL] met de echte titel van deze e-learning):
+RESULTAAT HTML (vervang [MODULETITEL] met de echte titel):
 
 <div id="screen-result" class="screen">
   <div class="resultaat-hero">
-    <div class="score-cirkel" id="score-display">—</div>
+    <div class="score-cirkel" id="score-display">...</div>
     <h2 style="font-family:var(--font-h);margin-bottom:0.5rem;">Training afgerond!</h2>
     <p id="resultaat-boodschap" style="color:rgba(255,248,242,0.85);position:relative;"></p>
   </div>
   <div id="certificaat-blok" class="certificaat" style="display:none;">
-    <div class="certificaat-title">🏆 Certificaat van voltooiing</div>
+    <div class="certificaat-title">Certificaat van voltooiing</div>
     <h2>[MODULETITEL]</h2>
     <p>Je hebt alle modules succesvol doorlopen en de quiz behaald.</p>
     <div class="certificaat-datum" id="cert-datum"></div>
   </div>
   <div class="btn-wrap">
-    <button class="btn btn-outline" onclick="herstart()">↩ Opnieuw beginnen</button>
+    <button class="btn btn-outline" onclick="herstart()">Opnieuw beginnen</button>
   </div>
 </div>
 
-⚠ Vervang [MODULETITEL] met de exacte tekst die ook in de <title>-tag staat.
-   Voorbeeld: als <title>Projectmanagement Basics | Umely E-learning</title>, dan:
-   <h2>Projectmanagement Basics</h2>
-
 ════════════════════════════════════════════════════
-KWALITEITS-CHECKLIST (doorloop dit voor je afrondt)
+KWALITEITS-CHECKLIST
 ════════════════════════════════════════════════════
+✓ Geen m-dashes (—) in de gehele output
+✓ Geen pijltjes (→) in knopteksten
 ✓ Font-import aanwezig: Arimo + Montserrat (GEEN Inter)
-✓ body background: #FFF8F2 — niet wit, niet grijs
+✓ body background: #FFF8F2
 ✓ header: background var(--bg) — NIET oranje of gradient
+✓ Moduletitel zichtbaar in header via header-module-title element
 ✓ Alle h1/h2/h3: font-family var(--font-h) = Arimo
-✓ Module-headers: background var(--gradient-warm) = goud→amber→flame
+✓ Module-headers: background var(--gradient-warm)
 ✓ Geen #FFFFFF als kaart- of sectie-achtergrond
-✓ Geen off-brand grijzen (#3d3f45, #5a5c62)
-✓ Geen Tailwind-kleuren buiten feedback-states
-✓ Footer aanwezig: charcoal achtergrond, gold logo, peach links
-✓ Welcome-hero: charcoal achtergrond met ::before blob
+✓ Footer aanwezig: charcoal achtergrond, gold logo
 ✓ Alle schermen aanwezig: welkom, 4+ modules, drag, quiz, resultaat
-✓ SCHERMEN-array klopt met het werkelijke aantal modules
-✓ goTo() gedefinieerd als gewone function (niet arrow function) — op TOP-LEVEL
+✓ Elke module gebruikt een ANDERE interactievorm
+✓ Niet elke module heeft dezelfde structuur van 1 alinea + 1 vraag
+✓ Sommige modules hebben 2-3 alinea's voor de eerste interactie
+✓ Kennischeck bevat altijd een uitleg als 5e argument van checkKC()
+✓ goTo() gedefinieerd als gewone function op TOP-LEVEL
 ✓ updateProgress() aanwezig en aangeroepen vanuit goTo()
 ✓ Alle functies op TOP-LEVEL — NOOIT binnen DOMContentLoaded
-✓ DOMContentLoaded roept alleen goTo('screen-welcome') en laadQuizVraag() aan
-✓ Elke kennischeck: id="kc-N" op wrapper, id="kc-feedback-N" op feedback
-✓ Kennischeck "Volgende →" knop verschijnt bij ZOWEL correct als fout antwoord
+✓ SCHERMEN-array klopt met het werkelijke aantal modules
+✓ MODULE_TITELS object aanwezig met alle screen-IDs
 ✓ Drag-bron container heeft id="drag-bron"
-✓ Quiz: id="quiz-voortgang", "quiz-vraag-tekst", "quiz-opties", "quiz-feedback", "quiz-volgende-btn"
-✓ quiz-volgende-btn heeft onclick="volgendeQuizVraag()"
-✓ Resultaat: id="score-display", "resultaat-boodschap", "certificaat-blok", "cert-datum"
-✓ Certificaat <h2> bevat de echte moduletitel — geen placeholder tekst
-✓ herstart() roept resetDragDrop() én laadQuizVraag() aan vóór goTo()
-✓ resetDragDrop() aanwezig als top-level functie
-✓ Geen andere placeholder tekst — alles uit de transcriptie
+✓ Quiz uitleg altijd aanwezig in v.uitleg veld
+✓ Resultaat: certificaat bevat echte moduletitel, geen placeholder
+✓ herstart() roept resetDragDrop() en laadQuizVraag() aan
 ✓ Mobile-responsive @media blok aanwezig

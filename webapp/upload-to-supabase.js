@@ -77,9 +77,7 @@ async function upload() {
     const { error } = await supabase.from('modules').insert({
       filename,
       title: rawTitle,
-      slug,
-      html,
-      created_date: createdDate
+      html
     });
 
     if (error) {
