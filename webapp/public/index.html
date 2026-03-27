@@ -185,7 +185,7 @@
   .error-box {
     background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px;
     padding: 14px 18px; margin-top: 16px; display: none;
-    display: none; flex-direction: column; gap: 10px;
+    flex-direction: column; gap: 10px;
   }
   .error-box p { font-size: 14px; color: #991B1B; font-weight: 500; margin: 0; }
   .btn-retry {
@@ -320,7 +320,6 @@ async function initAuth() {
     const config = await fetch('/api/config').then(r => r.json());
     _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
-    // Altijd loginscherm tonen bij openen van de pagina
     showLogin();
 
     _supabase.auth.onAuthStateChange((event, session) => {

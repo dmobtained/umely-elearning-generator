@@ -247,7 +247,6 @@ async function initAuth() {
     const config = await fetch('/api/config').then(r => r.json());
     _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
-    // Altijd loginscherm tonen bij openen van de pagina
     showLogin();
 
     _supabase.auth.onAuthStateChange((event, session) => {
