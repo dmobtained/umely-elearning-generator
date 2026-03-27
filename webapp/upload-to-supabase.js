@@ -31,6 +31,7 @@ async function upload() {
   console.log(`\n📂 ${files.length} bestand(en) gevonden in /output\n`);
 
   let success = 0;
+  let updated = 0;
   let skipped = 0;
   let failed = 0;
 
@@ -68,30 +69,41 @@ async function upload() {
       .single();
 
     if (existing) {
-      console.log(`⏭️  Al aanwezig, overgeslagen: ${filename}`);
-      skipped++;
-      continue;
-    }
+      // Update bestaande module
+      const { error } = await supabase.from('modules')
+        .update({ title: rawTitle, html })
+        .eq('filename', filename);
 
-    // Upload naar Supabase
-    const { error } = await supabase.from('modules').insert({
-      filename,
-      title: rawTitle,
-      html
-    });
-
-    if (error) {
-      console.log(`❌ Fout bij uploaden: ${filename}`);
-      console.log(`   ${error.message}`);
-      failed++;
+      if (error) {
+        console.log(`❌ Fout bij updaten: ${filename}`);
+        console.log(`   ${error.message}`);
+        failed++;
+      } else {
+        console.log(`🔄 Bijgewerkt: ${rawTitle}`);
+        updated++;
+      }
     } else {
-      console.log(`✅ Geüpload: ${rawTitle}`);
-      success++;
+      // Nieuwe module inserten
+      const { error } = await supabase.from('modules').insert({
+        filename,
+        title: rawTitle,
+        html
+      });
+
+      if (error) {
+        console.log(`❌ Fout bij uploaden: ${filename}`);
+        console.log(`   ${error.message}`);
+        failed++;
+      } else {
+        console.log(`✅ Nieuw: ${rawTitle}`);
+        success++;
+      }
     }
   }
 
   console.log(`\n────────────────────────────────`);
-  console.log(`✅ Geüpload:     ${success}`);
+  console.log(`✅ Nieuw:        ${success}`);
+  console.log(`🔄 Bijgewerkt:   ${updated}`);
   console.log(`⏭️  Overgeslagen: ${skipped}`);
   console.log(`❌ Mislukt:      ${failed}`);
   console.log(`────────────────────────────────`);
