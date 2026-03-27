@@ -22,7 +22,7 @@
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; opacity: 0; transition: opacity 0.15s ease; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; }
 
   /* ── AUTH OVERLAY ── */
   #authOverlay {
@@ -340,7 +340,6 @@ async function initAuth() {
 
 function showLogin() {
   document.getElementById('authOverlay').style.display = 'flex';
-  document.body.style.opacity = '1';
 }
 
 function showApp(session) {
@@ -349,7 +348,6 @@ function showApp(session) {
   const userEl = document.getElementById('headerUser');
   userEl.textContent = session.user.email;
   userEl.style.display = 'block';
-  document.body.style.opacity = '1';
 }
 
 async function login() {
