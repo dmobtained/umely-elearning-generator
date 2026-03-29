@@ -17,12 +17,12 @@ De volledige huisstijl, CSS en JavaScript staat in `webapp/prompt.md`. Lees dat 
 
 ## Output vereisten
 Elke gegenereerde e-learning MOET bevatten:
-1. Welkomstscherm — titel, intro, 3-5 leerdoelen, tijdsindicatie
-2. Minimaal 4 inhoudsmodules — uitleg + kennischeck per module
-3. Drag-and-drop oefening — minstens 1 in de hele module
-4. Voortgangsbalk — bovenaan, toont % voltooid
-5. Afsluitquiz — 5 vragen, directe feedback per antwoord
-6. Resultaatscherm — score + certificaat bij ≥70%
+1. Welkomstscherm - titel, intro, 3-5 leerdoelen, tijdsindicatie
+2. 4-8 inhoudsmodules - vrije compositie uit 14 componenttypen
+3. Minimaal 5 verschillende componenttypen per e-learning
+4. Voortgangsbalk - bovenaan, toont % voltooid
+5. Afsluitquiz - 5 vragen, directe feedback per antwoord
+6. Resultaatscherm - score + certificaat bij >=70%
 
 ## Kwaliteitseisen
 - Één volledig werkend HTML-bestand (geen backend nodig)
