@@ -1141,6 +1141,12 @@ Kies per module de meest passende componenten op basis van de inhoud.
 Combineer vrij uit deze 14 typen. Gebruik minimaal 5 verschillende typen per e-learning.
 Varieer altijd. Nooit twee dezelfde interactievormen achter elkaar.
 
+NAVIGATIEREGEL: Het LAATSTE component in elke module moet een knop bevatten
+die naar het volgende scherm navigeert via onclick="goTo('screen-module-N')".
+Tussenliggende componenten hoeven geen navigatieknop te hebben.
+Voeg aan interactieve componenten (kennischeck, invulveld, sorteer, scenario)
+altijd een "Volgende" knop toe zodat de gebruiker na interactie verder kan.
+
 ────────────────────────────────────────
 TEKSTCOMPONENTEN
 ────────────────────────────────────────
@@ -1253,6 +1259,9 @@ COMPONENT 7 - DRAG-AND-DROP (nu binnen een module, niet als apart scherm):
       <div class="drop-zone-label">Categorie B</div>
     </div>
   </div>
+  <div class="btn-wrap" style="margin-top:1rem;">
+    <button class="btn btn-outline" onclick="goTo('screen-VOLGENDE')">Volgende</button>
+  </div>
 </div>
 
 COMPONENT 8 - FLASHCARD-SET (klik om uitleg te zien, 3-6 kaarten):
@@ -1361,6 +1370,9 @@ COMPONENT 11 - SCENARIO/CASESTUDY (praktijksituatie met keuzes):
     <button class="scenario-keuze" onclick="checkScenario(N, this, false, 'Uitleg.')">Keuze C</button>
   </div>
   <div id="scenario-feedback-N" class="scenario-feedback"></div>
+  <div class="btn-wrap" style="margin-top:1rem;">
+    <button class="btn btn-outline" onclick="goTo('screen-VOLGENDE')">Volgende</button>
+  </div>
 </div>
 
 ────────────────────────────────────────
@@ -1390,6 +1402,9 @@ COMPONENT 12 - ANNOTATIE-FIGUUR (interactieve figuur met genummerde punten):
       </div>
     </div>
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-VOLGENDE')">Volgende</button>
+  </div>
 </div>
 
 COMPONENT 13 - TIJDLIJN (chronologische of fasegewijze weergave):
@@ -1407,6 +1422,9 @@ COMPONENT 13 - TIJDLIJN (chronologische of fasegewijze weergave):
     </div>
     <!-- meer punten -->
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-VOLGENDE')">Volgende</button>
+  </div>
 </div>
 
 COMPONENT 14 - PROCESSTROOM (visuele flow van stappen):
@@ -1419,6 +1437,9 @@ COMPONENT 14 - PROCESSTROOM (visuele flow van stappen):
     <div class="proces-blok"><h4>Stap 2</h4><p>Uitleg</p></div>
     <div class="proces-pijl">&#9658;</div>
     <div class="proces-blok"><h4>Stap 3</h4><p>Uitleg</p></div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-VOLGENDE')">Volgende</button>
   </div>
 </div>
 
