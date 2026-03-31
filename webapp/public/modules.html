@@ -368,7 +368,9 @@ async function initAuth() {
     const config = await fetch('/api/config').then(r => r.json());
     _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
-    showLogin();
+    const { data: { session } } = await _supabase.auth.getSession();
+    if (session) { _session = session; showApp(session); loadModules(); checkNewsletterPopup(session); }
+    else showLogin();
 
     _supabase.auth.onAuthStateChange((event, session) => {
       _session = session;

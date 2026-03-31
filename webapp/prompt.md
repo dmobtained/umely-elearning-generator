@@ -26,34 +26,43 @@ STAP 2 - STRUCTUUR EN COMPOSITIEREGELS
 ════════════════════════════════════════════════════
 
 SCHERMVOLGORDE (altijd in deze volgorde):
-- id="screen-welcome"     Welkomstscherm
-- id="screen-module-1"    Module 1
-- id="screen-module-2"    Module 2
-  (minimaal 4 modules, maximaal 8)
-- id="screen-quiz"        Afsluitquiz (5 vragen)
-- id="screen-result"      Resultaatscherm
+- id="screen-welcome"        Welkomstscherm
+- id="screen-module-1-1"     Module 1, sub-pagina 1: introductie + uitleg
+- id="screen-module-1-2"     Module 1, sub-pagina 2: verdieping + voorbeeld
+- id="screen-module-1-3"     Module 1, sub-pagina 3: toepassing/detail (optioneel 4e sub ook mogelijk)
+- id="screen-module-1-kc"    Module 1 kennischeck (altijd de LAATSTE sub van elke module)
+- id="screen-module-2-1"     Module 2, sub-pagina 1
+  ... enzovoort per module
+- id="screen-quiz"           Afsluitquiz (5 vragen)
+- id="screen-result"         Resultaatscherm
 
-Er is GEEN apart screen-drag meer. Drag-and-drop is nu een component binnen een module.
+ELKE MODULE BESTAAT UIT 3 TOT 5 SUB-SCHERMEN:
+- sub-1: Introductie van het onderwerp. Wat is het? Waarom bestaat het? Context.
+- sub-2: Verdieping. Hoe werkt het precies? Concreet voorbeeld uit de praktijk.
+- sub-3: Toepassing, aandachtspunten, veelgemaakte fouten of een vergelijking/processtroom.
+- sub-4 (optioneel): Nog meer detail, een scenario of extra oefening.
+- kc:   Kennischeck. Altijd de LAATSTE sub-pagina van een module. Nooit eerder.
+
+NOOIT direct na 1 pagina uitleg een vraag plaatsen. Minimaal 2 uitlegpagina's voor elke kennischeck.
+
+Er is GEEN apart screen-drag meer. Drag-and-drop is een component binnen een sub-pagina.
 
 COMPOSITIEREGELS (verplicht):
-1. Gebruik 4 tot 8 inhoudsmodules, afhankelijk van de hoeveelheid stof.
+1. Gebruik 4 tot 8 inhoudsmodules, afhankelijk van de hoeveelheid stof. Elke module heeft 3-5 sub-schermen.
 2. Gebruik minimaal 5 verschillende componenttypen in de gehele e-learning.
-3. Plaats nooit twee dezelfde interactievormen direct achter elkaar.
-4. Maximaal 2 tekstcomponenten achter elkaar voordat er een interactief of visueel component volgt.
-5. Elke module bevat minimaal 1 interactief of visueel component.
-6. Varieer de structuur per module. Niet elke module begint met tekst.
-7. Kies componenten op basis van de inhoud. Een vergelijking vraagt om een tabel, een proces om een processtroom, een reeks stappen om een stappenuitleg.
+3. Elke sub-pagina mag maar 1 hoofdcomponent bevatten (niet volstoppen).
+4. Varieer de componenttypen across sub-pagina's. Niet elke sub begint met een tekstblok.
+5. Kies componenten op basis van inhoud: vergelijking = tabel, proces = processtroom, stappen = stappenuitleg.
+6. De kc-sub is altijd een kennischeck of scenario. Nooit een puur tekstscherm.
 
-DIEPGANG PER ONDERWERP (verplicht):
-Ga NIET oppervlakkig door onderwerpen heen. Elk belangrijk begrip verdient een volledige behandeling.
-Volg dit patroon per kernonderwerp binnen een module:
-1. UITLEG - Leg het onderwerp grondig uit in 2-4 alinea's. Wat is het, waarom bestaat het, hoe werkt het in de praktijk.
-2. VOORBEELD - Geef een concreet, herkenbaar voorbeeld uit de praktijk.
-3. AANDACHTSPUNTEN - Benoem waar je rekening mee moet houden, veelgemaakte fouten, of beperkingen.
-4. INTERACTIE - Pas dan een kennischeck, invulveld of ander interactief component toe.
+DIEPGANG PER MODULE (verplicht):
+Elke module behandelt 1 kernonderwerp grondig over meerdere sub-schermen:
+- sub-1: Wat is het + waarom bestaat het (context, definitie, relevantie)
+- sub-2: Hoe werkt het (mechanisme, concreet voorbeeld, praktijk)
+- sub-3+: Toepassing, beperkingen, tips, vergelijkingen, scenario's
+- kc: Test begrip met een meerkeuzevraag of scenario gebaseerd op de stof van de sub-pagina's ervoor
 
-Doe dit voor ELK belangrijk begrip. Een module mag meerdere van deze cycli bevatten.
-Schrijf NOOIT een begrip af in 2-3 zinnen om dan direct een vraag erover te stellen.
+Schrijf NOOIT een begrip af in 2-3 zinnen en stel dan direct een vraag.
 
 FEITELIJKE NAUWKEURIGHEID (verplicht):
 - Maak geen overdreven claims (bijv. "verreweg de beste" of "absoluut veiligste").
@@ -847,23 +856,42 @@ ABSOLUTE REGELS:
 
 NAVIGATIE + VOORTGANG:
 
-Pas de SCHERMEN-array en MODULE_TITELS aan op het werkelijke aantal modules.
-Voorbeeld met 5 modules (pas aan naar 4, 6, 7 of 8 als dat beter past bij de stof):
+Pas de SCHERMEN-array en MODULE_TITELS aan op het werkelijke aantal modules EN sub-schermen.
+Elke module heeft 3-5 sub-schermen. Voorbeeld met 4 modules, elk met 3 subs + kc:
 
-const SCHERMEN = ['screen-welcome','screen-module-1','screen-module-2',
-  'screen-module-3','screen-module-4','screen-module-5','screen-quiz','screen-result'];
+const SCHERMEN = [
+  'screen-welcome',
+  'screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc',
+  'screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc',
+  'screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc',
+  'screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc',
+  'screen-quiz','screen-result'
+];
 
 const MODULE_TITELS = {
   'screen-welcome': '',
-  'screen-module-1': 'Module 1',
-  'screen-module-2': 'Module 2',
-  'screen-module-3': 'Module 3',
-  'screen-module-4': 'Module 4',
-  'screen-module-5': 'Module 5',
+  'screen-module-1-1': 'Module 1 - Uitleg',
+  'screen-module-1-2': 'Module 1 - Verdieping',
+  'screen-module-1-3': 'Module 1 - Toepassing',
+  'screen-module-1-kc': 'Module 1 - Kennischeck',
+  'screen-module-2-1': 'Module 2 - Uitleg',
+  'screen-module-2-2': 'Module 2 - Verdieping',
+  'screen-module-2-3': 'Module 2 - Toepassing',
+  'screen-module-2-kc': 'Module 2 - Kennischeck',
+  'screen-module-3-1': 'Module 3 - Uitleg',
+  'screen-module-3-2': 'Module 3 - Verdieping',
+  'screen-module-3-3': 'Module 3 - Toepassing',
+  'screen-module-3-kc': 'Module 3 - Kennischeck',
+  'screen-module-4-1': 'Module 4 - Uitleg',
+  'screen-module-4-2': 'Module 4 - Verdieping',
+  'screen-module-4-3': 'Module 4 - Toepassing',
+  'screen-module-4-kc': 'Module 4 - Kennischeck',
   'screen-quiz': 'Afsluitquiz',
   'screen-result': 'Resultaat'
 };
 
+BELANGRIJK: De SCHERMEN-array MOET alle sub-schermen bevatten in de exacte HTML-volgorde.
+Pas het aantal subs per module aan op de inhoud (3 tot 5 per module).
 Er is GEEN screen-drag meer in de SCHERMEN-array of MODULE_TITELS.
 
 function goTo(screenId) {
@@ -1026,7 +1054,7 @@ function toonResultaat() {
   slaVoortgangOp(true, pct);
 }
 
-function slaVoortgangOp(completed, quizScore) {
+function slaVoortgangOp(completed, scorePct) {
   const slug = location.pathname.split('/modules/')[1];
   if (!slug) return;
   const headers = { 'Content-Type': 'application/json' };
@@ -1035,9 +1063,9 @@ function slaVoortgangOp(completed, quizScore) {
     method: 'POST',
     headers: headers,
     body: JSON.stringify({
-      module_filename: slug + '.html',
+      module_slug: slug,
       completed: !!completed,
-      quiz_score: quizScore || null
+      score_pct: scorePct || 0
     })
   }).catch(() => {});
 }
@@ -1183,14 +1211,23 @@ Kies per module de meest passende componenten op basis van de inhoud.
 Combineer vrij uit deze 14 typen. Gebruik minimaal 5 verschillende typen per e-learning.
 Varieer altijd. Nooit twee dezelfde interactievormen achter elkaar.
 
-NAVIGATIEREGEL: Het LAATSTE component in elke module moet navigatieknoppen bevatten.
+NAVIGATIEREGEL: Elke sub-pagina eindigt met navigatieknoppen.
 Gebruik altijd een btn-wrap met daarin:
-- Een "Vorige" knop (btn btn-outline) met onclick="goBack()" - NIET tonen op screen-welcome.
-- Een "Volgende" knop (btn) met onclick="goTo('screen-module-N')".
-Voorbeeld: <div class="btn-wrap"><button class="btn btn-outline" onclick="goBack()">Vorige</button><button class="btn" onclick="goTo('screen-module-2')">Volgende</button></div>
-Tussenliggende componenten hoeven geen navigatieknop te hebben.
-Voeg aan interactieve componenten (kennischeck, invulveld, sorteer, scenario)
-altijd een "Volgende" knop toe zodat de gebruiker na interactie verder kan.
+- Een "Vorige" knop (btn btn-outline) met onclick="goBack()" - NIET op screen-welcome en screen-module-X-1.
+- Een "Volgende" knop (btn) met onclick="goTo('screen-module-X-2')" etc.
+- Op de kc-sub: na de kennischeck een knop naar de VOLGENDE module (screen-module-Y-1) of screen-quiz.
+
+Voorbeeld content sub-pagina:
+<div class="btn-wrap">
+  <button class="btn btn-outline" onclick="goBack()">Vorige</button>
+  <button class="btn" onclick="goTo('screen-module-1-2')">Volgende</button>
+</div>
+
+De kennischeck-sub heeft GEEN losse navigatieknoppen. De "Volgende"-knop zit IN de checkKC-feedback.
+Zorg dat de checkKC-aanroep voor de kc-sub verwijst naar de EERSTE sub van de volgende module (of screen-quiz).
+
+Voeg aan alle andere interactieve componenten (invulveld, sorteer, scenario) ook altijd
+een "Volgende" knop toe zodat de gebruiker na interactie verder kan.
 
 ────────────────────────────────────────
 TEKSTCOMPONENTEN
@@ -1256,14 +1293,17 @@ INTERACTIEVE COMPONENTEN
 
 COMPONENT 5 - KENNISCHECK (meerkeuzevraag met uitleg):
 
+Gebruik in de kc-sub van module X. De 'screen-VOLGENDE' is altijd screen-module-(X+1)-1 of screen-quiz.
+Zorg dat N uniek is per e-learning (kc-1, kc-2, kc-3... per module oplopend).
+
 <div id="kc-N" class="kennischeck">
   <h3>Kennischeck</h3>
-  <p class="kc-vraag">Vraagtekst?</p>
+  <p class="kc-vraag">Vraagtekst gebaseerd op de stof van de vorige sub-pagina's?</p>
   <div class="kc-opties">
-    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE', 'Uitleg waarom dit fout is.')">Antwoord A</button>
-    <button class="kc-optie" onclick="checkKC(N, this, true, 'screen-VOLGENDE', 'Uitleg waarom dit correct is.')">Antwoord B</button>
-    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE', 'Uitleg waarom dit fout is.')">Antwoord C</button>
-    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-VOLGENDE', 'Uitleg waarom dit fout is.')">Antwoord D</button>
+    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-module-2-1', 'Uitleg waarom dit fout is.')">Antwoord A</button>
+    <button class="kc-optie" onclick="checkKC(N, this, true, 'screen-module-2-1', 'Uitleg waarom dit correct is.')">Antwoord B</button>
+    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-module-2-1', 'Uitleg waarom dit fout is.')">Antwoord C</button>
+    <button class="kc-optie" onclick="checkKC(N, this, false, 'screen-module-2-1', 'Uitleg waarom dit fout is.')">Antwoord D</button>
   </div>
   <div id="kc-feedback-N" class="kc-feedback"></div>
 </div>
