@@ -463,7 +463,11 @@ async function login() {
 
   const { error } = await _supabase.auth.signInWithPassword({ email, password });
   if (error) {
-    errEl.textContent = error.message;
+    var msg = error.message;
+    if (msg.includes('Invalid login credentials')) msg = 'Onjuist e-mailadres of wachtwoord.';
+    else if (msg.includes('Email not confirmed')) msg = 'Je e-mail is nog niet geverifieerd. Controleer je inbox.';
+    else msg = 'Inloggen mislukt. Probeer het opnieuw.';
+    errEl.textContent = msg;
     errEl.style.display = 'block';
     btn.disabled = false;
     btn.textContent = 'Inloggen';
@@ -555,7 +559,7 @@ async function checkVerification() {
       if (error.message.includes('Email not confirmed')) {
         showAuthError('Je e-mail is nog niet geverifieerd. Controleer je inbox en klik op de verificatielink.');
       } else {
-        showAuthError(error.message);
+        showAuthError('Verificatie controleren mislukt. Probeer het opnieuw.');
       }
       return;
     }
