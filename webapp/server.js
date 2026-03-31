@@ -403,6 +403,15 @@ app.post('/api/auth/signup', async (req, res) => {
       })
       .select();
 
+    // Send verification email (admin.createUser does not send one automatically)
+    const { error: resendError } = await supabaseAdmin.auth.resend({
+      type: 'signup',
+      email: email
+    });
+    if (resendError) {
+      console.error('Could not send verification email:', resendError);
+    }
+
     res.json({
       success: true,
       message: 'Account aangemaakt. Controleer je email voor verificatie.',
@@ -446,34 +455,19 @@ app.get('/api/user/email-verified', async (req, res) => {
 
 // ── Task 8: POST /api/auth/resend-verification ──
 app.post('/api/auth/resend-verification', async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: 'Email vereist' });
+
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ error: 'Niet ingelogd' });
-    }
-
-    const token = authHeader.substring(7);
-
-    // Verify token
-    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
-
-    if (userError || !user) {
-      return res.status(401).json({ error: 'Token ongeldig' });
-    }
-
-    // Resend email confirmation
-    const { error } = await supabaseAdmin.auth.resendEmailConfirmLink(user.email);
-
-    if (error) {
-      console.error('Resend error:', error);
-      return res.status(400).json({ error: 'Kon email niet verzenden. Probeer later opnieuw.' });
-    }
-
-    res.json({ success: true, message: 'Verificatiemail verzonden.' });
-
-  } catch (error) {
-    console.error('Resend endpoint error:', error);
-    res.status(500).json({ error: 'Serverfout' });
+    const { error } = await supabaseAdmin.auth.resend({
+      type: 'signup',
+      email: email
+    });
+    if (error) throw error;
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Resend error:', err);
+    res.status(500).json({ error: 'Kon verificatie-email niet versturen' });
   }
 });
 
