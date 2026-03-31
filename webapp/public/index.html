@@ -279,11 +279,6 @@
         <span class="auth-hint">Min. 8 tekens, 1 hoofletter, 1 cijfer</span>
         <input id="signupPassword" type="password" placeholder="••••••••" autocomplete="new-password">
       </div>
-      <div class="auth-field">
-        <label>Bevestig wachtwoord</label>
-        <span class="auth-hint">Herhaal je wachtwoord</span>
-        <input id="signupPasswordConfirm" type="password" placeholder="••••••••" autocomplete="new-password">
-      </div>
       <button id="signupBtn" onclick="signup()" style="margin-top:6px;">Account aanmaken</button>
       <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray-text);">
         Al een account? <a href="#" id="toggleLogin" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Inloggen</a>
@@ -441,8 +436,8 @@ function toggleAuthMode(e) {
   if (isSignupMode) {
     loginForm.style.display = 'none';
     signupForm.style.display = 'block';
-    authTitle.textContent = 'Account aanmaken';
-    authSubtitle.textContent = 'Registreer voor de e-learning generator.';
+    authTitle.textContent = 'Welkom bij de E-learning modulen van Umely';
+    authSubtitle.textContent = 'Vul hieronder je gegevens in.';
   } else {
     loginForm.style.display = 'block';
     signupForm.style.display = 'none';
@@ -489,7 +484,6 @@ async function signup() {
   const lastName = document.getElementById('authLastName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
   const password = document.getElementById('signupPassword').value;
-  const passwordConfirm = document.getElementById('signupPasswordConfirm').value;
 
   // Validation
   if (!firstName || !lastName) return showAuthError('Vul je voor- en achternaam in.');
@@ -497,7 +491,6 @@ async function signup() {
   if (password.length < 8) return showAuthError('Wachtwoord moet minimaal 8 tekens zijn.');
   if (!/[A-Z]/.test(password)) return showAuthError('Wachtwoord moet minimaal 1 hoofdletter bevatten.');
   if (!/[0-9]/.test(password)) return showAuthError('Wachtwoord moet minimaal 1 cijfer bevatten.');
-  if (password !== passwordConfirm) return showAuthError('Wachtwoorden komen niet overeen.');
 
   document.getElementById('signupBtn').disabled = true;
   document.getElementById('signupBtn').textContent = 'Account aanmaken...';
