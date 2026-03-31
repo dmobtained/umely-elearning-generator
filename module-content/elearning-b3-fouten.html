@@ -1,6 +1,6 @@
 <!-- TITLE: B3 - Fouten, troubleshooting en grenzen van Claude -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Module 1','screen-module-2':'Module 2','screen-module-3':'Module 3','screen-module-4':'Module 4','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-module-5','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Module 1','screen-module-2':'Module 2','screen-module-3':'Module 3','screen-module-4':'Module 4','screen-module-5':'Module 5','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -17,7 +17,7 @@
       <li>Begrijpen waarom Claude bepaalde verzoeken weigert</li>
     </ul>
   </div>
-  <div class="tijdsbadge">Geschatte tijd: 12 minuten</div>
+  <div class="tijdsbadge">Geschatte tijd: 15 minuten</div>
   <div class="btn-wrap">
     <button class="btn" onclick="goTo('screen-module-1')">Start de module</button>
   </div>
@@ -26,37 +26,173 @@
 <!-- MODULE 1 -->
 <div id="screen-module-1" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 1 van 4</div>
-    <h2>Claude maakt fouten - en dat is normaal</h2>
+    <div class="module-num">Module 1 van 5</div>
+    <h2>Wat is hallucineren en waarom doet Claude het?</h2>
   </div>
   <div class="content-card">
-    <p>Claude is geen zoekmachine en geen database. Hij genereert tekst op basis van patronen die hij heeft geleerd tijdens zijn training. Dat betekent dat hij soms iets beweert wat niet klopt, verouderde informatie geeft of een antwoord verzint dat overtuigend klinkt maar feitelijk onjuist is. Dit heet "hallucineren".</p>
-    <p>Hallucineren is geen bug die snel wordt opgelost. Het is een fundamentele eigenschap van hoe grote taalmodellen werken. Alle AI-assistenten hebben dit probleem in meer of mindere mate.</p>
+    <h3>Claude is geen encyclopedie</h3>
+    <p>Claude is geen zoekmachine en geen database. Hij heeft geen lijst met feiten die hij opzoekt. In plaats daarvan voorspelt hij steeds het volgende woord in een zin, op basis van patronen die hij heeft geleerd uit miljarden teksten op het internet. Dat werkt verrassend goed voor veel taken, maar het heeft een fundamenteel probleem.</p>
+  </div>
+  <div class="content-card">
+    <h3>Waarom hallucineren onvermijdelijk is</h3>
+    <p>Omdat Claude tekst genereert woord voor woord, kan hij geen onderscheid maken tussen "dit weet ik zeker" en "dit klinkt logisch maar ik verzin het." Hij heeft geen interne factchecker. Als een antwoord taalkundig logisch klinkt, produceert hij het. Ook als het feitelijk niet klopt.</p>
+    <p>Dit is geen bug die Anthropic binnenkort oplost. Het is een eigenschap van hoe grote taalmodellen werken. Alle AI-assistenten hebben dit probleem in meer of mindere mate. GPT, Gemini, Copilot: ze hallucineren allemaal.</p>
+  </div>
+  <div class="content-card">
+    <h3>Wanneer hallucineren het vaakst voorkomt</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Specifieke feiten en cijfers</h4>
+          <p>Statistieken, percentages, jaartallen en precieze getallen zijn extra onbetrouwbaar. Claude verzint geloofwaardige maar onjuiste cijfers.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Namen en bronverwijzingen</h4>
+          <p>Claude citeert soms artikelen, boeken of onderzoeken die niet bestaan. De titels en auteurs klinken echt, maar zijn verzonnen.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Recente gebeurtenissen</h4>
+          <p>Claude heeft een trainingsdata-grens. Over gebeurtenissen na die datum kan hij niets betrouwbaars zeggen, maar hij probeert het soms toch.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">4</div>
+        <div class="stap-content">
+          <h4>Niche-onderwerpen</h4>
+          <p>Hoe specialistischer het onderwerp, hoe groter de kans op fouten. Over populaire onderwerpen is meer trainingsdata beschikbaar.</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Controleer altijd feiten, cijfers, namen en juridische of financiele informatie die Claude geeft. Gebruik Claude niet als enige bron voor beslissingen die gevolgen hebben.</p>
+    <p>Het lastige aan hallucinaties is dat ze er overtuigend uitzien. Claude schrijft zelfverzekerd, met correcte zinsbouw en logische structuur. Dat maakt het moeilijk om te zien dat de inhoud niet klopt.</p>
   </div>
-  <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
-    <p class="kc-vraag">Wat is "hallucineren" bij AI?</p>
-    <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Hallucineren is geen technische storing. Het is een eigenschap van hoe taalmodellen tekst genereren.')">Een technische storing in het systeem</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Hallucineren betekent dat Claude iets beweert dat overtuigend klinkt maar feitelijk niet klopt. Dit is een fundamentele eigenschap van alle grote taalmodellen.')">Overtuigend klinkende antwoorden geven die feitelijk niet kloppen</button>
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Het heeft niets met visie te maken. Hallucineren gaat over het genereren van onjuiste informatie.')">Dat de AI afbeeldingen ziet die er niet zijn</button>
-    </div>
-    <div id="kc-feedback-1" class="kc-feedback"></div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-2')">Volgende</button>
   </div>
 </div>
 
 <!-- MODULE 2 -->
 <div id="screen-module-2" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 2 van 4</div>
-    <h2>Eerlijkheid en weigeringen</h2>
+    <div class="module-num">Module 2 van 5</div>
+    <h2>Voorbeelden en verificatie</h2>
   </div>
   <div class="content-card">
+    <h3>Zo ziet hallucineren eruit in de praktijk</h3>
+    <div class="flashcard-set">
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Verzonnen rechtszaak</div>
+        <div class="fc-uitleg">Een advocaat vroeg een AI-assistent om relevante jurisprudentie. De AI noemde drie rechtszaken met complete referenties. Geen van de drie bleek te bestaan. De advocaat diende ze in bij de rechter en moest zich publiekelijk verontschuldigen. Dit is echt gebeurd (New York, 2023).</div>
+        <div class="fc-hint">Klik voor het verhaal</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Verzonnen statistieken</div>
+        <div class="fc-uitleg">Als je Claude vraagt "hoeveel procent van de Nederlandse bedrijven gebruikt AI?", krijg je een precies getal. Bijvoorbeeld "42% volgens onderzoek van CBS." Dat klinkt geloofwaardig, maar het percentage en de bron zijn vaak verzonnen. Claude combineert patronen tot iets dat logisch klinkt.</div>
+        <div class="fc-hint">Klik voor het verhaal</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Verzonnen biografie</div>
+        <div class="fc-uitleg">Vraag Claude naar een minder bekende persoon en hij schrijft een overtuigende biografie. Geboorteplaats, opleiding, carriere. Maar details worden ingevuld op basis van wat "logisch klinkt" voor iemand met die achtergrond. Hoe minder bekend de persoon, hoe meer Claude verzint.</div>
+        <div class="fc-hint">Klik voor het verhaal</div>
+      </div>
+    </div>
+  </div>
+  <div class="content-card">
+    <h3>Hoe controleer je wat Claude zegt?</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Controleer feiten bij de bron</h4>
+          <p>Zoek belangrijke claims op via een betrouwbare bron. Dit geldt vooral voor cijfers, namen, datums en juridische of medische informatie.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Vraag Claude om bronnen te noemen</h4>
+          <p>Zeg: "Noem de exacte bron van dit cijfer." Als Claude geen concrete, verifieerbare bron kan geven, is dat een waarschuwingssignaal.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Wees extra alert bij getallen en namen</h4>
+          <p>Specifieke cijfers, percentages, jaartallen en persoonsnamen zijn de meest voorkomende hallucinaties. Controleer deze altijd.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">4</div>
+        <div class="stap-content">
+          <h4>Gebruik webzoekopdrachten voor actuele info</h4>
+          <p>Claude heeft geen toegang tot het internet (tenzij je een tool met websearch gebruikt). Voor recente gebeurtenissen is een zoekmachine betrouwbaarder.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Een goede vuistregel: gebruik Claude voor denken, structureren en formuleren. Gebruik andere bronnen voor feiten en cijfers. Zo combineer je het beste van beide.</p>
+  </div>
+  <div id="kc-1" class="kennischeck">
+    <h3>Kennischeck</h3>
+    <p class="kc-vraag">Wat is "hallucineren" bij AI?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-3', 'Hallucineren is geen technische storing. Het is een eigenschap van hoe taalmodellen tekst genereren.')">Een technische storing in het systeem</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-3', 'Correct. Hallucineren betekent dat Claude iets beweert dat overtuigend klinkt maar feitelijk niet klopt. Dit is een fundamentele eigenschap van alle grote taalmodellen.')">Overtuigend klinkende antwoorden geven die feitelijk niet kloppen</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-3', 'Het heeft niets met visie te maken. Hallucineren gaat over het genereren van onjuiste informatie.')">Dat de AI afbeeldingen ziet die er niet zijn</button>
+    </div>
+    <div id="kc-feedback-1" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- MODULE 3 -->
+<div id="screen-module-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 5</div>
+    <h2>Eerlijkheid, onzekerheid en weigeringen</h2>
+  </div>
+  <div class="content-card">
+    <h3>Wanneer Claude zegt dat hij het niet weet</h3>
     <p>Een goed teken is als Claude zegt: "Ik weet dit niet zeker" of "Ik heb geen actuele informatie over dit onderwerp." Dat is eerlijkheid, geen fout. Vertrouw Claude meer als hij zijn onzekerheid benoemt dan als hij altijd zelfverzekerd antwoordt.</p>
+  </div>
+  <div class="content-card">
+    <h3>Wanneer is Claude waarschijnlijk onbetrouwbaar?</h3>
+    <table class="vergelijk-tabel">
+      <thead><tr><th>Situatie</th><th>Waarom</th></tr></thead>
+      <tbody>
+        <tr><td>Recente gebeurtenissen na de trainingsdatum</td><td>Claude heeft deze informatie simpelweg niet. Hij kan er alleen naar gissen.</td></tr>
+        <tr><td>Niche-domeinen en specialistische kennis</td><td>Minder trainingsdata beschikbaar, grotere kans op fouten.</td></tr>
+        <tr><td>Specifieke getallen en statistieken</td><td>Claude genereert "logische" cijfers, maar die zijn vaak verzonnen.</td></tr>
+        <tr><td>Juridische en medische details</td><td>Wetten en richtlijnen veranderen. Claude kan verouderde of onjuiste informatie geven.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="content-card">
+    <h3>Wanneer is Claude meestal wel betrouwbaar?</h3>
+    <table class="vergelijk-tabel">
+      <thead><tr><th>Situatie</th><th>Waarom</th></tr></thead>
+      <tbody>
+        <tr><td>Algemene kennis en bekende concepten</td><td>Veel trainingsdata beschikbaar. Fouten worden snel opgemerkt.</td></tr>
+        <tr><td>Redeneren en logisch nadenken</td><td>Claude is sterk in het analyseren van argumenten en het leggen van verbanden.</td></tr>
+        <tr><td>Creatieve taken (schrijven, brainstormen)</td><td>Er is geen "fout" antwoord. Claude genereert ideeeen en formuleringen.</td></tr>
+        <tr><td>Goed gedocumenteerde onderwerpen</td><td>Populaire programmeertalen, bekende historische feiten, brede wetenschappelijke consensus.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="content-card">
+    <h3>Hoe herken je twijfel in Claudes taalgebruik?</h3>
+    <p>Let op formuleringen als "Ik denk dat...", "Ik ben niet helemaal zeker, maar...", "Voor zover ik weet..." of "Het zou kunnen dat...". Dit zijn signalen dat Claude minder zeker is van zijn antwoord. Neem die signalen serieus. Het is eerlijker dan een AI die altijd doet alsof hij het zeker weet.</p>
+    <p>Omgekeerd: als Claude heel stellig een specifiek feit noemt zonder voorbehoud, betekent dat niet automatisch dat het klopt. Claude kan ook zelfverzekerd fouten maken. De vuistregel blijft: controleer belangrijke feiten altijd.</p>
   </div>
   <div class="content-card">
     <h3>Wat weigert Claude?</h3>
@@ -83,14 +219,14 @@
     <p>Soms weigert Claude ook dingen die eigenlijk prima zijn, omdat de formulering onduidelijk is. Herformuleer je vraag met meer context. Een weigering is niet altijd definitief.</p>
   </div>
   <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-module-3')">Volgende</button>
+    <button class="btn" onclick="goTo('screen-module-4')">Volgende</button>
   </div>
 </div>
 
-<!-- MODULE 3 -->
-<div id="screen-module-3" class="screen">
+<!-- MODULE 4 -->
+<div id="screen-module-4" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 3 van 4</div>
+    <div class="module-num">Module 4 van 5</div>
     <h2>Wat doe je als het antwoord niet goed is?</h2>
   </div>
   <div class="content-card">
@@ -143,15 +279,15 @@
     </div>
     <div id="scenario-feedback-1" class="scenario-feedback"></div>
     <div class="btn-wrap" style="margin-top:1rem;">
-      <button class="btn btn-outline" onclick="goTo('screen-module-4')">Volgende</button>
+      <button class="btn btn-outline" onclick="goTo('screen-module-5')">Volgende</button>
     </div>
   </div>
 </div>
 
-<!-- MODULE 4 -->
-<div id="screen-module-4" class="screen">
+<!-- MODULE 5 -->
+<div id="screen-module-5" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 4 van 4</div>
+    <div class="module-num">Module 5 van 5</div>
     <h2>Technische problemen</h2>
   </div>
   <div class="content-card">
