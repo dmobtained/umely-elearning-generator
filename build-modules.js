@@ -93,9 +93,9 @@ ${sharedCSS}
 
 <header>
   <div class="header-inner">
-    <div style="display:flex;align-items:center;gap:0.75rem;">
-      <a href="/modules.html" style="color:rgba(255,248,242,0.7);font-size:0.85rem;text-decoration:none;font-weight:600;">&#8592; Overzicht</a>
-      <img src="/logo.png" alt="Umely" style="height:65px;filter:brightness(0) invert(1);">
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.25rem;">
+      <a href="/modules.html"><img src="/logo.png" alt="Umely" style="height:65px;filter:brightness(0) invert(1);display:block;"></a>
+      <a href="/modules.html" style="color:rgba(255,248,242,0.6);font-size:0.75rem;text-decoration:none;font-weight:600;">&#8592; Overzicht</a>
     </div>
     <span class="header-title" id="header-module-title"></span>
     <span style="width:100px;"></span>
