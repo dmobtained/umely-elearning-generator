@@ -55,14 +55,17 @@ ${sharedCSS}
 
 <header>
   <div class="header-inner">
-    <a class="logo" href="#"><img src="/logo.png" alt="Umely" style="height:32px;"></a>
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <a href="/modules.html" style="color:rgba(255,248,242,0.7);font-size:0.85rem;text-decoration:none;font-weight:600;">&#8592; Overzicht</a>
+      <img src="/logo-small.png" alt="Umely" style="height:28px;">
+    </div>
     <span class="header-title" id="header-module-title"></span>
-    <a class="header-back" href="/modules.html">Bibliotheek</a>
+    <span style="width:100px;"></span>
   </div>
-  <div style="max-width:860px;margin:0.75rem auto 0;background:var(--peach);border-radius:50px;height:6px;overflow:hidden;">
+  <div style="max-width:860px;margin:0.75rem auto 0;background:rgba(255,248,242,0.15);border-radius:50px;height:6px;overflow:hidden;">
     <div id="progressBar" style="height:100%;background:var(--gradient);border-radius:50px;transition:width 0.4s ease;width:0%;"></div>
   </div>
-  <div id="progressLabel" style="text-align:right;font-size:0.75rem;color:var(--amber);font-weight:600;max-width:860px;margin:0.25rem auto 0.5rem;padding-right:0;">0% voltooid</div>
+  <div id="progressLabel" style="text-align:right;font-size:0.75rem;color:rgba(255,248,242,0.6);font-weight:600;max-width:860px;margin:0.25rem auto 0.5rem;padding-right:0;">0% voltooid</div>
 </header>
 
 ${content.replace(/<!-- TITLE: .+? -->/, '').replace(/<!-- SCHERMEN: .+? -->/, '').replace(/<!-- MODULE_TITELS: .+? -->/, '').replace(/<!-- QUIZ_START -->[\s\S]*?<!-- QUIZ_END -->/, '').trim()}
