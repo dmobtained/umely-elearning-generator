@@ -155,20 +155,21 @@
     <h2>Beperkingen en onderhoud</h2>
   </div>
   <div class="content-card">
-    <h3>Wat kan Claude niet voor je website?</h3>
+    <h3>Wat kan Claude wel en waar heb je meer kennis nodig?</h3>
     <table class="vergelijk-tabel">
-      <thead><tr><th>Kan wel</th><th>Kan niet</th></tr></thead>
+      <thead><tr><th>Kan zelfstandig</th><th>Kan, maar vraagt meer begeleiding</th></tr></thead>
       <tbody>
-        <tr><td>HTML en CSS genereren</td><td>Betalingssysteem integreren</td></tr>
-        <tr><td>Teksten en kleuren aanpassen</td><td>Inlogsysteem bouwen</td></tr>
-        <tr><td>Mobiele weergave verbeteren</td><td>Database koppelen</td></tr>
+        <tr><td>HTML en CSS genereren</td><td>Betalingssysteem integreren (Stripe, Mollie)</td></tr>
+        <tr><td>Teksten en kleuren aanpassen</td><td>Inlogsysteem bouwen (authenticatie, sessies)</td></tr>
+        <tr><td>Mobiele weergave verbeteren</td><td>Database koppelen (vereist technische kennis)</td></tr>
         <tr><td>Secties toevoegen/verwijderen</td><td>Afbeeldingen genereren of uploaden</td></tr>
       </tbody>
     </table>
+    <p style="margin-top:1rem;font-size:.95rem;">Claude Code kan eenvoudige webapplicaties bouwen, inclusief inlogsystemen en databasekoppelingen. Voor complexe systemen met betalingen en gevoelige data is meer technische kennis en begeleiding nodig.</p>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Een website die Claude heeft gebouwd, moet je zelf onderhouden. Als je teksten wilt aanpassen, doe je dat via Claude Code of door de HTML-bestanden direct te bewerken. Claude kan geen afbeeldingen genereren. Je voegt eigen afbeeldingen toe door ze in de juiste map te plaatsen.</p>
+    <p>Een website die Claude heeft gebouwd, moet je zelf onderhouden. Als je teksten wilt aanpassen, doe je dat via Claude Code of door de HTML-bestanden direct te bewerken. Claude kan geen afbeeldingen genereren, maar je voegt eigen afbeeldingen toe door ze in de juiste map te plaatsen.</p>
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
@@ -184,7 +185,7 @@
   {"vraag":"Wat heb je nodig om met Claude Code een website te bouwen?","opties":["Een betaald Adobe-abonnement","Claude Code, een browser en optioneel een hostingaccount","Een professionele webdesigner","WordPress en een databaseserver"],"correct":1,"uitleg":"Je hebt Claude Code nodig, een webbrowser om het resultaat te bekijken, en optioneel een gratis hostingaccount zoals Netlify."},
   {"vraag":"Hoe beschrijf je een website aan Claude Code?","opties":["Met technische specificaties in JSON","In gewone Nederlandse taal","Door een wireframe te uploaden","Met CSS-code"],"correct":1,"uitleg":"Je beschrijft in gewone taal wat je wilt: welke secties, welke kleuren, welke tekst. Claude schrijft de code."},
   {"vraag":"Wat is het bouwproces met Claude Code?","opties":["Eenmalig: beschrijf en klaar","Iteratief: beschrijf, bekijk, verfijn, herhaal","Lineair: eerst HTML, dan CSS, dan JavaScript","Automatisch: Claude bouwt alles zonder input"],"correct":1,"uitleg":"Het is een iteratief proces. Je beschrijft wat je wilt, bekijkt het resultaat en geeft feedback. Claude past aan en jij herhaalt tot je tevreden bent."},
-  {"vraag":"Wat kan Claude NIET voor een website?","opties":["HTML genereren","Teksten aanpassen op verzoek","Een betalingssysteem integreren","Mobiele weergave verbeteren"],"correct":2,"uitleg":"Claude kan geen betalingssystemen, inlogsystemen of databases integreren. Voor een informatieve website is dat niet nodig."},
+  {"vraag":"Waarvoor heb je meer technische kennis nodig bij het bouwen met Claude?","opties":["HTML genereren","Teksten aanpassen op verzoek","Complexe betalingssystemen met gevoelige data","Mobiele weergave verbeteren"],"correct":2,"uitleg":"Claude kan betalingssystemen, inlogsystemen en databases bouwen, maar voor complexe systemen met gevoelige data is meer technische kennis en begeleiding nodig."},
   {"vraag":"Wat is de eenvoudigste manier om een website online te zetten?","opties":["Een eigen server huren","Gratis uploaden naar Netlify","De bestanden e-mailen naar je hostingprovider","Een WordPress-installatie opzetten"],"correct":1,"uitleg":"Netlify biedt een gratis optie. Sleep je websitemap naar het dashboard en je website is live."}
 ]
 <!-- QUIZ_END -->
