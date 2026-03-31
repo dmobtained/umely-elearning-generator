@@ -147,10 +147,19 @@ app.get('/api/job/:jobId', (req, res) => {
 
 // ── API: lijst van alle modules + gebruikersrol ──
 app.get('/api/modules', requireAuth, async (req, res) => {
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('modules')
     .select('filename, slug, title, created_at')
     .order('created_at', { ascending: true });
+
+  // Fallback: probeer zonder slug kolom als die niet bestaat
+  if (error) {
+    console.error('/api/modules fout:', error.message);
+    ({ data, error } = await supabase
+      .from('modules')
+      .select('filename, title, created_at')
+      .order('created_at', { ascending: true }));
+  }
   if (error) return res.status(500).json({ error: error.message });
 
   const { data: profile } = await supabase

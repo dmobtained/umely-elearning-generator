@@ -457,8 +457,9 @@ async function loadModules() {
     const res = await fetch('/api/modules', { headers: authHeader() });
     if (res.status === 401) { showLogin(); return; }
     const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Server fout ' + res.status);
     userRole = json.role || 'user';
-    const modules = applyOrder(json.modules);
+    const modules = applyOrder(json.modules || []);
     const isAdmin = userRole === 'admin';
 
     if (modules.length === 0) {
