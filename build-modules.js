@@ -117,7 +117,17 @@ ${sharedJS}
 
 const quizVragen = ${quizVragen};
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+  // Inject nav-buttons into each screen (except welcome, quiz, result)
+  SCHERMEN.forEach(function(id) {
+    var screen = document.getElementById(id);
+    if (screen && id !== 'screen-welcome' && id !== 'screen-quiz' && id !== 'screen-result') {
+      var nav = document.createElement('div');
+      nav.className = 'nav-buttons';
+      nav.id = 'nav-' + id;
+      screen.appendChild(nav);
+    }
+  });
   goTo('screen-welcome');
   laadQuizVraag();
 });

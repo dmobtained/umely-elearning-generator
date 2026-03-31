@@ -151,10 +151,15 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 footer{background:var(--fg);color:rgba(255,248,242,0.7);text-align:center;padding:1.5rem;font-size:0.8rem;margin-top:3rem}
 footer strong{color:var(--gold)}
 footer a{color:var(--peach)}
+.nav-buttons{display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--peach)}
+.btn-vorige{display:inline-block;background:transparent;border:2px solid var(--fg);color:var(--fg);font-family:var(--font-b);font-weight:700;font-size:0.95rem;padding:0.8rem 2rem;border-radius:var(--radius-pill);cursor:pointer;text-decoration:none;transition:all 0.2s}
+.btn-vorige:hover{background:var(--fg);color:var(--bg)}
+.nav-spacer{flex:1}
 @media(max-width:600px){
   .welcome-hero h1{font-size:1.6rem}.screen{padding:0 1rem 3rem}
   .btn-wrap{flex-direction:column}.btn{text-align:center}
   .flashcard-set{flex-direction:column}.processtroom{flex-direction:column}
   .proces-pijl{transform:rotate(90deg)}.vergelijk-tabel{font-size:0.85rem}
   .stap-item{flex-direction:column}.annotatie-figuur{min-height:150px}
+  .nav-buttons{flex-direction:row}.btn-vorige,.btn{font-size:0.85rem;padding:0.7rem 1.2rem}
 }
