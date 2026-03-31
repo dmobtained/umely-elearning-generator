@@ -382,7 +382,7 @@ app.post('/api/auth/signup', async (req, res) => {
         firstName: firstName,
         lastName: lastName
       },
-      email_confirm: false // Require email confirmation
+      email_confirm: true // Auto-confirm until custom SMTP is configured
     });
 
     if (error) {

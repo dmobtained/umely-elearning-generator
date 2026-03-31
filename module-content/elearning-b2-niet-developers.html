@@ -48,11 +48,11 @@
   </div>
   <div id="kc-1" class="kennischeck">
     <h3>Kennischeck</h3>
-    <p class="kc-vraag">Voor hoeveel procent van de Claude-toepassingen heb je GEEN technische kennis nodig?</p>
+    <p class="kc-vraag">Waarvoor heb je technische kennis nodig bij Claude?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Het is veel meer dan 20%. De meeste dagelijkse toepassingen vereisen geen technische kennis.')">Ongeveer 20%</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Zo\'n 80% van de gebruiksscenario\'s werkt prima met gewone taal. Technische kennis is alleen nodig voor geavanceerde integraties.')">Ongeveer 80%</button>
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Niet 100%. Voor sommige geavanceerde functies zoals API-integraties heb je wel technische kennis nodig.')">100%, je hebt nooit technische kennis nodig</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Voor schrijven en samenvatten heb je geen technische kennis nodig. Je typt gewone taal.')">Voor het schrijven en samenvatten van teksten</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Voor het analyseren van documenten heb je geen technische kennis nodig. Je uploadt het bestand en stelt een vraag.')">Voor het analyseren van documenten</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. API-integraties en eigen applicaties bouwen vereisen technische kennis. De dagelijkse toepassingen zoals schrijven, samenvatten en analyseren werken gewoon met gewone taal.')">Voor het koppelen van Claude aan andere systemen via een API</button>
     </div>
     <div id="kc-feedback-1" class="kc-feedback"></div>
   </div>
@@ -159,6 +159,7 @@
         <div class="stap-content">
           <h4>Campagne-ideeen</h4>
           <p>Beschrijf je doelgroep en product, en vraag Claude om 10 campagneconcepten.</p>
+          <p style="margin-top:0.4rem;font-size:0.85rem;color:var(--gray-text);font-style:italic;">"Wij verkopen juridische software aan MKB-bedrijven. Geef me 10 campagneconcepten voor LinkedIn, gericht op directeuren van bedrijven met 10-50 medewerkers."</p>
         </div>
       </div>
       <div class="stap-item">
@@ -166,6 +167,7 @@
         <div class="stap-content">
           <h4>Beslissingsondersteuning</h4>
           <p>Leg je dilemma voor en vraag om argumenten voor en tegen elke optie.</p>
+          <p style="margin-top:0.4rem;font-size:0.85rem;color:var(--gray-text);font-style:italic;">"Ik twijfel tussen twee kantoorlocaties: centrum Utrecht vs randgemeente. Geef me de belangrijkste voor- en nadelen van beide opties voor een advocatenkantoor van 8 personen."</p>
         </div>
       </div>
       <div class="stap-item">
@@ -173,6 +175,7 @@
         <div class="stap-content">
           <h4>Presentatiestructuur</h4>
           <p>Geef je onderwerp en doelgroep, en laat Claude een structuur voorstellen.</p>
+          <p style="margin-top:0.4rem;font-size:0.85rem;color:var(--gray-text);font-style:italic;">"Ik geef een presentatie van 20 minuten over onze nieuwe dienstverlening aan bestaande klanten. Stel een structuur voor met titels en 2-3 kernpunten per onderdeel."</p>
         </div>
       </div>
     </div>
@@ -180,6 +183,11 @@
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
     <p>Gebruik Claude als sparringpartner, niet als beslisser. Vraag om meerdere opties en kies zelf wat het beste past bij jouw situatie.</p>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Do &amp; don't</div>
+    <p><strong>Do:</strong> Zeg wat je al hebt besloten en vraag Claude om de zwakke plekken te vinden. "Dit is mijn plan. Wat mis ik?"</p>
+    <p style="margin-top:0.5rem;"><strong>Don't:</strong> Verwacht geen unieke inzichten die jij als branche-expert niet zou hebben. Claude weet wat er online staat, niet wat er in jouw markt speelt.</p>
   </div>
   <div class="btn-wrap">
     <button class="btn" onclick="goTo('screen-module-5')">Volgende</button>
