@@ -53,10 +53,12 @@ console.log(`${contentFiles.length} module(s) gevonden\n`);
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 for (const file of contentFiles) {
-  const currentSlug = file.replace('.html', '');
-  const currentIdx = MODULE_ORDER.indexOf(currentSlug);
-  const nextSlug = currentIdx >= 0 && currentIdx < MODULE_ORDER.length - 1
+  const baseSlug = file.replace('.html', '');
+  const currentSlug = baseSlug + '-' + today;
+  const currentIdx = MODULE_ORDER.indexOf(baseSlug);
+  const nextBaseSlug = currentIdx >= 0 && currentIdx < MODULE_ORDER.length - 1
     ? MODULE_ORDER[currentIdx + 1] : null;
+  const nextSlug = nextBaseSlug ? nextBaseSlug + '-' + today : null;
   const nextModuleBtn = nextSlug
     ? '<a class="btn" href="/modules/' + nextSlug + '">Volgende module &#8594;</a>'
     : '<a class="btn" href="/modules.html">Terug naar overzicht</a>';
