@@ -21,7 +21,8 @@
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
 
   /* ── AUTH OVERLAY ── */
   #authOverlay {
@@ -189,9 +190,52 @@
   .category-group.open .category-modules { display: block; }
   .category-modules .grid { margin: 0; }
 
-  footer { padding: 24px 32px; text-align: center; background: var(--charcoal); margin-top: 64px; }
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); margin-top: 0; }
   footer p { font-size: 13px; color: rgba(255,255,255,0.85); }
   footer a { color: white; font-weight: 700; text-decoration: none; }
+
+  /* ── NEWSLETTER POPUP ── */
+  #newsletterPopup {
+    display: none; position: fixed; inset: 0;
+    background: rgba(39,41,45,0.75); backdrop-filter: blur(4px);
+    z-index: 500; align-items: center; justify-content: center;
+  }
+  #newsletterPopup.open { display: flex; }
+  .newsletter-modal {
+    background: var(--white); border-radius: 20px; padding: 40px;
+    max-width: 500px; width: 92%; position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+    max-height: 80vh; overflow-y: auto;
+  }
+  .newsletter-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; font-size: 22px; cursor: pointer;
+    color: #aaa; line-height: 1; padding: 4px;
+  }
+  .newsletter-close:hover { color: var(--charcoal); }
+  .newsletter-badge {
+    display: inline-block; background: var(--cream); color: var(--flame);
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 3px 12px; border-radius: 50px;
+    margin-bottom: 12px;
+  }
+  .newsletter-modal h2 { font-size: 20px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; }
+  .newsletter-modal .nl-date { font-size: 12px; color: #aaa; margin-bottom: 16px; }
+  .newsletter-modal .nl-body { font-size: 14px; color: var(--gray-text); line-height: 1.7; white-space: pre-wrap; }
+  .newsletter-btn {
+    display: inline-block; margin-top: 20px; padding: 12px 28px;
+    background: var(--gradient); color: white; border: none;
+    border-radius: 50px; font-size: 14px; font-weight: 700;
+    cursor: pointer; text-decoration: none; transition: opacity 0.2s;
+  }
+  .newsletter-btn:hover { opacity: 0.88; }
+  .nl-trigger {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 700;
+    background: var(--cream); color: var(--flame); border: none;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .nl-trigger:hover { background: var(--peach); }
 
   .progress-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-top: 2px; }
   .progress-status.done { background: #D1FAE5; color: #065F46; }
@@ -256,8 +300,26 @@
   <div id="grid" class="loading">Modules laden...</div>
 </main>
 
+<!-- Newsletter popup -->
+<div id="newsletterPopup">
+  <div class="newsletter-modal">
+    <button class="newsletter-close" onclick="closeNewsletter()">&#x2715;</button>
+    <div class="newsletter-badge">Nieuwsbrief</div>
+    <h2 id="nlTitle">Laden...</h2>
+    <div class="nl-date" id="nlDate"></div>
+    <div class="nl-body" id="nlBody"></div>
+    <a href="https://umely.ai" target="_blank" class="newsletter-btn">Meer op umely.ai</a>
+  </div>
+</div>
+
 <footer>
-  <p><img src="/logo.png" alt="Umely" style="height:32px;filter:brightness(0) invert(1);vertical-align:middle;margin-right:10px;"> — Jouw vaste AI-partner | <a href="https://umely.ai" target="_blank">umely.ai</a></p>
+  <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+    <img src="/logo.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
+    <span style="color:rgba(255,255,255,0.5);">|</span>
+    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+    <span style="color:rgba(255,255,255,0.5);">|</span>
+    <button class="nl-trigger" onclick="openNewsletter()">&#128240; Laatste nieuwsbrief</button>
+  </p>
 </footer>
 
 <script>
@@ -687,6 +749,27 @@ function filterModules() {
 }
 
 initAuth();
+
+// ── Newsletter popup ──
+async function openNewsletter() {
+  document.getElementById('newsletterPopup').classList.add('open');
+  try {
+    const res = await fetch('/api/newsletter/latest', { headers: authHeader() });
+    if (!res.ok) throw new Error();
+    const { newsletter } = await res.json();
+    document.getElementById('nlTitle').textContent = newsletter.title || 'Umely Nieuwsbrief';
+    document.getElementById('nlDate').textContent = newsletter.created_at
+      ? new Date(newsletter.created_at).toLocaleDateString('nl-NL', { day:'numeric', month:'long', year:'numeric' })
+      : '';
+    document.getElementById('nlBody').textContent = newsletter.content || newsletter.body || '';
+  } catch(e) {
+    document.getElementById('nlTitle').textContent = 'Nieuwsbrief niet beschikbaar';
+    document.getElementById('nlBody').textContent = 'Bezoek umely.ai voor de laatste updates.';
+  }
+}
+function closeNewsletter() {
+  document.getElementById('newsletterPopup').classList.remove('open');
+}
 </script>
 </body>
 </html>

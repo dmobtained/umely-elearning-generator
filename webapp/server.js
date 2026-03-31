@@ -378,6 +378,18 @@ app.patch('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => {
   res.json({ ok: true });
 });
 
+// ── Laatste nieuwsbrief (voor popup) ──
+app.get('/api/newsletter/latest', requireAuth, async (req, res) => {
+  const { data, error } = await supabase
+    .from('newsletters')
+    .select('title, content, created_at')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .single();
+  if (error || !data) return res.status(404).json({ error: 'Geen nieuwsbrief gevonden' });
+  res.json({ newsletter: data });
+});
+
 // ── Verwijder een module (admin) ──
 app.delete('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => {
   const filename = req.params.slug + '.html';

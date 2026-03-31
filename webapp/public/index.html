@@ -22,7 +22,8 @@
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
 
   /* ── AUTH OVERLAY ── */
   #authOverlay {
@@ -228,7 +229,7 @@
   }
   .btn-retry:hover { opacity: 0.85; }
 
-  footer { padding: 24px 32px; text-align: center; background: var(--charcoal); margin-top: 64px; }
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); margin-top: 0; }
   footer p { font-size: 13px; color: rgba(255,255,255,0.85); }
   footer a { color: white; font-weight: 700; text-decoration: none; }
 
@@ -400,7 +401,11 @@
 </main>
 
 <footer>
-  <p><img src="/logo.png" alt="Umely" style="height:32px;filter:brightness(0) invert(1);vertical-align:middle;margin-right:10px;"> — Jouw vaste AI-partner | <a href="https://umely.ai" target="_blank">umely.ai</a></p>
+  <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+    <img src="/logo.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
+    <span style="color:rgba(255,255,255,0.5);">|</span>
+    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+  </p>
 </footer>
 
 <script>

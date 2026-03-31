@@ -21,7 +21,8 @@
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
 
   /* ── AUTH OVERLAY ── */
   #authOverlay {
@@ -150,9 +151,29 @@
 
   .loading { text-align: center; padding: 40px; color: var(--gray-text); }
 
-  footer { padding: 24px 32px; text-align: center; background: var(--charcoal); margin-top: 64px; }
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); margin-top: 0; }
   footer p { font-size: 13px; color: rgba(255,255,255,0.85); }
   footer a { color: white; font-weight: 700; text-decoration: none; }
+
+  /* ── CERTIFICATEN ── */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 16px; margin-top: 12px; }
+  .cert-card {
+    background: var(--white); border: 2px solid #FFD7AD;
+    border-radius: 14px; padding: 24px; position: relative;
+    box-shadow: 0 2px 12px rgba(255,133,20,0.08);
+  }
+  .cert-card .cert-icon { font-size: 28px; margin-bottom: 8px; }
+  .cert-card h4 { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; line-height: 1.3; }
+  .cert-card .cert-score { font-size: 22px; font-weight: 800; color: var(--amber); }
+  .cert-card .cert-date { font-size: 11px; color: #aaa; margin-top: 4px; }
+  .cert-card .cert-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: #D1FAE5; color: #065F46;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 2px 8px; border-radius: 50px;
+  }
+  .cert-card a { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--flame); text-decoration: none; }
+  .cert-card a:hover { text-decoration: underline; }
 
   @media(max-width:600px) {
     .stats-grid { grid-template-columns: 1fr; }
@@ -211,6 +232,11 @@
     <div id="statsGrid" class="loading">Laden...</div>
   </div>
 
+  <div class="section">
+    <h2>Mijn certificaten</h2>
+    <div id="certGrid">Laden...</div>
+  </div>
+
   <div class="section" id="adminSection" style="display:none;">
     <h2>Gebruikersbeheer (admin)</h2>
     <div id="usersTable" class="loading">Laden...</div>
@@ -218,7 +244,11 @@
 </main>
 
 <footer>
-  <p><img src="/logo.png" alt="Umely" style="height:32px;filter:brightness(0) invert(1);vertical-align:middle;margin-right:10px;"> — Jouw vaste AI-partner | <a href="https://umely.ai" target="_blank">umely.ai</a></p>
+  <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+    <img src="/logo.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
+    <span style="color:rgba(255,255,255,0.5);">|</span>
+    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+  </p>
 </footer>
 
 <script>
@@ -363,8 +393,8 @@ async function loadAccount() {
 
     // Statistieken
     const started = progress.length;
-    const completed = progress.filter(p => p.completed_at).length;
-    const scores = progress.filter(p => p.quiz_score !== null).map(p => p.quiz_score);
+    const completed = progress.filter(p => p.completed).length;
+    const scores = progress.filter(p => p.score_pct > 0).map(p => p.score_pct);
     const avgScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
 
     document.getElementById('statsGrid').innerHTML = `
@@ -378,10 +408,32 @@ async function loadAccount() {
           <div class="stat-label">Modules afgerond</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">${avgScore}%</div>
+          <div class="stat-value">${avgScore > 0 ? avgScore + '%' : '-'}</div>
           <div class="stat-label">Gemiddelde quizscore</div>
         </div>
       </div>`;
+
+    // Certificaten (alleen afgeronde modules met score >= 70)
+    const certs = progress.filter(p => p.completed && p.score_pct >= 70);
+    if (certs.length === 0) {
+      document.getElementById('certGrid').innerHTML = '<p style="color:#aaa;font-size:14px;">Je hebt nog geen certificaten behaald. Rond een module af met minimaal 70% om een certificaat te verdienen.</p>';
+    } else {
+      document.getElementById('certGrid').innerHTML = `<div class="cert-grid">${certs.map(p => {
+        const dateStr = p.completed_at
+          ? new Date(p.completed_at).toLocaleDateString('nl-NL', { day:'numeric', month:'long', year:'numeric' })
+          : '';
+        const title = p.module_slug.replace(/^elearning-/, '').replace(/-\d{8}$/, '').replace(/-/g, ' ');
+        const titleCap = title.charAt(0).toUpperCase() + title.slice(1);
+        return `<div class="cert-card">
+          <div class="cert-badge">Behaald</div>
+          <div class="cert-icon">&#127942;</div>
+          <h4>${titleCap}</h4>
+          <div class="cert-score">${p.score_pct}%</div>
+          <div class="cert-date">${dateStr}</div>
+          <a href="/modules/${p.module_slug}" target="_blank">Module openen &#8594;</a>
+        </div>`;
+      }).join('')}</div>`;
+    }
 
     // Admin sectie
     if (profile.role === 'admin') {
@@ -414,8 +466,8 @@ async function loadUsers() {
         <tbody>
           ${users.map(u => {
             const started = u.progress.length;
-            const completed = u.progress.filter(p => p.completed_at).length;
-            const scores = u.progress.filter(p => p.quiz_score !== null).map(p => p.quiz_score);
+            const completed = u.progress.filter(p => p.completed).length;
+            const scores = u.progress.filter(p => p.score_pct > 0).map(p => p.score_pct);
             const avg = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : '-';
             return `
               <tr>
