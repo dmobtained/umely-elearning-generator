@@ -16,13 +16,51 @@ if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR);
 const sharedCSS = fs.readFileSync(CSS_FILE, 'utf8');
 const sharedJS = fs.readFileSync(JS_FILE, 'utf8');
 
+const MODULE_ORDER = [
+  'elearning-a1-wat-is-claude',
+  'elearning-a2-ecosysteem',
+  'elearning-a3-prompts',
+  'elearning-b1-veiligheid',
+  'elearning-b2-niet-developers',
+  'elearning-b3-fouten',
+  'elearning-c1-webapp',
+  'elearning-c2-desktop',
+  'elearning-c3-chrome',
+  'elearning-c4-cowork',
+  'elearning-c5-excel-powerpoint',
+  'elearning-c6-settings',
+  'elearning-c7-organisatie',
+  'elearning-d1-claude-code',
+  'elearning-d2-claude-md',
+  'elearning-d3-plan-mode',
+  'elearning-e1-mcp',
+  'elearning-e2-connectors',
+  'elearning-e3-plugins',
+  'elearning-e4-skills',
+  'elearning-e5-eerste-skill',
+  'elearning-e6-agentic-workflows',
+  'elearning-e7-portfolio-website',
+  'elearning-i1-praktijktoets',
+  'elearning-i2-certificaat'
+];
+
 // Zoek alle content bestanden (niet _shared*)
 const contentFiles = fs.readdirSync(TEMPLATE_DIR)
   .filter(f => f.endsWith('.html') && !f.startsWith('_'));
 
 console.log(`${contentFiles.length} module(s) gevonden\n`);
 
+const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+
 for (const file of contentFiles) {
+  const currentSlug = file.replace('.html', '');
+  const currentIdx = MODULE_ORDER.indexOf(currentSlug);
+  const nextSlug = currentIdx >= 0 && currentIdx < MODULE_ORDER.length - 1
+    ? MODULE_ORDER[currentIdx + 1] : null;
+  const nextModuleBtn = nextSlug
+    ? '<a class="btn" href="/modules/' + nextSlug + '">Volgende module &#8594;</a>'
+    : '<a class="btn" href="/modules.html">Terug naar overzicht</a>';
+
   const content = fs.readFileSync(path.join(TEMPLATE_DIR, file), 'utf8');
 
   // Haal title uit content (eerste regel moet <!-- TITLE: ... --> zijn)
@@ -101,6 +139,7 @@ ${content.replace(/<!-- TITLE: .+? -->/, '').replace(/<!-- SCHERMEN: .+? -->/, '
   </div>
   <div class="btn-wrap">
     <button class="btn btn-outline" onclick="herstart()">Opnieuw beginnen</button>
+    ${nextModuleBtn}
   </div>
 </div>
 
@@ -135,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </body>
 </html>`;
 
-  const outputName = file.replace('.html', '-20260329.html');
+  const outputName = file.replace('.html', '-' + today + '.html');
   fs.writeFileSync(path.join(OUTPUT_DIR, outputName), html, 'utf8');
   console.log(`Gebouwd: ${outputName}`);
 }
