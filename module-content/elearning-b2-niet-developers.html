@@ -1,237 +1,501 @@
 <!-- TITLE: B2 - Claude voor niet-developers -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-module-5','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Module 1','screen-module-2':'Module 2','screen-module-3':'Module 3','screen-module-4':'Module 4','screen-module-5':'Module 5','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'Welkom','screen-module-1-1':'Onderdeel 1 - Uitleg','screen-module-1-2':'Onderdeel 1 - Verdieping','screen-module-1-3':'Onderdeel 1 - Praktijk','screen-module-1-kc':'Kennischeck 1','screen-module-2-1':'Onderdeel 2 - Uitleg','screen-module-2-2':'Onderdeel 2 - Verdieping','screen-module-2-3':'Onderdeel 2 - Praktijk','screen-module-2-kc':'Kennischeck 2','screen-module-3-1':'Onderdeel 3 - Uitleg','screen-module-3-2':'Onderdeel 3 - Verdieping','screen-module-3-3':'Onderdeel 3 - Praktijk','screen-module-3-kc':'Kennischeck 3','screen-module-4-1':'Onderdeel 4 - Uitleg','screen-module-4-2':'Onderdeel 4 - Verdieping','screen-module-4-3':'Onderdeel 4 - Praktijk','screen-module-4-kc':'Kennischeck 4','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
-<div id="screen-welcome" class="screen start">
+<div id="screen-welcome" class="screen">
   <div class="welcome-hero">
-    <div class="welcome-badge">Umely E-learning</div>
-    <h1>B2 - Claude voor niet-developers</h1>
-    <p>Leer hoe je Claude effectief inzet voor dagelijks kantoorwerk zonder technische kennis. Na deze module weet je precies hoe je direct waarde haalt uit Claude.</p>
+    <div class="welcome-tag">Module B2</div>
+    <h1>Claude voor niet-developers</h1>
+    <p class="welcome-intro">Je hoeft geen programmeur te zijn om Claude goed te gebruiken. Of je nu marketeer, jurist, HR-medewerker of ondernemer bent: Claude is voor iedereen. In deze module leer je wat je ermee kunt, wat je ervoor nodig hebt en waar de grenzen liggen.</p>
+    <div class="welcome-meta">
+      <span>&#128337; 15 minuten</span>
+      <span>&#128221; 4 onderdelen</span>
+      <span>&#10003; Afsluitquiz</span>
+    </div>
   </div>
-  <div class="leerdoelen">
-    <h3>Na deze module kun je:</h3>
+  <div class="welcome-leerdoelen">
+    <h3>Na deze module weet je:</h3>
     <ul>
-      <li>De meest praktische toepassingen van Claude benoemen voor kantoorwerk</li>
-      <li>Claude inzetten voor schrijven, redigeren en samenvatten</li>
-      <li>Claude gebruiken om teksten te analyseren en doorzoeken</li>
-      <li>Claude als sparringpartner gebruiken voor brainstormsessies</li>
-      <li>De beperkingen herkennen van Claude als niet-developer</li>
+      <li>Dat technische kennis niet vereist is voor de meeste toepassingen</li>
+      <li>Hoe Claude kan helpen bij schrijven en redigeren</li>
+      <li>Hoe je grote hoeveelheden tekst laat analyseren</li>
+      <li>Hoe je Claude gebruikt als sparringpartner</li>
+      <li>Wat Claude niet kan zonder technische koppelingen</li>
     </ul>
   </div>
-  <div class="tijdsbadge">Geschatte tijd: 15 minuten</div>
-  <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-module-1')">Start de module</button>
-  </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button></div>
 </div>
 
-<!-- MODULE 1 -->
-<div id="screen-module-1" class="screen">
+<!-- ============================================================ -->
+<!-- ONDERDEEL 1: Je hoeft geen developer te zijn -->
+<!-- ============================================================ -->
+
+<div id="screen-module-1-1" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 1 van 5</div>
+    <div class="module-num">Onderdeel 1 van 4</div>
     <h2>Je hoeft geen developer te zijn</h2>
   </div>
   <div class="content-card">
-    <p>Claude is gebouwd voor iedereen. De meeste mensen die Claude dagelijks gebruiken zijn geen programmeurs. Het zijn marketeers, juristen, HR-medewerkers, directeuren, assistenten en ondernemers. Je gebruikt Claude door gewone taal te typen. Dat is alles.</p>
-    <p>Het enige wat je nodig hebt is een account, een internetverbinding en de bereidheid om te experimenteren. Technische kennis maakt Claude krachtiger, maar is geen vereiste voor het merendeel van de gebruiksscenario's.</p>
+    <p>Claude is ontworpen voor iedereen die gewone taal spreekt. Je typt wat je wilt weten of gedaan wilt hebben, en Claude reageert. Geen code, geen technische commando's, geen handleiding vereist.</p>
+    <p>De enige drie dingen die je nodig hebt: een account, een internetverbinding en de bereidheid om te experimenteren. Dat is het.</p>
+    <p>Technische kennis maakt Claude krachtiger, dat is eerlijk gezegd zo. Maar voor zo'n 80% van de dagelijkse use cases, zoals teksten schrijven, documenten samenvatten en vragen beantwoorden, heb je die kennis simpelweg niet nodig.</p>
   </div>
-  <div class="content-card">
-    <h3>Waar Claude het meeste tijd bespaart</h3>
-    <div class="processtroom">
-      <div class="proces-blok"><h4>Schrijven</h4><p>E-mails, offertes, rapporten</p></div>
-      <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>Analyseren</h4><p>Contracten, documenten</p></div>
-      <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>Brainstormen</h4><p>Ideeen, strategieen</p></div>
-      <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>Vertalen</h4><p>Taal, toon, niveau</p></div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Goed om te weten</div>
+    <p>Claude begrijpt context. Als je een beetje achtergrond geeft, zoals je functie, het doel van de tekst of wie de lezer is, worden de antwoorden direct veel beter. Dat is geen technische vaardigheid, dat is gewoon goed communiceren.</p>
+  </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-1-2')">Volgende</button></div>
+</div>
+
+<div id="screen-module-1-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Wie gebruikt Claude al?</h2>
+  </div>
+  <div class="flashcard-set">
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">Marketeer</div>
+      <div class="fc-uitleg">Schrijft campagneteksten, social media posts en nieuwsbrieven. Vraagt Claude om varianten, verschillende tonen of een samenvatting van klantfeedback.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">HR-medewerker</div>
+      <div class="fc-uitleg">Werkt sollicitatiebrieven uit naar bullet points, schrijft functieomschrijvingen, stelt vragen voor sollicitatiegesprekken op en maakt onboardingmateriaal.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">Jurist of advocaat</div>
+      <div class="fc-uitleg">Vertaalt juridische contracten naar begrijpelijke taal, stelt samenvattingen op van uitgebreide dossiers en bereidt correspondentie voor.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">Directeur of manager</div>
+      <div class="fc-uitleg">Laat lange rapporten samenvatten tot een executive summary van één pagina, bereidt presentaties voor en denkt na over strategische opties.</div>
+      <div class="fc-hint">Klik voor uitleg</div>
     </div>
   </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-1-3')">Volgende</button></div>
+</div>
+
+<div id="screen-module-1-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Praktijk: wat heb je echt nodig?</h2>
+  </div>
+  <div id="scenario-1" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Een assistent van een makelaarskantoor wil Claude gebruiken maar zegt: "Ik kan niet programmeren, dus dit is niks voor mij." Wat zou jij haar uitleggen?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Dat is niet juist. Claude werkt prima zonder technische kennis voor de meeste dagelijkse taken. Programmeren is alleen nodig als je geavanceerde koppelingen met andere systemen wilt bouwen.')">Ze heeft gelijk, voor Claude heb je technische kennis nodig</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Precies. Claude werkt via gewone taal. Voor 80% van de dagelijkse taken, zoals teksten schrijven, samenvatten en vragen stellen, heb je geen technische kennis nodig. Je hebt alleen een account, internet en de wil om te proberen.')">Programmeren is niet nodig. Claude werkt via gewone taal en is voor iedereen toegankelijk</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Dat is te kort door de bocht. Claude heeft veel meer toepassingen dan alleen recepten zoeken. Het punt is dat technische kennis niet vereist is voor de meeste zakelijke taken.')">Ze hoeft alleen Claude te gebruiken voor eenvoudige zoekopdrachten, de rest is te moeilijk</button>
+    </div>
+    <div id="scenario-feedback-1" class="scenario-feedback"></div>
+  </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-1-kc')">Volgende</button></div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
-    <p class="kc-vraag">Waarvoor heb je technische kennis nodig bij Claude?</p>
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat heb je minimaal nodig om Claude te gebruiken?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Voor schrijven en samenvatten heb je geen technische kennis nodig. Je typt gewone taal.')">Voor het schrijven en samenvatten van teksten</button>
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Voor het analyseren van documenten heb je geen technische kennis nodig. Je uploadt het bestand en stelt een vraag.')">Voor het analyseren van documenten</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. API-integraties en eigen applicaties bouwen vereisen technische kennis. De dagelijkse toepassingen zoals schrijven, samenvatten en analyseren werken gewoon met gewone taal.')">Voor het koppelen van Claude aan andere systemen via een API</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Nee. Programmeerkennis is absoluut niet vereist. Claude werkt via gewone taal.')">Een programmeerkennis en een technische achtergrond</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Correct. Een account, een internetverbinding en de bereidheid om te experimenteren zijn de enige vereisten. Technische kennis maakt Claude krachtiger, maar is niet nodig voor de meeste toepassingen.')">Een account, een internetverbinding en de wil om te experimenteren</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Nee. Claude heeft geen speciale software of installatie nodig. Het werkt via een gewone browser.')">Speciale software en een krachtige computer</button>
     </div>
     <div id="kc-feedback-1" class="kc-feedback"></div>
   </div>
 </div>
 
-<!-- MODULE 2 -->
-<div id="screen-module-2" class="screen">
+<!-- ============================================================ -->
+<!-- ONDERDEEL 2: Schrijven en redigeren -->
+<!-- ============================================================ -->
+
+<div id="screen-module-2-1" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 2 van 5</div>
+    <div class="module-num">Onderdeel 2 van 4</div>
     <h2>Schrijven en redigeren</h2>
   </div>
   <div class="content-card">
-    <h3>Wat Claude kan doen met tekst</h3>
-    <div class="flashcard-set">
-      <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">E-mails</div>
-        <div class="fc-uitleg">Schrijf professionele e-mails of laat bestaande e-mails verbeteren qua toon, structuur of lengte.</div>
-        <div class="fc-hint">Klik voor uitleg</div>
-      </div>
-      <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Offertes</div>
-        <div class="fc-uitleg">Laat Claude een offerte of voorstel structureren op basis van de informatie die je aanlevert.</div>
-        <div class="fc-hint">Klik voor uitleg</div>
-      </div>
-      <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Samenvatten</div>
-        <div class="fc-uitleg">Upload een lang rapport en vraag Claude om een executive summary van een pagina. Of vat notulen samen in vijf bullet points.</div>
-        <div class="fc-hint">Klik voor uitleg</div>
-      </div>
-      <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Vertalen</div>
-        <div class="fc-uitleg">Vertaal teksten naar een andere taal, maar ook naar een andere toon: van juridisch jargon naar gewone taal, of van formeel naar informeel.</div>
-        <div class="fc-hint">Klik voor uitleg</div>
-      </div>
-    </div>
+    <p>Een van de meest gebruikte toepassingen van Claude is hulp bij schrijfwerk. Denk aan e-mails die je wilt verbeteren, offertes opstellen, rapporten samenvatten of notulen uitwerken vanuit spaarzame aantekeningen.</p>
+    <p>Claude kan ook schakelen tussen registers. Heb je een technische tekst die begrijpelijker moet worden voor klanten? Of een informele mail die formeler moet klinken voor een bestuursvergadering? Geef Claude de context en vraag om de aanpassing.</p>
+    <p>Ook vertalen valt hieronder, niet alleen tussen talen maar ook tussen schrijfstijlen. Van directief naar vriendelijk, van uitgebreid naar beknopt, van intern naar extern.</p>
   </div>
-  <div id="scenario-1" class="scenario-blok">
-    <div class="scenario-label">Praktijksituatie</div>
-    <p class="scenario-tekst">Je bent HR-medewerker en hebt 15 sollicitatiebrieven ontvangen voor een vacature. Je wilt snel de kern van elke brief zien. Hoe gebruik je Claude?</p>
-    <div class="scenario-keuzes">
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Claude kan niet automatisch je inbox lezen. Je moet de brieven zelf kopieren of uploaden.')">Vraag Claude om je inbox te openen en de brieven te lezen</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Plak de brieven in Claude en vraag om een samenvatting per brief in vijf bullet points. Zo heb je in een paar minuten een overzicht.')">Plak de brieven in Claude en vraag per brief een samenvatting van vijf bullet points</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Claude kan niet voor je selecteren of beslissen. Hij kan je wel helpen de kern van elke brief te zien zodat jij sneller kunt beoordelen.')">Laat Claude de beste kandidaat kiezen</button>
-    </div>
-    <div id="scenario-feedback-1" class="scenario-feedback"></div>
-    <div class="btn-wrap" style="margin-top:1rem;">
-      <button class="btn btn-outline" onclick="goTo('screen-module-3')">Volgende</button>
-    </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Concrete aanpak</div>
+    <p>Geef Claude altijd het origineel mee plus wat je wilt bereiken. Schrijf bijvoorbeeld: "Hier is mijn conceptmail. Maak hem professioneler en korter, maximaal drie alinea's." Dat werkt veel beter dan "verbeter deze mail".</p>
   </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-2-2')">Volgende</button></div>
 </div>
 
-<!-- MODULE 3 -->
-<div id="screen-module-3" class="screen">
+<div id="screen-module-2-2" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 3 van 5</div>
-    <h2>Analyseren en doorzoeken</h2>
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Schrijftaken: voorbeelden per rol</h2>
   </div>
-  <div class="content-card">
-    <p>Claude kan grote hoeveelheden tekst lezen en samenvatten. Upload een contract, een rapport of een reeks e-mails en vraag Claude wat de belangrijkste punten zijn, welke verplichtingen er in staan of welke risico's hij ziet.</p>
+  <table class="vergelijk-tabel">
+    <thead>
+      <tr>
+        <th>Rol</th>
+        <th>Taak</th>
+        <th>Wat Claude doet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Makelaar</td>
+        <td>Bezichtigingsaantekeningen</td>
+        <td>Omzetten naar professionele terugkoppeling aan klant</td>
+      </tr>
+      <tr>
+        <td>HR-medewerker</td>
+        <td>Sollicitatiebrief (2 pagina's)</td>
+        <td>Samenvatten naar 5 kernpunten voor de selectie</td>
+      </tr>
+      <tr>
+        <td>Directeur</td>
+        <td>Kwartaalrapport (40 pagina's)</td>
+        <td>Uitwerken tot executive summary van 1 pagina</td>
+      </tr>
+      <tr>
+        <td>Accountant</td>
+        <td>Juridische clausule</td>
+        <td>Vertalen naar begrijpelijke taal voor de klant</td>
+      </tr>
+      <tr>
+        <td>Assistent</td>
+        <td>Vergaderaantekeningen</td>
+        <td>Uitwerken tot gestructureerde notulen met actiepunten</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-2-3')">Volgende</button></div>
+</div>
+
+<div id="screen-module-2-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Praktijk: schrijfhulp inzetten</h2>
   </div>
-  <div class="tip-box waarschuwing">
-    <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Claude leest wat je hem geeft. Hij heeft geen toegang tot je inbox, je cloudopslag of je systemen tenzij je Connectors of MCP-integraties hebt ingeschakeld (zie module E2). Standaard heeft Claude alleen toegang tot wat je in het gesprek deelt. Je moet de tekst kopieren of het bestand uploaden.</p>
+  <div id="scenario-2" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Een HR-medewerker heeft een sollicitatiebrief van twee A4-tjes ontvangen. Ze wil snel de essentie kunnen beoordelen. Ze heeft geen tijd om hem volledig te lezen. Hoe kan Claude hier het best bij helpen?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Dat werkt niet. Claude kan geen bestanden uit je mailbox halen. Je moet de tekst zelf kopiëren en plakken, of het bestand uploaden.')">Claude automatisch je mailbox laten doorzoeken op de brief</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, true, 'Precies. Door de brief te kopiëren en Claude te vragen om een samenvatting van vijf bullet points, krijg je snel inzicht in de essentie. Dit is een van de meest praktische toepassingen van Claude voor niet-technische gebruikers.')">De brief kopiëren, in Claude plakken en vragen om een samenvatting van 5 bullet points</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Dat is omslachtig en niet nodig. Claude kan prima samenvatten zonder dat je hem specifieke beoordelingscriteria geeft, al helpt context altijd.')">Claude vragen om een volledig beoordelingsrapport op te stellen met scores per competentie</button>
+    </div>
+    <div id="scenario-feedback-2" class="scenario-feedback"></div>
   </div>
-  <div class="content-card">
-    <h3>Voorbeelden per rol</h3>
-    <table class="vergelijk-tabel">
-      <thead><tr><th>Rol</th><th>Wat Claude kan analyseren</th></tr></thead>
-      <tbody>
-        <tr><td>Makelaar</td><td>Bezichtigingsaantekeningen omzetten naar terugkoppeling aan verkoper</td></tr>
-        <tr><td>HR-medewerker</td><td>Sollicitatiebrieven samenvatten in bullet points</td></tr>
-        <tr><td>Directeur</td><td>Lang rapport samenvatten in een executive summary</td></tr>
-        <tr><td>Jurist</td><td>Contract doorzoeken op verplichtingen en risico's</td></tr>
-      </tbody>
-    </table>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-2-kc')">Volgende</button></div>
+</div>
+
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Kennischeck</h2>
   </div>
   <div id="kc-2" class="kennischeck">
-    <h3>Kennischeck</h3>
-    <p class="kc-vraag">Wat moet je doen voordat Claude een document kan analyseren?</p>
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat is de beste manier om Claude te vragen een tekst te verbeteren?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Claude heeft geen speciale plugin nodig voor documentanalyse. Je kunt direct tekst plakken of bestanden uploaden.')">Een speciale plugin installeren</button>
-      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Claude heeft geen toegang tot je systemen. Je moet de tekst zelf kopieren of het bestand uploaden in het gesprek.')">Het document kopieren of uploaden in het gesprek</button>
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Claude kan direct analyseren zodra hij de tekst heeft. Er is geen wachttijd of verwerkingsproces.')">Wachten tot Claude het document heeft verwerkt</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Dat is te vaag. Claude weet dan niet wat "beter" betekent voor jou. Geef altijd context mee: doel, doelgroep en gewenste stijl.')">Stuur de tekst mee en schrijf alleen "verbeter dit"</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Correct. Door het doel, de doelgroep en de gewenste lengte mee te geven, snapt Claude precies wat je wilt. Hoe meer context, hoe beter het resultaat.')">Stuur de tekst mee met uitleg over het doel, de doelgroep en wat je anders wilt</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Nee, dat is niet nodig. Claude begrijpt gewone taal. Je hoeft geen speciale termen of codes te gebruiken.')">Gebruik technische termen zodat Claude begrijpt wat je bedoelt</button>
     </div>
     <div id="kc-feedback-2" class="kc-feedback"></div>
   </div>
 </div>
 
-<!-- MODULE 4 -->
-<div id="screen-module-4" class="screen">
+<!-- ============================================================ -->
+<!-- ONDERDEEL 3: Analyseren en brainstormen -->
+<!-- ============================================================ -->
+
+<div id="screen-module-3-1" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 4 van 5</div>
-    <h2>Brainstormen met Claude</h2>
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Analyseren en brainstormen</h2>
   </div>
   <div class="content-card">
-    <p>Claude is een uitstekende sparringpartner. Beschrijf je probleem en vraag hem om opties, alternatieven of een andere invalshoek.</p>
-    <p>Claude geeft altijd een antwoord, maar dat antwoord is niet altijd het beste antwoord. Gebruik het als startpunt, niet als eindpunt.</p>
+    <p>Claude is uitstekend in het lezen en samenvatten van grote hoeveelheden tekst. Upload een contract, een lang rapport of een reeks e-mails, en vraag Claude om de kern samen te vatten, hoofdpunten te benoemen of specifieke informatie eruit te halen.</p>
+    <p>Belangrijk om te weten: Claude leest wat jij hem geeft. Hij heeft geen toegang tot je inbox, je cloudopslag of je bedrijfssystemen, tenzij je die expliciet hebt gekoppeld. Kopiëren of uploaden is altijd noodzakelijk.</p>
+    <p>Als sparringpartner werkt Claude ook goed. Beschrijf een probleem, vraag om opties of andere invalshoeken. Hij geeft altijd antwoord. Maar: niet altijd het beste antwoord. Gebruik zijn output als startpunt, niet als eindoordeel.</p>
   </div>
-  <div class="content-card">
-    <h3>Waar werkt brainstormen goed?</h3>
-    <div class="stappen-lijst">
-      <div class="stap-item">
-        <div class="stap-nummer">1</div>
-        <div class="stap-content">
-          <h4>Campagne-ideeen</h4>
-          <p>Beschrijf je doelgroep en product, en vraag Claude om 10 campagneconcepten.</p>
-          <p style="margin-top:0.4rem;font-size:0.85rem;color:var(--gray-text);font-style:italic;">"Wij verkopen juridische software aan MKB-bedrijven. Geef me 10 campagneconcepten voor LinkedIn, gericht op directeuren van bedrijven met 10-50 medewerkers."</p>
-        </div>
+  <div class="tip-box">
+    <div class="tip-box-label info">Beperkingen</div>
+    <p>Claude heeft een limiet aan hoeveel tekst hij in één gesprek kan verwerken. Heel lange documenten moet je soms in stukken knippen. En zijn kennis heeft een einddatum: recente gebeurtenissen of nieuwe wetgeving kent hij mogelijk niet.</p>
+  </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-3-2')">Volgende</button></div>
+</div>
+
+<div id="screen-module-3-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Analyseren in de praktijk: stap voor stap</h2>
+  </div>
+  <div class="stappen-lijst">
+    <div class="stap-item">
+      <div class="stap-nummer">1</div>
+      <div class="stap-content">
+        <h4>Verzamel de tekst</h4>
+        <p>Kopieer de tekst uit je document, e-mail of rapport. Claude heeft geen automatische toegang tot je bestanden.</p>
       </div>
-      <div class="stap-item">
-        <div class="stap-nummer">2</div>
-        <div class="stap-content">
-          <h4>Beslissingsondersteuning</h4>
-          <p>Leg je dilemma voor en vraag om argumenten voor en tegen elke optie.</p>
-          <p style="margin-top:0.4rem;font-size:0.85rem;color:var(--gray-text);font-style:italic;">"Ik twijfel tussen twee kantoorlocaties: centrum Utrecht vs randgemeente. Geef me de belangrijkste voor- en nadelen van beide opties voor een advocatenkantoor van 8 personen."</p>
-        </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nummer">2</div>
+      <div class="stap-content">
+        <h4>Plak of upload</h4>
+        <p>Plak de tekst direct in het invoerveld, of upload een PDF of Word-bestand via het paperclip-icoon.</p>
       </div>
-      <div class="stap-item">
-        <div class="stap-nummer">3</div>
-        <div class="stap-content">
-          <h4>Presentatiestructuur</h4>
-          <p>Geef je onderwerp en doelgroep, en laat Claude een structuur voorstellen.</p>
-          <p style="margin-top:0.4rem;font-size:0.85rem;color:var(--gray-text);font-style:italic;">"Ik geef een presentatie van 20 minuten over onze nieuwe dienstverlening aan bestaande klanten. Stel een structuur voor met titels en 2-3 kernpunten per onderdeel."</p>
-        </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nummer">3</div>
+      <div class="stap-content">
+        <h4>Geef een concrete opdracht</h4>
+        <p>Formuleer duidelijk wat je wilt: samenvatten, hoofdpunten benoemen, risico's identificeren of een specifieke vraag beantwoorden.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nummer">4</div>
+      <div class="stap-content">
+        <h4>Stel vervolgvragen</h4>
+        <p>Je hoeft niet alles in één keer te vragen. Stel vervolgvragen om dieper in te gaan op specifieke onderdelen.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nummer">5</div>
+      <div class="stap-content">
+        <h4>Controleer de uitkomst</h4>
+        <p>Gebruik Claude's output als startpunt. Controleer feiten en cijfers altijd zelf voordat je ze doorgeeft.</p>
       </div>
     </div>
   </div>
-  <div class="tip-box">
-    <div class="tip-box-label tip">Tip</div>
-    <p>Gebruik Claude als sparringpartner, niet als beslisser. Vraag om meerdere opties en kies zelf wat het beste past bij jouw situatie.</p>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-3-3')">Volgende</button></div>
+</div>
+
+<div id="screen-module-3-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Praktijk: brainstormen met Claude</h2>
   </div>
-  <div class="tip-box waarschuwing">
-    <div class="tip-box-label waarschuwing">Do &amp; don't</div>
-    <p><strong>Do:</strong> Zeg wat je al hebt besloten en vraag Claude om de zwakke plekken te vinden. "Dit is mijn plan. Wat mis ik?"</p>
-    <p style="margin-top:0.5rem;"><strong>Don't:</strong> Verwacht geen unieke inzichten die jij als branche-expert niet zou hebben. Claude weet wat er online staat, niet wat er in jouw markt speelt.</p>
+  <div id="scenario-3" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Een ondernemer wil een nieuwe dienst lanceren en zoekt campagne-ideeën. Hij vraagt Claude om tien ideeën. Claude geeft tien ideeën, maar de ondernemer vindt ze te generiek. Wat is de beste vervolgstap?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(3, this, false, 'Dat is te snel opgeven. Claude kan wel degelijk goede ideeën genereren, maar heeft meer context nodig over de doelgroep, het product en de tone of voice.')">Stoppen met Claude, hij is niet geschikt voor creatieve taken</button>
+      <button class="scenario-keuze" onclick="checkScenario(3, this, true, 'Goed. Door meer context te geven, zoals de doelgroep, het unieke van de dienst en de gewenste toon, kan Claude veel gerichtere ideeën genereren. Claude is een startpunt, geen eindproduct.')">Meer context geven: beschrijf de doelgroep, het unieke van de dienst en de gewenste toon</button>
+      <button class="scenario-keuze" onclick="checkScenario(3, this, false, 'Dat is onnodig. Het is beter om Claude meer context te geven dan om direct het hele gesprek opnieuw te beginnen.')">Alle tien ideeën negeren en een volledig nieuw gesprek starten</button>
+    </div>
+    <div id="scenario-feedback-3" class="scenario-feedback"></div>
   </div>
-  <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-module-5')">Volgende</button>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-3-kc')">Volgende</button></div>
+</div>
+
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-3" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Je wilt Claude een lang contract laten analyseren. Wat moet je daarvoor doen?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Nee. Claude heeft geen automatische toegang tot je bestanden of cloudopslag. Je moet de tekst zelf aanleveren.')">Claude toegang geven tot je cloudopslag zodat hij het contract zelf kan ophalen</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. Je kunt de tekst kopiëren en plakken, of het bestand uploaden via het paperclip-icoon. Claude heeft geen automatische toegang tot je bestanden.')">De tekst kopiëren en plakken, of het bestand uploaden via het paperclip-icoon</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Nee, dat is niet nodig. Gewone taal werkt prima. Je hoeft geen speciale opdrachtsyntax te leren.')">Een speciale opdrachtsyntax gebruiken die Claude herkent voor documentanalyse</button>
+    </div>
+    <div id="kc-feedback-3" class="kc-feedback"></div>
   </div>
 </div>
 
-<!-- MODULE 5 -->
-<div id="screen-module-5" class="screen">
+<!-- ============================================================ -->
+<!-- ONDERDEEL 4: Wat Claude niet kan voor niet-developers -->
+<!-- ============================================================ -->
+
+<div id="screen-module-4-1" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 5 van 5</div>
-    <h2>Wat Claude niet kan (zonder technische hulp)</h2>
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Wat Claude niet kan voor niet-developers</h2>
   </div>
   <div class="content-card">
-    <p>Claude kan geen bestanden aanmaken en opslaan op je computer tenzij je hem daartoe de tools geeft. Hij kan geen e-mails versturen, geen afspraken inplannen en geen documenten uploaden naar je systemen, tenzij je hem integreert via de API of speciale connectoren.</p>
-    <p>Voor de meeste gebruikers is Claude een gesprekspartner in de browser, niet een agent die taken uitvoert in je systemen.</p>
-  </div>
-  <div class="content-card">
-    <h3>Wat kan wel vs wat kan niet</h3>
-    <table class="vergelijk-tabel">
-      <thead><tr><th>Kan wel</th><th>Kan niet (zonder integratie)</th></tr></thead>
-      <tbody>
-        <tr><td>Tekst schrijven en verbeteren</td><td>E-mails versturen</td></tr>
-        <tr><td>Documenten samenvatten</td><td>Bestanden opslaan op je computer</td></tr>
-        <tr><td>Ideeen genereren</td><td>Afspraken inplannen</td></tr>
-        <tr><td>Teksten vertalen</td><td>Documenten uploaden naar je systeem</td></tr>
-      </tbody>
-    </table>
+    <p>Claude is een krachtige gesprekspartner in de browser. Maar zonder technische koppelingen kan hij geen taken buiten dat gesprek uitvoeren. Hij kan geen bestanden aanmaken en opslaan op je computer, geen e-mails versturen, geen afspraken inplannen in je agenda en geen documenten uploaden naar je systemen.</p>
+    <p>Dit klinkt misschien als een teleurstelling, maar voor de meeste gebruikers maakt het weinig uit. De meeste waarde zit in het gesprek zelf: teksten verbeteren, ideeën genereren, documenten analyseren, vragen beantwoorden.</p>
+    <p>Wil je Claude wél laten koppelen aan andere systemen? Dan heb je connectors of een API-koppeling nodig. Dat valt buiten het bereik van dit onderdeel, maar het bestaat.</p>
   </div>
   <div class="tip-box">
-    <div class="tip-box-label tip">Tip</div>
-    <p>In module E2 leer je over connectoren waarmee Claude wel taken in je systemen kan uitvoeren. Maar voor dagelijks gebruik als tekstassistent heb je dat niet nodig.</p>
+    <div class="tip-box-label info">Wat betekent dit in de praktijk?</div>
+    <p>Zie Claude als een slimme collega die je kunt bellen voor advies. Hij kan je helpen nadenken, teksten schrijven en informatie verwerken, maar hij loopt niet zelf naar de printer of verstuurt geen e-mails namens jou tenzij je hem daarvoor de juiste tools geeft.</p>
   </div>
-  <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz</button>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-4-2')">Volgende</button></div>
+</div>
+
+<div id="screen-module-4-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Kan wel / Kan niet: overzicht</h2>
+  </div>
+  <table class="vergelijk-tabel">
+    <thead>
+      <tr>
+        <th>Taak</th>
+        <th>Kan Claude dit?</th>
+        <th>Toelichting</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tekst schrijven of verbeteren</td>
+        <td>Ja</td>
+        <td>Kernfunctie, werkt altijd</td>
+      </tr>
+      <tr>
+        <td>Documenten samenvatten</td>
+        <td>Ja, mits aangeleverd</td>
+        <td>Je moet de tekst zelf invoeren of uploaden</td>
+      </tr>
+      <tr>
+        <td>Brainstormen en sparren</td>
+        <td>Ja</td>
+        <td>Goed als startpunt, uitkomst altijd zelf beoordelen</td>
+      </tr>
+      <tr>
+        <td>E-mails versturen</td>
+        <td>Nee</td>
+        <td>Alleen via technische koppeling met e-mailsysteem</td>
+      </tr>
+      <tr>
+        <td>Afspraken inplannen</td>
+        <td>Nee</td>
+        <td>Alleen via koppeling met agenda-app</td>
+      </tr>
+      <tr>
+        <td>Bestanden opslaan op computer</td>
+        <td>Nee</td>
+        <td>Geen toegang tot lokale bestanden</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-4-3')">Volgende</button></div>
+</div>
+
+<div id="screen-module-4-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Praktijk: grenzen herkennen</h2>
+  </div>
+  <div id="scenario-4" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Een assistent vraagt Claude om alle klanten een bevestigingsmail te sturen na een vergadering. Ze wil niet zelf tien mailtjes typen. Wat kan Claude hier wel en niet voor haar doen?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Dat klopt niet. Claude kan de mails schrijven, maar hij kan ze zonder e-mailkoppeling niet zelf versturen. Versturen moet de assistent zelf doen.')">Claude kan de mails schrijven én automatisch versturen naar alle klanten</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, true, 'Precies. Claude is uitstekend voor het schrijven van de mails, varianten per klant maken of aanpassen op toon. Maar versturen doet hij niet zonder technische koppeling. De assistent kopieert de tekst en verstuurt zelf.')">Claude kan de mails schrijven. Versturen moet de assistent zelf doen, Claude heeft geen toegang tot e-mail</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Dat is te beperkt. Claude kan prima helpen met het opstellen van de teksten, dat is juist een van zijn sterkste kanten.')">Claude kan hier helemaal niet bij helpen, dit vereist technische kennis</button>
+    </div>
+    <div id="scenario-feedback-4" class="scenario-feedback"></div>
+  </div>
+  <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-4-kc')">Volgende</button></div>
+</div>
+
+<div id="screen-module-4-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-4" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat kan Claude NIET doen zonder technische koppelingen?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. Teksten verbeteren is juist een van de kernfuncties van Claude en werkt altijd zonder extra koppelingen.')">Teksten verbeteren en herschrijven</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. Documenten samenvatten werkt prima zolang jij de tekst aanlevert. Dat is geen technische koppeling.')">Documenten samenvatten die je hebt geüpload</button>
+      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-quiz', 'Correct. Claude kan e-mails schrijven, maar hij kan ze niet zelf versturen. Daarvoor is een technische koppeling met je e-mailsysteem nodig, iets wat de meeste gebruikers niet hebben.')">E-mails versturen vanuit jouw e-mailaccount</button>
+    </div>
+    <div id="kc-feedback-4" class="kc-feedback"></div>
   </div>
 </div>
 
 <!-- QUIZ_START -->
 [
-  {"vraag":"Wie zijn de meeste dagelijkse gebruikers van Claude?","opties":["Programmeurs en developers","Marketeers, juristen, HR-medewerkers en directeuren","Data scientists","Alleen IT-afdelingen"],"correct":1,"uitleg":"De meeste Claude-gebruikers zijn geen programmeurs maar kantoormedewerkers die Claude gebruiken voor schrijven, samenvatten en analyseren."},
-  {"vraag":"Wat is de snelste manier om waarde uit Claude te halen voor kantoorwerk?","opties":["Een API-integratie bouwen","Teksten laten schrijven, verbeteren of samenvatten","Een cursus programmeren volgen","Claude koppelen aan je CRM"],"correct":1,"uitleg":"Schrijven en redigeren is waar de meeste mensen beginnen en waar Claude het meeste tijd bespaart. Geen technische kennis nodig."},
-  {"vraag":"Kan Claude je inbox lezen en e-mails beantwoorden?","opties":["Ja, automatisch","Nee, je moet tekst zelf kopieren of uploaden","Ja, met de Chrome-extensie","Alleen met een Enterprise-abonnement"],"correct":1,"uitleg":"Claude heeft geen toegang tot je inbox of systemen. Je moet tekst kopieren of bestanden uploaden in het gesprek."},
-  {"vraag":"Hoe gebruik je Claude het beste bij brainstormen?","opties":["Als eindpunt: neem het eerste antwoord over","Als sparringpartner: vraag om meerdere opties en kies zelf","Als automatische beslisser","Brainstormen werkt niet met Claude"],"correct":1,"uitleg":"Claude is een goede sparringpartner maar geen beslisser. Vraag om meerdere opties en alternatieven, en kies zelf wat het beste past."},
-  {"vraag":"Wat kan Claude NIET doen zonder technische integratie?","opties":["Teksten vertalen","Rapporten samenvatten","E-mails versturen en afspraken inplannen","Ideeen genereren"],"correct":2,"uitleg":"Claude kan geen e-mails versturen, afspraken inplannen of bestanden opslaan zonder speciale integraties via de API of connectoren."},
-  {"vraag":"Je gebruikt Claude als sparringpartner voor een nieuw dienstenaanbod. Claude geeft een uitgebreid advies. Wat doe je daarmee?","opties":["Het advies direct overnemen en implementeren","Het advies gebruiken als startpunt en toetsen aan je eigen branchekennis","Het advies negeren want Claude kent jouw markt niet","Het advies doorsturen naar je team als definitief plan"],"correct":1,"uitleg":"Claude weet wat er online staat, niet wat er in jouw specifieke markt speelt. Gebruik zijn output als startpunt en voeg je eigen expertise toe."}
+  {
+    "vraag": "Wie kan Claude gebruiken?",
+    "opties": [
+      "Alleen mensen met een technische of IT-achtergrond",
+      "Iedereen die gewone taal kan typen en een account heeft",
+      "Alleen medewerkers van grote bedrijven",
+      "Alleen mensen met een Pro-abonnement"
+    ],
+    "correct": 1,
+    "uitleg": "Claude is ontworpen voor iedereen. Je hebt alleen een account, een internetverbinding en de wil om te experimenteren nodig. Technische kennis is niet vereist voor de meeste toepassingen."
+  },
+  {
+    "vraag": "Welke toepassingen zijn het meest geschikt voor niet-technische gebruikers?",
+    "opties": [
+      "API-koppelingen bouwen en scripts schrijven",
+      "Teksten schrijven en verbeteren, documenten samenvatten, brainstormen",
+      "Databases beheren en systemen automatiseren",
+      "Modellen trainen en fine-tunen"
+    ],
+    "correct": 1,
+    "uitleg": "Voor niet-technische gebruikers zijn schrijfhulp, samenvatten en sparren de meest waardevolle toepassingen. Dit zijn precies de taken waarvoor je geen technische kennis nodig hebt."
+  },
+  {
+    "vraag": "Je wilt Claude een rapport laten analyseren. Wat moet je daarvoor doen?",
+    "opties": [
+      "Claude de link naar je cloudopslag geven",
+      "De tekst kopiëren of het bestand uploaden via het paperclip-icoon",
+      "Een speciale analysequopdracht typen",
+      "Eerst een betaald abonnement nemen"
+    ],
+    "correct": 1,
+    "uitleg": "Claude heeft geen automatische toegang tot je bestanden. Je moet de tekst zelf aanleveren door te kopiëren en plakken, of door het bestand te uploaden. Dat is geen technische handeling."
+  },
+  {
+    "vraag": "Je vraagt Claude om campagne-ideeën en de resultaten zijn te generiek. Wat is de beste vervolgstap?",
+    "opties": [
+      "Claude is niet geschikt voor creatieve taken, stop ermee",
+      "Vraag exact dezelfde vraag opnieuw",
+      "Geef meer context: beschrijf de doelgroep, het product en de gewenste toon",
+      "Schakel over naar een ander AI-systeem"
+    ],
+    "correct": 2,
+    "uitleg": "Meer context geeft betere resultaten. Beschrijf je doelgroep, het unieke van je product en de gewenste toon. Claude gebruikt die context om gerichtere en relevantere ideeën te genereren."
+  },
+  {
+    "vraag": "Wat kan Claude NIET doen zonder technische koppelingen?",
+    "opties": [
+      "Teksten verbeteren",
+      "Documenten samenvatten die je hebt geüpload",
+      "E-mails versturen vanuit jouw e-mailaccount",
+      "Vragen beantwoorden over een onderwerp"
+    ],
+    "correct": 2,
+    "uitleg": "Claude kan geen e-mails versturen zonder een technische koppeling met je e-mailsysteem. Hij kan de tekst schrijven, maar het versturen doe jij zelf."
+  },
+  {
+    "vraag": "Claude geeft een antwoord dat niet klopt. Wat doe je?",
+    "opties": [
+      "Claude altijd geloven want hij is een AI",
+      "Het antwoord negeren en nooit meer Claude gebruiken",
+      "Het antwoord controleren en Claude corrigeren met de juiste informatie",
+      "Opnieuw exact dezelfde vraag stellen totdat het klopt"
+    ],
+    "correct": 2,
+    "uitleg": "Claude maakt fouten. Als een antwoord niet klopt, corrigeer hem dan met de juiste informatie. Schrijf bijvoorbeeld: 'Dit klopt niet, de situatie is zo...' en Claude past zijn antwoord aan."
+  },
+  {
+    "vraag": "Hoe kun je Claude het beste inzetten als sparringpartner?",
+    "opties": [
+      "Zijn eerste antwoord altijd overnemen als definitief advies",
+      "Hem het probleem beschrijven en vragen om opties, alternatieven of andere invalshoeken",
+      "Alleen feitelijke vragen stellen, geen meningen vragen",
+      "Hem vragen om beslissingen voor je te nemen"
+    ],
+    "correct": 1,
+    "uitleg": "Claude is een goede sparringpartner als je hem het probleem beschrijft en vraagt om meerdere opties of invalshoeken. Gebruik zijn output als startpunt en beoordeel zelf welke richting het beste past."
+  }
 ]
 <!-- QUIZ_END -->

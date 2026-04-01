@@ -1,0 +1,374 @@
+<!-- TITLE: A2 - Het Claude-ecosysteem -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Onderdeel 1 - Uitleg','screen-module-1-2':'Onderdeel 1 - Verdieping','screen-module-1-3':'Onderdeel 1 - Praktijk','screen-module-1-kc':'Onderdeel 1 - Kennischeck','screen-module-2-1':'Onderdeel 2 - Uitleg','screen-module-2-2':'Onderdeel 2 - Verdieping','screen-module-2-3':'Onderdeel 2 - Praktijk','screen-module-2-kc':'Onderdeel 2 - Kennischeck','screen-module-3-1':'Onderdeel 3 - Uitleg','screen-module-3-2':'Onderdeel 3 - Verdieping','screen-module-3-3':'Onderdeel 3 - Praktijk','screen-module-3-kc':'Onderdeel 3 - Kennischeck','screen-module-4-1':'Onderdeel 4 - Uitleg','screen-module-4-2':'Onderdeel 4 - Verdieping','screen-module-4-3':'Onderdeel 4 - Praktijk','screen-module-4-kc':'Onderdeel 4 - Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+
+<div id="screen-welcome" class="screen start">
+  <div class="welcome-hero">
+    <div class="welcome-badge">Umely E-learning</div>
+    <h1>A2 - Het Claude-ecosysteem</h1>
+    <p>Ontdek de verschillende manieren waarop je Claude kunt gebruiken en kies de tool die het best past bij jouw werksituatie.</p>
+  </div>
+  <div class="leerdoelen">
+    <h3>Na deze module kun je:</h3>
+    <ul>
+      <li>De vier toegangsmogelijkheden van Claude benoemen</li>
+      <li>Het verschil uitleggen tussen de web-app en de desktop-app</li>
+      <li>De mogelijkheden en beperkingen van de Chrome-extensie beschrijven</li>
+      <li>Aangeven waarvoor de Excel- en PowerPoint-integraties geschikt zijn</li>
+      <li>De juiste Claude-tool kiezen voor jouw werksituatie</li>
+    </ul>
+  </div>
+  <div class="tijdsbadge">Geschatte tijd: 15 minuten</div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
+  </div>
+</div>
+
+<!-- MODULE 1 SCREEN 1: Uitleg -->
+<div id="screen-module-1-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Claude.ai - de web-app</h2>
+  </div>
+  <div class="content-card">
+    <p>De eenvoudigste manier om Claude te gebruiken is via de website claude.ai. Je hebt geen installatie nodig, alleen een browser en een account. Je typt je vraag, Claude antwoordt. Zo simpel is het.</p>
+    <p>Er is een gratis versie met een dagelijks gebruikslimiet. Voor zwaarder gebruik is er een Pro-abonnement (ongeveer 20 dollar per maand). Met Pro kun je ook de Projects-functie gebruiken: een manier om Claude context te geven over jouw werk die bewaard blijft over meerdere gesprekken.</p>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Let op</div>
+    <p>Alles wat je typt gaat naar servers van Anthropic in de VS. Controleer de privacy-instellingen van je account. Bij het gratis abonnement kan Anthropic gesprekken gebruiken voor modelverbetering tenzij je dit uitschakelt. Stuur geen gevoelige klantgegevens via een gratis account.</p>
+  </div>
+</div>
+
+<!-- MODULE 1 SCREEN 2: Verdieping -->
+<div id="screen-module-1-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Claude.ai - Verdieping</h2>
+  </div>
+  <div class="content-card">
+    <h3>Gratis vs Pro - wat zijn de verschillen?</h3>
+    <table class="vergelijk-tabel">
+      <thead><tr><th>Eigenschap</th><th>Gratis</th><th>Pro (~$20/mnd)</th></tr></thead>
+      <tbody>
+        <tr><td>Toegang via browser</td><td>Ja</td><td>Ja</td></tr>
+        <tr><td>Dagelijks gebruikslimiet</td><td>Ja, beperkt</td><td>Ruimer</td></tr>
+        <tr><td>Bestanden uploaden</td><td>Ja</td><td>Ja</td></tr>
+        <tr><td>Projects-functie</td><td>Nee</td><td>Ja</td></tr>
+        <tr><td>Gesprekken voor training</td><td>Standaard aan (uitzetten kan)</td><td>Standaard uitgeschakeld</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="content-card">
+    <p>De Projects-functie is handig als je Claude regelmatig gebruikt voor hetzelfde type werk. Je kunt instructies en achtergrondinfo opslaan die Claude bij elk gesprek beschikbaar heeft. Denk aan vaste opmaakrichtlijnen of informatie over je kantoor.</p>
+  </div>
+</div>
+
+<!-- MODULE 1 SCREEN 3: Praktijk -->
+<div id="screen-module-1-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Claude.ai - Praktijk</h2>
+  </div>
+  <div id="scenario-1" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Je gebruikt de gratis versie van Claude.ai en wilt een huurcontract van een klant samenvatten. Wat is de juiste aanpak?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Bij een gratis account zijn er geen garanties over hoe je data wordt behandeld. Klantgegevens met persoonsgegevens horen niet in een gratis account.')">Het contract direct uploaden en een samenvatting vragen</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Voor klantdata heb je een zakelijk abonnement met de juiste privacyafspraken nodig. Bij de gratis versie kun je wel werken met geanonimiseerde documenten of je eigen teksten.')">Eerst de privacyinstellingen checken en eventueel upgraden naar een zakelijk abonnement voor klantdata</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Claude.ai is wel degelijk geschikt voor het samenvatten van documenten. Het punt is welk abonnement je gebruikt en of je klantdata mag verwerken.')">Claude.ai is niet geschikt voor het samenvatten van documenten</button>
+    </div>
+    <div id="scenario-feedback-1" class="scenario-feedback"></div>
+  </div>
+</div>
+
+<!-- MODULE 1 KENNISCHECK -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-1" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat is een voordeel van het Pro-abonnement van Claude.ai ten opzichte van de gratis versie?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Dat klopt niet. Bestanden uploaden kan ook met een gratis account.')">Je kunt bestanden uploaden, dat kan niet gratis</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Correct. De Projects-functie is exclusief voor Pro-gebruikers. Hiermee kun je context opslaan die bewaard blijft over meerdere gesprekken.')">Je krijgt toegang tot de Projects-functie</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Dat klopt niet. Claude.ai werkt in elke moderne browser, ongeacht je abonnement.')">Je kunt Claude.ai gebruiken in meer browsers</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Dat klopt niet. Claude.ai is in beide gevallen via de browser beschikbaar. De snelheid hangt niet af van je abonnement maar van je internetverbinding.')">De web-app werkt sneller bij een betaald abonnement</button>
+    </div>
+    <div id="kc-feedback-1" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- MODULE 2 SCREEN 1: Uitleg -->
+<div id="screen-module-2-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>De desktop-app</h2>
+  </div>
+  <div class="content-card">
+    <p>Naast de web-app is er ook een zelfstandige desktop-app voor Mac en Windows. Die installeer je eenmalig op je computer. Het voordeel is dat je Claude altijd snel kunt openen zonder een browser te hoeven starten, en dat de app toegang kan hebben tot bestanden op je computer zonder dat je die hoeft te uploaden.</p>
+    <p>De desktop-app heeft drie functies: Chat (gewoon gesprekken voeren), Cowork (samenwerken aan documenten) en Code (hulp bij het schrijven van code). Voor de meeste kantoorgebruikers is Chat het meest relevant.</p>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Als je Claude dagelijks gebruikt voor kantoorwerk is de desktop-app handiger dan de browser. Je kunt hem sneller openen en hij staat altijd klaar. De functionaliteit is vergelijkbaar met de web-app.</p>
+  </div>
+</div>
+
+<!-- MODULE 2 SCREEN 2: Verdieping -->
+<div id="screen-module-2-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Desktop-app - Verdieping</h2>
+  </div>
+  <div class="content-card">
+    <h3>De drie functies van de desktop-app</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Chat</h4>
+          <p>Gesprekken voeren met Claude, vragen stellen, teksten schrijven en samenvatten. Hetzelfde als de web-app, maar sneller bereikbaar.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Cowork</h4>
+          <p>Samenwerken aan documenten. Claude kan meelezen terwijl jij schrijft en direct suggesties geven. Handig voor langere teksten zoals rapporten of brieven.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Code</h4>
+          <p>Hulp bij het schrijven en begrijpen van programmacode. Voor de meeste kantoorgebruikers minder relevant, tenzij je met Excel-macro's of scripts werkt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 2 SCREEN 3: Praktijk -->
+<div id="screen-module-2-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Desktop-app - Vergelijking</h2>
+  </div>
+  <div class="content-card">
+    <h3>Web-app vs desktop-app: wanneer wat kiezen?</h3>
+    <table class="vergelijk-tabel">
+      <thead><tr><th>Situatie</th><th>Beste keuze</th></tr></thead>
+      <tbody>
+        <tr><td>Je gebruikt Claude af en toe, geen installatie nodig</td><td>Web-app (claude.ai)</td></tr>
+        <tr><td>Je gebruikt Claude dagelijks en wilt het snel openen</td><td>Desktop-app</td></tr>
+        <tr><td>Je wilt Claude bestanden op je computer laten lezen zonder uploaden</td><td>Desktop-app</td></tr>
+        <tr><td>Je werkt op een computer zonder installatierechten</td><td>Web-app (claude.ai)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label info">Info</div>
+    <p>Beide opties gebruiken hetzelfde account. Je kunt de web-app en de desktop-app door elkaar gebruiken zonder problemen.</p>
+  </div>
+</div>
+
+<!-- MODULE 2 KENNISCHECK -->
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-2" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat is een voordeel van de desktop-app ten opzichte van de web-app?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Dat klopt niet. De desktop-app biedt geen extra privacyvoordelen ten opzichte van de web-app. Gegevens gaan in beide gevallen naar Anthropic.')">De desktop-app is veiliger voor gevoelige gegevens</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Correct. De desktop-app kan bestanden op je computer direct lezen zonder dat je ze hoeft te uploaden. Dat maakt het werken met lokale documenten makkelijker.')">De desktop-app kan bestanden op je computer lezen zonder uploaden</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Dat klopt niet. Beide opties gebruiken hetzelfde Claude-account en hetzelfde abonnement.')">De desktop-app is goedkoper dan de web-app</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Dat klopt niet. Beide opties hebben toegang tot dezelfde Claude-modellen.')">De desktop-app heeft toegang tot krachtigere Claude-modellen</button>
+    </div>
+    <div id="kc-feedback-2" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- MODULE 3 SCREEN 1: Uitleg -->
+<div id="screen-module-3-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Chrome-extensie</h2>
+  </div>
+  <div class="content-card">
+    <p>Er is een Chrome-extensie waarmee je Claude direct in je browser kunt gebruiken. Je kunt tekst samenvatten op de pagina die je bekijkt, vragen stellen over de inhoud, of hulp krijgen bij het schrijven van een e-mail in Gmail, zonder apart naar claude.ai te gaan.</p>
+    <p>De extensie werkt alleen in Google Chrome, niet in andere browsers. En let op: de extensie heeft toegang tot de inhoud van de pagina's die je bezoekt. Dat is nodig om te kunnen helpen, maar vraagt ook om bewustzijn: gebruik de extensie niet op pagina's met gevoelige informatie als je dit niet wilt.</p>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Let op</div>
+    <p>De Chrome-extensie kan inhoud lezen van de pagina waarop je werkt. Dat geldt ook voor pagina's met klantgegevens of vertrouwelijke informatie. Wees je hiervan bewust bij gebruik.</p>
+  </div>
+</div>
+
+<!-- MODULE 3 SCREEN 2: Verdieping -->
+<div id="screen-module-3-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Chrome-extensie - Mogelijkheden en beperkingen</h2>
+  </div>
+  <div class="content-card">
+    <h3>Wat kan de extensie wel en niet?</h3>
+    <div class="flashcard-set">
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Kan wel: tekst samenvatten</div>
+        <div class="fc-uitleg">Je kunt Claude vragen om een webpagina of artikel samen te vatten. Handig als je snel de kern wilt weten zonder alles te lezen.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Kan wel: e-mails schrijven in Gmail</div>
+        <div class="fc-uitleg">In Gmail kan de extensie meehelpen bij het schrijven van e-mails. Je kunt een opzetje laten schrijven of een bestaande mail laten verbeteren.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Kan niet: acties uitvoeren</div>
+        <div class="fc-uitleg">De extensie kan alleen lezen en adviseren. Hij kan geen knoppen klikken, formulieren invullen of andere acties uitvoeren op een pagina. Claude leest mee, maar je doet het zelf.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Kan niet: andere browsers</div>
+        <div class="fc-uitleg">De extensie werkt alleen in Google Chrome. Firefox, Safari of Edge worden niet ondersteund. Daarvoor moet je de web-app of desktop-app gebruiken.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 3 SCREEN 3: Praktijk -->
+<div id="screen-module-3-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Chrome-extensie - Praktijk</h2>
+  </div>
+  <div id="scenario-2" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Je bent aan het werk in je browser en leest een lang juridisch artikel. Je wilt snel weten wat de belangrijkste punten zijn. Je hebt de Chrome-extensie geinstalleerd. Hoe gebruik je die het best?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'De extensie kan de pagina lezen en samenvatten, maar hij kan de tekst niet automatisch kopiëren naar een ander programma. Dat moet je zelf doen.')">Claude automatisch de tekst laten kopiëren naar Word</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, true, 'Correct. De extensie kan de pagina-inhoud lezen en een samenvatting geven. Dat is precies waarvoor hij bedoeld is.')">De extensie openen en vragen om een samenvatting van de pagina</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Dat is omslachtig. Je hoeft de tekst niet te kopiëren als je de extensie hebt. Die heeft al toegang tot de pagina-inhoud.')">De tekst handmatig kopiëren en in claude.ai plakken</button>
+    </div>
+    <div id="scenario-feedback-2" class="scenario-feedback"></div>
+  </div>
+</div>
+
+<!-- MODULE 3 KENNISCHECK -->
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-3" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat kan de Claude Chrome-extensie NIET doen?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'De extensie kan wel tekst samenvatten op een pagina. Dat is juist een van de kernfuncties.')">Tekst op een pagina samenvatten</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'De extensie kan wel helpen bij het schrijven van e-mails in Gmail.')">Helpen bij het schrijven van e-mails in Gmail</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. De extensie kan alleen lezen en adviseren. Hij kan geen acties uitvoeren zoals knoppen klikken, formulieren invullen of bestanden downloaden.')">Knoppen klikken of acties uitvoeren op een pagina</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'De extensie kan wel vragen beantwoorden over de inhoud van een pagina.')">Vragen beantwoorden over de inhoud van een pagina</button>
+    </div>
+    <div id="kc-feedback-3" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- MODULE 4 SCREEN 1: Uitleg -->
+<div id="screen-module-4-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>API, Office-integraties en kiezen</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude is ook beschikbaar via Microsoft 365. In Excel kun je Claude inzetten om formules te schrijven, data te analyseren en samenvattingen te maken. In PowerPoint helpt Claude bij het structureren van presentaties en het schrijven van teksten. Let op de beperkingen: Claude kan geen opmaak aanpassen, geen macro's schrijven of bestanden automatisch opslaan. Hij werkt met tekst en data, niet met de interface van de programma's zelf.</p>
+    <p>Voor bedrijven die Claude willen inbouwen in eigen software of systemen is er de API. Dit vereist technische kennis of een developer. De meeste kantoren beginnen niet met de API.</p>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label info">Info</div>
+    <p>De integraties met Microsoft 365 zijn nog volop in ontwikkeling. Wat nu beperkt is, kan over enkele maanden uitgebreider zijn. Bekijk de actuele mogelijkheden via de Microsoft 365-instellingen of de Anthropic-documentatie.</p>
+  </div>
+</div>
+
+<!-- MODULE 4 SCREEN 2: Verdieping -->
+<div id="screen-module-4-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Office-integraties - Verdieping</h2>
+  </div>
+  <div class="content-card">
+    <h3>Wat kan Claude in Excel en PowerPoint?</h3>
+    <table class="vergelijk-tabel">
+      <thead><tr><th>Applicatie</th><th>Kan wel</th><th>Kan niet</th></tr></thead>
+      <tbody>
+        <tr><td>Excel</td><td>Formules schrijven, data samenvatten, patronen uitleggen</td><td>Macro's, opmaak aanpassen, bestanden opslaan</td></tr>
+        <tr><td>PowerPoint</td><td>Dia-structuur voorstellen, teksten schrijven en aanpassen</td><td>Afbeeldingen invoegen, opmaak aanpassen, animaties</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="content-card">
+    <h3>De API: voor wie?</h3>
+    <p>De API is bedoeld voor bedrijven die Claude willen inbouwen in eigen applicaties of workflows. Denk aan een kantoorinformatiesysteem dat automatisch documenten samenvatst, of een klantenportaal dat AI-ondersteuning biedt. Dit vereist technische kennis. Voor dagelijks kantoorgebruik is de API niet de startplaats.</p>
+  </div>
+</div>
+
+<!-- MODULE 4 SCREEN 3: Praktijk -->
+<div id="screen-module-4-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>De juiste tool kiezen</h2>
+  </div>
+  <div class="content-card">
+    <h3>Welke Claude-tool past bij jou?</h3>
+    <div class="processtroom">
+      <div class="proces-blok"><h4>Web / Desktop</h4><p>Voor de meeste kantoren. Schrijven, samenvatten, vragen beantwoorden.</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Chrome-extensie</h4><p>Aanvulling voor browserwerk. Pagina's samenvatten, Gmail-hulp.</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Excel / PowerPoint</h4><p>Als je Microsoft 365 gebruikt en Claude wilt inzetten bij spreadsheets of presentaties.</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>API</h4><p>Voor inbouwen in eigen systemen. Vereist technische kennis.</p></div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Begin met de web-app of de desktop-app. Zodra je die goed kent, kun je kijken of de Chrome-extensie of Office-integraties iets toevoegen voor jouw specifieke werkzaamheden. Hoef je niet alles tegelijk te leren.</p>
+  </div>
+</div>
+
+<!-- MODULE 4 KENNISCHECK -->
+<div id="screen-module-4-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-4" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Voor wie is de Claude API het meest geschikt?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. Beginners starten het best met de web-app of desktop-app. De API vereist technische kennis.')">Beginners die voor het eerst met Claude werken</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. De API heeft niets te maken met een Pro-abonnement of de Chrome-extensie. Het is een aparte technische dienst.')">Gebruikers van de Chrome-extensie die meer willen</button>
+      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-quiz', 'Correct. De API is bedoeld voor bedrijven of developers die Claude willen inbouwen in eigen software, systemen of workflows. Het vereist technische kennis.')">Bedrijven die Claude willen inbouwen in eigen software of systemen</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. De API is niet specifiek voor Excel-gebruikers. Voor Excel is er de Microsoft 365-integratie.')">Excel-gebruikers die formules willen schrijven</button>
+    </div>
+    <div id="kc-feedback-4" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- QUIZ_START -->
+[
+  {"vraag":"Wat is de eenvoudigste manier om Claude te gebruiken zonder iets te installeren?","opties":["De desktop-app downloaden","De API inrichten","Via claude.ai in een browser","De Chrome-extensie installeren"],"correct":2,"uitleg":"Claude.ai is de web-app die direct werkt in elke browser. Geen installatie nodig, alleen een account aanmaken."},
+  {"vraag":"Wat is een voordeel van de Claude desktop-app ten opzichte van de web-app?","opties":["De desktop-app is goedkoper","De desktop-app kan bestanden op je computer lezen zonder uploaden","De desktop-app heeft toegang tot meer functies","De desktop-app werkt sneller op elk apparaat"],"correct":1,"uitleg":"De desktop-app kan bestanden op je computer direct lezen. Dat is handig als je lokale documenten wilt verwerken zonder ze te hoeven uploaden."},
+  {"vraag":"Wat kan de Claude Chrome-extensie NIET doen?","opties":["Tekst op een webpagina samenvatten","Helpen bij e-mails schrijven in Gmail","Knoppen klikken of acties uitvoeren op een webpagina","Vragen beantwoorden over pagina-inhoud"],"correct":2,"uitleg":"De Chrome-extensie kan alleen lezen en adviseren. Hij voert geen acties uit op pagina's, zoals knoppen klikken of formulieren invullen."},
+  {"vraag":"Welke beperking geldt voor de Microsoft 365-integratie van Claude?","opties":["Claude kan geen Nederlandse teksten verwerken in Excel","Claude kan geen opmaak aanpassen of macro's schrijven","Claude kan alleen in Word worden gebruikt, niet in Excel","Claude werkt niet samen met bestaande Excel-formules"],"correct":1,"uitleg":"De Excel- en PowerPoint-integraties zijn beperkt tot tekst en data. Claude kan geen opmaak aanpassen, geen macro's schrijven en geen bestanden automatisch opslaan."},
+  {"vraag":"Voor welk type gebruiker is de Claude API bedoeld?","opties":["Iedereen die Claude dagelijks gebruikt","Gebruikers met een Pro-abonnement","Bedrijven die Claude willen inbouwen in eigen systemen","Mensen die de desktop-app willen upgraden"],"correct":2,"uitleg":"De API is voor bedrijven en developers die Claude technisch willen integreren in eigen software of workflows. Niet voor dagelijkse kantoorgebruikers die zelf met Claude werken."},
+  {"vraag":"Wat is een privacyaandachtspunt bij de Chrome-extensie?","opties":["De extensie stuurt je wachtwoorden naar Anthropic","De extensie heeft toegang tot de inhoud van pagina's die je bezoekt","De extensie werkt alleen als je bent ingelogd bij Google","De extensie deelt je browsegeschiedenis met andere gebruikers"],"correct":1,"uitleg":"De Chrome-extensie leest de inhoud van de pagina's die je bezoekt om je te kunnen helpen. Wees je hiervan bewust bij pagina's met gevoelige of vertrouwelijke informatie."},
+  {"vraag":"Waar begin je het best als je Claude wilt leren gebruiken voor kantoorwerk?","opties":["Met de API om Claude in je systemen te integreren","Met de web-app of desktop-app","Met de Chrome-extensie voor browserwerk","Met de Excel-integratie voor data-analyse"],"correct":1,"uitleg":"Voor de meeste kantoren is de web-app of desktop-app het beste startpunt. Die zijn eenvoudig in gebruik, vereisen geen technische kennis en dekken de meeste kantoorbehoeften."}
+]
+<!-- QUIZ_END -->

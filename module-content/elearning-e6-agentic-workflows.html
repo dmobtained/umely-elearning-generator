@@ -1,208 +1,505 @@
-<!-- TITLE: E6 - Agentic workflows ontwerpen -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Module 1','screen-module-2':'Module 2','screen-module-3':'Module 3','screen-module-4':'Module 4','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- TITLE: E6 - Agentic Workflows Ontwerpen -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Wat is een agentic workflow?','screen-module-1-2':'Wat is een agentic workflow?','screen-module-1-3':'Wat is een agentic workflow?','screen-module-1-kc':'Kennischeck','screen-module-2-1':'Wanneer is het zinvol?','screen-module-2-2':'Wanneer is het zinvol?','screen-module-2-3':'Wanneer is het zinvol?','screen-module-2-kc':'Kennischeck','screen-module-3-1':'Hoe ontwerp je een workflow?','screen-module-3-2':'Hoe ontwerp je een workflow?','screen-module-3-3':'Hoe ontwerp je een workflow?','screen-module-3-kc':'Kennischeck','screen-module-4-1':'Wat gaat er mis?','screen-module-4-2':'Wat gaat er mis?','screen-module-4-3':'Wat gaat er mis?','screen-module-4-kc':'Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>E6 - Agentic workflows ontwerpen</h1>
-    <p>Leer hoe je werkprocessen automatiseert waarbij Claude meerdere stappen zelfstandig uitvoert, verantwoord en met de juiste grenzen.</p>
+    <h1>E6 - Agentic Workflows Ontwerpen</h1>
+    <p>Leer hoe je Claude meerdere stappen achter elkaar laat uitvoeren, zodat terugkerende werkprocessen grotendeels vanzelf gaan.</p>
   </div>
   <div class="leerdoelen">
     <h3>Na deze module kun je:</h3>
     <ul>
-      <li>Uitleggen wat een agentic workflow is</li>
-      <li>Bepalen wanneer automatisering zinvol is</li>
-      <li>Een workflow ontwerpen in vijf stappen</li>
-      <li>Grenzen instellen voor wat Claude automatisch mag doen</li>
+      <li>Uitleggen wat een agentic workflow is en hoe die werkt</li>
+      <li>Bepalen wanneer automatisering zinvol is en wanneer niet</li>
+      <li>Een workflow ontwerpen in vijf concrete stappen</li>
+      <li>Veelgemaakte fouten herkennen en vermijden</li>
     </ul>
   </div>
-  <div class="tijdsbadge">Geschatte tijd: 15 minuten</div>
+  <div class="tijdsbadge">Geschatte tijd: 20 minuten</div>
   <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-module-1')">Start de module</button>
+    <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
   </div>
 </div>
 
-<div id="screen-module-1" class="screen">
+<!-- ONDERDEEL 1: Wat is een agentic workflow? -->
+
+<div id="screen-module-1-1" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 1 van 4</div>
+    <div class="module-num">Onderdeel 1 van 4</div>
     <h2>Wat is een agentic workflow?</h2>
   </div>
   <div class="content-card">
-    <p>Een agentic workflow is een reeks taken die Claude zelfstandig uitvoert, stap voor stap, zonder dat jij elke stap handmatig goedkeurt. Claude neemt beslissingen onderweg op basis van de instructies die je hem hebt gegeven.</p>
+    <p>Bij de meeste opdrachten geef je Claude een taak en hij geeft antwoord. Klaar. Maar bij een <strong>agentic workflow</strong> voert Claude meerdere stappen achter elkaar uit, zonder dat jij elke stap handmatig goedkeurt.</p>
+    <p>Claude neemt onderweg kleine beslissingen op basis van de instructies die jij hem hebt gegeven. Jij bepaalt de regels vooraf, Claude voert uit.</p>
   </div>
   <div class="content-card">
-    <h3>Voorbeeld: dagelijkse bezichtigingsverwerking</h3>
-    <div class="processtroom">
-      <div class="proces-blok"><h4>E-mail lezen</h4><p>Nieuwe aanvragen ophalen</p></div>
-      <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>Samenvatten</h4><p>Per aanvraag een overzicht</p></div>
-      <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>CRM bijwerken</h4><p>Toevoegen aan klantdossier</p></div>
-      <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>Bevestigen</h4><p>Mail naar klant sturen</p></div>
-    </div>
+    <h3>Een concreet voorbeeld</h3>
+    <p>Stel: jij wilt elke ochtend weten welke nieuwe bezichtigingsaanvragen zijn binnengekomen. Handmatig open je je e-mail, leest elke aanvraag, maakt een samenvatting, voegt die toe aan het CRM en stuurt een bevestigingsmail. Dat kost 30 minuten per dag.</p>
+    <p>Met een agentic workflow doet Claude al die stappen zelf, in volgorde, elke ochtend.</p>
   </div>
-  <div class="content-card">
-    <h3>Wanneer wel en niet automatiseren?</h3>
-    <table class="vergelijk-tabel">
-      <thead><tr><th>Wel automatiseren</th><th>Niet automatiseren</th></tr></thead>
-      <tbody>
-        <tr><td>Dagelijks/wekelijks terugkerend</td><td>Veel menselijk oordeel nodig</td></tr>
-        <tr><td>Stappen altijd in dezelfde volgorde</td><td>Grote gevolgen bij fouten</td></tr>
-        <tr><td>Eenvoudige, voorspelbare beslissingen</td><td>Stappen elke keer anders</td></tr>
-        <tr><td>Fouten makkelijk te herstellen</td><td>Financieel, juridisch of reputatierisico</td></tr>
-      </tbody>
-    </table>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Een agentic workflow is niet magisch. Het werkt alleen goed als jij de stappen duidelijk hebt beschreven en Claude toegang heeft tot de juiste systemen via Connectors of MCP.</p>
   </div>
-  <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
-    <p class="kc-vraag">Welke taak is geschikt voor een agentic workflow?</p>
-    <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Juridische beslissingen vereisen menselijk oordeel en hebben grote gevolgen bij fouten. Niet geschikt voor automatisering.')">Het beoordelen van juridische contracten</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Dit is een terugkerende taak met vaste stappen en voorspelbare beslissingen. Precies geschikt voor een agentic workflow.')">Dagelijks nieuwe e-mails categoriseren en samenvatten</button>
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Strategische beslissingen vereisen menselijk oordeel en zijn niet geschikt voor automatisering.')">Beslissen welke klanten je prioriteit geeft</button>
-    </div>
-    <div id="kc-feedback-1" class="kc-feedback"></div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-2')">Volgende</button>
   </div>
 </div>
 
-<div id="screen-module-2" class="screen">
+<div id="screen-module-1-2" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 2 van 4</div>
-    <h2>Een workflow ontwerpen</h2>
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Hoe ziet een workflow eruit?</h2>
   </div>
   <div class="content-card">
-    <h3>Vijf stappen</h3>
+    <h3>Voorbeeld: bezichtigingsaanvragen verwerken</h3>
+    <div class="processtroom">
+      <div class="proces-blok"><h4>Stap 1</h4><p>E-mails ophalen uit inbox</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Stap 2</h4><p>Per aanvraag samenvatting maken</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Stap 3</h4><p>Toevoegen aan CRM</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Stap 4</h4><p>Bevestigingsmail sturen</p></div>
+    </div>
+  </div>
+  <div class="content-card">
+    <p>Merk op: dit zijn meerdere stappen, in meerdere systemen (e-mail, CRM, e-mail opnieuw). Claude voert ze allemaal uit. Dat is het verschil met een gewone vraag aan Claude.</p>
+  </div>
+  <div class="content-card">
+    <h3>Wat maakt het "agentisch"?</h3>
+    <table class="vergelijk-tabel">
+      <thead><tr><th>Gewone opdracht</th><th>Agentic workflow</th></tr></thead>
+      <tbody>
+        <tr><td>Een vraag, een antwoord</td><td>Meerdere stappen achter elkaar</td></tr>
+        <tr><td>Jij goedkeurt elke stap</td><td>Claude voert zelfstandig uit</td></tr>
+        <tr><td>Geen externe systemen nodig</td><td>Werkt met echte tools en data</td></tr>
+        <tr><td>Eenmalig gebruik</td><td>Regelmatig herhaald</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-3')">Volgende</button>
+  </div>
+</div>
+
+<div id="screen-module-1-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Wat heb je nodig?</h2>
+  </div>
+  <div class="content-card">
+    <h3>Drie bouwstenen voor een agentic workflow</h3>
     <div class="stappen-lijst">
       <div class="stap-item">
         <div class="stap-nummer">1</div>
         <div class="stap-content">
-          <h4>Beschrijf de workflow</h4>
-          <p>Schrijf op wat er nu handmatig gebeurt, stap voor stap. Wie doet wat, in welke volgorde, met welke tools?</p>
+          <h4>Duidelijke instructies</h4>
+          <p>Claude moet precies weten wat hij moet doen bij elke stap. Vaag is niet goed genoeg. "Verwerk de e-mails" werkt niet. "Haal e-mails op van de afgelopen 24 uur, maak per e-mail een samenvatting van maximaal vijf regels" werkt wel.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-nummer">2</div>
         <div class="stap-content">
-          <h4>Identificeer beslismomenten</h4>
-          <p>Altijd dezelfde beslissing? Claude kan het. Wisselende beslissingen? Houd die bij de mens.</p>
+          <h4>Toegang tot systemen</h4>
+          <p>Voor stappen in externe tools (e-mail, agenda, CRM) heeft Claude toegang nodig via Connectors of MCP. Zonder die toegang kan hij de stap niet uitvoeren.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-nummer">3</div>
         <div class="stap-content">
-          <h4>Bepaal de systemen</h4>
-          <p>E-mail, agenda, CRM, opslag? Zorg dat Claude via Connectors toegang heeft.</p>
+          <h4>Duidelijke grenzen</h4>
+          <p>Claude moet weten wat hij zelfstandig mag doen en waar hij op jou moet wachten. Dit leg je vast in een CLAUDE.md of Skill.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-kc')">Naar kennischeck</button>
+  </div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-1" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat maakt een workflow "agentisch"?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Claude kan zeker ook gewone vragen beantwoorden. Dat is geen agentic workflow. Bij een agentic workflow voert Claude meerdere stappen achter elkaar uit, zonder dat jij elke stap goedkeurt.')">Claude beantwoordt een vraag snel en slim</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Correct. Bij een agentic workflow voert Claude meerdere stappen zelfstandig uit, op basis van instructies die jij vooraf hebt gegeven. Jij hoeft niet elke stap handmatig goed te keuren.')">Claude voert meerdere stappen zelfstandig uit op basis van jouw instructies</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Nieuwe tabbladen of vensters openen is geen onderdeel van een agentic workflow. Het gaat om het zelfstandig uitvoeren van meerdere stappen in echte systemen.')">Claude opent meerdere tabbladen tegelijk</button>
+    </div>
+    <div id="kc-feedback-1" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- ONDERDEEL 2: Wanneer is het zinvol? -->
+
+<div id="screen-module-2-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Wanneer is een agentic workflow zinvol?</h2>
+  </div>
+  <div class="content-card">
+    <p>Niet elk werkproces is geschikt voor automatisering. Een agentic workflow werkt goed bij taken die regelmatig terugkomen, altijd in dezelfde volgorde verlopen en weinig verrassing bevatten.</p>
+    <p>Er is ook een duidelijke grens. Sommige taken horen bij de mens te blijven, hoe handig automatisering ook klinkt.</p>
+  </div>
+  <div class="content-card">
+    <h3>Vier criteria: wel automatiseren</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>De taak komt regelmatig terug</h4>
+          <p>Dagelijks, wekelijks of maandelijks. Eenmalige taken automatiseer je niet, want de opbouwtijd weegt niet op tegen de tijdwinst.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>De stappen zijn altijd in dezelfde volgorde</h4>
+          <p>Als de workflow elke keer anders verloopt, kan Claude geen betrouwbare instructies volgen.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Beslissingen zijn eenvoudig en voorspelbaar</h4>
+          <p>"Is dit een bezichtigingsaanvraag of niet?" is voorspelbaar. "Is dit een goede klant om te prioriteren?" is dat niet.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">4</div>
+        <div class="stap-content">
+          <h4>Fouten zijn herstelbaar</h4>
+          <p>Als er iets misgaat, kun je het makkelijk terugdraaien of corrigeren zonder grote gevolgen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-2-2')">Volgende</button>
+  </div>
+</div>
+
+<div id="screen-module-2-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Wanneer is het NIET zinvol?</h2>
+  </div>
+  <div class="content-card">
+    <h3>Drie situaties om te vermijden</h3>
+    <div class="flashcard-set">
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Veel menselijk oordeel vereist</div>
+        <div class="fc-uitleg">Als elke situatie anders is en er geen vaste regel voor bestaat, kan Claude niet goed beslissen. Voorbeeld: beoordelen of een klacht serieus is of niet. Dat vereist context, ervaring en een gevoel voor de situatie.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Fout heeft grote gevolgen</div>
+        <div class="fc-uitleg">Bij financiele transacties, juridische documenten of communicatie die reputatieschade kan veroorzaken wil je altijd een mens in de loop houden. Een automatisch verstuurde e-mail naar honderd klanten met foute informatie is moeilijk terug te draaien.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+      <div class="flashcard" onclick="toggleFlashcard(this)">
+        <div class="fc-term">Stappen elke keer anders</div>
+        <div class="fc-uitleg">Als de volgorde of inhoud elke keer varieert op basis van factoren die Claude niet kan kennen, werkt automatisering niet betrouwbaar. Dan is een ondersteunende rol voor Claude beter dan een zelfstandige rol.</div>
+        <div class="fc-hint">Klik voor uitleg</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Let op</div>
+    <p>Wees eerlijk over de risico's van je specifieke werkproces. Automatisering bespaart tijd, maar het wegvallen van menselijke controle heeft ook een prijs. Maak die keuze bewust.</p>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-2-3')">Volgende</button>
+  </div>
+</div>
+
+<div id="screen-module-2-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Praktijkvoorbeeld: past dit erbij?</h2>
+  </div>
+  <div id="scenario-1" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Een advocatenkantoor overweegt twee processen te automatiseren. Proces A: elke nieuwe klant een standaard welkomstpakket sturen met een map aanmaken en documenten invullen. Proces B: beoordelen of een klacht kans van slagen heeft bij de rechter. Welk proces is geschikt voor een agentic workflow?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Proces A heeft vaste stappen, is altijd in dezelfde volgorde en de beslissingen zijn eenvoudig en voorspelbaar. Proces B vereist juridisch oordeel, ervaring en context, dat is precies wat niet geautomatiseerd moet worden.')">Alleen proces A: welkomstpakket en map aanmaken</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Beoordelen of een klacht kans van slagen heeft vereist juridisch oordeel en is elke keer anders. Dit is ongeschikt voor automatisering. Fouten hier kunnen grote gevolgen hebben voor de client.')">Alleen proces B: kansen beoordelen</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Proces B is ongeschikt voor automatisering. Het vereist menselijk oordeel en heeft grote gevolgen als het fout gaat. Automatiseer alleen proces A.')">Beide processen tegelijk</button>
+    </div>
+    <div id="scenario-feedback-1" class="scenario-feedback"></div>
+    <div class="btn-wrap" style="margin-top:1rem;">
+      <button class="btn btn-outline" onclick="goTo('screen-module-2-kc')">Naar kennischeck</button>
+    </div>
+  </div>
+</div>
+
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-2" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Welke taak is NIET geschikt voor automatisering met een agentic workflow?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Wekelijkse rapportages van klantdata zijn terugkerend, hebben vaste stappen en eenvoudige beslissingen. Dit is juist een goede kandidaat voor automatisering.')">Wekelijks klantdata samenvatten in een rapport</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Nieuwe klantmappen aanmaken is een terugkerende taak met vaste stappen. Dat is prima te automatiseren, zolang je controleert wat erin gaat voordat het naar de klant gaat.')">Nieuwe klantmappen aanmaken bij binnenkomende opdrachten</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Correct. Juridische beoordeling vereist menselijk oordeel en is elke keer anders. Fouten hier kunnen grote gevolgen hebben. Dit hoort bij de mens te blijven.')">Beoordelen of een juridisch bezwaar kans van slagen heeft</button>
+    </div>
+    <div id="kc-feedback-2" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- ONDERDEEL 3: Hoe ontwerp je een agentic workflow? -->
+
+<div id="screen-module-3-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Een workflow ontwerpen: 5 stappen</h2>
+  </div>
+  <div class="content-card">
+    <p>Een goede workflow bouw je niet in een keer. Je begint klein, test grondig en bouwt stap voor stap verder. Hier zijn de vijf stappen om een agentic workflow te ontwerpen.</p>
+  </div>
+  <div class="content-card">
+    <h3>Stap 1 en 2: begrijp het huidige proces</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Beschrijf de workflow in gewone taal</h4>
+          <p>Schrijf op wat er nu handmatig gebeurt, stap voor stap. Wie doet wat? In welke volgorde? Met welke tools? Wees zo concreet mogelijk. "We verwerken aanvragen" is te vaag. "Ik open elke ochtend mijn inbox, zoek e-mails met het onderwerp 'bezichtiging', open ze een voor een..." is goed.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Identificeer de beslismomenten</h4>
+          <p>Waar wordt er een beslissing genomen? Is die altijd hetzelfde of varieert die? Als de beslissing altijd hetzelfde is (bijv. "is er een telefoonnummer in de e-mail?"), kan Claude het. Als de beslissing varieert (bijv. "is dit een serieuze klant?"), houd het bij de mens.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-2')">Volgende</button>
+  </div>
+</div>
+
+<div id="screen-module-3-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Stappen 3, 4 en 5</h2>
+  </div>
+  <div class="content-card">
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Bepaal welke systemen erbij betrokken zijn</h4>
+          <p>Heeft de workflow toegang nodig tot e-mail? Agenda? CRM? Bestandsopslag? Zorg dat Claude via Connectors of MCP toegang heeft tot die systemen. Zonder toegang stopt de workflow bij die stap.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-nummer">4</div>
         <div class="stap-content">
           <h4>Bouw en test in kleine stappen</h4>
-          <p>Begin met een stap, test grondig, voeg dan de volgende toe. Nooit alles in een keer.</p>
+          <p>Begin met stap 1 van je workflow. Test die grondig met echte of nagebootste data. Werkt het? Voeg dan stap 2 toe. Nooit de complete workflow in een keer bouwen. Elke stap die je toevoegt vergroot de kans op fouten die je niet ziet aankomen.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-nummer">5</div>
         <div class="stap-content">
           <h4>Stel grenzen in</h4>
-          <p>Wat mag Claude zonder bevestiging? Wat vereist altijd menselijke goedkeuring?</p>
+          <p>Bepaal wat Claude automatisch mag doen en wat altijd menselijke goedkeuring vereist. Leg dit vast in je CLAUDE.md of Skill zodat Claude het weet bij elke uitvoering.</p>
         </div>
       </div>
     </div>
   </div>
-  <div id="scenario-1" class="scenario-blok">
-    <div class="scenario-label">Praktijksituatie</div>
-    <p class="scenario-tekst">Een accountantskantoor verwerkt elke vrijdag rapporten van tien klanten. Handmatig kost dit drie uur. Je wilt dit automatiseren. Bij welke stap houd je menselijke controle?</p>
-    <div class="scenario-keuzes">
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Rapporten ophalen is een eenvoudige, risicoloze stap die Claude prima automatisch kan doen.')">Bij het ophalen van rapporten uit de map</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. CRM-data moet kloppen. Een fout in het CRM heeft gevolgen voor klantcommunicatie. Laat een mens de samenvatting controleren voordat deze in het CRM gaat.')">Bij het toevoegen van samenvattingen aan het CRM</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Een weekoverzicht maken is een samenvatting van wat er al is. Het risico is laag en dit kan Claude automatisch doen.')">Bij het maken van het weekoverzicht</button>
-    </div>
-    <div id="scenario-feedback-1" class="scenario-feedback"></div>
-    <div class="btn-wrap" style="margin-top:1rem;">
-      <button class="btn btn-outline" onclick="goTo('screen-module-3')">Volgende</button>
-    </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Leg stap 1 (beschrijving van het huidige proces) ook altijd schriftelijk vast. Het helpt je later om te begrijpen waarom je bepaalde keuzes hebt gemaakt en maakt het makkelijker om de workflow aan te passen.</p>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-3')">Volgende</button>
   </div>
 </div>
 
-<div id="screen-module-3" class="screen">
+<div id="screen-module-3-3" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 3 van 4</div>
-    <h2>Wat kan er misgaan?</h2>
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Praktijkvoorbeeld: accountantskantoor</h2>
   </div>
   <div class="content-card">
-    <h3>Veelvoorkomende problemen</h3>
+    <h3>Situatie</h3>
+    <p>Een accountantskantoor verwerkt elke vrijdag rapporten van tien klanten. Handmatig kost dit drie uur. Ze willen een agentic workflow bouwen.</p>
+  </div>
+  <div class="content-card">
+    <h3>Ontwerp van de workflow</h3>
+    <div class="processtroom">
+      <div class="proces-blok"><h4>Stap 1</h4><p>Rapporten ophalen uit gedeelde map (automatisch)</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Stap 2</h4><p>Per rapport: samenvatting 5 punten (automatisch)</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Stap 3</h4><p>Samenvatting naar CRM (na menselijke controle)</p></div>
+      <div class="proces-pijl">&#9658;</div>
+      <div class="proces-blok"><h4>Stap 4</h4><p>Weekoverzicht voor directeur (automatisch)</p></div>
+    </div>
+  </div>
+  <div class="content-card">
+    <p><strong>Bewuste keuze bij stap 3:</strong> het CRM-systeem moet kloppen. Een fout daarin heeft gevolgen voor alle toekomstige klantcommunicatie. Daarom controleert een medewerker de samenvatting kort voordat die in het CRM gaat. Stap 1, 2 en 4 hebben laag risico en lopen volledig automatisch.</p>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-kc')">Naar kennischeck</button>
+  </div>
+</div>
+
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-3" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Waarom beginnen met kleine stappen bij het bouwen van een workflow?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Snelheid is niet de reden. Het gaat om betrouwbaarheid. Als je de hele workflow in een keer bouwt en er gaat iets mis, weet je niet waar het probleem zit.')">Omdat het sneller gaat dan alles tegelijk bouwen</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. Door stap voor stap te bouwen en te testen, ontdek je fouten vroeg en op een plek waar je ze kunt begrijpen en oplossen. Als je alles in een keer bouwt en het werkt niet, weet je niet wat er misgaat.')">Zodat je fouten vroeg ontdekt en weet waar ze vandaan komen</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Claude heeft geen voorkeur voor kleine stappen. Het gaat erom dat jij als ontwerper grip houdt op het proces en fouten vroeg kunt ontdekken.')">Omdat Claude beter werkt met kleine opdrachten</button>
+    </div>
+    <div id="kc-feedback-3" class="kc-feedback"></div>
+  </div>
+</div>
+
+<!-- ONDERDEEL 4: Wat gaat er mis en hoe los je het op? -->
+
+<div id="screen-module-4-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Wat gaat er mis?</h2>
+  </div>
+  <div class="content-card">
+    <p>Geen enkele workflow werkt direct perfect. Dat is normaal. Wat je kunt doen is anticiperen op de meest voorkomende problemen en een plan hebben voor als het misgaat.</p>
+  </div>
+  <div class="content-card">
+    <h3>Drie veelvoorkomende problemen</h3>
     <div class="flashcard-set">
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Verkeerde beslissing</div>
-        <div class="fc-uitleg">Claude neemt een beslissing die niet klopt. Oplossing: meer specifieke instructies voor die situatie toevoegen, of dat beslismoment menselijk maken.</div>
+        <div class="fc-term">Verkeerde beslissing onderweg</div>
+        <div class="fc-uitleg">Claude neemt een beslissing die niet klopt voor de situatie. Oplossing: voeg specifiekere instructies toe voor die situatie, of maak van dat beslismoment een menselijk goedkeuringsmoment. Analyseer eerst waarom Claude de verkeerde keuze maakte.</div>
         <div class="fc-hint">Klik voor oplossing</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Workflow stopt</div>
-        <div class="fc-uitleg">Technisch probleem of onherkenbare situatie. Oplossing: bouw een foutmelding in: "Als stap X mislukt, stop en stuur een melding."</div>
+        <div class="fc-term">Workflow stopt halverwege</div>
+        <div class="fc-uitleg">Technisch probleem (systeem niet beschikbaar) of situatie die Claude niet herkent. Oplossing: bouw altijd een foutmelding in. "Als stap X mislukt, stop en stuur een melding naar [naam]." Claude moet stoppen, niet raden of improviseren.</div>
         <div class="fc-hint">Klik voor oplossing</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
         <div class="fc-term">Output klopt niet</div>
-        <div class="fc-uitleg">Wat in de test werkt, werkt niet altijd in de praktijk. Oplossing: test met echte data voordat je de workflow automatisch laat draaien.</div>
+        <div class="fc-uitleg">Wat in de test werkte, werkt niet met echte data. Oplossing: test altijd met echte of realistische testdata voordat je de workflow automatisch laat draaien. Synthetische testdata mist vaak de randgevallen die in de praktijk voorkomen.</div>
         <div class="fc-hint">Klik voor oplossing</div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-4-2')">Volgende</button>
+  </div>
+</div>
+
+<div id="screen-module-4-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Foutmelding inbouwen</h2>
+  </div>
+  <div class="content-card">
+    <p>De meest onderschatte veiligheidsregel bij agentic workflows: zorg dat Claude weet wat hij moet doen als er iets misgaat. Als je dit niet vastlegt, kan Claude proberen te improviseren, en dat is bijna altijd erger dan stoppen.</p>
+  </div>
+  <div class="content-card">
+    <h3>Hoe leg je dit vast?</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Beschrijf de foutmelding per stap</h4>
+          <p>Voeg aan elke stap toe: "Als deze stap mislukt of als het resultaat niet overeenkomt met het verwachte formaat, stop dan en stuur een melding naar [naam/e-mail]."</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Leg het vast in CLAUDE.md</h4>
+          <p>Een vaste regel zoals "Bij twijfel of fout: stop, rapporteer, wacht op instructie" geeft Claude een helder kader voor alle workflows die je bouwt.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Test de foutmelding bewust</h4>
+          <p>Laat de workflow expres mislukken (bijv. door een verkeerd bestandspad op te geven) en controleer of Claude inderdaad stopt en meldt. Vertrouw niet blindelings op je eigen instructies.</p>
+        </div>
       </div>
     </div>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Bouw altijd een foutmelding in je workflow. Als een stap mislukt, moet Claude stoppen en je waarschuwen, niet zelf proberen het op te lossen.</p>
+    <p>Een workflow zonder foutafhandeling is een workflow die vroeg of laat stilletjes verkeerd gaat. Je merkt het dan niet totdat er al schade is. Bouw foutmeldingen in voordat je live gaat.</p>
   </div>
-  <div id="kc-2" class="kennischeck">
-    <h3>Kennischeck</h3>
-    <p class="kc-vraag">Wat moet je ALTIJD doen als een workflow een fout maakt?</p>
-    <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'De workflow volledig verwijderen is overreactie. Pas de instructies aan voor de situatie die fout ging.')">De hele workflow verwijderen</button>
-      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Analyseer wat er misging, pas de instructies aan of maak van dat moment een menselijk goedkeuringsmoment. Test daarna opnieuw.')">Analyseren wat er misging en de instructies aanpassen of menselijke controle toevoegen</button>
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Negeren is gevaarlijk. Een fout in een automatische workflow kan zich herhalen bij elke uitvoering.')">Het negeren en doorgaan</button>
-    </div>
-    <div id="kc-feedback-2" class="kc-feedback"></div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-4-3')">Volgende</button>
   </div>
 </div>
 
-<div id="screen-module-4" class="screen">
+<div id="screen-module-4-3" class="screen">
   <div class="module-header">
-    <div class="module-num">Module 4 van 4</div>
-    <h2>Grenzen instellen</h2>
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Praktijk: wat doe je als het misgaat?</h2>
   </div>
-  <div class="content-card">
-    <p>De belangrijkste keuze bij agentic workflows: wat mag Claude automatisch doen en wat vereist altijd menselijke goedkeuring? Stel dit vast in je CLAUDE.md of Skill.</p>
+  <div id="scenario-2" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Je agentic workflow verwerkt dagelijks bezichtigingsaanvragen. Op een ochtend merkt een medewerker dat er gisteren geen bevestigingsmails zijn verstuurd, maar de CRM-data wel al is bijgewerkt. De workflow is halverwege gestopt, maar heeft niet gemeld dat dit gebeurde. Wat had je moeten inbouwen?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'De workflow verwijderen lost het probleem niet op. De oorzaak was het ontbreken van foutafhandeling, niet de workflow zelf. Pas de workflow aan en bouw foutmeldingen in.')">De workflow verwijderen en handmatig verder gaan</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, true, 'Correct. Per stap een foutmelding die Claude laat stoppen en een melding stuurt. Dan had je geweten dat stap 3 mislukte voordat de CRM al bijgewerkt was, of had Claude helemaal gestopt voor stap 2.')">Per stap een foutmelding: als stap X mislukt, stop en stuur een melding</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Meer stappen toevoegen maakt de workflow complexer maar lost het probleem van ontbrekende foutafhandeling niet op. Het gaat erom dat Claude weet wat hij doet als er iets misgaat.')">Meer tussenstappen toevoegen zodat Claude minder fouten maakt</button>
+    </div>
+    <div id="scenario-feedback-2" class="scenario-feedback"></div>
+    <div class="btn-wrap" style="margin-top:1rem;">
+      <button class="btn btn-outline" onclick="goTo('screen-module-4-kc')">Naar kennischeck</button>
+    </div>
   </div>
-  <div class="content-card">
-    <h3>Richtlijnen voor grenzen</h3>
-    <table class="vergelijk-tabel">
-      <thead><tr><th>Automatisch mag</th><th>Menselijke goedkeuring vereist</th></tr></thead>
-      <tbody>
-        <tr><td>Bestanden lezen en samenvatten</td><td>Data schrijven naar CRM</td></tr>
-        <tr><td>Overzichten maken</td><td>E-mails versturen naar klanten</td></tr>
-        <tr><td>Bestanden categoriseren</td><td>Bestanden verwijderen</td></tr>
-        <tr><td>Rapporten genereren</td><td>Financiele transacties verwerken</td></tr>
-      </tbody>
-    </table>
+</div>
+
+<div id="screen-module-4-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 4</div>
+    <h2>Kennischeck</h2>
   </div>
-  <div class="tip-box">
-    <div class="tip-box-label tip">Tip</div>
-    <p>Begin met meer menselijke controlepunten dan je denkt nodig te hebben. Je kunt ze later verwijderen als je vertrouwen hebt in de workflow. Het is makkelijker om controle weg te nemen dan om schade te herstellen.</p>
-  </div>
-  <div class="btn-wrap">
-    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz</button>
+  <div id="kc-4" class="kennischeck">
+    <h3>Controleer je kennis</h3>
+    <p class="kc-vraag">Wat moet je altijd inbouwen in een agentic workflow?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Automatisch herstarten klinkt handig, maar als een stap mislukt om een goede reden (bijv. verkeerde data), dan maak je het probleem groter door automatisch te herstarten. Stop en meld is altijd veiliger.')">Automatisch herstarten als een stap mislukt</button>
+      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-quiz', 'Correct. Als een stap mislukt, moet Claude stoppen en jou een melding sturen. Niet improviseren, niet herstarten. Jij besluit wat er dan gebeurt.')">Een foutmelding die Claude laat stoppen en jou waarschuwt</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Een dagelijks logboek is nuttig maar niet voldoende. Het grootste risico zit in wat Claude doet als er iets misgaat. Foutafhandeling is de kern.')">Een dagelijks logboek van alle uitgevoerde stappen</button>
+    </div>
+    <div id="kc-feedback-4" class="kc-feedback"></div>
   </div>
 </div>
 
 <!-- QUIZ_START -->
 [
-  {"vraag":"Wat is een agentic workflow?","opties":["Een enkele vraag aan Claude","Een reeks taken die Claude zelfstandig uitvoert, stap voor stap","Een handmatig proces","Een type abonnement"],"correct":1,"uitleg":"Een agentic workflow is een reeks taken die Claude zelfstandig uitvoert op basis van de instructies die je hem hebt gegeven, zonder handmatige tussenkomst bij elke stap."},
-  {"vraag":"Wanneer is een agentic workflow NIET zinvol?","opties":["Bij dagelijks terugkerende taken","Bij taken met eenvoudige beslissingen","Bij taken die veel menselijk oordeel vereisen of grote gevolgen hebben bij fouten","Bij taken met vaste stappen"],"correct":2,"uitleg":"Automatisering is niet zinvol bij taken die veel menselijk oordeel vereisen of waar fouten grote financiële, juridische of reputatieschade veroorzaken."},
-  {"vraag":"Hoe bouw je een workflow op?","opties":["Alles in een keer bouwen en testen","Stap voor stap: begin met een stap, test, voeg de volgende toe","Wachten tot de technologie perfect is","Een developer inhuren die alles bouwt"],"correct":1,"uitleg":"Bouw en test in kleine stappen. Begin met een stap, test grondig, voeg dan de volgende toe. Nooit alles in een keer."},
-  {"vraag":"Wat moet je altijd inbouwen in een agentic workflow?","opties":["Een foutmelding die Claude laat stoppen en jou waarschuwt","Automatische reparatie van fouten","Een dagelijks rapport","Een back-up van alle bestanden"],"correct":0,"uitleg":"Bouw altijd een foutmelding in. Als een stap mislukt, moet Claude stoppen en je waarschuwen, niet zelf proberen het op te lossen."},
-  {"vraag":"Wat is de veiligste aanpak bij het instellen van grenzen?","opties":["Claude alles automatisch laten doen","Beginnen met meer menselijke controlepunten en die later verminderen","Geen grenzen instellen","Alleen grenzen instellen als er iets misgaat"],"correct":1,"uitleg":"Begin met meer controlepunten dan je denkt nodig te hebben. Het is makkelijker om controle weg te nemen dan om schade te herstellen."}
+  {"vraag":"Wat is een agentic workflow?","opties":["Een snelle vraag aan Claude met een lang antwoord","Een reeks taken die Claude zelfstandig uitvoert op basis van jouw instructies","Een type abonnement bij Anthropic","Een manier om Claude te trainen op jouw data"],"correct":1,"uitleg":"Een agentic workflow is een reeks taken die Claude zelfstandig uitvoert, stap voor stap, zonder dat jij elke stap goedkeurt. Claude neemt onderweg kleine beslissingen op basis van de instructies die jij vooraf hebt gegeven."},
+  {"vraag":"Welke taak is GESCHIKT voor een agentic workflow?","opties":["Beoordelen of een klant kredietwaardig is","Beslissen wie er ontslagen wordt","Dagelijks nieuwe e-mails categoriseren en samenvatten in een overzicht","Onderhandelen over contracten"],"correct":2,"uitleg":"Dagelijks e-mails categoriseren is terugkerend, heeft vaste stappen, eenvoudige beslissingen en lage gevolgen als het fout gaat. Dat zijn precies de criteria voor een agentic workflow."},
+  {"vraag":"Wat is het doel van stap 2 in het ontwerpproces: beslismomenten identificeren?","opties":["Bepalen hoe snel de workflow moet werken","Bepalen welke stappen automatisch kunnen en welke bij de mens blijven","Een back-up maken van alle bestanden","Claude trainen op het specifieke werkproces"],"correct":1,"uitleg":"Bij het identificeren van beslismomenten bepaal je welke beslissingen altijd hetzelfde zijn (Claude kan die overnemen) en welke variabel zijn (die houd je bij de mens)."},
+  {"vraag":"Waarom bouw je een workflow in kleine stappen?","opties":["Omdat Claude anders te langzaam reageert","Omdat Anthropic dit verplicht stelt","Zodat je fouten vroeg ontdekt en weet waar ze vandaan komen","Omdat kleine stappen goedkoper zijn"],"correct":2,"uitleg":"Door stap voor stap te bouwen en te testen, ontdek je fouten vroeg en op een plek waar je ze kunt begrijpen en oplossen. Een complete workflow in een keer bouwen maakt het moeilijk om problemen te lokaliseren."},
+  {"vraag":"In het accountantskantoor-voorbeeld: waarom heeft stap 3 (CRM bijwerken) menselijke controle?","opties":["Omdat Claude geen toegang heeft tot het CRM","Omdat het CRM te duur is om te koppelen","Omdat CRM-data moet kloppen en een fout gevolgen heeft voor alle klantcommunicatie","Omdat stap 3 altijd manueel moet gaan"],"correct":2,"uitleg":"CRM-data die klopt is essentieel voor klantcommunicatie. Als er iets fout staat, heeft dat gevolgen voor elke toekomstige interactie met die klant. Daarom controleert een medewerker de samenvatting eerst."},
+  {"vraag":"Wat moet Claude doen als een stap in de workflow mislukt?","opties":["Raden wat de bedoeling was en doorgaan","Automatisch de vorige stap herhalen","Stoppen en een melding sturen naar de verantwoordelijke persoon","De workflow opnieuw van het begin starten"],"correct":2,"uitleg":"Als een stap mislukt, moet Claude stoppen en jou een melding sturen. Niet improviseren, niet herhalen. Jij besluit wat er dan gebeurt."},
+  {"vraag":"Welke situatie is NIET geschikt voor automatisering?","opties":["Wekelijks klantdata samenvatten","Nieuwe klantmappen aanmaken bij binnenkomende opdrachten","Elke ochtend de inbox op nieuwe aanvragen controleren","Beslissen of een klacht juridische actie rechtvaardigt"],"correct":3,"uitleg":"Juridische beoordeling vereist menselijk oordeel, is elke keer anders en heeft grote gevolgen als het fout gaat. Dit hoort bij de mens te blijven, niet bij een geautomatiseerde workflow."}
 ]
 <!-- QUIZ_END -->

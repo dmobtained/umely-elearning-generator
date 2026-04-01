@@ -1,0 +1,529 @@
+<!-- TITLE: A1 - Wat is Claude en Anthropic? -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-kc','screen-module-5-1','screen-module-5-2','screen-module-5-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Onderdeel 1 - Wat is Anthropic?','screen-module-1-2':'Onderdeel 1 - Wat betekent dit voor jou?','screen-module-1-kc':'Onderdeel 1 - Kennischeck','screen-module-2-1':'Onderdeel 2 - Wat is Claude?','screen-module-2-2':'Onderdeel 2 - Claude in de praktijk','screen-module-2-kc':'Onderdeel 2 - Kennischeck','screen-module-3-1':'Onderdeel 3 - Claude vs andere AI-tools','screen-module-3-2':'Onderdeel 3 - Welke tool voor welke taak?','screen-module-3-kc':'Onderdeel 3 - Kennischeck','screen-module-4-1':'Onderdeel 4 - Hoe werkt Claude?','screen-module-4-2':'Onderdeel 4 - Waarom maakt Claude fouten?','screen-module-4-kc':'Onderdeel 4 - Kennischeck','screen-module-5-1':'Onderdeel 5 - Beperkingen van Claude','screen-module-5-2':'Onderdeel 5 - Slim omgaan met beperkingen','screen-module-5-kc':'Onderdeel 5 - Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+
+<!-- QUIZ_START -->
+[
+  {
+    "vraag": "In welk jaar werd Anthropic opgericht?",
+    "opties": ["2015", "2019", "2021", "2023"],
+    "correct": 2,
+    "uitleg": "Anthropic werd opgericht in 2021 door voormalige medewerkers van OpenAI, waaronder Dario en Daniela Amodei."
+  },
+  {
+    "vraag": "Wat is een 'context window' bij een taalmodel zoals Claude?",
+    "opties": [
+      "De schermgrootte van je browser",
+      "De hoeveelheid tekst die Claude tegelijk kan verwerken",
+      "Het aantal tokens dat een gesprek kost",
+      "De snelheid waarmee Claude een antwoord geeft"
+    ],
+    "correct": 1,
+    "uitleg": "Het context window is de hoeveelheid tekst (jouw berichten + Claude's antwoorden) die het model tegelijk kan 'zien'. Alles buiten dat venster is Claude vergeten."
+  },
+  {
+    "vraag": "Wat wordt bedoeld met een 'hallucination' bij een AI-model?",
+    "opties": [
+      "Een visuele fout in de interface",
+      "Een antwoord dat klinkt als feit maar verzonnen is",
+      "Een langzame responstijd door serveroverbelasting",
+      "Een weigering om een vraag te beantwoorden"
+    ],
+    "correct": 1,
+    "uitleg": "Een hallucination is wanneer een AI-model iets verzint en dat presenteert als feit. Claude doet dit ook. Controleer altijd belangrijke feiten, cijfers en bronnen."
+  },
+  {
+    "vraag": "Wat is het grootste praktische verschil tussen Claude en ChatGPT voor een kantoorgebruiker?",
+    "opties": [
+      "Claude is gratis, ChatGPT niet",
+      "Claude kan geen afbeeldingen genereren, ChatGPT wel",
+      "Ze zijn van verschillende bedrijven met andere keuzes rond veiligheid en gedrag",
+      "ChatGPT werkt alleen in het Engels"
+    ],
+    "correct": 2,
+    "uitleg": "Beide tools doen grotendeels hetzelfde voor kantoorwerk. Het verschil zit in nuances: hoe ze omgaan met gevoelige verzoeken, hoe eerlijk ze zijn over fouten, en welke integraties beschikbaar zijn."
+  },
+  {
+    "vraag": "Waarom onthoudt Claude standaard niets van een vorig gesprek?",
+    "opties": [
+      "Technische beperking die binnenkort opgelost wordt",
+      "Bewuste keuze rond privacy en architectuur",
+      "Om kosten te besparen voor Anthropic",
+      "Claude wist gesprekken zelf na gebruik"
+    ],
+    "correct": 1,
+    "uitleg": "Elk gesprek begint blanco. Dat is een bewuste keuze: privacy staat centraal. Met Projects of via de API kun je wel geheugen toevoegen, maar dat is een expliciete instelling, geen standaard."
+  }
+]
+<!-- QUIZ_END -->
+
+<!-- WELKOMSTSCHERM -->
+<div id="screen-welcome" class="screen start">
+  <div class="welcome-hero">
+    <div class="welcome-badge">Umely E-learning</div>
+    <h1>A1 - Wat is Claude en Anthropic?</h1>
+    <p>Maak kennis met het bedrijf achter Claude, begrijp wat dit AI-model is en kan, en leer wanneer je het wel of niet inzet.</p>
+  </div>
+  <div class="leerdoelen">
+    <h3>Na deze module kun je:</h3>
+    <ul>
+      <li>Uitleggen wat Anthropic is en hoe het bedrijf is ontstaan</li>
+      <li>Beschrijven wat Claude is en hoe het technisch werkt (zonder jargon)</li>
+      <li>Het verschil aangeven tussen Claude, ChatGPT en andere AI-tools</li>
+      <li>De belangrijkste beperkingen van Claude benoemen en ermee omgaan</li>
+      <li>Bewust kiezen wanneer je Claude inzet en wanneer niet</li>
+    </ul>
+  </div>
+  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 20 minuten</div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ONDERDEEL 1: WAT IS ANTHROPIC?
+═══════════════════════════════════════════ -->
+
+<div id="screen-module-1-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 5</div>
+    <h2>Wat is Anthropic?</h2>
+  </div>
+  <div class="content-card">
+    <p>Anthropic is een Amerikaans AI-bedrijf, opgericht in 2021 door Dario Amodei, Daniela Amodei en een groep voormalige OpenAI-medewerkers. Ze stapten op bij OpenAI omdat ze zich zorgen maakten over de richting die het bedrijf op ging, met name rond veiligheid en het tempo van ontwikkeling.</p>
+    <p>Anthropic's centrale belofte is: AI bouwen dat betrouwbaar, eerlijk en veilig is. Dat klinkt als marketing, maar het heeft concrete gevolgen voor hoe Claude zich gedraagt. Claude geeft vaker toe dat hij iets niet weet. Hij weigert bepaalde verzoeken sneller dan andere tools. Hij is minder enthousiast over zijn eigen antwoorden dan je misschien verwacht.</p>
+    <p>Anthropic verdient geld op twee manieren: via consumentenabonnementen (claude.ai) en via de API, waarmee bedrijven Claude inbouwen in eigen software. Veel tools die je dagelijks gebruikt, draaien mogelijk al op Claude onder de motorkap.</p>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Context</div>
+    <p>De drie grote spelers op dit moment zijn Anthropic (Claude), OpenAI (ChatGPT) en Google (Gemini). Ze concurreren op dezelfde markt maar maken andere keuzes over snelheid, veiligheid en openheid. Die keuzes bepalen het gedrag van hun modellen.</p>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Eerlijk gezegd</div>
+    <p>De nadruk op veiligheid bij Anthropic is zowel een echte overtuiging als een marketingstrategie. Het onderscheidt hen van OpenAI in de markt. Dat betekent niet dat ze ongelijk hebben, maar wees je bewust dat elk AI-bedrijf commerciele belangen heeft.</p>
+  </div>
+</div>
+
+<div id="screen-module-1-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 5</div>
+    <h2>Wat betekent dit voor jou als gebruiker?</h2>
+  </div>
+  <div class="content-card">
+    <h3>Drie dingen om te onthouden</h3>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Je gebruikt een commercieel product</h4>
+          <p>Claude is niet neutraal of gratis van bijbedoelingen. Anthropic is een bedrijf. Dat is prima, maar stuur geen gevoelige bedrijfsinformatie zonder na te denken over wie die gegevens verwerkt.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Veiligheid heeft praktische gevolgen</h4>
+          <p>Claude weigert bepaalde verzoeken die andere tools wel uitvoeren. Soms is dat terecht, soms frustrerend. Begrijpen waarom helpt je beter met het model te werken in plaats van ertegen.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Het product verandert snel</h4>
+          <p>Anthropic brengt regelmatig nieuwe versies uit. Wat vandaag niet werkt, kan over drie maanden verbeterd zijn. Wat nu goed werkt, kan ook veranderen. Blijf testen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div class="kennischeck" id="kc-1">
+    <h3>Vraag</h3>
+    <p class="kc-vraag">Anthropic werd opgericht door mensen die eerder bij een ander AI-bedrijf werkten. Welk bedrijf was dat?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Google DeepMind is een apart bedrijf, opgericht door Britse onderzoekers. Anthropic is voortgekomen uit OpenAI.')">Google DeepMind</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Correct. Dario Amodei en anderen verlieten OpenAI in 2021 en richtten Anthropic op, mede vanwege zorgen over de veiligheidsaanpak van OpenAI.')">OpenAI</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Meta AI is de AI-tak van Meta (Facebook). Dat heeft geen directe link met de oprichting van Anthropic.')">Meta AI</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Microsoft heeft wel geïnvesteerd in OpenAI, maar is zelf geen AI-onderzoeksbedrijf van waaruit Anthropic is voortgekomen.')">Microsoft Research</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-1"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ONDERDEEL 2: WAT IS CLAUDE?
+═══════════════════════════════════════════ -->
+
+<div id="screen-module-2-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 5</div>
+    <h2>Wat is Claude eigenlijk?</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude is een large language model (LLM), een type AI dat getraind is op enorme hoeveelheden tekst. Door die training heeft Claude patronen geleerd in hoe mensen schrijven, redeneren en communiceren. Het model genereert antwoorden door te voorspellen welke tekst het meest logisch volgt op jouw invoer.</p>
+    <p>Dat klinkt simpel, maar het resultaat is verrassend capabel. Claude kan teksten schrijven en samenvatten, code uitleggen en debuggen, redeneren over complexe vraagstukken, vertalen, analyseren en structureren.</p>
+    <p>Er zijn meerdere versies van Claude. De namen veranderen regelmatig, maar de logica is consistent: een lichte versie (snel, goedkoop, goed genoeg voor eenvoudige taken), een middenversie (de meest gebruikte, goede balans) en een zware versie (langzamer, duurder, beter bij complexe opdrachten).</p>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Belangrijk misverstand</div>
+    <p>Claude "begrijpt" niet in de menselijke zin van het woord. Het model voorspelt tekst op basis van patronen. Dat leidt tot indrukwekkende resultaten, maar ook tot fouten die een mens nooit zou maken. Houd daar rekening mee.</p>
+  </div>
+</div>
+
+<div id="screen-module-2-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 5</div>
+    <h2>Claude in de praktijk</h2>
+  </div>
+  <div class="content-card">
+    <h3>Wat gebruik je Claude voor op een gewone werkdag?</h3>
+    <table class="vergelijk-tabel">
+      <thead>
+        <tr><th>Taak</th><th>Wat Claude doet</th><th>Let op</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>E-mail schrijven</td>
+          <td>Concept maken op basis van jouw punten</td>
+          <td>Controleer toon en inhoud voor verzenden</td>
+        </tr>
+        <tr>
+          <td>Vergadering samenvatten</td>
+          <td>Transcript omzetten naar actiepunten</td>
+          <td>Nuance gaat soms verloren</td>
+        </tr>
+        <tr>
+          <td>Onderzoek</td>
+          <td>Overzicht geven van een onderwerp</td>
+          <td>Feiten altijd zelf verifiëren</td>
+        </tr>
+        <tr>
+          <td>Code debuggen</td>
+          <td>Fout opsporen en uitleggen</td>
+          <td>Test de oplossing altijd zelf</td>
+        </tr>
+        <tr>
+          <td>Ideeën genereren</td>
+          <td>Brainstormen, variaties bedenken</td>
+          <td>Kwaliteit varieert, jij filtert</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Gouden regel</div>
+    <p>Claude is het meest waardevol als verlengstuk van jouw denken, niet als vervanging ervan. Hoe beter jij de opdracht formuleert, hoe beter het resultaat.</p>
+  </div>
+</div>
+
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div class="kennischeck" id="kc-2">
+    <h3>Vraag</h3>
+    <p class="kc-vraag">Hoe genereert Claude een antwoord op jouw vraag?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Claude zoekt niet live op internet (tenzij dat expliciet is ingeschakeld). Het model werkt vanuit getrainde patronen, niet vanuit real-time zoekopdrachten.')">Het zoekt het antwoord op internet</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Claude heeft geen vaste antwoorden opgeslagen. Het genereert tekst dynamisch op basis van patronen uit training.')">Het raadpleegt een database met vaste antwoorden</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Correct. Claude is getraind op grote hoeveelheden tekst en voorspelt op basis daarvan welke tekst het meest logisch volgt op jouw invoer.')">Het voorspelt tekst op basis van patronen uit training</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Claude koppelt niet aan externe kennisbanken tenzij dat via tools of integraties expliciet is ingesteld.')">Het koppelt aan een live kennisbank</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-2"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ONDERDEEL 3: CLAUDE VS ANDERE AI-TOOLS
+═══════════════════════════════════════════ -->
+
+<div id="screen-module-3-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 5</div>
+    <h2>Claude vs andere AI-tools</h2>
+  </div>
+  <div class="content-card">
+    <p>De drie grootste spelers zijn Claude (Anthropic), ChatGPT (OpenAI) en Gemini (Google). Daarnaast is er Microsoft Copilot, dat grotendeels op OpenAI-technologie draait maar geintegreerd is in Office 365.</p>
+    <p>Voor de meeste kantooropdrachten zijn de verschillen klein. Alle vier kunnen teksten schrijven, samenvatten, vertalen en redeneren. De nuances zitten in gedrag, integraties en karakter:</p>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer" style="background:#10a37f;">C</div>
+        <div class="stap-content">
+          <h4>ChatGPT (OpenAI)</h4>
+          <p>Grootste gebruikersbasis, meeste plugins en integraties, regelmatig nieuwe functies. Kan soms enthousiaster zijn dan accuraat.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer" style="background:#4285f4;">G</div>
+        <div class="stap-content">
+          <h4>Gemini (Google)</h4>
+          <p>Sterkste integratie met Google Workspace (Docs, Gmail, Drive). Handige keuze als je zwaar in het Google-ecosysteem zit.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer" style="background:#0078d4;">M</div>
+        <div class="stap-content">
+          <h4>Microsoft Copilot</h4>
+          <p>Diep geintegreerd in Word, Excel, Teams en Outlook. Logische keuze voor organisaties die al Microsoft 365 gebruiken.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-module-3-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 5</div>
+    <h2>Welke tool voor welke taak?</h2>
+  </div>
+  <div class="content-card">
+    <p>Er is geen objectieve winnaar. De beste tool hangt af van wat je al gebruikt, wat je taak is en welk gedrag je prettig vindt. Hieronder een eerlijke vergelijking:</p>
+    <table class="vergelijk-tabel">
+      <thead>
+        <tr><th>Criterium</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lange teksten analyseren</td>
+          <td>Sterk</td>
+          <td>Goed</td>
+          <td>Goed</td>
+          <td>Gemiddeld</td>
+        </tr>
+        <tr>
+          <td>Integratie met Office</td>
+          <td>Beperkt</td>
+          <td>Beperkt</td>
+          <td>Beperkt</td>
+          <td>Uitstekend</td>
+        </tr>
+        <tr>
+          <td>Integratie met Google</td>
+          <td>Beperkt</td>
+          <td>Beperkt</td>
+          <td>Uitstekend</td>
+          <td>Beperkt</td>
+        </tr>
+        <tr>
+          <td>Eerlijkheid over fouten</td>
+          <td>Sterk</td>
+          <td>Gemiddeld</td>
+          <td>Gemiddeld</td>
+          <td>Gemiddeld</td>
+        </tr>
+        <tr>
+          <td>Beschikbare plugins</td>
+          <td>Groeiend</td>
+          <td>Groot</td>
+          <td>Groeiend</td>
+          <td>Microsoft-gericht</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Praktisch advies</div>
+    <p>Kies niet op basis van hype. Kies op basis van wat je al gebruikt. Als je organisatie Microsoft 365 heeft, begin dan met Copilot. Als je veel lange documenten analyseert, is Claude sterk. Probeer, vergelijk en kies bewust.</p>
+  </div>
+</div>
+
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div class="kennischeck" id="kc-3">
+    <h3>Vraag</h3>
+    <p class="kc-vraag">Een collega gebruikt Microsoft 365 dagelijks en wil AI integreren in Word en Teams. Welke tool past het best bij die situatie?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Claude is sterk voor analyse en lange teksten, maar heeft geen diepe integratie met Microsoft Office-producten.')">Claude</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'ChatGPT heeft beperkte native integratie met Microsoft Office, hoewel dat via plugins soms mogelijk is.')">ChatGPT</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Gemini is het sterkst geintegreerd met Google Workspace, niet met Microsoft 365.')">Gemini</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. Microsoft Copilot is diep geintegreerd in Word, Teams, Outlook en Excel. Voor iemand die al zwaar in het Microsoft-ecosysteem zit, is dat de logische keuze.')">Microsoft Copilot</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-3"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ONDERDEEL 4: HOE WERKT CLAUDE?
+═══════════════════════════════════════════ -->
+
+<div id="screen-module-4-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 5</div>
+    <h2>Hoe werkt Claude onder de motorkap?</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude is getraind op een enorme hoeveelheid tekst: boeken, websites, artikelen, code, wetenschappelijke papers. Door die training heeft het model statistisch geleerd welke woorden, zinnen en redeneringen logisch op elkaar volgen.</p>
+    <p>Wanneer jij een bericht stuurt, verwerkt Claude dat bericht samen met de volledige gespreksgeschiedenis binnen het zogenaamde context window. Dat is het "werkgeheugen" van het model: alles wat daarbinnen staat, ziet Claude. Alles buiten dat venster bestaat voor het model niet meer.</p>
+    <p>Elk nieuw gesprek begint blanco. Claude onthoudt niets van eerdere gesprekken tenzij je dat expliciet inschakelt via Projects of een API-integratie met geheugen.</p>
+  </div>
+  <div class="processtroom">
+    <div class="proces-blok">
+      <h4>Jouw bericht</h4>
+      <p>Tekst, vraag of opdracht</p>
+    </div>
+    <div class="proces-pijl">&#8594;</div>
+    <div class="proces-blok">
+      <h4>Context window</h4>
+      <p>Gesprek + instructies samen</p>
+    </div>
+    <div class="proces-pijl">&#8594;</div>
+    <div class="proces-blok">
+      <h4>Taalmodel</h4>
+      <p>Voorspelt meest logische vervolg</p>
+    </div>
+    <div class="proces-pijl">&#8594;</div>
+    <div class="proces-blok">
+      <h4>Antwoord</h4>
+      <p>Tekst gegenereerd, woord voor woord</p>
+    </div>
+  </div>
+</div>
+
+<div id="screen-module-4-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 5</div>
+    <h2>Waarom maakt Claude fouten?</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude "weet" niets in de betekenis die wij aan dat woord geven. Het model voorspelt tekst. Dat verschil is groter dan het lijkt.</p>
+    <p>Een mens die iets niet weet, zegt dat meestal. Claude genereert een antwoord dat <em>klinkt</em> als een correct antwoord, ook als de onderliggende informatie ontbreekt of onjuist is. Dit heet een hallucination: een zelfverzekerd klinkend antwoord dat feitelijk niet klopt.</p>
+  </div>
+  <div class="scenario-blok">
+    <div class="scenario-label">Herkenbaar scenario</div>
+    <p class="scenario-tekst">Je vraagt Claude naar de omzet van een specifiek bedrijf in 2023. Claude geeft een concreet getal met uitleg. Het getal blijkt bij navraag niet te kloppen.</p>
+    <div class="tip-box" style="margin-top:1rem;">
+      <div class="tip-box-label tip">Wat doe je?</div>
+      <p>Gebruik Claude voor structuur, redeneren en schrijven. Verifieer specifieke feiten, cijfers en bronnen altijd zelf. Stel Claude ook gerust de vraag: "Hoe zeker ben je hiervan?" Het model geeft dan vaak eerlijk aan waar de onzekerheid zit.</p>
+    </div>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Vuistregel</div>
+    <p>Hoe specifieker een feit (een getal, een datum, een naam), hoe groter de kans op een hallucination. Hoe abstracter een redenering, hoe betrouwbaarder Claude meestal is.</p>
+  </div>
+</div>
+
+<div id="screen-module-4-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div class="kennischeck" id="kc-4">
+    <h3>Vraag</h3>
+    <p class="kc-vraag">Je hebt een lang gesprek met Claude en merkt dat het model eerdere afspraken uit het begin van het gesprek lijkt te vergeten. Wat is de meest waarschijnlijke oorzaak?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-5-1', 'Claude heeft geen slaapstand. Dit is geen technische storing maar een fundamentele eigenschap van hoe taalmodellen werken.')">Claude staat in slaapstand</button>
+      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-module-5-1', 'Correct. Het context window heeft een limiet. Als het gesprek te lang wordt, valt het begin buiten dat venster en "ziet" Claude die informatie niet meer.')">Het gesprek is langer dan het context window</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-5-1', 'Claude heeft geen bewuste keuze om iets te negeren. Als informatie in het context window staat, verwerkt het model die.')">Claude negeert oudere berichten bewust</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-5-1', 'Serverfouten zijn zeldzaam en zouden het gesprek onderbreken, niet selectief informatie doen vergeten.')">Er is een serverfout opgetreden</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-4"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ONDERDEEL 5: BEPERKINGEN VAN CLAUDE
+═══════════════════════════════════════════ -->
+
+<div id="screen-module-5-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 5 van 5</div>
+    <h2>Wat kan Claude niet?</h2>
+  </div>
+  <div class="content-card">
+    <p>Eerlijk zijn over beperkingen is nuttiger dan enthousiasme. Hier zijn de beperkingen die je als gebruiker het vaakst tegenkomt:</p>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Geen internettoegang (standaard)</h4>
+          <p>Claude werkt vanuit zijn trainingsdata, niet vanuit live informatie. Actuele nieuwtjes, prijzen, wetgeving of recente studies: Claude kan die niet ophalen tenzij je ze zelf meestuurt of een tool zoals de zoekfunctie actief is.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Geen persistent geheugen</h4>
+          <p>Elk gesprek begint opnieuw. Claude weet niets van vorige gesprekken, tenzij je Projects gebruikt of zelf context meestuurt.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Hallucinations</h4>
+          <p>Claude verzint soms feiten met grote zelfverzekerdheid. Specifieke cijfers, namen, datums en bronnen altijd controleren.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">4</div>
+        <div class="stap-content">
+          <h4>Geen acties in de echte wereld (standaard)</h4>
+          <p>Claude stuurt geen e-mails, maakt geen afspraken en boekt niets tenzij je het koppelt aan tools die dat mogelijk maken. Het model praat, handelt niet uit zichzelf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-module-5-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 5 van 5</div>
+    <h2>Slim omgaan met beperkingen</h2>
+  </div>
+  <div class="content-card">
+    <p>Beperkingen kennen is stap een. Ermee omgaan is stap twee. In de praktijk zijn de meeste beperkingen te ondervangen als je weet hoe.</p>
+    <table class="vergelijk-tabel">
+      <thead>
+        <tr><th>Beperking</th><th>Oplossing in de praktijk</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Geen actuele informatie</td>
+          <td>Stuur relevante tekst, artikelen of data mee in je bericht</td>
+        </tr>
+        <tr>
+          <td>Geen geheugen</td>
+          <td>Gebruik Projects voor terugkerende taken, of begin elk gesprek met context</td>
+        </tr>
+        <tr>
+          <td>Hallucinations</td>
+          <td>Vraag Claude naar zekerheid, verifieer specifieke feiten altijd extern</td>
+        </tr>
+        <tr>
+          <td>Geen acties</td>
+          <td>Gebruik Claude voor het plannen en schrijven, voer zelf de actie uit</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Mindset</div>
+    <p>Claude is een krachtige assistent met echte beperkingen. Hoe beter jij die beperkingen kent, hoe effectiever je de tool inzet. Dat geldt ook voor elke andere AI-tool op de markt.</p>
+  </div>
+</div>
+
+<div id="screen-module-5-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 5 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div class="kennischeck" id="kc-5">
+    <h3>Vraag</h3>
+    <p class="kc-vraag">Je vraagt Claude wat de huidige prijs is van een aandeel. Claude geeft een concreet getal. Wat is de juiste reactie?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(5, this, false, 'screen-quiz', 'Claude geeft soms zelfverzekerd onjuiste informatie. Aandelenkoersen zijn real-time data; die heeft Claude sowieso niet.')">Het getal overnemen want Claude is betrouwbaar</button>
+      <button class="kc-optie" onclick="checkKC(5, this, true, 'screen-quiz', 'Correct. Claude heeft geen toegang tot real-time data zoals aandelenkoersen. Het getal is waarschijnlijk verouderd of verzonnen. Verifieer altijd via een betrouwbare bron.')">Het getal verifiëren via een betrouwbare bron</button>
+      <button class="kc-optie" onclick="checkKC(5, this, false, 'screen-quiz', 'Claude geeft dit soort informatie soms wel, maar dat maakt het niet betrouwbaar. Het probleem is niet dat het antwoord gegeven wordt, maar dat het niet geverifieerd kan worden.')">Claude nooit meer gebruiken voor financiële vragen</button>
+      <button class="kc-optie" onclick="checkKC(5, this, false, 'screen-quiz', 'Claude kan wel degelijk antwoorden geven op vragen over actuele data, maar die antwoorden zijn niet betrouwbaar zonder externe verificatie.')">Claude opnieuw vragen want het eerste antwoord was vast fout</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-5"></div>
+  </div>
+</div>

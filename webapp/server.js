@@ -37,6 +37,8 @@ async function requireAuth(req, res, next) {
 const jobs = {};
 
 const SYSTEM_PROMPT = fs.readFileSync(path.join(__dirname, 'prompt.md'), 'utf8');
+const BOILERPLATE = fs.readFileSync(path.join(__dirname, 'boilerplate.html'), 'utf8');
+const FULL_PROMPT = SYSTEM_PROMPT + '\n\n## BOILERPLATE\n\nGebruik dit als exacte basis. Kopieer alle CSS, JS en vaste HTML-blokken letterlijk over. Vervang alleen de placeholder-schermen en de 3 aanpasbare JS-variabelen (SCHERMEN, MODULE_TITELS, quizVragen).\n\n```html\n' + BOILERPLATE + '\n```';
 
 
 // ── Config voor frontend ──
@@ -64,7 +66,7 @@ app.post('/generate', requireAuth, async (req, res) => {
       const stream = await client.messages.stream({
         model: 'claude-sonnet-4-6',
         max_tokens: 64000,
-        system: SYSTEM_PROMPT,
+        system: FULL_PROMPT,
         messages: [{
           role: 'user',
           content: `Genereer een complete interactieve e-learning op basis van de volgende transcriptie:\n\n${transcription}`
