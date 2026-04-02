@@ -31,7 +31,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 .leerdoelen li{padding:0.5rem 0 0.5rem 1.75rem;position:relative;border-bottom:1px solid var(--cream);font-size:0.95rem}
 .leerdoelen li:last-child{border-bottom:none}
 .leerdoelen li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:12px;height:12px;background:var(--gradient);border-radius:50%}
-.tijdsbadge{display:inline-flex;align-items:center;gap:0.4rem;background:var(--cream);color:var(--fg);font-size:0.85rem;font-weight:600;padding:0.35rem 0.9rem;border-radius:var(--radius-pill);margin-bottom:1.5rem}
+.tijdsbadge{display:inline-flex;align-items:center;gap:0.4rem;background:#EDEBE8;color:var(--fg);font-size:0.85rem;font-weight:600;padding:0.35rem 0.9rem;border-radius:var(--radius-pill);margin-bottom:1.5rem}
 .module-header{background:var(--fg);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
 .module-header .module-naam{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,217,100,0.6);margin-bottom:0.2rem}
 .module-header .module-num{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.25rem}
@@ -51,7 +51,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 .fout{background:rgba(239,68,68,0.15)!important;border-color:#ef4444!important}
 .kc-feedback.correct{display:block;color:#16a34a;background:rgba(34,197,94,0.12);border:1px solid #22c55e}
 .kc-feedback.fout{display:block;color:#dc2626;background:rgba(239,68,68,0.12);border:1px solid #ef4444}
-.flashcard-set{display:flex;flex-wrap:wrap;gap:0.75rem;margin:1.25rem 0}
+.flashcard-set{display:flex;flex-wrap:wrap;gap:0.75rem;margin:1.25rem 0;align-items:flex-start}
 .flashcard{background:var(--fg);color:var(--bg);border-radius:var(--radius);padding:1rem 1.25rem;cursor:pointer;flex:1;min-width:180px;transition:all 0.2s;border:2px solid transparent}
 .flashcard:hover{border-color:var(--amber)}
 .flashcard .fc-term{font-family:var(--font-h);font-size:0.9rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem}
@@ -64,7 +64,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 .stap-nummer{flex-shrink:0;width:36px;height:36px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:700;color:var(--bg);font-size:0.9rem}
 .stap-content h4{font-family:var(--font-h);font-size:1rem;margin:0 0 0.25rem;color:var(--fg)}
 .stap-content p{margin:0;font-size:0.9rem}
-.tip-box{border-left:4px solid var(--amber);background:rgba(255,215,173,0.25);border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.25rem 0}
+.tip-box{border-left:4px solid var(--amber);background:rgba(39,41,45,0.04);border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.25rem 0}
 .tip-box.waarschuwing{border-left-color:#ef4444;background:rgba(239,68,68,0.08)}
 .tip-box-label{font-family:var(--font-h);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem}
 .tip-box-label.tip{color:var(--amber)}
@@ -74,7 +74,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 .vergelijk-tabel th{background:var(--fg);color:var(--gold);font-family:var(--font-h);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;padding:0.75rem 1rem;text-align:left}
 .vergelijk-tabel td{padding:0.75rem 1rem;font-size:0.9rem;border-top:1px solid var(--cream)}
 .vergelijk-tabel tr:nth-child(even) td{background:rgba(247,230,194,0.3)}
-.scenario-blok{background:var(--cream);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;border:1px solid var(--peach)}
+.scenario-blok{background:var(--bg);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;border:1px solid var(--peach)}
 .scenario-label{font-family:var(--font-h);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);margin-bottom:0.5rem}
 .scenario-tekst{font-size:0.95rem;margin-bottom:1.25rem}
 .scenario-keuzes{display:flex;flex-direction:column;gap:0.5rem}
@@ -111,7 +111,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 .diagram-popup.zichtbaar{display:block}
 .diagram-popup .popup-titel{font-family:var(--font-h);font-weight:700;color:var(--gold);margin-bottom:0.35rem;font-size:0.9rem}
 .annotatie-wrap{margin:1.25rem 0}
-.annotatie-figuur{position:relative;background:var(--cream);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--peach);min-height:200px}
+.annotatie-figuur{position:relative;background:var(--bg);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--peach);min-height:200px}
 .annotatie-punt{position:absolute;width:28px;height:28px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:0.75rem;font-weight:700;color:white;cursor:pointer;transition:transform 0.2s;z-index:10}
 .annotatie-punt:hover{transform:scale(1.2)}
 .annotatie-uitleg{display:flex;flex-direction:column;gap:0.75rem;margin-top:1rem}

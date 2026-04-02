@@ -86,6 +86,10 @@ function checkInvul(inputId, correctAntwoord, feedbackId) {
   const feedback = document.getElementById(feedbackId);
   const waarde = input.value.trim().toLowerCase();
   const correct = correctAntwoord.toLowerCase();
+  if (!waarde) {
+    feedback.textContent = 'Typ eerst een antwoord.'; feedback.style.color = '#dc2626';
+    return;
+  }
   if (waarde === correct || waarde.includes(correct) || correct.includes(waarde)) {
     input.classList.add('correct-input'); input.classList.remove('fout-input');
     feedback.textContent = 'Correct!'; feedback.style.color = '#16a34a';
@@ -202,11 +206,6 @@ function toonResultaat() {
   document.getElementById('resultaat-boodschap').textContent = pct >= 70
     ? 'Gefeliciteerd! Je hebt de training succesvol afgerond.'
     : 'Je score is ' + pct + '%. Probeer het nog eens!';
-  if (pct >= 70) {
-    document.getElementById('certificaat-blok').style.display = 'block';
-    document.getElementById('cert-datum').textContent = 'Behaald op ' +
-      new Date().toLocaleDateString('nl-NL', { day:'numeric', month:'long', year:'numeric' });
-  }
   if (typeof onQuizCompleted === 'function') onQuizCompleted(pct);
 }
 

@@ -147,18 +147,6 @@ ${content
     <h2 style="font-family:var(--font-h);margin-bottom:0.5rem;">Training afgerond!</h2>
     <p id="resultaat-boodschap" style="color:rgba(255,248,242,0.85);position:relative;"></p>
   </div>
-  <div id="certificaat-blok" class="certificaat" style="display:none;">
-    <div class="certificaat-title">Certificaat van voltooiing</div>
-    <h2>${title}</h2>
-    <p>Je hebt alle modules succesvol doorlopen en de quiz behaald.</p>
-    <div class="certificaat-datum" id="cert-datum"></div>
-    <div style="margin-top:1.5rem;">
-      <button id="pdf-download-btn" class="btn" onclick="window.print()" style="display:none;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download certificaat als PDF
-      </button>
-    </div>
-  </div>
   <div class="btn-wrap">
     <button class="btn btn-outline" onclick="herstart()">Opnieuw beginnen</button>
     ${nextModuleBtn}
@@ -208,14 +196,20 @@ document.addEventListener('DOMContentLoaded', function() {
     nameDiv.textContent = '${title}';
     header.insertBefore(nameDiv, header.firstChild);
   });
-  // Inject nav-buttons into each screen (except welcome, quiz, result)
+  // Inject nav-buttons class into each screen (except welcome, quiz, result)
   SCHERMEN.forEach(function(id) {
-    var screen = document.getElementById(id);
-    if (screen && id !== 'screen-welcome' && id !== 'screen-quiz' && id !== 'screen-result') {
-      var nav = document.createElement('div');
-      nav.className = 'nav-buttons';
-      nav.id = 'nav-' + id;
-      screen.appendChild(nav);
+    if (id === 'screen-welcome' || id === 'screen-quiz' || id === 'screen-result') return;
+    var navEl = document.getElementById('nav-' + id);
+    if (navEl) {
+      navEl.className = 'nav-buttons';
+    } else {
+      var screen = document.getElementById(id);
+      if (screen) {
+        var nav = document.createElement('div');
+        nav.className = 'nav-buttons';
+        nav.id = 'nav-' + id;
+        screen.appendChild(nav);
+      }
     }
   });
   goTo('screen-welcome');
