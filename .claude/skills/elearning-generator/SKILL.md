@@ -8,11 +8,13 @@ author: Umely
 # E-learning Generator Skill
 
 ## Centrale bron van waarheid
-De volledige generatie-instructies (huisstijl, CSS, JavaScript, componentenbibliotheek) staan in:
 
-**`webapp/prompt.md`**
+De instructies en boilerplate zijn gesplitst in twee bestanden:
 
-Lees dit bestand volledig voordat je begint met genereren. Alle CSS-variabelen, componentstijlen, JavaScript-logica en de 14 beschikbare componenten staan daar exact beschreven. Volg die instructies letterlijk.
+- **`webapp/prompt.md`** — instructies, structuurregels, 14 componenttypen (~70 regels)
+- **`webapp/boilerplate.html`** — alle CSS, JS-functies en vaste HTML-blokken
+
+Lees `webapp/prompt.md` voor de regels. Gebruik `webapp/boilerplate.html` als exacte startbasis: kopieer alle CSS en JS letterlijk over, vervang alleen de schermen en de drie aanpasbare JS-variabelen (SCHERMEN, MODULE_TITELS, quizVragen).
 
 ## Wanneer activeer je deze skill?
 - Gebruiker geeft een transcriptie, samenvatting of tekst aan
@@ -22,7 +24,7 @@ Lees dit bestand volledig voordat je begint met genereren. Alle CSS-variabelen, 
 ## Werkwijze
 
 ### Stap 1 - Lees de instructies
-Lees `webapp/prompt.md` volledig. Dit is de authoratieve bron voor alle opmaak, componenten en structuur.
+Lees `webapp/prompt.md`. Gebruik `webapp/boilerplate.html` als startbasis voor het HTML-bestand.
 
 ### Stap 2 - Analyseer het bronmateriaal
 Identificeer uit de transcriptie:
@@ -41,7 +43,7 @@ Zorg voor:
 - Maximaal 2 tekstcomponenten achter elkaar
 
 ### Stap 4 - Genereer het HTML-bestand
-Volg de instructies uit `webapp/prompt.md` exact. Geen afwijkingen van de huisstijl.
+Gebruik `webapp/boilerplate.html` als basis. Kopieer alle CSS en JS letterlijk. Voeg de schermen toe op de plek van het `<!-- SCHERMEN HIER -->` comment. Pas SCHERMEN, MODULE_TITELS en quizVragen aan.
 Output: een volledig werkend HTML-bestand.
 Sla op als: `output/elearning-[onderwerp]-[YYYYMMDD].html`
 
@@ -67,7 +69,8 @@ Controleer minimaal:
 - Inter, Roboto of system-ui als primair font gebruiken
 - Oranje of gradient als header-achtergrond
 - Placeholder tekst laten staan
-- Afwijken van de CSS-variabelen in prompt.md
-- Dezelfde structuur in elke module (altijd varieren)
+- CSS of JS afwijken van boilerplate.html
+- Dezelfde structuur in elke module (altijd variëren)
 - Marketingpraat of overdreven claims
 - M-dashes gebruiken
+- html-template.md gebruiken (vervangen door boilerplate.html)

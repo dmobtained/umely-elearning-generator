@@ -44,7 +44,8 @@ umely-elearning-generator/
 ├── upload-modules.js               <- uploadt output/ naar Supabase
 └── webapp/
     ├── server.js                   <- Express backend
-    ├── prompt.md                   <- SYSTEM_PROMPT voor Claude (1500+ regels)
+    ├── prompt.md                   <- instructies + structuurregels (~70 regels)
+    ├── boilerplate.html            <- alle CSS, JS en vaste HTML-blokken (startbasis)
     ├── public/
     │   ├── index.html              <- login UI
     │   ├── modules.html            <- modulebiblioteek
@@ -125,7 +126,7 @@ Uit `_shared-js.html`:
 ## Architectuur (webapp)
 
 - Auth via Supabase JWT (`requireAuth` middleware)
-- `SYSTEM_PROMPT` ingeladen uit `prompt.md`
+- `prompt.md` + `boilerplate.html` worden samengevoegd tot `FULL_PROMPT` in `server.js`
 - Endpoints: `GET /api/modules`, `GET /modules/:slug`, `PATCH /api/modules/:slug`, `DELETE /api/modules/:slug`
 
 ## Database (Supabase)

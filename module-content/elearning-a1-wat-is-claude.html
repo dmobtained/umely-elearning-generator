@@ -1,6 +1,6 @@
 <!-- TITLE: A1 - Wat is Claude en Anthropic? -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-kc','screen-module-5-1','screen-module-5-2','screen-module-5-kc','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Onderdeel 1 - Wat is Anthropic?','screen-module-1-2':'Onderdeel 1 - Wat betekent dit voor jou?','screen-module-1-kc':'Onderdeel 1 - Kennischeck','screen-module-2-1':'Onderdeel 2 - Wat is Claude?','screen-module-2-2':'Onderdeel 2 - Claude in de praktijk','screen-module-2-kc':'Onderdeel 2 - Kennischeck','screen-module-3-1':'Onderdeel 3 - Claude vs andere AI-tools','screen-module-3-2':'Onderdeel 3 - Welke tool voor welke taak?','screen-module-3-kc':'Onderdeel 3 - Kennischeck','screen-module-4-1':'Onderdeel 4 - Hoe werkt Claude?','screen-module-4-2':'Onderdeel 4 - Waarom maakt Claude fouten?','screen-module-4-kc':'Onderdeel 4 - Kennischeck','screen-module-5-1':'Onderdeel 5 - Beperkingen van Claude','screen-module-5-2':'Onderdeel 5 - Slim omgaan met beperkingen','screen-module-5-kc':'Onderdeel 5 - Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-module-5-1','screen-module-5-2','screen-module-5-3','screen-module-5-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Onderdeel 1 - Wat is Anthropic?','screen-module-1-2':'Onderdeel 1 - Wat betekent dit voor jou?','screen-module-1-3':'Onderdeel 1 - Claude als commercieel product','screen-module-1-kc':'Onderdeel 1 - Kennischeck','screen-module-2-1':'Onderdeel 2 - Wat is Claude?','screen-module-2-2':'Onderdeel 2 - Claude in de praktijk','screen-module-2-3':'Onderdeel 2 - Claude per branche','screen-module-2-kc':'Onderdeel 2 - Kennischeck','screen-module-3-1':'Onderdeel 3 - Claude vs andere AI-tools','screen-module-3-2':'Onderdeel 3 - Welke tool voor welke taak?','screen-module-3-3':'Onderdeel 3 - Diepte boven breedte','screen-module-3-kc':'Onderdeel 3 - Kennischeck','screen-module-4-1':'Onderdeel 4 - Hoe werkt Claude?','screen-module-4-2':'Onderdeel 4 - Waarom maakt Claude fouten?','screen-module-4-3':'Onderdeel 4 - Omgaan met hallucinations','screen-module-4-kc':'Onderdeel 4 - Kennischeck','screen-module-5-1':'Onderdeel 5 - Beperkingen van Claude','screen-module-5-2':'Onderdeel 5 - Slim omgaan met beperkingen','screen-module-5-3':'Onderdeel 5 - Praktijkcheck','screen-module-5-kc':'Onderdeel 5 - Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <!-- QUIZ_START -->
 [
@@ -74,7 +74,7 @@
       <li>Bewust kiezen wanneer je Claude inzet en wanneer niet</li>
     </ul>
   </div>
-  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 20 minuten</div>
+  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 25 minuten</div>
   <div class="btn-wrap">
     <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
   </div>
@@ -102,6 +102,7 @@
     <div class="tip-box-label waarschuwing">Eerlijk gezegd</div>
     <p>De nadruk op veiligheid bij Anthropic is zowel een echte overtuiging als een marketingstrategie. Het onderscheidt hen van OpenAI in de markt. Dat betekent niet dat ze ongelijk hebben, maar wees je bewust dat elk AI-bedrijf commerciele belangen heeft.</p>
   </div>
+  <div id="nav-screen-module-1-1"></div>
 </div>
 
 <div id="screen-module-1-2" class="screen">
@@ -135,6 +136,26 @@
       </div>
     </div>
   </div>
+  <div id="nav-screen-module-1-2"></div>
+</div>
+
+<div id="screen-module-1-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1 van 5</div>
+    <h2>Claude als commercieel product: wat betekent dat?</h2>
+  </div>
+  <div id="scenario-1" class="scenario-blok">
+    <div class="scenario-label">Scenario</div>
+    <p class="scenario-tekst">Jouw collega wil een klantendossier met namen, adressen en contractinformatie naar Claude sturen om het te laten samenvatten. Ze vraagt jou of dat een goed idee is. Wat zeg je?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'De verbinding is versleuteld, maar dat betekent niet dat Anthropic de data niet verwerkt. Claude is een commercieel product met eigen gebruiksvoorwaarden. Encryptie beschermt data onderweg, niet de verwerking door de dienst zelf.')">Gewoon doen, de verbinding is versleuteld dus het is veilig</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Claude is een extern commercieel product. Voordat je persoonsgegevens of vertrouwelijke klantdata uploadt, moet je weten of dat past binnen de privacyregels van je organisatie en de verwerkersovereenkomst met Anthropic.')">Eerst checken of de privacyregels van de organisatie dit toestaan</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Namen verwijderen is een stap, maar een dossier bevat meer persoonsgegevens dan alleen namen: adressen, contractbedragen, geboortedatums. Anonimiseren is complexer dan namen weghalen.')">Alleen de namen verwijderen, dan is het veilig genoeg</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Dit is te absoluut. Zakelijke versies van Claude (via de API of Teams-abonnement) bieden betere privacygaranties dan de gratis consumentenversie. De vraag is welke versie je gebruikt en wat de voorwaarden zijn.')">Nooit doen, AI mag nooit klantdata verwerken</button>
+    </div>
+    <div id="scenario-feedback-1" class="scenario-feedback"></div>
+  </div>
+  <div id="nav-screen-module-1-3"></div>
 </div>
 
 <div id="screen-module-1-kc" class="screen">
@@ -173,6 +194,7 @@
     <div class="tip-box-label waarschuwing">Belangrijk misverstand</div>
     <p>Claude "begrijpt" niet in de menselijke zin van het woord. Het model voorspelt tekst op basis van patronen. Dat leidt tot indrukwekkende resultaten, maar ook tot fouten die een mens nooit zou maken. Houd daar rekening mee.</p>
   </div>
+  <div id="nav-screen-module-2-1"></div>
 </div>
 
 <div id="screen-module-2-2" class="screen">
@@ -219,6 +241,40 @@
     <div class="tip-box-label tip">Gouden regel</div>
     <p>Claude is het meest waardevol als verlengstuk van jouw denken, niet als vervanging ervan. Hoe beter jij de opdracht formuleert, hoe beter het resultaat.</p>
   </div>
+  <div id="nav-screen-module-2-2"></div>
+</div>
+
+<div id="screen-module-2-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2 van 5</div>
+    <h2>Claude per branche</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude is bruikbaar voor elk type bedrijf, maar de concrete toepassing verschilt. Klik op een branche om te zien wat Claude daar voor je kan doen.</p>
+  </div>
+  <div class="flashcard-set">
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="flashcard-voorzijde">Makelaarskantoor</div>
+      <div class="flashcard-achterzijde">Huurcontracten samenvatten, e-mails aan huurders opstellen, veelgestelde vragen van klanten beantwoorden, objectomschrijvingen schrijven.</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="flashcard-voorzijde">Advocatenkantoor</div>
+      <div class="flashcard-achterzijde">Juridische documenten doorzoeken op relevante passages, brieven in de juiste formele toon schrijven, zaken samenvatten voor intern overleg.</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="flashcard-voorzijde">Marketingbureau</div>
+      <div class="flashcard-achterzijde">Campagneteksten genereren, social media posts schrijven, productbeschrijvingen opstellen, content variëren voor verschillende doelgroepen.</div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="flashcard-voorzijde">Accountantskantoor</div>
+      <div class="flashcard-achterzijde">Rapporten samenvatten, standaardbrieven opstellen, complexe regelgeving in begrijpelijke taal uitleggen aan klanten.</div>
+    </div>
+  </div>
+  <div class="tip-box waarschuwing">
+    <div class="tip-box-label waarschuwing">Altijd controleren</div>
+    <p>Claude is geen vervanging voor expertise. Hij helpt je sneller werken, maar de eindverantwoordelijkheid blijft bij jou. Controleer altijd wat Claude produceert, zeker bij juridische, financiële of medische informatie.</p>
+  </div>
+  <div id="nav-screen-module-2-3"></div>
 </div>
 
 <div id="screen-module-2-kc" class="screen">
@@ -275,6 +331,7 @@
       </div>
     </div>
   </div>
+  <div id="nav-screen-module-3-1"></div>
 </div>
 
 <div id="screen-module-3-2" class="screen">
@@ -331,6 +388,28 @@
     <div class="tip-box-label tip">Praktisch advies</div>
     <p>Kies niet op basis van hype. Kies op basis van wat je al gebruikt. Als je organisatie Microsoft 365 heeft, begin dan met Copilot. Als je veel lange documenten analyseert, is Claude sterk. Probeer, vergelijk en kies bewust.</p>
   </div>
+  <div id="nav-screen-module-3-2"></div>
+</div>
+
+<div id="screen-module-3-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3 van 5</div>
+    <h2>Diepte boven breedte</h2>
+  </div>
+  <div class="content-card">
+    <p>Dit traject gaat over Claude, niet om andere tools af te kraken. De reden is praktisch: diepgaande kennis van één tool levert meer op dan oppervlakkige kennis van tien.</p>
+    <p>Een gebruiker die weet hoe je Claude goed instrueert, hoe je de context opbouwt en hoe je omgaat met de beperkingen, haalt structureel betere resultaten dan iemand die tien tools oppervlakkig kent maar geen van alle goed beheerst.</p>
+  </div>
+  <div class="content-card">
+    <h3>Vul in</h3>
+    <p>Diepgaande kennis van <strong>één</strong> tool levert meer op dan oppervlakkige kennis van <strong>tien</strong> tools, omdat je dan weet hoe je de tool moet <span class="invul-wrap"><input class="invul-input" id="invul-3" type="text" placeholder="typ hier..."><button class="btn" style="margin-left:0.5rem;" onclick="checkInvul('invul-3', 'instrueren', 'invul-feedback-3')">Check</button></span></p>
+    <p id="invul-feedback-3" style="margin-top:0.5rem;font-weight:600;"></p>
+  </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Mindset</div>
+    <p>Zodra je Claude goed kent, zie je patronen die je meteen kunt toepassen op andere AI-tools. De vaardigheid is overdraagbaar, de diepgang niet.</p>
+  </div>
+  <div id="nav-screen-module-3-3"></div>
 </div>
 
 <div id="screen-module-3-kc" class="screen">
@@ -386,6 +465,7 @@
       <p>Tekst gegenereerd, woord voor woord</p>
     </div>
   </div>
+  <div id="nav-screen-module-4-1"></div>
 </div>
 
 <div id="screen-module-4-2" class="screen">
@@ -397,18 +477,63 @@
     <p>Claude "weet" niets in de betekenis die wij aan dat woord geven. Het model voorspelt tekst. Dat verschil is groter dan het lijkt.</p>
     <p>Een mens die iets niet weet, zegt dat meestal. Claude genereert een antwoord dat <em>klinkt</em> als een correct antwoord, ook als de onderliggende informatie ontbreekt of onjuist is. Dit heet een hallucination: een zelfverzekerd klinkend antwoord dat feitelijk niet klopt.</p>
   </div>
-  <div class="scenario-blok">
-    <div class="scenario-label">Herkenbaar scenario</div>
-    <p class="scenario-tekst">Je vraagt Claude naar de omzet van een specifiek bedrijf in 2023. Claude geeft een concreet getal met uitleg. Het getal blijkt bij navraag niet te kloppen.</p>
-    <div class="tip-box" style="margin-top:1rem;">
-      <div class="tip-box-label tip">Wat doe je?</div>
-      <p>Gebruik Claude voor structuur, redeneren en schrijven. Verifieer specifieke feiten, cijfers en bronnen altijd zelf. Stel Claude ook gerust de vraag: "Hoe zeker ben je hiervan?" Het model geeft dan vaak eerlijk aan waar de onzekerheid zit.</p>
+  <div id="scenario-4" class="scenario-blok">
+    <div class="scenario-label">Scenario</div>
+    <p class="scenario-tekst">Je vraagt Claude naar de omzet van een specifiek beursgenoteerd bedrijf in 2023. Claude geeft een concreet getal met uitleg. Wat doe je?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Claude kan niet garanderen dat dit getal klopt. Specifieke cijfers zijn precies het type informatie waar hallucinations het vaakst voorkomen.')">Het getal overnemen in mijn rapport</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, true, 'Correct. Controleer specifieke cijfers altijd via het jaarverslag, een persbericht of een betrouwbare databron. Claude is handig voor structuur en redeneren, niet als primaire databron.')">Het getal verifiëren via het jaarverslag of een betrouwbare bron</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Als Claude ja zegt, wil dat nog niet zeggen dat het klopt. Het model geeft bij onjuiste antwoorden soms ook een zelfverzekerde bevestiging.')">Claude vragen of hij zeker is, en bij bevestiging overnemen</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Of een bedrijf beursgenoteerd is, maakt niet uit voor het risico op hallucinations. Het probleem zit in specifieke cijfers, niet in het type bedrijf.')">Alleen vragen over beursgenoteerde bedrijven vermijden</button>
     </div>
+    <div id="scenario-feedback-4" class="scenario-feedback"></div>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Vuistregel</div>
     <p>Hoe specifieker een feit (een getal, een datum, een naam), hoe groter de kans op een hallucination. Hoe abstracter een redenering, hoe betrouwbaarder Claude meestal is.</p>
   </div>
+  <div id="nav-screen-module-4-2"></div>
+</div>
+
+<div id="screen-module-4-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4 van 5</div>
+    <h2>Omgaan met hallucinations in de praktijk</h2>
+  </div>
+  <div class="content-card">
+    <p>Hallucinations zijn niet te vermijden, maar je kunt ze wel systematisch opsporen. Dit stappenplan helpt je om Claude veilig te gebruiken voor feitelijke informatie.</p>
+    <div class="stappen-lijst">
+      <div class="stap-item">
+        <div class="stap-nummer">1</div>
+        <div class="stap-content">
+          <h4>Herken risicovolle inhoud</h4>
+          <p>Wees extra alert bij concrete cijfers, namen, datums, bronvermeldingen en wetsartikelen. Dit zijn de categorieën waar Claude het vaakst fouten maakt.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">2</div>
+        <div class="stap-content">
+          <h4>Vraag Claude naar zijn zekerheid</h4>
+          <p>Stel de vraag: "Hoe zeker ben je hiervan?" of "Kun je aangeven waar je onzeker over bent?" Claude geeft dan vaak eerlijk aan waar de grenzen van zijn kennis liggen.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">3</div>
+        <div class="stap-content">
+          <h4>Verifieer via een primaire bron</h4>
+          <p>Gebruik Claude voor structuur, redeneren en schrijven. Controleer specifieke feiten altijd via een onafhankelijke bron: jaarverslag, officiële website, wetgeving of vakblad.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-nummer">4</div>
+        <div class="stap-content">
+          <h4>Geef Claude betere context</h4>
+          <p>Hoe beter de context die jij aanlevert, hoe minder Claude hoeft te "raden". Plak de relevante tekst erbij in plaats van alleen een vraag te stellen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="nav-screen-module-4-3"></div>
 </div>
 
 <div id="screen-module-4-kc" class="screen">
@@ -421,7 +546,7 @@
     <p class="kc-vraag">Je hebt een lang gesprek met Claude en merkt dat het model eerdere afspraken uit het begin van het gesprek lijkt te vergeten. Wat is de meest waarschijnlijke oorzaak?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-5-1', 'Claude heeft geen slaapstand. Dit is geen technische storing maar een fundamentele eigenschap van hoe taalmodellen werken.')">Claude staat in slaapstand</button>
-      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-module-5-1', 'Correct. Het context window heeft een limiet. Als het gesprek te lang wordt, valt het begin buiten dat venster en "ziet" Claude die informatie niet meer.')">Het gesprek is langer dan het context window</button>
+      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-module-5-1', 'Correct. Het context window heeft een limiet. Als het gesprek te lang wordt, valt het begin buiten dat venster en ziet Claude die informatie niet meer.')">Het gesprek is langer dan het context window</button>
       <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-5-1', 'Claude heeft geen bewuste keuze om iets te negeren. Als informatie in het context window staat, verwerkt het model die.')">Claude negeert oudere berichten bewust</button>
       <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-5-1', 'Serverfouten zijn zeldzaam en zouden het gesprek onderbreken, niet selectief informatie doen vergeten.')">Er is een serverfout opgetreden</button>
     </div>
@@ -471,6 +596,7 @@
       </div>
     </div>
   </div>
+  <div id="nav-screen-module-5-1"></div>
 </div>
 
 <div id="screen-module-5-2" class="screen">
@@ -508,6 +634,26 @@
     <div class="tip-box-label tip">Mindset</div>
     <p>Claude is een krachtige assistent met echte beperkingen. Hoe beter jij die beperkingen kent, hoe effectiever je de tool inzet. Dat geldt ook voor elke andere AI-tool op de markt.</p>
   </div>
+  <div id="nav-screen-module-5-2"></div>
+</div>
+
+<div id="screen-module-5-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 5 van 5</div>
+    <h2>Praktijkcheck: beperkingen herkennen</h2>
+  </div>
+  <div id="scenario-5" class="scenario-blok">
+    <div class="scenario-label">Scenario</div>
+    <p class="scenario-tekst">Je bent makelaar en vraagt Claude naar de actuele gemiddelde huizenprijs in jouw regio. Claude geeft een concreet bedrag met een toelichting. Wat is de juiste reactie?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'Claude heeft geen toegang tot actuele marktdata. Het bedrag is gebaseerd op trainingsdata met een einddatum. Huizenprijzen veranderen maandelijks.')">Het bedrag overnemen in een klantpresentatie</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, true, 'Correct. Claude heeft geen internettoegang en zijn kennis heeft een einddatum. Actuele huizenprijzen moet je opzoeken via Funda, het Kadaster of een andere actuele bron.')">Het bedrag verifiëren via een actuele bron zoals het Kadaster</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'Het probleem is niet de formulering maar het ontbreken van actuele data. Hoe je de vraag ook stelt, Claude heeft geen toegang tot real-time marktinformatie.')">De vraag opnieuw stellen met een andere formulering</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'Claude kan wel helpen bij het schrijven, structureren en analyseren van vastgoedinformatie. Het probleem is specifiek actuele data, niet vastgoed als onderwerp.')">Claude nooit gebruiken voor vastgoedgerelateerde vragen</button>
+    </div>
+    <div id="scenario-feedback-5" class="scenario-feedback"></div>
+  </div>
+  <div id="nav-screen-module-5-3"></div>
 </div>
 
 <div id="screen-module-5-kc" class="screen">
