@@ -152,7 +152,7 @@ app.get('/api/job/:jobId', (req, res) => {
 app.get('/api/modules', requireAuth, async (req, res) => {
   let { data, error } = await supabase
     .from('modules')
-    .select('filename, slug, title, created_at')
+    .select('filename, slug, title, created_at, created_date')
     .order('created_at', { ascending: true });
 
   // Fallback: probeer zonder slug kolom als die niet bestaat
@@ -160,7 +160,7 @@ app.get('/api/modules', requireAuth, async (req, res) => {
     console.error('/api/modules fout:', error.message);
     ({ data, error } = await supabase
       .from('modules')
-      .select('filename, title, created_at')
+      .select('filename, title, created_at, created_date')
       .order('created_at', { ascending: true }));
   }
   if (error) return res.status(500).json({ error: error.message });
@@ -177,7 +177,7 @@ app.get('/api/modules', requireAuth, async (req, res) => {
       filename: m.filename,
       slug: m.slug || m.filename.replace('.html', ''),
       title: m.title,
-      date: m.created_at.slice(0, 10),
+      date: m.created_date || m.created_at.slice(0, 10),
       url: `/modules/${m.slug || m.filename.replace('.html', '')}`
     }))
   });

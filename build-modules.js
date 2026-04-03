@@ -121,7 +121,7 @@ ${content
     .replace(/<!-- SCHERMEN: .+? -->/, '')
     .replace(/<!-- MODULE_TITELS: .+? -->/, '')
     .replace(/<!-- QUIZ_START -->[\s\S]*?<!-- QUIZ_END -->/, '')
-    .replace('<div class="welcome-badge">Umely E-learning</div>', '<div class="welcome-badge"><img src="/logo.png" alt="Umely" style="height:28px;filter:brightness(0) invert(1);vertical-align:middle;"></div>')
+    .replace('<div class="welcome-badge">Umely E-learning</div>', '<div class="welcome-badge">Umely E-learning</div>')
     .trim()}
 
 <!-- AFSLUITQUIZ -->
