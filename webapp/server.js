@@ -414,8 +414,43 @@ app.post('/api/newsletter/unsubscribe', requireAuth, async (req, res) => {
   res.json({ ok: true });
 });
 
-// ── Review-pagina: alle modules als leesbare broncode op één pagina (admin) ──
-app.get('/admin/review', requireAuth, requireAdmin, async (req, res) => {
+// ── Review-pagina: JS-wrapper (zoals /modules/:slug) ──
+app.get('/admin/review', (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.send(`<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Module Review</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; background: #f5f5f5; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .msg { text-align: center; color: #FF8514; font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="msg">Laden...</div>
+<script>
+(async () => {
+  const config = await fetch('/api/config').then(r => r.json());
+  const _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+  const { data: { session } } = await _supabase.auth.getSession();
+  if (!session) { window.location.href = '/account.html?redirect=/admin/review'; return; }
+  const res = await fetch('/admin/review-data', { headers: { 'Authorization': 'Bearer ' + session.access_token } });
+  if (res.status === 401 || res.status === 403) {
+    document.body.innerHTML = '<div class="msg">Geen toegang. Alleen admins kunnen deze pagina zien.</div>';
+    return;
+  }
+  const html = await res.text();
+  document.open(); document.write(html); document.close();
+})();
+</script>
+</body>
+</html>`);
+});
+
+// ── Review-data: echte inhoud, beveiligd voor admins ──
+app.get('/admin/review-data', requireAuth, requireAdmin, async (req, res) => {
   const { data, error } = await supabase
     .from('modules')
     .select('slug, title, html')
