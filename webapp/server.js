@@ -355,10 +355,21 @@ app.post('/api/user/progress', requireAuth, async (req, res) => {
   if (completed) record.completed_at = new Date().toISOString();
 
   const isStartedOnly = (score_pct ?? 0) === 0 && !completed;
-  const { error } = await supabase
-    .from('user_progress')
-    .upsert(record, { onConflict: 'user_id,module_slug', ignoreDuplicates: isStartedOnly });
-  if (error) return res.status(500).json({ error: error.message });
+  let error;
+  if (isStartedOnly) {
+    // Eerste bezoek: alleen invoegen als er nog geen record is
+    const result = await supabase.from('user_progress').insert(record);
+    error = result.error;
+    if (error && error.code === '23505') error = null; // conflict = al gestart, negeer
+  } else {
+    // Quiz afgerond: altijd opslaan
+    const result = await supabase.from('user_progress').upsert(record, { onConflict: 'user_id,module_slug' });
+    error = result.error;
+  }
+  if (error) {
+    console.error('Progress save error:', error.message, error.code, record);
+    return res.status(500).json({ error: error.message });
+  }
   res.json({ ok: true });
 });
 
