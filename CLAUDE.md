@@ -190,6 +190,34 @@ DELETE FROM elearning.modules WHERE slug ~ '-2026[0-9]{4}$';
 - Nederlandse taal
 - `ANTHROPIC_API_KEY` alleen in `server.js`, nooit in lokale scripts
 
+### Universele/tijdloze formulering
+
+Content moet tijdloos zijn. Vermijd:
+- Vergelijkingen met andere tools ("beter dan GPT", "anders dan Copilot")
+- Tijdsgebonden claims ("Claude kan nu X", "nieuwste versie")
+- Specifieke limieten die snel verouderen — gebruik in plaats daarvan "controleer actuele limiet"
+- Zinnen als "op dit moment" of "recent" — die worden snel onjuist
+
+Formuleer altijd zo dat de inhoud over 6 maanden nog klopt.
+
+### Diepgang verplicht
+
+Elke uitleg moet verder gaan dan de oppervlakte. Verboden:
+- Uitleggen WAT Claude doet zonder uit te leggen WAAROM of HOE
+- Waarschuwingen zonder concrete handelswijze ("controleer altijd de inhoud" is te vaag — geef aan wat te controleren en hoe)
+- Schermen met alleen een tip-box als enige inhoud
+
+Verplicht: elk contentscherm heeft minstens één concrete handeling, voorbeeld of oefening.
+
+### Geen AI-opvulling
+
+Verwijder automatisch gegenereerde loze zinnen zoals:
+- "zonder andere tools af te kraken"
+- "dit is geen vervanging voor menselijk denken"
+- "gebruik Claude verstandig"
+- "de mogelijkheden zijn eindeloos"
+- Elke zin die niets concreets toevoegt aan de leerdoelen
+
 ## Kwaliteitsregels voor module-content (VERPLICHT)
 
 Dit zijn de regels die bij elke module gecontroleerd en gehandhaafd moeten worden. Afwijkingen zijn fouten, geen stijlkeuzes.
