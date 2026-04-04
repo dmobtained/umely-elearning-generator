@@ -238,6 +238,18 @@
   .progress-status.started { background: var(--cream); color: #92400E; }
   .progress-status svg { flex-shrink: 0; }
 
+  /* ── SKELETON LOADERS ── */
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .skeleton-group { margin-bottom: 1rem; border: 1px solid var(--gray-border); border-radius: 12px; overflow: hidden; }
+  .skeleton-header { height: 56px; background: var(--charcoal); opacity: 0.8; }
+  .skeleton-body { padding: 20px; background: var(--warm-white); display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+  .skeleton-card { background: white; border: 1px solid var(--gray-border); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+  .skeleton-line { border-radius: 6px; background: linear-gradient(90deg, #ececec 25%, #f8f8f8 50%, #ececec 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+  .skeleton-line.w100 { height: 14px; width: 100%; }
+  .skeleton-line.w60 { height: 14px; width: 60%; }
+  .skeleton-line.w40 { height: 12px; width: 40%; }
+  .skeleton-line.icon { height: 32px; width: 32px; border-radius: 8px; }
+
   @media(max-width:900px) {
     .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   }
@@ -515,10 +527,40 @@ function applyOrder(modules) {
 
 let userRole = 'user';
 
+function skeletonCard() {
+  return `<div class="skeleton-card">
+    <div class="skeleton-line icon"></div>
+    <div class="skeleton-line w100"></div>
+    <div class="skeleton-line w60"></div>
+    <div class="skeleton-line w40"></div>
+  </div>`;
+}
+
+function showSkeleton(grid) {
+  grid.className = '';
+  grid.innerHTML = [1,2,3].map(() => `
+    <div class="skeleton-group">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-body">
+        ${skeletonCard()}${skeletonCard()}${skeletonCard()}
+      </div>
+    </div>`).join('');
+}
+
+const OPEN_CATS_KEY = 'umely_open_cats';
+
+function saveOpenCats() {
+  const open = [...document.querySelectorAll('.category-group.open')].map(g => g.dataset.cat);
+  localStorage.setItem(OPEN_CATS_KEY, JSON.stringify(open));
+}
+
+function getOpenCats() {
+  try { return JSON.parse(localStorage.getItem(OPEN_CATS_KEY)) || []; } catch { return []; }
+}
+
 async function loadModules() {
   const grid = document.getElementById('grid');
-  grid.className = 'loading';
-  grid.innerHTML = 'Modules laden...';
+  showSkeleton(grid);
   try {
     const res = await fetch('/api/modules', { headers: authHeader() });
     if (res.status === 401) { showLogin(); return; }
@@ -559,6 +601,7 @@ async function loadModules() {
 
       var group = document.createElement('div');
       group.className = 'category-group';
+      group.dataset.cat = cat.prefix;
 
       var header = document.createElement('div');
       header.className = 'category-header';
@@ -567,7 +610,7 @@ async function loadModules() {
         '<span class="category-count">' + catModules.length + ' module' + (catModules.length !== 1 ? 's' : '') + '</span>' +
         '<span class="category-chevron">&#9660;</span>';
       header.onclick = function(el) {
-        return function() { el.classList.toggle('open'); };
+        return function() { el.classList.toggle('open'); saveOpenCats(); };
       }(group);
 
       var modulesDiv = document.createElement('div');
@@ -616,6 +659,19 @@ async function loadModules() {
       group.appendChild(header);
       group.appendChild(modulesDiv);
       grid.appendChild(group);
+    }
+
+    // Herstel open categorieën
+    var openCats = getOpenCats();
+    if (openCats.length === 0) {
+      // Standaard: eerste categorie open
+      var first = grid.querySelector('.category-group');
+      if (first) first.classList.add('open');
+    } else {
+      openCats.forEach(function(prefix) {
+        var g = grid.querySelector('.category-group[data-cat="' + prefix + '"]');
+        if (g) g.classList.add('open');
+      });
     }
 
     // Laad voortgang na het renderen van kaarten
