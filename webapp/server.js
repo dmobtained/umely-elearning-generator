@@ -515,49 +515,35 @@ app.post('/api/auth/signup', async (req, res) => {
       return res.status(400).json({ error: 'Wachtwoord moet minstens 8 tekens zijn.' });
     }
 
-    // Sign up with Supabase Auth
-    // Supabase will send verification email automatically (configured via SMTP)
-    const { data, error } = await supabaseAdmin.auth.admin.createUser({
+    // Standaard signUp: werkt met anon én service role key, verstuurt verificatiemail via Resend
+    const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
-      user_metadata: {
-        firstName: firstName,
-        lastName: lastName
-      },
-      email_confirm: true // Auto-confirm until custom SMTP is configured
+      options: {
+        data: { firstName, lastName }
+      }
     });
 
     if (error) {
       console.error('Signup error:', error);
-      if (error.message.includes('already registered')) {
+      if (error.message.toLowerCase().includes('already registered') || error.message.toLowerCase().includes('already been registered')) {
         return res.status(400).json({ error: 'Dit e-mailadres is al geregistreerd.' });
       }
       return res.status(400).json({ error: error.message });
     }
 
-    // Auto-create profile row (will be updated when email verified via auth hook)
-    await supabase
-      .from('profiles')
-      .insert({
-        id: data.user.id,
-        email: email,
-        role: 'user'
-      })
-      .select();
-
-    // Send verification email (admin.createUser does not send one automatically)
-    const { error: resendError } = await supabaseAdmin.auth.resend({
-      type: 'signup',
-      email: email
-    });
-    if (resendError) {
-      console.error('Could not send verification email:', resendError);
+    // Profiel aanmaken
+    if (data.user) {
+      await supabase
+        .from('profiles')
+        .insert({ id: data.user.id, email: email, role: 'user' })
+        .select();
     }
 
     res.json({
       success: true,
       message: 'Account aangemaakt. Controleer je email voor verificatie.',
-      userId: data.user.id
+      userId: data.user?.id
     });
 
   } catch (error) {
