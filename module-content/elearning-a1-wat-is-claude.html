@@ -463,14 +463,13 @@
     <p><strong>Hoe is Claude getraind?</strong> Op een enorme hoeveelheid tekst: boeken, websites, artikelen, code, wetenschappelijke papers. Door die training heeft het model statistisch geleerd welke woorden, zinnen en redeneringen logisch op elkaar volgen.</p>
     <p><strong>Wat is het context window?</strong> Wanneer jij een bericht stuurt, verwerkt Claude dat bericht samen met de volledige gespreksgeschiedenis binnen het context window. Dat is het werkgeheugen van het model: alles wat daarbinnen staat, ziet Claude. Alles buiten dat venster bestaat voor het model niet meer.</p>
   </div>
-  <div class="tip-box">
-    <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Elk nieuw gesprek begint blanco. Claude onthoudt niets van eerdere gesprekken, tenzij je dat expliciet inschakelt via Projects of een API-integratie met geheugen.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;margin:0 0 1.5rem;">
+    <img src="https://dsxyygvvtwnsoiubrwxc.supabase.co/storage/v1/object/public/module-images/a1/context-window.jpg" alt="Context window metafoor" style="width:100%;border-radius:10px;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.12);">
+    <div>
+      <h4 style="margin-top:0;">Het context window in beeld</h4>
+      <p>Het kader toont alleen het deel van de papieren dat erin valt. Wat erbuiten ligt, is er niet voor het model. Elk nieuw gesprek begint blanco — Claude onthoudt niets van eerdere sessies, tenzij je dat expliciet inschakelt via Projects.</p>
+    </div>
   </div>
-  <figure style="margin:0 0 1.5rem;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.12);">
-    <img src="https://dsxyygvvtwnsoiubrwxc.supabase.co/storage/v1/object/public/module-images/a1/context-window.jpg" alt="Een houten fotolijstje op verspreide documenten als metafoor voor het context window" style="width:100%;display:block;">
-    <figcaption style="background:#f5f5f5;padding:0.5rem 0.75rem;font-size:0.8rem;color:#666;text-align:center;">Het context window: Claude ziet alleen wat binnen het kader valt. Alles erbuiten bestaat niet meer voor het model.</figcaption>
-  </figure>
   <div class="processtroom">
     <div class="proces-blok">
       <h4>Jouw bericht</h4>
@@ -500,14 +499,13 @@
     <div class="module-num">Onderdeel 4 van 5</div>
     <h2>Waarom maakt Claude fouten?</h2>
   </div>
-  <div class="content-card">
-    <p>Claude "weet" niets in de betekenis die wij aan dat woord geven. Het model voorspelt tekst. Dat verschil is groter dan het lijkt.</p>
-    <p>Een mens die iets niet weet, zegt dat meestal. Claude genereert een antwoord dat <em>klinkt</em> als een correct antwoord, ook als de onderliggende informatie ontbreekt of onjuist is. Dit heet een hallucination: een zelfverzekerd klinkend antwoord dat feitelijk niet klopt.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;margin:0 0 1.5rem;">
+    <div>
+      <h4 style="margin-top:0;">Zelfverzekerd, maar fout</h4>
+      <p>Claude "weet" niets in de betekenis die wij aan dat woord geven. Het model voorspelt tekst. Een mens die iets niet weet, zegt dat meestal. Claude genereert een antwoord dat <em>klinkt</em> als een correct antwoord, ook als de onderliggende informatie ontbreekt of onjuist is. Dit heet een hallucination.</p>
+    </div>
+    <img src="https://dsxyygvvtwnsoiubrwxc.supabase.co/storage/v1/object/public/module-images/a1/hallucination.jpg" alt="Zakelijk rapport met rode pen-annotaties" style="width:100%;border-radius:10px;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.12);">
   </div>
-  <figure style="margin:0 0 1.5rem;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.12);">
-    <img src="https://dsxyygvvtwnsoiubrwxc.supabase.co/storage/v1/object/public/module-images/a1/hallucination.jpg" alt="Een zakelijk rapport vol rode pen-annotaties en een sticky note met vragen bij de cijfers" style="width:100%;display:block;">
-    <figcaption style="background:#f5f5f5;padding:0.5rem 0.75rem;font-size:0.8rem;color:#666;text-align:center;">Een zelfverzekerd klinkend rapport, maar de cijfers kloppen niet. Zo werkt een hallucination: overtuigend van vorm, fout van inhoud.</figcaption>
-  </figure>
   <div id="scenario-4" class="scenario-blok">
     <div class="scenario-label">Scenario</div>
     <p class="scenario-tekst">Je vraagt Claude naar de omzet van een specifiek beursgenoteerd bedrijf in 2023. Claude geeft een concreet getal met uitleg. Wat doe je?</p>

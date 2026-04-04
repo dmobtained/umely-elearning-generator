@@ -162,6 +162,8 @@ Gebruik altijd de MCP-tools, nooit Node.js scripts of dotenv voor databasetoegan
 - Project ID `ummcgaazziivvxgfwsio` staat in de `.env` maar is NIET het MCP project ID — het juiste ID is `dsxyygvvtwnsoiubrwxc`
 - `FROM modules` zonder schema geeft lege resultaten — schrijf altijd `FROM elearning.modules`
 - De MCP `execute_sql` werkt alleen met het juiste project ID; bij twijfel eerst `list_projects` aanroepen
+- De Supabase REST API (`/rest/v1/modules`) gebruikt standaard het `public` schema — gebruik altijd de header `Content-Profile: elearning` bij POST/PATCH via de REST API, anders gaat de upsert naar de verkeerde tabel
+- Verifieer na elke upload via MCP SQL of de HTML ook echt de verwachte inhoud bevat (bv. `html LIKE '%zoekterm%'`)
 
 ### Slugs
 Modules worden opgeslagen met een schone slug zonder datum, bv. `elearning-a1-wat-is-claude`.
