@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   // Inject nav-buttons class into each screen (except welcome, quiz, result)
   SCHERMEN.forEach(function(id) {
-    if (id === 'screen-welcome' || id === 'screen-quiz' || id === 'screen-result' || id.endsWith('-kc')) return;
+    if (id === 'screen-welcome' || id === 'screen-quiz' || id === 'screen-result') return;
     var navEl = document.getElementById('nav-' + id);
     if (navEl) {
       navEl.className = 'nav-buttons';

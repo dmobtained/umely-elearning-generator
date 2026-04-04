@@ -48,14 +48,13 @@ function checkKC(nr, el, isCorrect, volgendeScherm, uitleg) {
   document.querySelectorAll('#kc-' + nr + ' .kc-optie').forEach(o => o.style.pointerEvents = 'none');
   el.classList.add(isCorrect ? 'correct' : 'fout');
   const fb = document.getElementById('kc-feedback-' + nr);
-  const btnStijl = 'background:linear-gradient(90deg,#FF8514,#FF4D00);color:white;border:none;border-radius:50px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.9rem;';
-  const volgendeKnop = '<button style="' + btnStijl + '" onclick="goTo(\'' + volgendeScherm + '\')">Volgende</button>';
+  const btnStijl = 'background:#27292D;color:white;border:none;border-radius:50px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.9rem;';
   if (isCorrect) {
     fb.className = 'kc-feedback correct';
-    fb.innerHTML = '<strong>Correct!</strong> ' + uitleg + '<div class="kc-knoppen">' + volgendeKnop + '</div>';
+    fb.innerHTML = '<strong>Correct!</strong> ' + uitleg;
   } else {
     fb.className = 'kc-feedback fout';
-    fb.innerHTML = '<strong>Niet correct.</strong> ' + uitleg + '<div class="kc-knoppen"><button style="' + btnStijl + 'background:#27292D;" onclick="resetKC(' + nr + ')">Probeer opnieuw</button>' + volgendeKnop + '</div>';
+    fb.innerHTML = '<strong>Niet correct.</strong> ' + uitleg + '<div class="kc-knoppen"><button style="' + btnStijl + '" onclick="resetKC(' + nr + ')">Probeer opnieuw</button></div>';
   }
 }
 
