@@ -14,7 +14,7 @@
       <li>De vier toegangsmogelijkheden van Claude benoemen</li>
       <li>Het verschil uitleggen tussen de web-app en de desktop-app</li>
       <li>De mogelijkheden en beperkingen van de Chrome-extensie beschrijven</li>
-      <li>Aangeven waarvoor de Excel- en PowerPoint-integraties geschikt zijn</li>
+      <li>Uitleggen hoe je Claude effectief inzet naast Excel en PowerPoint</li>
       <li>De juiste Claude-tool kiezen voor jouw werksituatie</li>
     </ul>
   </div>
@@ -32,11 +32,65 @@
   </div>
   <div class="content-card">
     <p>De eenvoudigste manier om Claude te gebruiken is via de website claude.ai. Je hebt geen installatie nodig, alleen een browser en een account. Je typt je vraag, Claude antwoordt. Zo simpel is het.</p>
-    <p>Er is een gratis versie met een dagelijks gebruikslimiet. Voor zwaarder gebruik is er een betaald abonnement. Er is een betaald abonnement beschikbaar voor zwaarder gebruik. De exacte prijs vind je op claude.ai/pricing — reken op een paar tientallen euro's per maand. Met Pro kun je ook de Projects-functie gebruiken: een manier om Claude context te geven over jouw werk die bewaard blijft over meerdere gesprekken.</p>
+    <p>Er is een gratis versie met een dynamisch gebruikslimiet — Anthropic publiceert geen vaste aantallen. Bij intensief gebruik loop je snel tegen de limiet aan. Voor dagelijks professioneel gebruik zijn er betaalde plannen: Claude Pro ($20/mnd) en Claude Max (vanaf $100/mnd). Controleer <strong>claude.com/pricing</strong> voor actuele tarieven, want prijzen kunnen wijzigen. Met betaalde plannen krijg je toegang tot de Projects-functie: een manier om Claude context te geven over jouw werk die bewaard blijft over meerdere gesprekken.</p>
+  </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <!-- Window background -->
+      <rect width="580" height="320" rx="10" fill="#ebebeb"/>
+      <!-- Browser chrome -->
+      <rect width="580" height="38" rx="10" fill="#d9d9d9"/>
+      <rect y="28" width="580" height="10" fill="#d9d9d9"/>
+      <!-- Traffic lights -->
+      <circle cx="18" cy="19" r="5" fill="#ff5f57"/>
+      <circle cx="34" cy="19" r="5" fill="#febc2e"/>
+      <circle cx="50" cy="19" r="5" fill="#28c840"/>
+      <!-- Address bar -->
+      <rect x="90" y="9" width="290" height="20" rx="10" fill="white"/>
+      <text x="235" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#555">claude.ai</text>
+      <!-- Sidebar -->
+      <rect x="0" y="38" width="158" height="282" fill="#27292D"/>
+      <!-- New chat button -->
+      <rect x="9" y="50" width="140" height="28" rx="6" fill="#FF8514"/>
+      <text x="79" y="69" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">+ Nieuw gesprek</text>
+      <!-- Active conversation -->
+      <rect x="9" y="86" width="140" height="22" rx="4" fill="rgba(255,255,255,0.13)"/>
+      <text x="79" y="101" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.85)">Huurcontract samenvatten</text>
+      <!-- Other conversations -->
+      <text x="14" y="126" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.45)">Opvolgmail klant Jansen</text>
+      <text x="14" y="146" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.45)">Agenda volgende week</text>
+      <text x="14" y="166" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.45)">Brief naar gemeente</text>
+      <!-- Projects label -->
+      <text x="14" y="196" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.3)" letter-spacing="1">PROJECTS</text>
+      <rect x="9" y="202" width="140" height="22" rx="4" fill="rgba(255,133,20,0.18)"/>
+      <text x="79" y="217" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF8514">Vastgoedtransacties</text>
+      <text x="14" y="240" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.45)">Huurder-communicatie</text>
+      <!-- Main area -->
+      <rect x="158" y="38" width="422" height="282" fill="#FFF8F2"/>
+      <!-- Claude message bubble -->
+      <rect x="172" y="56" width="248" height="44" rx="9" fill="white" stroke="#EAE6E0" stroke-width="1"/>
+      <text x="186" y="74" font-family="Arial, sans-serif" font-size="10.5" fill="#27292D">Hallo! Hoe kan ik je helpen?</text>
+      <text x="186" y="91" font-family="Arial, sans-serif" font-size="10" fill="#888">Upload een bestand of stel een vraag ↗</text>
+      <!-- User message -->
+      <rect x="292" y="118" width="256" height="28" rx="9" fill="#FF8514"/>
+      <text x="420" y="136" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="white">Vat dit contract samen in 5 punten</text>
+      <!-- Claude response -->
+      <rect x="172" y="164" width="276" height="80" rx="9" fill="white" stroke="#EAE6E0" stroke-width="1"/>
+      <text x="186" y="182" font-family="Arial, sans-serif" font-size="10" fill="#27292D" font-weight="bold">Hier zijn de 5 kernpunten:</text>
+      <text x="186" y="200" font-family="Arial, sans-serif" font-size="10" fill="#27292D">1. Huurperiode: 12 maanden</text>
+      <text x="186" y="218" font-family="Arial, sans-serif" font-size="10" fill="#27292D">2. Opzegtermijn: 2 maanden</text>
+      <text x="186" y="234" font-family="Arial, sans-serif" font-size="10" fill="#aaa">3. Borgsom: ...</text>
+      <!-- Input bar -->
+      <rect x="168" y="292" width="400" height="24" rx="12" fill="white" stroke="#EAE6E0" stroke-width="1.5"/>
+      <text x="222" y="308" font-family="Arial, sans-serif" font-size="10" fill="#bbb">Stuur een bericht aan Claude...</text>
+      <text x="183" y="309" font-family="Arial, sans-serif" font-size="14" fill="#ccc">⊕</text>
+      <circle cx="554" cy="304" r="10" fill="#FF8514"/>
+      <text x="554" y="309" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">↑</text>
+    </svg>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Alles wat je typt gaat naar servers van Anthropic in de VS. Controleer de privacy-instellingen van je account. Bij het gratis abonnement kan Anthropic gesprekken gebruiken voor modelverbetering tenzij je dit uitschakelt. Stuur geen gevoelige klantgegevens via een gratis account.</p>
+    <p>Alles wat je typt gaat naar servers van Anthropic. Dataopslag is in de VS; verkeer kan ook via EU of Aziatische regio's lopen. Modeltraining is een opt-in keuze voor Free, Pro en Max — de instelling staat niet automatisch aan. Voor Teams, Enterprise en API traint Anthropic nooit op gesprekken. Stuur geen gevoelige klantgegevens via een gratis account zonder de privacyvoorwaarden te kennen.</p>
   </div>
 </div>
 
@@ -55,7 +109,7 @@
         <tr><td>Dagelijks gebruikslimiet</td><td>Ja, beperkt</td><td>Ruimer</td></tr>
         <tr><td>Bestanden uploaden</td><td>Ja</td><td>Ja</td></tr>
         <tr><td>Projects-functie</td><td>Nee</td><td>Ja</td></tr>
-        <tr><td>Gesprekken voor training</td><td>Standaard aan (uitzetten kan)</td><td>Standaard uitgeschakeld</td></tr>
+        <tr><td>Gesprekken voor training</td><td>Opt-in (staat standaard UIT)</td><td>Nooit (contractueel)</td></tr>
       </tbody>
     </table>
   </div>
@@ -109,7 +163,60 @@
   </div>
   <div class="content-card">
     <p>Naast de web-app is er ook een zelfstandige desktop-app voor Mac en Windows. Die installeer je eenmalig op je computer. Het voordeel is dat je Claude altijd snel kunt openen zonder een browser te hoeven starten, en dat de app toegang kan hebben tot bestanden op je computer zonder dat je die hoeft te uploaden.</p>
-    <p>De desktop-app heeft drie functies: Chat (gewoon gesprekken voeren), Cowork (samenwerken aan documenten) en Code (hulp bij het schrijven van code). Voor de meeste kantoorgebruikers is Chat het meest relevant.</p>
+    <p>De desktop-app heeft drie functies: Chat (gewoon gesprekken voeren), Cowork (samenwerken aan documenten) en Code (hulp bij het schrijven van code). Voor de meeste kantoorgebruikers is Chat het meest relevant. De exacte functies en namen kunnen bij updates veranderen.</p>
+  </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <!-- App window -->
+      <rect width="580" height="300" rx="10" fill="#1e1e1e"/>
+      <!-- Title bar -->
+      <rect width="580" height="36" rx="10" fill="#2a2a2a"/>
+      <rect y="26" width="580" height="10" fill="#2a2a2a"/>
+      <circle cx="18" cy="18" r="5" fill="#ff5f57"/>
+      <circle cx="34" cy="18" r="5" fill="#febc2e"/>
+      <circle cx="50" cy="18" r="5" fill="#28c840"/>
+      <text x="290" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">Claude</text>
+      <!-- Tab bar -->
+      <rect x="0" y="36" width="580" height="34" fill="#27292D"/>
+      <!-- Tabs -->
+      <rect x="10" y="42" width="72" height="22" rx="5" fill="#FF8514"/>
+      <text x="46" y="57" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">Chat</text>
+      <rect x="88" y="42" width="72" height="22" rx="5" fill="rgba(255,255,255,0.07)"/>
+      <text x="124" y="57" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">Cowork</text>
+      <rect x="166" y="42" width="72" height="22" rx="5" fill="rgba(255,255,255,0.07)"/>
+      <text x="202" y="57" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">Code</text>
+      <!-- Sidebar -->
+      <rect x="0" y="70" width="155" height="230" fill="#222222"/>
+      <rect x="9" y="80" width="137" height="26" rx="5" fill="#FF8514"/>
+      <text x="77" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">+ Nieuw gesprek</text>
+      <rect x="9" y="114" width="137" height="20" rx="4" fill="rgba(255,255,255,0.1)"/>
+      <text x="77" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Offerte voor klant De Vries</text>
+      <text x="14" y="152" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Factuur Q1 samenvatten</text>
+      <text x="14" y="172" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Notulen vergadering</text>
+      <!-- File access label -->
+      <rect x="9" y="210" width="137" height="20" rx="4" fill="rgba(255,133,20,0.15)"/>
+      <text x="77" y="224" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF8514">📂 Bestanden op computer</text>
+      <!-- Main chat area -->
+      <rect x="155" y="70" width="425" height="230" fill="#2d2d2d"/>
+      <!-- Claude message -->
+      <rect x="168" y="86" width="234" height="36" rx="8" fill="#3a3a3a" stroke="#444" stroke-width="1"/>
+      <text x="180" y="102" font-family="Arial, sans-serif" font-size="10.5" fill="rgba(255,255,255,0.85)">Hallo! Wat kan ik voor je doen?</text>
+      <text x="180" y="116" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Slepen ook mogelijk ↗</text>
+      <!-- User message -->
+      <rect x="300" y="140" width="252" height="26" rx="8" fill="#FF8514"/>
+      <text x="426" y="157" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="white">Analyseer rapport.pdf van mijn bureaublad</text>
+      <!-- Claude response -->
+      <rect x="168" y="182" width="270" height="56" rx="8" fill="#3a3a3a" stroke="#444" stroke-width="1"/>
+      <text x="182" y="200" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.85)" font-weight="bold">Ik heb rapport.pdf gelezen.</text>
+      <text x="182" y="218" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">De omzet in Q1 steeg met 12%...</text>
+      <text x="182" y="232" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Wil je een samenvatting of analyse?</text>
+      <!-- Input bar -->
+      <rect x="162" y="272" width="404" height="22" rx="11" fill="#3a3a3a" stroke="#555" stroke-width="1"/>
+      <text x="214" y="287" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.3)">Stuur een bericht...</text>
+      <text x="176" y="287" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.25)">⊕</text>
+      <circle cx="553" cy="283" r="9" fill="#FF8514"/>
+      <text x="553" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">↑</text>
+    </svg>
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
@@ -202,7 +309,63 @@
   </div>
   <div class="content-card">
     <p>Er is een Chrome-extensie waarmee je Claude direct in je browser kunt gebruiken. Je kunt tekst samenvatten op de pagina die je bekijkt, vragen stellen over de inhoud, of hulp krijgen bij het schrijven van een e-mail in Gmail, zonder apart naar claude.ai te gaan.</p>
-    <p>De extensie werkt alleen in Google Chrome, niet in andere browsers. En let op: de extensie heeft toegang tot de inhoud van de pagina's die je bezoekt. Dat is nodig om te kunnen helpen, maar vraagt ook om bewustzijn: gebruik de extensie niet op pagina's met gevoelige informatie als je dit niet wilt.</p>
+    <p>De extensie is op dit moment beschikbaar voor Google Chrome — controleer de actuele browser-ondersteuning in de Chrome Web Store, want dit kan uitgebreid worden. En let op: de extensie heeft toegang tot de inhoud van de pagina's die je bezoekt. Dat is nodig om te kunnen helpen, maar vraagt ook om bewustzijn: gebruik de extensie niet op pagina's met gevoelige informatie als je dit niet wilt.</p>
+  </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <!-- Browser background -->
+      <rect width="580" height="300" rx="10" fill="#f0f0f0"/>
+      <!-- Browser chrome -->
+      <rect width="580" height="38" rx="10" fill="#d9d9d9"/>
+      <rect y="28" width="580" height="10" fill="#d9d9d9"/>
+      <circle cx="18" cy="19" r="5" fill="#ff5f57"/>
+      <circle cx="34" cy="19" r="5" fill="#febc2e"/>
+      <circle cx="50" cy="19" r="5" fill="#28c840"/>
+      <!-- Address bar -->
+      <rect x="88" y="9" width="330" height="20" rx="10" fill="white"/>
+      <text x="253" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#555">rechtbank.nl/uitspraak-huurrecht-2024</text>
+      <!-- Claude icon in toolbar (top right) -->
+      <circle cx="552" cy="19" r="11" fill="#FF8514"/>
+      <text x="552" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">C</text>
+      <!-- Webpage content (left side) -->
+      <rect x="0" y="38" width="370" height="262" fill="white"/>
+      <!-- Webpage text lines (simulated article) -->
+      <rect x="16" y="54" width="200" height="14" rx="3" fill="#27292D"/>
+      <rect x="16" y="76" width="338" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="90" width="310" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="104" width="328" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="118" width="295" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="138" width="180" height="12" rx="3" fill="#555"/>
+      <rect x="16" y="158" width="338" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="172" width="322" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="186" width="310" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="200" width="340" height="8" rx="2" fill="#e0e0e0"/>
+      <rect x="16" y="214" width="290" height="8" rx="2" fill="#e0e0e0"/>
+      <!-- Divider -->
+      <rect x="370" y="38" width="1" height="262" fill="#e0e0e0"/>
+      <!-- Claude side panel -->
+      <rect x="371" y="38" width="209" height="262" fill="#FFF8F2"/>
+      <!-- Panel header -->
+      <rect x="371" y="38" width="209" height="42" fill="#27292D"/>
+      <circle cx="393" cy="59" r="11" fill="#FF8514"/>
+      <text x="393" y="64" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">C</text>
+      <text x="412" y="57" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">Claude</text>
+      <text x="412" y="72" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">Chrome-extensie</text>
+      <!-- Claude message in panel -->
+      <rect x="380" y="92" width="190" height="60" rx="7" fill="white" stroke="#EAE6E0" stroke-width="1"/>
+      <text x="390" y="110" font-family="Arial, sans-serif" font-size="9.5" fill="#27292D" font-weight="bold">Samenvatting:</text>
+      <text x="390" y="126" font-family="Arial, sans-serif" font-size="9" fill="#555">1. Huurder mag niet zomaar</text>
+      <text x="390" y="140" font-family="Arial, sans-serif" font-size="9" fill="#555">    worden uitgezet</text>
+      <text x="390" y="154" font-family="Arial, sans-serif" font-size="9" fill="#aaa">2. Opzegtermijn geldt...</text>
+      <!-- User input in panel -->
+      <rect x="380" y="168" width="190" height="24" rx="8" fill="#FF8514"/>
+      <text x="475" y="184" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Wat zijn mijn rechten als huurder?</text>
+      <!-- Input bar in panel -->
+      <rect x="380" y="272" width="185" height="22" rx="11" fill="white" stroke="#EAE6E0" stroke-width="1"/>
+      <text x="424" y="287" font-family="Arial, sans-serif" font-size="9" fill="#bbb">Stel een vraag...</text>
+      <circle cx="555" cy="283" r="8" fill="#FF8514"/>
+      <text x="555" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">↑</text>
+    </svg>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
@@ -236,7 +399,7 @@
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
         <div class="fc-term">Kan niet: andere browsers</div>
-        <div class="fc-uitleg">De extensie werkt alleen in Google Chrome. Firefox, Safari of Edge worden niet ondersteund. Daarvoor moet je de web-app of desktop-app gebruiken.</div>
+        <div class="fc-uitleg">De extensie is op dit moment beschikbaar voor Google Chrome. Firefox, Safari of Edge worden niet ondersteund — controleer de actuele browser-ondersteuning, want dit kan uitgebreid worden. Gebruik anders de web-app of desktop-app.</div>
         <div class="fc-hint">Klik voor uitleg</div>
       </div>
     </div>
@@ -287,7 +450,7 @@
     <h2>API, Office-integraties en kiezen</h2>
   </div>
   <div class="content-card">
-    <p>Er is geen directe Claude-integratie in Microsoft Office. Microsoft 365 Copilot gebruikt een ander AI-model. De gangbare manier om Claude naast Excel of PowerPoint te gebruiken is de copy-paste werkwijze: kopieer data of tekst naar Claude, stel je vraag en plak het resultaat terug. Dit werkt altijd, ongeacht je abonnement.</p>
+    <p>Claude is niet standaard ingebouwd in Microsoft Office. Sommige M365 Copilot-configuraties ondersteunen Claude als AI-optie, maar dit vereist activatie door een beheerder en is niet overal beschikbaar. De gangbare manier om Claude naast Excel of PowerPoint te gebruiken is de copy-paste werkwijze: kopieer data of tekst naar Claude, stel je vraag en plak het resultaat terug. Dit werkt altijd, ongeacht je abonnement of regio.</p>
     <p>Voor bedrijven die Claude willen inbouwen in eigen software of systemen is er de API. Dit vereist technische kennis of een developer. De meeste kantoren beginnen niet met de API.</p>
   </div>
   <div class="tip-box">

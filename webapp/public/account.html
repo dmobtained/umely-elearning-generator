@@ -9,178 +9,122 @@
 <script src="https://instant.page/5.2.0" type="module"></script>
 <style>
   :root {
-    --amber: #FF8514;
-    --flame: #FF4D00;
-    --gold: #FFD964;
-    --charcoal: #27292D;
-    --warm-white: #FFF8F2;
-    --white: #FFFFFF;
-    --cream: #F7E6C2;
-    --peach: #FFD7AD;
-    --gray-text: #4A4A4A;
-    --gray-border: #EDE0D4;
+    --amber: #FF8514; --flame: #FF4D00; --gold: #FFD964;
+    --charcoal: #27292D; --warm-white: #FFF8F2; --white: #FFFFFF;
+    --gray-text: #5A5A5A; --gray-border: #E8D9CC; --gray-light: #F5F0EA;
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; display: flex; flex-direction: column; }
-  main { flex: 1; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #F5F5F7; color: var(--charcoal); min-height: 100vh; display: flex; flex-direction: column; }
 
   /* ── AUTH OVERLAY ── */
-  #authOverlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(39,41,45,0.85); backdrop-filter: blur(6px);
-    z-index: 1000; align-items: center; justify-content: center;
-  }
-  .auth-card {
-    background: var(--white); border-radius: 20px; padding: 48px;
-    max-width: 400px; width: 90%;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
-  }
+  #authOverlay { display: none; position: fixed; inset: 0; background: rgba(39,41,45,0.88); backdrop-filter: blur(6px); z-index: 1000; align-items: center; justify-content: center; }
+  .auth-card { background: var(--white); border-radius: 20px; padding: 48px; max-width: 400px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.3); }
   .auth-card .auth-logo { text-align: center; margin-bottom: 28px; }
   .auth-card .auth-logo h2 { font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 6px; }
   .auth-card .auth-logo p { font-size: 14px; color: var(--gray-text); }
   .auth-field { margin-bottom: 14px; }
   .auth-field label { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
-  .auth-field input {
-    width: 100%; padding: 12px 16px;
-    border: 2px solid var(--gray-border); border-radius: 10px;
-    font-family: 'Inter', system-ui, sans-serif; font-size: 14px;
-    color: var(--charcoal); outline: none; transition: border-color 0.15s;
-  }
+  .auth-field input { width: 100%; padding: 12px 16px; border: 2px solid var(--gray-border); border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--charcoal); outline: none; transition: border-color 0.15s; }
   .auth-field input:focus { border-color: var(--amber); }
-  #authError {
-    display: none; background: #FEF2F2; border: 1px solid #FCA5A5;
-    border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;
-    font-size: 13px; color: #991B1B;
-  }
-  #loginBtn {
-    width: 100%; padding: 14px; background: var(--gradient);
-    color: white; border: none; border-radius: 50px;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    transition: opacity 0.2s; margin-top: 6px;
-  }
+  #authError { display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px; color: #991B1B; }
+  #loginBtn { width: 100%; padding: 14px; background: var(--gradient); color: white; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; margin-top: 6px; }
   #loginBtn:hover:not(:disabled) { opacity: 0.88; }
   #loginBtn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  header {
-    background: var(--charcoal); border-bottom: none;
-    padding: 0 32px; height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; color: white; text-decoration: none; }
+  /* ── HEADER ── */
+  header { background: var(--charcoal); height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .logo { display: flex; align-items: center; gap: 8px; color: white; text-decoration: none; font-size: 18px; font-weight: 800; }
   .header-actions { display: flex; gap: 10px; align-items: center; }
-  .header-user { font-size: 13px; color: rgba(255,255,255,0.85); display: none; }
-  .btn-sm {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700;
-    cursor: pointer; text-decoration: none; border: none;
-    transition: all 0.15s;
-  }
-  .btn-primary { background: linear-gradient(135deg, #FF8514, #FF4D00); color: white; border: 2px solid transparent; }
+  .header-user { font-size: 13px; color: rgba(255,255,255,0.7); display: none; }
+  .btn-sm { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; border: none; transition: all 0.15s; }
+  .btn-primary { background: var(--gradient); color: white; }
   .btn-primary:hover { opacity: 0.88; }
-  .btn-ghost { background: rgba(255,255,255,0.15); color: white; border: 2px solid rgba(255,255,255,0.45); backdrop-filter: blur(4px); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.25); }
-  .btn-logout {
-    background: none; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.4);
-    padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
-    cursor: pointer; display: none; transition: all 0.15s;
-  }
-  .btn-logout:hover { background: rgba(255,255,255,0.15); color: white; }
+  .btn-ghost { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.3); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.22); color: white; }
+  .btn-logout { background: none; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; display: none; transition: all 0.15s; }
+  .btn-logout:hover { background: rgba(255,255,255,0.1); color: white; }
+  .btn-admin-new { display: none; }
 
-  main { max-width: 900px; margin: 0 auto; padding: 48px 20px; }
+  /* ── MAIN ── */
+  main { flex: 1; max-width: 900px; margin: 0 auto; width: 100%; padding: 32px 20px 64px; }
 
-  .section { margin-bottom: 40px; }
-  .section h2 { font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 16px; }
+  /* ── PROFILE HERO ── */
+  .profile-hero {
+    background: var(--charcoal); border-radius: 20px; padding: 28px 32px;
+    display: flex; gap: 20px; align-items: center; margin-bottom: 20px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(39,41,45,0.18);
+  }
+  .profile-hero::after { content: ''; position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; background: rgba(255,133,20,0.1); border-radius: 50%; pointer-events: none; }
+  .profile-avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 26px; color: white; font-weight: 800; flex-shrink: 0; }
+  .profile-info { flex: 1; min-width: 0; }
+  .profile-info h3 { font-size: 18px; font-weight: 800; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .profile-info .member-since { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .role-badge { display: inline-block; padding: 3px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; }
+  .role-badge.admin { background: rgba(255,133,20,0.25); color: #FF8514; }
+  .role-badge.user { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
+  .hero-progress { flex-shrink: 0; text-align: right; min-width: 160px; }
+  .hero-progress .prog-numbers { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
+  .hero-progress .prog-numbers strong { font-size: 22px; font-weight: 800; color: white; }
+  .prog-track { background: rgba(255,255,255,0.12); border-radius: 50px; height: 6px; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--gradient); border-radius: 50px; transition: width 0.6s ease; }
+  .hero-progress .prog-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 5px; }
 
-  .profile-card {
-    background: var(--white); border: 1px solid var(--gray-border);
-    border-radius: 14px; padding: 28px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    display: flex; gap: 20px; align-items: center;
-  }
-  .profile-avatar {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--gradient); display: flex; align-items: center; justify-content: center;
-    font-size: 24px; color: white; font-weight: 800; flex-shrink: 0;
-  }
-  .profile-info h3 { font-size: 18px; font-weight: 700; color: var(--charcoal); }
-  .profile-info p { font-size: 14px; color: var(--gray-text); margin-top: 2px; }
-  .role-badge {
-    display: inline-block; padding: 3px 12px;
-    border-radius: 50px; font-size: 11px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    margin-top: 6px;
-  }
-  .role-badge.admin { background: var(--cream); color: var(--flame); }
-  .role-badge.user { background: #E8E8E8; color: #666; }
+  /* ── LIBRARY CTA ── */
+  .library-cta { background: white; border-radius: 16px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .library-cta p { font-size: 14px; color: var(--gray-text); margin: 0; }
+  .library-cta strong { color: var(--charcoal); }
 
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-  }
-  .stat-card {
-    background: var(--white); border: 1px solid var(--gray-border);
-    border-radius: 14px; padding: 24px; text-align: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  }
-  .stat-value { font-size: 32px; font-weight: 800; color: var(--charcoal); }
-  .stat-label { font-size: 13px; color: var(--gray-text); margin-top: 4px; }
+  /* ── STATS ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-card { background: white; border-radius: 16px; padding: 20px 22px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .stat-value { font-size: 32px; font-weight: 800; color: var(--charcoal); letter-spacing: -0.5px; line-height: 1; }
+  .stat-label { font-size: 12px; color: #AAA; font-weight: 500; margin-top: 4px; }
+  .stat-sub { font-size: 11px; color: #CCC; font-weight: 500; margin-top: 2px; }
 
-  .users-table {
-    width: 100%; border-collapse: separate; border-spacing: 0;
-    background: var(--white); border: 1px solid var(--gray-border);
-    border-radius: 14px; overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  }
-  .users-table th {
-    background: var(--charcoal); color: var(--gold);
-    font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.5px; padding: 12px 16px; text-align: left;
-  }
-  .users-table td {
-    padding: 12px 16px; font-size: 14px;
-    border-top: 1px solid var(--gray-border);
-  }
-  .users-table tr:hover td { background: rgba(255,133,20,0.04); }
-  .role-select {
-    padding: 6px 12px; border: 2px solid var(--gray-border);
-    border-radius: 8px; font-family: 'Inter', system-ui, sans-serif;
-    font-size: 13px; font-weight: 600; color: var(--charcoal);
-    background: var(--white); cursor: pointer; outline: none;
-  }
+  /* ── SECTION ── */
+  .section { margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--charcoal); margin-bottom: 12px; }
+
+  /* ── CERTIFICATES ── */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; }
+  .cert-card { background: white; border-radius: 16px; padding: 22px; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-top: 3px solid var(--amber); }
+  .cert-card .cert-badge { position: absolute; top: 14px; right: 14px; background: #D1FAE5; color: #065F46; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 50px; }
+  .cert-card .cert-icon { font-size: 26px; margin-bottom: 10px; }
+  .cert-card h4 { font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; line-height: 1.3; padding-right: 60px; }
+  .cert-score-row { display: flex; align-items: baseline; gap: 6px; }
+  .cert-card .cert-score { font-size: 28px; font-weight: 800; color: var(--amber); line-height: 1; }
+  .cert-card .cert-score-label { font-size: 12px; color: #aaa; }
+  .cert-card .cert-date { font-size: 11px; color: #bbb; margin-top: 6px; }
+  .cert-card a { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--amber); text-decoration: none; }
+  .cert-card a:hover { color: var(--flame); }
+  .cert-empty { background: white; border-radius: 16px; padding: 32px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .cert-empty p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
+
+  /* ── NEWSLETTER ── */
+  .nl-card { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .nl-card p { font-size: 14px; color: var(--gray-text); margin: 0; flex: 1; min-width: 200px; }
+
+  /* ── ADMIN ── */
+  .admin-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .users-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  .users-table th { background: var(--charcoal); color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; }
+  .users-table td { padding: 11px 16px; font-size: 13.5px; border-top: 1px solid var(--gray-border); color: var(--charcoal); }
+  .users-table tr:hover td { background: #FAFAFA; }
+  .role-select { padding: 5px 10px; border: 1.5px solid var(--gray-border); border-radius: 7px; font-family: 'Inter', system-ui, sans-serif; font-size: 12px; font-weight: 600; color: var(--charcoal); background: white; cursor: pointer; outline: none; }
   .role-select:focus { border-color: var(--amber); }
 
-  .loading { text-align: center; padding: 40px; color: var(--gray-text); }
-
-  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); margin-top: 0; }
-  footer p { font-size: 13px; color: rgba(255,255,255,0.85); }
+  .loading { text-align: center; padding: 40px; color: #aaa; font-size: 14px; }
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.7); }
   footer a { color: white; font-weight: 700; text-decoration: none; }
 
-  /* ── CERTIFICATEN ── */
-  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 16px; margin-top: 12px; }
-  .cert-card {
-    background: var(--white); border: 2px solid #FFD7AD;
-    border-radius: 14px; padding: 24px; position: relative;
-    box-shadow: 0 2px 12px rgba(255,133,20,0.08);
-  }
-  .cert-card .cert-icon { font-size: 28px; margin-bottom: 8px; }
-  .cert-card h4 { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; line-height: 1.3; }
-  .cert-card .cert-score { font-size: 22px; font-weight: 800; color: var(--amber); }
-  .cert-card .cert-date { font-size: 11px; color: #aaa; margin-top: 4px; }
-  .cert-card .cert-badge {
-    position: absolute; top: 16px; right: 16px;
-    background: #D1FAE5; color: #065F46;
-    font-size: 10px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.5px; padding: 2px 8px; border-radius: 50px;
-  }
-  .cert-card a { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--flame); text-decoration: none; }
-  .cert-card a:hover { text-decoration: underline; }
-
-  @media(max-width:600px) {
-    .stats-grid { grid-template-columns: 1fr; }
-    .profile-card { flex-direction: column; text-align: center; }
-    main { padding: 24px 16px; }
-    .users-table { font-size: 13px; }
+  @media(max-width:640px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .profile-hero { flex-wrap: wrap; }
+    .hero-progress { text-align: left; min-width: 100%; }
+    .library-cta { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -190,7 +134,7 @@
 <div id="authOverlay" style="display:none;">
   <div class="auth-card">
     <div class="auth-logo">
-      <img src="/logo.png" alt="Umely" style="height:80px;">
+      <img src="/logo-small.png" alt="Umely" style="height:80px;">
       <h2>Welkom bij Umely</h2>
       <p>Log in om je account te bekijken.</p>
     </div>
@@ -212,52 +156,62 @@
 
 <header>
   <a class="logo" href="/">
-    <img src="/logo.png" alt="Umely" style="height:65px;filter:brightness(0) invert(1);">
+    <img src="/logo-small.png" alt="Umely" style="height:65px;filter:brightness(0) invert(1);">
   </a>
   <div class="header-actions">
     <span class="header-user" id="headerUser"></span>
     <a class="btn-sm btn-ghost" href="/modules.html">Bibliotheek</a>
-    <a class="btn-sm btn-primary" href="/">+ Nieuwe e-learning</a>
+    <a class="btn-sm btn-primary btn-admin-new" id="btnAdminNew" href="/">+ Nieuwe module</a>
     <button class="btn-logout" id="logoutBtn" onclick="logout()">Uitloggen</button>
   </div>
 </header>
 
 <main>
-  <div class="section">
-    <h2>Mijn profiel</h2>
-    <div id="profileCard" class="loading">Laden...</div>
+  <!-- Profiel hero -->
+  <div id="profileCard" class="loading">Laden...</div>
+
+  <!-- Bibliotheek CTA -->
+  <div class="library-cta">
+    <p><strong>Klaar om verder te leren?</strong> Ga naar de bibliotheek en kies een module.</p>
+    <a class="btn-sm btn-primary" href="/modules.html">Naar de bibliotheek &rarr;</a>
   </div>
 
+  <!-- Statistieken -->
+  <div id="statsGrid" class="loading">Laden...</div>
+
+  <!-- Certificaten -->
   <div class="section">
-    <h2>Mijn statistieken</h2>
-    <div id="statsGrid" class="loading">Laden...</div>
+    <div class="section-title">Mijn certificaten</div>
+    <div id="certGrid" class="loading">Laden...</div>
   </div>
 
+  <!-- Nieuwsbrief -->
   <div class="section">
-    <h2>Mijn certificaten</h2>
-    <div id="certGrid">Laden...</div>
+    <div class="section-title">Nieuwsbrief</div>
+    <div id="nlSection" class="loading">Laden...</div>
   </div>
 
-  <div class="section">
-    <h2>Nieuwsbrief</h2>
-    <div id="nlSection">Laden...</div>
-  </div>
-
+  <!-- Admin: gebruikersbeheer -->
   <div class="section" id="adminSection" style="display:none;">
-    <h2>Gebruikersbeheer (admin)</h2>
-    <div id="usersTable" class="loading">Laden...</div>
+    <div class="section-title">Gebruikersbeheer</div>
+    <div class="admin-card">
+      <div id="usersTable" class="loading">Laden...</div>
+    </div>
   </div>
 
+  <!-- Admin: tools -->
   <div class="section" id="adminToolsSection" style="display:none;">
-    <h2>Beheerhulpmiddelen (admin)</h2>
-    <a href="/admin/review" target="_blank" class="btn-sm btn-primary" style="display:inline-flex;">Module review openen</a>
-    <p style="margin-top:10px;font-size:13px;color:var(--gray-text);">Toont alle modules als leesbare broncode op één pagina. Gebruik dit met de Claude Chrome-extensie voor een kwaliteitsbeoordeling.</p>
+    <div class="section-title">Beheerhulpmiddelen</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+      <a href="/admin/review" target="_blank" class="btn-sm btn-primary" style="display:inline-flex;">Module review openen</a>
+      <p style="font-size:13px;color:var(--gray-text);margin:0;">Toont alle modules als broncode — gebruik met de Chrome-extensie voor kwaliteitsbeoordeling.</p>
+    </div>
   </div>
 </main>
 
 <footer>
   <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
-    <img src="/logo.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
+    <img src="/logo-small.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
     <span style="color:rgba(255,255,255,0.5);">|</span>
     <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
   </p>
@@ -395,44 +349,63 @@ async function loadAccount() {
     if (res.status === 401) { showLogin(); return; }
     const { profile, progress } = await res.json();
 
-    // Profiel kaart
+    // Profiel hero
     const initial = (profile.email || '?')[0].toUpperCase();
-    document.getElementById('profileCard').innerHTML = `
-      <div class="profile-card">
-        <div class="profile-avatar">${initial}</div>
-        <div class="profile-info">
-          <h3>${profile.email}</h3>
-          <p>Lid sinds ${new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-          <span class="role-badge ${profile.role}">${profile.role === 'admin' ? 'Admin' : 'Gebruiker'}</span>
-        </div>
-      </div>`;
-
-    // Statistieken
     const started = progress.length;
     const completed = progress.filter(p => p.completed).length;
     const scores = progress.filter(p => p.score_pct > 0).map(p => p.score_pct);
     const avgScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
+    const totalModules = 25;
+    const progPct = Math.round((completed / totalModules) * 100);
 
-    document.getElementById('statsGrid').innerHTML = `
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value">${started}</div>
-          <div class="stat-label">Modules gestart</div>
+    document.getElementById('profileCard').innerHTML = `
+      <div class="profile-hero">
+        <div class="profile-avatar">${initial}</div>
+        <div class="profile-info">
+          <h3>${profile.email}</h3>
+          <div class="member-since">Lid sinds ${new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+          <span class="role-badge ${profile.role}">${profile.role === 'admin' ? 'Admin' : 'Gebruiker'}</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-value">${completed}</div>
-          <div class="stat-label">Modules afgerond</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">${avgScore > 0 ? avgScore + '%' : '-'}</div>
-          <div class="stat-label">Gemiddelde quizscore</div>
+        <div class="hero-progress">
+          <div class="prog-numbers"><strong>${completed}</strong> / ${totalModules}</div>
+          <div class="prog-track"><div class="prog-fill" style="width:${progPct}%"></div></div>
+          <div class="prog-label">modules afgerond</div>
         </div>
       </div>`;
 
-    // Certificaten (alleen afgeronde modules met score >= 70)
+    // Admin: toon nieuwe module knop
+    if (profile.role === 'admin') {
+      document.getElementById('btnAdminNew').style.display = 'inline-flex';
+    }
+
+    // Statistieken
+    document.getElementById('statsGrid').innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Modules gestart</div>
+          <div class="stat-value">${started}</div>
+          <div class="stat-sub">van ${totalModules} beschikbaar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Modules afgerond</div>
+          <div class="stat-value">${completed}</div>
+          <div class="stat-sub">${progPct}% van het totaal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Gemiddelde quizscore</div>
+          <div class="stat-value">${avgScore > 0 ? avgScore + '%' : '—'}</div>
+          <div class="stat-sub">${scores.length > 0 ? scores.length + ' quizzen gemaakt' : 'nog geen quizzen'}</div>
+        </div>
+      </div>`;
+
+    // Certificaten
     const certs = progress.filter(p => p.completed && p.score_pct >= 70);
     if (certs.length === 0) {
-      document.getElementById('certGrid').innerHTML = '<p style="color:#aaa;font-size:14px;">Je hebt nog geen certificaten behaald. Rond een module af met minimaal 70% om een certificaat te verdienen.</p>';
+      document.getElementById('certGrid').innerHTML = `
+        <div class="cert-empty">
+          <p>Je hebt nog geen certificaten behaald. Rond een module af met minimaal 70% om een certificaat te verdienen.</p>
+          <a class="btn-sm btn-primary" href="/modules.html" style="display:inline-flex;">Ga naar de bibliotheek &rarr;</a>
+        </div>`;
     } else {
       document.getElementById('certGrid').innerHTML = `<div class="cert-grid">${certs.map(p => {
         const dateStr = p.completed_at
@@ -444,9 +417,12 @@ async function loadAccount() {
           <div class="cert-badge">Behaald</div>
           <div class="cert-icon">&#127942;</div>
           <h4>${titleCap}</h4>
-          <div class="cert-score">${p.score_pct}%</div>
+          <div class="cert-score-row">
+            <div class="cert-score">${p.score_pct}%</div>
+            <div class="cert-score-label">quizscore</div>
+          </div>
           <div class="cert-date">${dateStr}</div>
-          <a href="/modules/${p.module_slug}" target="_blank">Module openen &#8594;</a>
+          <a href="/modules/${p.module_slug}" target="_blank">Module openen &rarr;</a>
         </div>`;
       }).join('')}</div>`;
     }
@@ -469,16 +445,16 @@ async function loadAccount() {
 function renderNewsletterSection(subscribed) {
   const el = document.getElementById('nlSection');
   if (subscribed) {
-    el.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <p style="font-size:14px;color:var(--gray-text);margin:0;">Je bent aangemeld voor de wekelijkse Umely AI-nieuwsbrief.</p>
-      <button onclick="toggleNewsletter(false)" style="background:none;border:1px solid #ddd;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:#aaa;cursor:pointer;">Afmelden</button>
+    el.innerHTML = `<div class="nl-card">
+      <p>✅ Je bent aangemeld voor de wekelijkse Umely AI-nieuwsbrief.</p>
+      <button onclick="toggleNewsletter(false)" style="background:none;border:1.5px solid #ddd;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:#aaa;cursor:pointer;white-space:nowrap;flex-shrink:0;">Afmelden</button>
     </div>`;
   } else {
-    el.innerHTML = `<p style="font-size:14px;color:var(--gray-text);margin-bottom:14px;">Ontvang wekelijks de Umely AI-nieuwsbrief: de belangrijkste AI-ontwikkelingen en praktische tips.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button onclick="toggleNewsletter(true)" style="padding:11px 24px;background:var(--gradient);color:white;border:none;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;">Aanmelden voor nieuwsbrief</button>
-      </div>
-      <div id="nlAccountMsg" style="font-size:13px;margin-top:10px;display:none;"></div>`;
+    el.innerHTML = `<div class="nl-card">
+      <p>Ontvang wekelijks de Umely AI-nieuwsbrief: de belangrijkste AI-ontwikkelingen en praktische tips voor je werk.</p>
+      <button onclick="toggleNewsletter(true)" class="btn-sm btn-primary" style="white-space:nowrap;flex-shrink:0;">Aanmelden &rarr;</button>
+    </div>
+    <div id="nlAccountMsg" style="font-size:13px;margin-top:8px;display:none;"></div>`;
   }
 }
 

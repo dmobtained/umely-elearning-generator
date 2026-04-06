@@ -109,6 +109,41 @@ Uit `_shared-css.html`:
 - `.sorteer-lijst` / `.sorteer-item` — drag-to-sort
 - `.drag-items` / `.drop-zone` — drag-and-drop
 - `.invul-wrap` / `.invul-input` — invulvak in zin
+- `.visual-block` — wrapper voor inline SVG-illustraties (margin, border-radius, overflow:hidden)
+
+### Visuele illustraties in modules (SVG-mockups)
+
+Gebruik altijd **inline SVG** voor visuele uitbeelding — geen externe afbeeldingen, geen screenshots als bestanden. SVG wordt direct in het HTML-bestand geschreven en werkt altijd, ook als de echte UI van Claude verandert.
+
+**Wanneer een visual toevoegen:**
+- Bij schermen die een interface uitleggen (web-app, desktop-app, Chrome-extensie)
+- Bij architectuurdiagrammen (MCP-flow, Connectors-flow)
+- Bij concepten die beter te begrijpen zijn met een visueel schema dan met tekst
+
+**Hoe een visual plaatsen:**
+```html
+<div class="visual-block">
+  <svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+    <!-- SVG inhoud hier -->
+  </svg>
+</div>
+```
+
+**Regels voor SVG-illustraties:**
+- Altijd `viewBox="0 0 580 [hoogte]"` + `width:100%` zodat het responsive is
+- Gebruik uitsluitend Umely-kleuren: `#27292D` (charcoal), `#FF8514` (amber), `#FFF8F2` (warm wit), `#EAE6E0` (border)
+- Gebruik `font-family="Arial, sans-serif"` (geen Google Fonts in SVG)
+- Mockups van UI: toon alleen de essentiële elementen die in de module worden uitgelegd — geen decoratieve details
+- Architectuurdiagrammen: gebruik blokken + pijlen, label elk blok kort, voeg een beschrijvende voetnoot toe
+- SVG staat ALTIJD in een `.visual-block` div
+- Positie: direct na de uitlegparagraaf, vóór de tip-box of kennischeck
+
+**Huidige visuals per module:**
+- `elearning-a2-ecosysteem.html` — web-app mockup (module-1-1), desktop-app mockup (module-2-1), Chrome-extensie + zijpaneel (module-3-1)
+- `elearning-c1-webapp.html` — web-app interface met genummerde callouts (module-1-1)
+- `elearning-c3-chrome.html` — Chrome-extensie browser + zijpaneel (module-1)
+- `elearning-e1-mcp.html` — MCP architectuurdiagram Jij→Claude→MCP→tools (module-1-1)
+- `elearning-e2-connectors.html` — Connectors flow Jij→Claude→Connector→services (module-1)
 
 ### Beschikbare JS-functies
 

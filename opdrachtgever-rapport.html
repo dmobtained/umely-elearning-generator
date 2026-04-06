@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uitgevoerd werk — Umely E-learning</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --charcoal: #27292D;
+    --amber: #FF8514;
+    --flame: #FF4D00;
+    --bg: #FFF8F2;
+    --card: #ffffff;
+    --border: #EAE6E0;
+    --muted: #888;
+    --green: #1A7A4A;
+    --green-bg: #EEF7F1;
+    --blue: #1A5CA8;
+    --blue-bg: #EEF3FC;
+    --orange: #C95800;
+    --orange-bg: #FEF3EA;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--charcoal);
+    padding: 48px 20px 80px;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 820px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    background: var(--charcoal);
+    border-radius: 16px;
+    padding: 40px 48px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .header-left p {
+    font-size: 14px;
+    color: #aaa;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 1px;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .item-dot.green { background: var(--green); }
+  .item-dot.blue { background: var(--blue); }
+
+  .item-label {
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    color: var(--charcoal);
+    background: #F0EEE9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .item-label.green { background: var(--green-bg); color: var(--green); }
+  .item-label.blue { background: var(--blue-bg); color: var(--blue); }
+  .item-label.orange { background: var(--orange-bg); color: var(--orange); }
+
+  .item-text {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.55;
+  }
+
+  .item-text strong { color: var(--charcoal); }
+
+  /* Table variant */
+  .table-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    background: var(--charcoal);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 16px;
+    letter-spacing: 0.04em;
+  }
+
+  td {
+    font-size: 13px;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #444;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #FAFAF8; }
+
+  td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .tag.fix { background: var(--orange-bg); color: var(--orange); }
+  .tag.new { background: var(--green-bg); color: var(--green); }
+  .tag.infra { background: var(--blue-bg); color: var(--blue); }
+
+  /* Footer */
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .header { flex-direction: column; gap: 16px; text-align: center; }
+    .header-right { text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Uitgevoerd werk</h1>
+      <p>Umely E-learning platform &nbsp;·&nbsp; 6 april 2026</p>
+    </div>
+    <div class="header-right">
+      <div class="logo">UMELY</div>
+      <div class="logo-sub">E-learning</div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num">25</div>
+      <div class="stat-label">Modules geüpload</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">44</div>
+      <div class="stat-label">Factcheck claims verwerkt</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Modules gecorrigeerd</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Tegenstrijdigheden opgelost</div>
+    </div>
+  </div>
+
+  <!-- 1. UI Redesign -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🖥</div>
+      <div class="section-title">Webapp UI — modulebiblioteek</div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <div class="item-dot green"></div>
+        <span class="item-label green">Nieuw</span>
+        <div class="item-text"><strong>Volledige redesign van modules.html</strong> — nieuwe bibliotheek-interface met sidebar-navigatie, categorieën (A t/m I) en accordion-structuur per categorie</div>
+      </div>
+      <div class="item">
+        <div class="item-dot green"></div>
+        <span class="item-label green">Nieuw</span>
+        <div class="item-text"><strong>Voortgangsbalk en statistieken</strong> — gebruiker ziet hoeveel modules voltooid zijn</div>
+      </div>
+      <div class="item">
+        <div class="item-dot green"></div>
+        <span class="item-label green">Nieuw</span>
+        <div class="item-text"><strong>"Ga verder"-kaart</strong> — de laatst bekeken module direct hervatten vanuit het dashboard</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>upload-modules.js</strong> — bug met dubbele datumstempel-slugs opgelost; altijd de nieuwste versie per module geüpload</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Inhoudelijke fixes -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">✏️</div>
+      <div class="section-title">Inhoudelijke fixes — modules</div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px">Module</th>
+            <th>Probleem</th>
+            <th style="width:90px">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>C2</td><td>HTML-bug: aanhalingstekens in knoptekst veroorzaakten render-fout</td><td><span class="tag fix">Fix</span></td></tr>
+          <tr><td>C7</td><td>Dubbele zin "Een A4 is genoeg" op twee schermen; KC-feedback uitgebreid</td><td><span class="tag fix">Fix</span></td></tr>
+          <tr><td>D1</td><td>Internettoegangsclaim in quiz zonder voorbehoud "indien ingeschakeld"</td><td><span class="tag fix">Fix</span></td></tr>
+          <tr><td>E1</td><td>"50+ connectoren" vervangen door tijdloze formulering "tientallen"</td><td><span class="tag fix">Fix</span></td></tr>
+          <tr><td>E1</td><td>Verwijzing naar Umely als implementatiepartner verwijderd</td><td><span class="tag fix">Fix</span></td></tr>
+          <tr><td>E6</td><td>Spelfout: "financiele" gecorrigeerd naar "financiële"</td><td><span class="tag fix">Fix</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. Tegenstrijdigheden -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">⚠️</div>
+      <div class="section-title">Interne tegenstrijdigheden opgelost</div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:110px">Modules</th>
+            <th>Probleem</th>
+            <th>Oplossing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>B1 vs C7</td>
+            <td>B1 zei "DPA alleen via Enterprise"; C7 zei "Teams heeft ook DPA"</td>
+            <td>Beide modules zeggen nu: Teams heeft standaard DPA inbegrepen</td>
+          </tr>
+          <tr>
+            <td>B1 vs C6</td>
+            <td>B1 zei "profielfoto rechtsonder"; C6 zei "rechtsboven"</td>
+            <td>Beide modules zeggen nu: rechtsboven</td>
+          </tr>
+          <tr>
+            <td>A2 vs C5</td>
+            <td>A2 zei "Claude werkt in Excel via M365"; C5 zei "geen directe integratie"</td>
+            <td>Beide modules beschrijven nu de M365 Copilot-integratie correct met EU-voorbehoud</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. Factcheck -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🔍</div>
+      <div class="section-title">Factcheck — 44 claims verwerkt</div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Kritiek</span>
+        <div class="item-text"><strong>C6 — trainingsinstelling gecorrigeerd:</strong> stond als "standaard aan bij gratis account" terwijl het een opt-in is (standaard UIT)</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>A1 — oprichtingsverhaal genuanceerd:</strong> motivatie vertrek bij OpenAI nu als "volgens publieke uitspraken" geformuleerd, niet als hard feit</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>A1 — live-informatieclaim:</strong> caveat toegevoegd dat mogelijkheden rond web-toegang veranderen per abonnement</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>A2 — Chrome-extensie:</strong> "werkt alleen in Chrome" voorzien van caveat over toekomstige browser-ondersteuning</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>B1 — 30-dagenclausule:</strong> bewaartermijn verwijst nu naar anthropic.com/privacy i.p.v. vast getal</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>C1 — inlogopties:</strong> Google/Apple-login voorzien van caveat over regionale beschikbaarheid</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>C3 — extensie privacyclaim:</strong> absolute formulering "gaat naar servers" verzacht naar bewuste keuze bij actief gebruik</div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <span class="item-label fix">Fix</span>
+        <div class="item-text"><strong>E2 — UI-pad Connectors:</strong> "puzzelstukje-icoon" voorzien van caveat over interface-updates</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Infrastructuur -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">⚙️</div>
+      <div class="section-title">Infrastructuur & techniek</div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <div class="item-dot blue"></div>
+        <span class="item-label blue">Infra</span>
+        <div class="item-text"><strong>Supabase schema-migratie:</strong> overgestapt van <code>public</code> naar <code>elearning</code> schema voor correcte datascheiding</div>
+      </div>
+      <div class="item">
+        <div class="item-dot blue"></div>
+        <span class="item-label blue">Infra</span>
+        <div class="item-text"><strong>upload-modules.js volledig herschreven:</strong> upsert op slug, geen dubbele rijen, altijd nieuwste versie actief</div>
+      </div>
+      <div class="item">
+        <div class="item-dot green"></div>
+        <span class="item-label green">Nieuw</span>
+        <div class="item-text"><strong>E-mailtemplate in Supabase:</strong> verificatiemail in Umely-huisstijl geplakt in Auth → Email Templates</div>
+      </div>
+      <div class="item">
+        <div class="item-dot green"></div>
+        <span class="item-label green">Nieuw</span>
+        <div class="item-text"><strong>Admin-beveiliging:</strong> generatiepagina afgeschermd — alleen admins kunnen modules genereren, gebruikers alleen consumeren</div>
+      </div>
+      <div class="item">
+        <div class="item-dot green"></div>
+        <span class="item-label green">Nieuw</span>
+        <div class="item-text"><strong>25 modules live</strong> — alle modules gebouwd en geüpload naar Supabase (25/25 geslaagd)</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Umely E-learning &nbsp;·&nbsp; Rapport gegenereerd 6 april 2026
+  </footer>
+
+</div>
+</body>
+</html>

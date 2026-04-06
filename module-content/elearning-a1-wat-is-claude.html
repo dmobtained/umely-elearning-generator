@@ -90,7 +90,7 @@
     <h2>Wat is Anthropic?</h2>
   </div>
   <div class="content-card">
-    <p>Anthropic is een Amerikaans AI-bedrijf, opgericht in 2021 door Dario Amodei, Daniela Amodei en een groep voormalige OpenAI-medewerkers. Ze stapten op bij OpenAI omdat ze zich zorgen maakten over de richting die het bedrijf op ging, met name rond veiligheid en het tempo van ontwikkeling.</p>
+    <p>Anthropic is een Amerikaans AI-bedrijf, opgericht in 2021 door Dario Amodei, Daniela Amodei en een groep voormalige OpenAI-medewerkers. Ze stapten op bij OpenAI — volgens publieke uitspraken van de oprichters mede vanwege zorgen over veiligheid en het tempo van ontwikkeling bij hun vorige werkgever.</p>
     <p>Anthropic's centrale belofte is: AI bouwen dat betrouwbaar, eerlijk en veilig is. Dat klinkt als marketing, maar het heeft concrete gevolgen voor hoe Claude zich gedraagt. Claude geeft vaker toe dat hij iets niet weet. Hij weigert bepaalde verzoeken sneller dan andere tools. Hij is minder enthousiast over zijn eigen antwoorden dan je misschien verwacht.</p>
     <p>Anthropic verdient geld op twee manieren: via consumentenabonnementen (claude.ai) en via de API, waarmee bedrijven Claude inbouwen in eigen software. Veel tools die je dagelijks gebruikt, draaien mogelijk al op Claude onder de motorkap.</p>
   </div>
@@ -168,7 +168,7 @@
     <p class="kc-vraag">Anthropic werd opgericht door mensen die eerder bij een ander AI-bedrijf werkten. Welk bedrijf was dat?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Google DeepMind is een apart bedrijf, opgericht door Britse onderzoekers. Anthropic is voortgekomen uit OpenAI.')">Google DeepMind</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Correct. Dario Amodei en anderen verlieten OpenAI in 2021 en richtten Anthropic op, mede vanwege zorgen over de veiligheidsaanpak van OpenAI.')">OpenAI</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Correct. Dario Amodei en anderen verlieten OpenAI in 2021 en richtten Anthropic op. Volgens publieke uitspraken van de oprichters speelden zorgen over veiligheid en ontwikkelingstempo een rol.')">OpenAI</button>
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Meta AI is de AI-tak van Meta (Facebook). Dat heeft geen directe link met de oprichting van Anthropic.')">Meta AI</button>
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Microsoft heeft wel geïnvesteerd in OpenAI, maar is zelf geen AI-onderzoeksbedrijf van waaruit Anthropic is voortgekomen.')">Microsoft Research</button>
     </div>
@@ -461,13 +461,35 @@
   </div>
   <div class="content-card">
     <p><strong>Hoe is Claude getraind?</strong> Op een enorme hoeveelheid tekst: boeken, websites, artikelen, code, wetenschappelijke papers. Door die training heeft het model statistisch geleerd welke woorden, zinnen en redeneringen logisch op elkaar volgen.</p>
-    <p><strong>Wat is het context window?</strong> Wanneer jij een bericht stuurt, verwerkt Claude dat bericht samen met de volledige gespreksgeschiedenis binnen het context window. Dat is het werkgeheugen van het model: alles wat daarbinnen staat, ziet Claude. Alles buiten dat venster bestaat voor het model niet meer.</p>
+    <p><strong>Wat is het context window?</strong> Wanneer jij een bericht stuurt, verwerkt Claude dat bericht samen met de volledige gespreksgeschiedenis binnen het context window. Dat is het werkgeheugen van het model: alles wat daarbinnen staat, ziet Claude. Alles buiten dat venster bestaat voor het model niet meer. Claude ondersteunt momenteel grote context windows — controleer de actuele specs op <strong>docs.anthropic.com/models</strong>, want dit groeit per modelgeneratie.</p>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;margin:0 0 1.5rem;">
-    <img src="https://dsxyygvvtwnsoiubrwxc.supabase.co/storage/v1/object/public/module-images/a1/context-window.jpg" alt="Context window metafoor" style="width:100%;border-radius:10px;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.12);">
+    <svg viewBox="0 0 260 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
+      <rect width="260" height="230" rx="10" fill="#F7F4F0"/>
+      <!-- Faded text above window (buiten venster) -->
+      <rect x="20" y="14" width="220" height="6" rx="3" fill="rgba(39,41,45,0.1)"/>
+      <rect x="20" y="26" width="185" height="6" rx="3" fill="rgba(39,41,45,0.1)"/>
+      <rect x="20" y="38" width="205" height="6" rx="3" fill="rgba(39,41,45,0.1)"/>
+      <text x="130" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="rgba(39,41,45,0.3)" font-style="italic">buiten het venster — onzichtbaar</text>
+      <!-- Context window frame -->
+      <rect x="10" y="66" width="240" height="112" rx="8" fill="white" stroke="#FF8514" stroke-width="2.5"/>
+      <text x="130" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF8514" font-weight="bold">Context Window</text>
+      <text x="130" y="99" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#888">alles wat Claude op dit moment 'ziet'</text>
+      <!-- Text lines inside window (zichtbaar) -->
+      <rect x="24" y="108" width="212" height="7" rx="3" fill="#27292D" opacity="0.75"/>
+      <rect x="24" y="121" width="178" height="7" rx="3" fill="#27292D" opacity="0.75"/>
+      <rect x="24" y="134" width="200" height="7" rx="3" fill="#27292D" opacity="0.75"/>
+      <rect x="24" y="147" width="160" height="7" rx="3" fill="#27292D" opacity="0.75"/>
+      <rect x="24" y="160" width="190" height="7" rx="3" fill="#27292D" opacity="0.75"/>
+      <!-- Faded text below window -->
+      <text x="130" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="rgba(39,41,45,0.3)" font-style="italic">buiten het venster — onzichtbaar</text>
+      <rect x="20" y="198" width="220" height="6" rx="3" fill="rgba(39,41,45,0.1)"/>
+      <rect x="20" y="210" width="190" height="6" rx="3" fill="rgba(39,41,45,0.1)"/>
+      <rect x="20" y="222" width="205" height="6" rx="3" fill="rgba(39,41,45,0.1)"/>
+    </svg>
     <div>
       <h4 style="margin-top:0;">Het context window in beeld</h4>
-      <p>Het kader toont alleen het deel van de papieren dat erin valt. Wat erbuiten ligt, is er niet voor het model. Elk nieuw gesprek begint blanco — Claude onthoudt niets van eerdere sessies, tenzij je dat expliciet inschakelt via Projects.</p>
+      <p>Het kader toont alleen het deel van de tekst dat erin valt. Wat erbuiten ligt, is er niet voor het model. Elk nieuw gesprek begint blanco — Claude onthoudt niets van eerdere sessies, tenzij je dat expliciet inschakelt via Projects.</p>
     </div>
   </div>
   <div class="processtroom">
@@ -504,7 +526,31 @@
       <h4 style="margin-top:0;">Zelfverzekerd, maar fout</h4>
       <p>Claude "weet" niets in de betekenis die wij aan dat woord geven. Het model voorspelt tekst. Een mens die iets niet weet, zegt dat meestal. Claude genereert een antwoord dat <em>klinkt</em> als een correct antwoord, ook als de onderliggende informatie ontbreekt of onjuist is. Dit heet een hallucination.</p>
     </div>
-    <img src="https://dsxyygvvtwnsoiubrwxc.supabase.co/storage/v1/object/public/module-images/a1/hallucination.jpg" alt="Zakelijk rapport met rode pen-annotaties" style="width:100%;border-radius:10px;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.12);">
+    <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
+      <rect width="260" height="220" rx="10" fill="#F7F4F0"/>
+      <!-- Document -->
+      <rect x="30" y="16" width="200" height="140" rx="8" fill="white" stroke="#EAE6E0" stroke-width="1.5"/>
+      <!-- Document header -->
+      <rect x="30" y="16" width="200" height="28" rx="8" fill="#27292D"/>
+      <rect x="30" y="36" width="200" height="8" fill="#27292D"/>
+      <text x="130" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">Kwartaalrapport Q3</text>
+      <!-- Text lines -->
+      <rect x="46" y="56" width="168" height="6" rx="2" fill="#e0e0e0"/>
+      <rect x="46" y="68" width="140" height="6" rx="2" fill="#e0e0e0"/>
+      <!-- Hallucinated fact with red underline -->
+      <text x="46" y="92" font-family="Arial, sans-serif" font-size="10" fill="#27292D">Omzet: <tspan font-weight="bold">€ 4,2 miljard</tspan></text>
+      <line x1="46" y1="95" x2="200" y2="95" stroke="#ef4444" stroke-width="2"/>
+      <rect x="46" y="104" width="155" height="6" rx="2" fill="#e0e0e0"/>
+      <rect x="46" y="116" width="130" height="6" rx="2" fill="#e0e0e0"/>
+      <!-- Red X badge -->
+      <circle cx="210" cy="88" r="14" fill="#ef4444"/>
+      <text x="210" y="93" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">✕</text>
+      <!-- Correction label -->
+      <rect x="30" y="168" width="200" height="38" rx="7" fill="rgba(239,68,68,0.08)" stroke="#ef4444" stroke-width="1"/>
+      <text x="130" y="183" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#ef4444" font-weight="bold">Werkelijk: € 3,1 miljard</text>
+      <text x="130" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#888">Claude heeft dit verzonnen — verifieer</text>
+      <text x="130" y="211" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#888">altijd specifieke cijfers</text>
+    </svg>
   </div>
   <div id="scenario-4" class="scenario-blok">
     <div class="scenario-label">Scenario</div>
@@ -599,7 +645,7 @@
         <div class="stap-nummer">1</div>
         <div class="stap-content">
           <h4>Geen internettoegang (standaard)</h4>
-          <p>Claude werkt vanuit zijn trainingsdata, niet vanuit live informatie. Actuele nieuwtjes, prijzen, wetgeving of recente studies: Claude kan die niet ophalen tenzij je ze zelf meestuurt of een tool zoals de zoekfunctie actief is.</p>
+          <p>Claude werkt standaard vanuit zijn trainingsdata, niet vanuit live informatie. Actuele nieuwtjes, prijzen, wetgeving of recente studies: Claude kan die niet ophalen tenzij je ze zelf meestuurt of een zoektool actief is. Controleer welke tools beschikbaar zijn in jouw abonnement — de mogelijkheden rond live informatie veranderen.</p>
         </div>
       </div>
       <div class="stap-item">

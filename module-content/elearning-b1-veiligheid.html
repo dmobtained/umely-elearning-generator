@@ -37,12 +37,12 @@
   </div>
   <div class="content-card">
     <p>Elke keer dat je iets intypt in Claude.ai, vertrekt die tekst naar servers van Anthropic in de Verenigde Staten. Dat is niet anders dan bij andere webdiensten zoals Gmail of Google Translate, maar het is wel iets waar je bewust van moet zijn.</p>
-    <p>Bij een <strong>gratis of Pro-account</strong> kunnen je gesprekken door Anthropic worden gebruikt om het model te verbeteren, tenzij je dit zelf uitschakelt. Dat doe je via Instellingen &gt; Privacy en zet de optie voor modeltraining uit.</p>
-    <p>De gesprekken worden doorgaans 30 dagen bewaard voor veiligheidsdoeleinden, ook als je de training uitschakelt. Verwijder je een gesprek zelf, dan wordt het eerder gewist.</p>
+    <p>Voor <strong>Free, Pro en Max</strong> geldt een opt-in model: gesprekken worden alleen voor modelverbetering gebruikt als jij dit actief toestaat via Instellingen &gt; Privacy. Wie niet actief opt-in gaat, valt op de standaard bewaartermijn van 30 dagen zonder trainingsgebruik. Voor <strong>Teams, Enterprise en API</strong> traint Anthropic standaard nooit op gesprekken — dit is contractueel vastgelegd.</p>
+    <p>Gesprekken worden standaard 30 dagen bewaard voor veiligheidsdoeleinden. Controleer de actuele bewaartermijn op <strong>anthropic.com/privacy</strong>, want dit beleid kan wijzigen. Verwijder je een gesprek zelf, dan wordt het eerder gewist.</p>
   </div>
   <div class="tip-box">
     <div class="tip-box-label info">Let op</div>
-    <p>Het uitschakelen van trainingsdata geldt alleen voor toekomstige gesprekken. Gesprekken die al zijn verstuurd, zijn al verwerkt. Schakel dit dus in voordat je gevoelige informatie bespreekt.</p>
+    <p>Modeltraining is een opt-in keuze — het staat niet automatisch aan. Je beheert de instelling via claude.ai/settings/data-privacy-controls. Je kunt de keuze op elk moment wijzigen.</p>
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
@@ -56,35 +56,56 @@
     <div class="module-num">Onderdeel 1 van 4</div>
     <h2>Gegevensstroom: wat gebeurt er precies?</h2>
   </div>
-  <div class="processtroom">
-    <div class="proces-blok">
-      <h4>Jij typt</h4>
-      <p>Je voert tekst in het invoerveld in via de browser.</p>
-    </div>
-    <div class="proces-pijl">&#9658;</div>
-    <div class="proces-blok">
-      <h4>Verzenden</h4>
-      <p>De tekst wordt versleuteld verstuurd naar Anthropic-servers in de VS.</p>
-    </div>
-    <div class="proces-pijl">&#9658;</div>
-    <div class="proces-blok">
-      <h4>Verwerking</h4>
-      <p>Het model genereert een antwoord op basis van jouw invoer.</p>
-    </div>
-    <div class="proces-pijl">&#9658;</div>
-    <div class="proces-blok">
-      <h4>Opslag</h4>
-      <p>Gesprek bewaard in geschiedenis (standaard 30 dagen bij gratis/Pro).</p>
-    </div>
-    <div class="proces-pijl">&#9658;</div>
-    <div class="proces-blok">
-      <h4>Training?</h4>
-      <p>Mogelijk gebruikt voor modelverbetering, tenzij je dit uitschakelt in de privacy-instellingen.</p>
-    </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
+      <rect width="580" height="200" rx="10" fill="#F7F4F0"/>
+      <text x="290" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#888" font-weight="bold">Wat gebeurt er met jouw tekst?</text>
+      <!-- Step 1: Jij typt -->
+      <rect x="12" y="36" width="88" height="80" rx="8" fill="#27292D"/>
+      <text x="56" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="18">💻</text>
+      <text x="56" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">Jij typt</text>
+      <text x="56" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.55)">in de browser</text>
+      <!-- Arrow -->
+      <line x1="102" y1="76" x2="118" y2="76" stroke="#FF8514" stroke-width="2"/>
+      <polygon points="118,71 128,76 118,81" fill="#FF8514"/>
+      <!-- Step 2: Versleuteld verstuurd -->
+      <rect x="130" y="36" width="88" height="80" rx="8" fill="#FF8514"/>
+      <text x="174" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="18">🔒</text>
+      <text x="174" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">Versleuteld</text>
+      <text x="174" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.8)">naar servers VS</text>
+      <!-- Arrow -->
+      <line x1="220" y1="76" x2="236" y2="76" stroke="#FF8514" stroke-width="2"/>
+      <polygon points="236,71 246,76 236,81" fill="#FF8514"/>
+      <!-- Step 3: Verwerking -->
+      <rect x="248" y="36" width="88" height="80" rx="8" fill="#27292D"/>
+      <text x="292" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="18">⚙️</text>
+      <text x="292" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">Verwerking</text>
+      <text x="292" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.55)">model genereert antwoord</text>
+      <!-- Arrow -->
+      <line x1="338" y1="76" x2="354" y2="76" stroke="#FF8514" stroke-width="2"/>
+      <polygon points="354,71 364,76 354,81" fill="#FF8514"/>
+      <!-- Step 4: Opslag -->
+      <rect x="366" y="36" width="88" height="80" rx="8" fill="#27292D"/>
+      <text x="410" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="18">🗄️</text>
+      <text x="410" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">Opslag</text>
+      <text x="410" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.55)">gesprek bewaard</text>
+      <!-- Arrow -->
+      <line x1="456" y1="76" x2="472" y2="76" stroke="#aaa" stroke-width="2" stroke-dasharray="4,3"/>
+      <polygon points="472,71 482,76 472,81" fill="#aaa"/>
+      <!-- Step 5: Training? (opt-in) -->
+      <rect x="484" y="36" width="88" height="80" rx="8" fill="#EAE6E0" stroke="#aaa" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="528" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="18">🎓</text>
+      <text x="528" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#555" font-weight="bold">Training?</text>
+      <text x="528" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#888">opt-in — staat uit</text>
+      <!-- Bottom note -->
+      <text x="290" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#888">Stap 5 (training) is standaard uitgeschakeld. Jij zet dit aan via claude.ai/settings/data-privacy-controls.</text>
+      <rect x="484" y="154" width="88" height="20" rx="5" fill="rgba(255,133,20,0.12)" stroke="#FF8514" stroke-width="1"/>
+      <text x="528" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" font-weight="bold">alleen bij opt-in</text>
+    </svg>
   </div>
   <div class="tip-box">
     <div class="tip-box-label waarschuwing">Belangrijk</div>
-    <p>Omdat de servers in de VS staan, geldt de Amerikaanse wetgeving. Dit is een extra reden om voorzichtig te zijn met persoonsgegevens van Europese burgers.</p>
+    <p>Dataopslag vindt standaard plaats in de VS, maar verkeer wordt gerouteerd via meerdere regio's (VS, Europa, Azië, Australië). Voor commerciële klanten (Teams/Enterprise) bieden Standard Contractual Clauses in de DPA aanvullende Europese privacybescherming. Het is dus niet zo dat uitsluitend Amerikaanse wetgeving geldt — voor zakelijke klanten zijn er aanvullende Europese waarborgen.</p>
   </div>
   <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-1-3')">Volgende</button></div>
 </div>
@@ -135,8 +156,8 @@
   </div>
   <div class="content-card">
     <p>Voor structureel gebruik van Claude met gevoelige of zakelijke gegevens is een zakelijk abonnement noodzakelijk. Anthropic biedt twee zakelijke varianten: <strong>Teams</strong> en <strong>Enterprise</strong>.</p>
-    <p>Bij het <strong>Teams-abonnement</strong> worden gesprekken standaard niet gebruikt voor modeltraining. Dat is een wezenlijk verschil met de gratis versie, waar je dat zelf moet uitschakelen.</p>
-    <p>Het <strong>Teams-abonnement</strong> biedt al een standaard verwerkersovereenkomst (DPA) en gesprekken worden niet voor training gebruikt. Het <strong>Enterprise-abonnement</strong> voegt aanvullende beveiligingsopties toe: Single Sign-On via SAML, uitgebreide auditlogs en betere beheermogelijkheden.</p>
+    <p>Bij het <strong>Teams-abonnement</strong> worden gesprekken nooit voor modeltraining gebruikt — dat is contractueel vastgelegd. Voor Free, Pro en Max geldt een opt-in: de instelling staat standaard UIT, en jij kiest zelf of je meedoet.</p>
+    <p>Het <strong>Teams-abonnement</strong> biedt een verwerkersovereenkomst (DPA) die automatisch is opgenomen in de Commercial Terms — wie die accepteert, heeft de DPA. Gesprekken worden voor Teams, Enterprise en API nooit voor training gebruikt. Het <strong>Enterprise-abonnement</strong> voegt aanvullende beveiligingsopties toe: SSO via SAML, auditlogs en betere beheermogelijkheden. Zie <strong>anthropic.com/legal/data-processing-addendum</strong> voor de actuele DPA-tekst.</p>
   </div>
   <div class="tip-box">
     <div class="tip-box-label info">Wat is de AVG?</div>
@@ -387,7 +408,7 @@
     <p class="scenario-tekst">Een directeur vraagt zijn assistent om Claude te gebruiken voor een vertrouwelijk strategiedocument. Na afloop maakt de directeur zich zorgen: "Staat dit document nu ergens opgeslagen bij Anthropic? Kan een medewerker het terugvinden?" Wat is het juiste antwoord?</p>
     <div class="scenario-keuzes">
       <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Dat klopt niet. Claude slaat gesprekken niet op in een doorzoekbaar archief voor anderen. Medewerkers kunnen elkaars gesprekken niet inzien via Claude.ai.')">Ja, alle gesprekken zijn inzichtelijk voor alle medewerkers in de organisatie</button>
-      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Dat klopt niet volledig. Anthropic bewaart gesprekken tijdelijk op de servers (standaard 30 dagen), tenzij ze worden verwijderd. De inhoud is dus niet volledig weg na afsluiting.')">Nee, Claude slaat helemaal niets op en de tekst verdwijnt direct</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Dat klopt niet volledig. Anthropic bewaart gesprekken tijdelijk op de servers. De actuele bewaartermijn staat op anthropic.com/privacy. De inhoud is dus niet volledig weg na afsluiting.')">Nee, Claude slaat helemaal niets op en de tekst verdwijnt direct</button>
       <button class="scenario-keuze" onclick="checkScenario(4, this, true, 'Goed antwoord. Gesprekken zijn gekoppeld aan de account van de gebruiker en alleen zichtbaar voor die persoon. Anthropic bewaart ze tijdelijk op servers. Bij een gratis of Pro-account kan de inhoud theoretisch voor training worden gebruikt, tenzij uitgeschakeld. Voor structureel gebruik van vertrouwelijke strategiedocumenten is een zakelijk abonnement beter.')">Het gesprek is alleen zichtbaar voor de assistent zelf. Anthropic bewaart het tijdelijk, maar andere medewerkers zien het niet. Voor strategische documenten is een zakelijk abonnement beter</button>
     </div>
     <div id="scenario-feedback-4" class="scenario-feedback"></div>
@@ -426,15 +447,15 @@
     "uitleg": "Anthropic is een Amerikaans bedrijf met servers in de VS. Alle ingevoerde teksten worden daar verwerkt. Dit is relevant voor je privacyafwegingen, met name voor Europese persoonsgegevens."
   },
   {
-    "vraag": "Hoe schakel je uit dat jouw gesprekken worden gebruikt voor het trainen van het model?",
+    "vraag": "Hoe werkt modeltraining voor Free, Pro en Max accounts?",
     "opties": [
-      "Dat kan niet, dat is altijd ingeschakeld",
-      "Door je account te verwijderen na elk gesprek",
-      "Via Instellingen > Privacy in je Claude-account",
-      "Door een betaald abonnement te nemen"
+      "Training staat standaard aan en je moet het uitschakelen",
+      "Training is opt-in: de instelling staat standaard uit en jij zet het zelf aan als je wilt meedoen",
+      "Je hebt geen controle over de trainingsinstelling",
+      "Alleen bij een Enterprise-account kun je de instelling beheren"
     ],
-    "correct": 2,
-    "uitleg": "Je kunt trainingsdata uitschakelen via de privacy-instellingen in je account. Ga naar je profielpagina en zoek de optie onder Privacy. Let op: dit geldt alleen voor toekomstige gesprekken."
+    "correct": 1,
+    "uitleg": "Modeltraining is opt-in voor alle consumentenplannen (Free, Pro, Max). De instelling staat standaard UIT — jij kiest via claude.ai/settings/data-privacy-controls of je gesprekken gebruikt mogen worden. Voor Teams, Enterprise en API traint Anthropic nooit op gesprekken."
   },
   {
     "vraag": "Welk abonnement is vereist voor structureel gebruik van Claude met persoonsgegevens van klanten?",
@@ -445,7 +466,7 @@
       "Elk abonnement is voldoende"
     ],
     "correct": 2,
-    "uitleg": "Voor structureel gebruik met persoonsgegevens heb je minimaal Teams nodig, maar bij gevoelige data is Enterprise met verwerkersovereenkomst vereist. Dit is een wettelijke verplichting onder de AVG."
+    "uitleg": "Voor structureel gebruik met persoonsgegevens heb je minimaal Teams nodig — dat biedt al een standaard verwerkersovereenkomst (DPA). Enterprise voegt aanvullende beveiligingsopties toe (SSO, auditlogs) voor grotere organisaties met strengere eisen. Dit is een wettelijke verplichting onder de AVG."
   },
   {
     "vraag": "Wat is jouw rol onder de AVG als je klantgegevens invoert in Claude?",

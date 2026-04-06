@@ -34,6 +34,46 @@
     <p>MCP staat voor Model Context Protocol. Het is een standaard waarmee Claude verbinding maakt met externe tools en systemen. Zonder MCP werkt Claude alleen met de informatie die jij typt in het gespreksvenster. Met MCP kan Claude informatie ophalen uit, en schrijven naar, systemen die je dagelijks gebruikt.</p>
     <p>Simpel gezegd: MCP is de brug tussen Claude en de rest van je digitale werkomgeving.</p>
   </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
+      <rect width="580" height="200" rx="10" fill="#F7F4F0"/>
+      <!-- Person -->
+      <circle cx="62" cy="72" r="22" fill="#27292D"/>
+      <text x="62" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="white">👤</text>
+      <text x="62" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="bold">Jij</text>
+      <text x="62" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#888">geeft opdracht</text>
+      <!-- Arrow 1 -->
+      <line x1="96" y1="72" x2="138" y2="72" stroke="#FF8514" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="138,66 150,72 138,78" fill="#FF8514"/>
+      <!-- Claude box -->
+      <rect x="154" y="46" width="96" height="52" rx="9" fill="#27292D"/>
+      <text x="202" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">Claude</text>
+      <text x="202" y="84" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.6)">verwerkt</text>
+      <text x="202" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="bold">Claude</text>
+      <text x="202" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#888">begrijpt de taak</text>
+      <!-- Arrow 2 -->
+      <line x1="252" y1="72" x2="294" y2="72" stroke="#FF8514" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="294,66 306,72 294,78" fill="#FF8514"/>
+      <!-- MCP box -->
+      <rect x="308" y="46" width="96" height="52" rx="9" fill="#FF8514"/>
+      <text x="356" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">MCP</text>
+      <text x="356" y="84" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.8)">de brug</text>
+      <text x="356" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="bold">MCP</text>
+      <text x="356" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#888">verzorgt verbinding</text>
+      <!-- Arrow 3 -->
+      <line x1="406" y1="72" x2="448" y2="72" stroke="#FF8514" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="448,66 460,72 448,78" fill="#FF8514"/>
+      <!-- Tools cluster -->
+      <text x="510" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">📧</text>
+      <text x="545" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">📅</text>
+      <text x="510" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">📁</text>
+      <text x="545" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">📊</text>
+      <text x="527" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="bold">Externe tools</text>
+      <text x="527" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#888">Gmail, agenda, CRM...</text>
+      <!-- Bottom label -->
+      <text x="290" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#888" font-style="italic">MCP verbindt Claude met je bestaande tools — jij bepaalt welke</text>
+    </svg>
+  </div>
   <div class="content-card">
     <h3>Zonder MCP vs met MCP</h3>
     <table class="vergelijk-tabel">
@@ -273,7 +313,7 @@
         <div class="stap-nummer">1</div>
         <div class="stap-content">
           <h4>Connector inschakelen</h4>
-          <p>Via de Claude-instellingen (Teams of Enterprise-account) of via de Claude desktop-app schakel je de gewenste connector in.</p>
+          <p>Via de Claude-instellingen of via de Claude desktop-app schakel je de gewenste connector in. Connectors zijn beschikbaar voor alle plannen — gratis gebruikers starten met 1 connector, betaalde plannen hebben volledige toegang.</p>
         </div>
       </div>
       <div class="stap-item">

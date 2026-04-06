@@ -46,6 +46,48 @@
     <div class="module-num">Onderdeel 1 van 5</div>
     <h2>Wat is een prompt - Verdieping</h2>
   </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <!-- Left: vague prompt -->
+      <rect x="0" y="0" width="284" height="240" rx="10" fill="#fff5f5"/>
+      <rect x="0" y="0" width="284" height="34" rx="10" fill="#ef4444"/>
+      <rect y="24" width="284" height="10" fill="#ef4444"/>
+      <text x="142" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">Vage prompt</text>
+      <!-- User message vague -->
+      <rect x="100" y="46" width="172" height="24" rx="8" fill="#ef4444" opacity="0.7"/>
+      <text x="186" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Schrijf een e-mail</text>
+      <!-- Claude response vague -->
+      <rect x="12" y="82" width="260" height="86" rx="8" fill="white" stroke="#fca5a5" stroke-width="1"/>
+      <text x="24" y="100" font-family="Arial, sans-serif" font-size="9.5" fill="#27292D" font-weight="bold">Beste [naam],</text>
+      <text x="24" y="116" font-family="Arial, sans-serif" font-size="9" fill="#888">Hierbij stuur ik u een e-mail over</text>
+      <text x="24" y="130" font-family="Arial, sans-serif" font-size="9" fill="#888">[onderwerp]. Graag hoor ik van</text>
+      <text x="24" y="144" font-family="Arial, sans-serif" font-size="9" fill="#888">u. Met vriendelijke groet,</text>
+      <text x="24" y="158" font-family="Arial, sans-serif" font-size="9" fill="#888">[naam]</text>
+      <rect x="12" y="180" width="260" height="46" rx="7" fill="rgba(239,68,68,0.07)"/>
+      <text x="142" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#ef4444" font-weight="bold">Resultaat: onbruikbaar</text>
+      <text x="142" y="214" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#888">Claude raadde alles — naam, onderwerp,</text>
+      <text x="142" y="226" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#888">toon, lengte. Niets klopt.</text>
+      <!-- Right: specific prompt -->
+      <rect x="296" y="0" width="284" height="240" rx="10" fill="#f0faf5"/>
+      <rect x="296" y="0" width="284" height="34" rx="10" fill="#1A7A4A"/>
+      <rect y="24" x="296" width="284" height="10" fill="#1A7A4A"/>
+      <text x="438" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">Specifieke prompt</text>
+      <!-- User message specific -->
+      <rect x="312" y="46" width="256" height="36" rx="8" fill="#1A7A4A" opacity="0.8"/>
+      <text x="440" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="white">Ik ben makelaar. Schrijf een vriendelijke</text>
+      <text x="440" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="white">e-mail om bezichtiging dinsdag te bevestigen</text>
+      <!-- Claude response specific -->
+      <rect x="308" y="94" width="260" height="74" rx="8" fill="white" stroke="#86efac" stroke-width="1"/>
+      <text x="320" y="112" font-family="Arial, sans-serif" font-size="9.5" fill="#27292D" font-weight="bold">Beste heer/mevrouw [achternaam],</text>
+      <text x="320" y="128" font-family="Arial, sans-serif" font-size="9" fill="#27292D">Graag bevestig ik onze afspraak voor</text>
+      <text x="320" y="142" font-family="Arial, sans-serif" font-size="9" fill="#27292D">de bezichtiging op dinsdag om 14.00 uur.</text>
+      <text x="320" y="156" font-family="Arial, sans-serif" font-size="9" fill="#888">Tot dan! Met vriendelijke groet, ...</text>
+      <rect x="308" y="180" width="260" height="46" rx="7" fill="rgba(26,122,74,0.08)"/>
+      <text x="438" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#1A7A4A" font-weight="bold">Resultaat: direct bruikbaar</text>
+      <text x="438" y="214" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">Claude wist wie je bent, wat de toon</text>
+      <text x="438" y="226" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555">moet zijn en wat het doel is.</text>
+    </svg>
+  </div>
   <div class="content-card">
     <h3>Wat maakt een prompt goed of slecht?</h3>
     <div class="flashcard-set">
@@ -118,6 +160,45 @@
   <div class="content-card">
     <p>Een goede prompt bestaat uit drie onderdelen. Context: wie ben je en wat is de situatie? Opdracht: wat moet Claude precies doen? Formaat: hoe wil je de output hebben?</p>
     <p>Je hoeft niet elke keer een lang opstel te schrijven. De drie onderdelen kunnen ook in twee zinnen staan. Maar als je een van de drie weglaat, merkt Claude dat direct aan de kwaliteit van zijn antwoord.</p>
+  </div>
+  <div class="visual-block">
+    <svg viewBox="0 0 580 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
+      <rect width="580" height="220" rx="10" fill="#F7F4F0"/>
+      <text x="290" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#888" font-weight="bold">De anatomie van een goede prompt</text>
+      <!-- Context blok -->
+      <rect x="16" y="36" width="148" height="108" rx="9" fill="#27292D"/>
+      <text x="90" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">1. Context</text>
+      <text x="90" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.6)">Wie ben je?</text>
+      <rect x="26" y="80" width="128" height="55" rx="6" fill="rgba(255,255,255,0.08)"/>
+      <text x="90" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.75)">"Ik werk bij een</text>
+      <text x="90" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.75)">makelaarskantoor en</text>
+      <text x="90" y="123" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.75)">schrijf aan een klant..."</text>
+      <!-- Arrow 1 -->
+      <polygon points="172,84 188,90 172,96" fill="#FF8514"/>
+      <line x1="164" y1="90" x2="173" y2="90" stroke="#FF8514" stroke-width="2.5"/>
+      <!-- Opdracht blok -->
+      <rect x="190" y="36" width="148" height="108" rx="9" fill="#FF8514"/>
+      <text x="264" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">2. Opdracht</text>
+      <text x="264" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.7)">Wat moet Claude doen?</text>
+      <rect x="200" y="80" width="128" height="55" rx="6" fill="rgba(255,255,255,0.15)"/>
+      <text x="264" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="white">"Schrijf een vriendelijke</text>
+      <text x="264" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="white">e-mail om de bezichtiging</text>
+      <text x="264" y="123" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="white">te bevestigen."</text>
+      <!-- Arrow 2 -->
+      <polygon points="346,84 362,90 346,96" fill="#FF8514"/>
+      <line x1="338" y1="90" x2="347" y2="90" stroke="#FF8514" stroke-width="2.5"/>
+      <!-- Formaat blok -->
+      <rect x="364" y="36" width="148" height="108" rx="9" fill="#EAE6E0"/>
+      <text x="438" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#27292D" font-weight="bold">3. Formaat</text>
+      <text x="438" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Hoe wil je de output?</text>
+      <rect x="374" y="80" width="128" height="55" rx="6" fill="rgba(39,41,45,0.06)"/>
+      <text x="438" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#444">"Maximaal 100 woorden,</text>
+      <text x="438" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#444">zakelijk maar vriendelijk,</text>
+      <text x="438" y="123" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#444">in het Nederlands."</text>
+      <!-- Result label -->
+      <text x="290" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#FF8514" font-weight="bold">= Een complete prompt die Claude direct begrijpt</text>
+      <text x="290" y="188" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#888">Laat je een van de drie weg? Dan moet Claude raden — en dat geeft wisselende resultaten.</text>
+    </svg>
   </div>
   <div class="content-card">
     <h3>De drie onderdelen in beeld</h3>

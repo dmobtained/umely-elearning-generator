@@ -64,6 +64,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:none
 .stap-nummer{flex-shrink:0;width:36px;height:36px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:700;color:var(--bg);font-size:0.9rem}
 .stap-content h4{font-family:var(--font-h);font-size:1rem;margin:0 0 0.25rem;color:var(--fg)}
 .stap-content p{margin:0;font-size:0.9rem}
+.visual-block{margin:1.25rem 0;border-radius:var(--radius);overflow:hidden}
 .tip-box{background:rgba(39,41,45,0.05);border-radius:var(--radius);padding:1rem 1.25rem;margin:1.25rem 0;border:none}
 .tip-box.waarschuwing{background:rgba(239,68,68,0.08)}
 .tip-box-label{font-family:var(--font-h);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem}
@@ -156,6 +157,17 @@ footer a{color:var(--peach)}
 .btn-vorige{display:inline-block;background:transparent;border:2px solid var(--fg);color:var(--fg);font-family:var(--font-b);font-weight:700;font-size:0.95rem;padding:0.8rem 2rem;border-radius:var(--radius-pill);cursor:pointer;text-decoration:none;transition:all 0.2s}
 .btn-vorige:hover{background:var(--fg);color:var(--bg)}
 .nav-spacer{flex:1}
+/* ── MILESTONE TOAST ── */
+.milestone-toast{position:fixed;bottom:28px;right:28px;background:var(--fg);color:var(--bg);padding:14px 22px;border-radius:50px;font-family:var(--font-h);font-weight:700;font-size:0.95rem;box-shadow:0 6px 28px rgba(39,41,45,0.25),0 0 0 2px var(--amber);z-index:9999;transform:translateY(80px) scale(0.9);opacity:0;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;display:flex;align-items:center;gap:10px;max-width:300px}
+.milestone-toast.show{transform:translateY(0) scale(1);opacity:1}
+.milestone-toast .mt-icon{font-size:1.3rem}
+.milestone-toast .mt-pct{color:var(--amber)}
+/* ── KC CORRECT FLASH ── */
+@keyframes kcFlash{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.5)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.kc-optie.correct{animation:kcFlash 0.6s ease-out}
+/* ── PROGRESS BAR SHIMMER ── */
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+#progressBar.shimmer{background:linear-gradient(90deg,#FF8514,#FF4D00,#FFD964,#FF8514);background-size:200% auto;animation:shimmer 1.5s linear}
 @media(max-width:600px){
   .welcome-hero h1{font-size:1.6rem}.screen{padding:0 1rem 3rem}
   .btn-wrap{flex-direction:column}.btn{text-align:center}
