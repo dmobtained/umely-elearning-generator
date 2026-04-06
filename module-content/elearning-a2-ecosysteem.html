@@ -287,12 +287,12 @@
     <h2>API, Office-integraties en kiezen</h2>
   </div>
   <div class="content-card">
-    <p>Claude is ook beschikbaar via Microsoft 365. In Excel kun je Claude inzetten om formules te schrijven, data te analyseren en samenvattingen te maken. In PowerPoint helpt Claude bij het structureren van presentaties en het schrijven van teksten. Let op de beperkingen: Claude kan geen opmaak aanpassen, geen macro's schrijven of bestanden automatisch opslaan. Hij werkt met tekst en data, niet met de interface van de programma's zelf.</p>
+    <p>Er is geen directe Claude-integratie in Microsoft Office. Microsoft 365 Copilot gebruikt een ander AI-model. De gangbare manier om Claude naast Excel of PowerPoint te gebruiken is de copy-paste werkwijze: kopieer data of tekst naar Claude, stel je vraag en plak het resultaat terug. Dit werkt altijd, ongeacht je abonnement.</p>
     <p>Voor bedrijven die Claude willen inbouwen in eigen software of systemen is er de API. Dit vereist technische kennis of een developer. De meeste kantoren beginnen niet met de API.</p>
   </div>
   <div class="tip-box">
     <div class="tip-box-label info">Info</div>
-    <p>De Office-integraties zijn functioneel beperkt ten opzichte van de web- en desktop-app. Zoek in je Microsoft 365-beheercentrum naar 'Copilot' of 'AI-apps' voor de actuele integratieopties. In de Anthropic-documentatie vind je onder 'Integrations' een overzicht van ondersteunde platformen.</p>
+    <p>Voor de meeste kantoorgebruikers is de web-app of desktop-app het beste startpunt. Claude parallel openhouden naast Office en data via copy-paste uitwisselen geeft in de praktijk hetzelfde resultaat als een directe integratie, zonder extra installatie.</p>
   </div>
 </div>
 
@@ -303,12 +303,14 @@
     <h2>Office-integraties - Verdieping</h2>
   </div>
   <div class="content-card">
-    <h3>Wat kan Claude in Excel en PowerPoint?</h3>
+    <h3>Claude naast Excel en PowerPoint (copy-paste werkwijze)</h3>
     <table class="vergelijk-tabel">
-      <thead><tr><th>Applicatie</th><th>Kan wel</th><th>Kan niet</th></tr></thead>
+      <thead><tr><th>Taak</th><th>Werkwijze</th></tr></thead>
       <tbody>
-        <tr><td>Excel</td><td>Formules schrijven, data samenvatten, patronen uitleggen</td><td>Macro's, opmaak aanpassen, bestanden opslaan</td></tr>
-        <tr><td>PowerPoint</td><td>Dia-structuur voorstellen, teksten schrijven en aanpassen</td><td>Afbeeldingen invoegen, opmaak aanpassen, animaties</td></tr>
+        <tr><td>Formule schrijven</td><td>Beschrijf wat je wilt in Claude, plak de formule in Excel</td></tr>
+        <tr><td>Data samenvatten</td><td>Kopieer data naar Claude, stel je vraag, plak resultaat terug</td></tr>
+        <tr><td>Presentatietekst</td><td>Geef Claude je kernpunten, gebruik de tekst in PowerPoint</td></tr>
+        <tr><td>Opmaak aanpassen</td><td>Niet via Claude — dit doe je zelf in Office</td></tr>
       </tbody>
     </table>
   </div>
@@ -331,7 +333,7 @@
       <div class="proces-pijl">&#9658;</div>
       <div class="proces-blok"><h4>Chrome-extensie</h4><p>Aanvulling voor browserwerk. Pagina's samenvatten, Gmail-hulp.</p></div>
       <div class="proces-pijl">&#9658;</div>
-      <div class="proces-blok"><h4>Excel / PowerPoint</h4><p>Als je Microsoft 365 gebruikt en Claude wilt inzetten bij spreadsheets of presentaties.</p></div>
+      <div class="proces-blok"><h4>Excel / PowerPoint</h4><p>Claude parallel openhouden en data via copy-paste uitwisselen. Geen directe integratie nodig.</p></div>
       <div class="proces-pijl">&#9658;</div>
       <div class="proces-blok"><h4>API</h4><p>Voor inbouwen in eigen systemen. Vereist technische kennis.</p></div>
     </div>
@@ -355,7 +357,7 @@
       <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. Beginners starten het best met de web-app of desktop-app. De API vereist technische kennis.')">Beginners die voor het eerst met Claude werken</button>
       <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. De API heeft niets te maken met een Pro-abonnement of de Chrome-extensie. Het is een aparte technische dienst.')">Gebruikers van de Chrome-extensie die meer willen</button>
       <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-quiz', 'Correct. De API is bedoeld voor bedrijven of developers die Claude willen inbouwen in eigen software, systemen of workflows. Het vereist technische kennis.')">Bedrijven die Claude willen inbouwen in eigen software of systemen</button>
-      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. De API is niet specifiek voor Excel-gebruikers. Voor Excel is er de Microsoft 365-integratie.')">Excel-gebruikers die formules willen schrijven</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Nee. Voor Excel-werk heb je geen API nodig. De copy-paste werkwijze met de web-app of desktop-app volstaat.')">Excel-gebruikers die formules willen schrijven</button>
     </div>
     <div id="kc-feedback-4" class="kc-feedback"></div>
   </div>
@@ -366,7 +368,7 @@
   {"vraag":"Wat is de eenvoudigste manier om Claude te gebruiken zonder iets te installeren?","opties":["De desktop-app downloaden","De API inrichten","Via claude.ai in een browser","De Chrome-extensie installeren"],"correct":2,"uitleg":"Claude.ai is de web-app die direct werkt in elke browser. Geen installatie nodig, alleen een account aanmaken."},
   {"vraag":"Wat is een voordeel van de Claude desktop-app ten opzichte van de web-app?","opties":["De desktop-app is goedkoper","De desktop-app kan bestanden op je computer lezen zonder uploaden","De desktop-app heeft toegang tot meer functies","De desktop-app werkt sneller op elk apparaat"],"correct":1,"uitleg":"De desktop-app kan bestanden op je computer direct lezen. Dat is handig als je lokale documenten wilt verwerken zonder ze te hoeven uploaden."},
   {"vraag":"Wat kan de Claude Chrome-extensie NIET doen?","opties":["Tekst op een webpagina samenvatten","Helpen bij e-mails schrijven in Gmail","Knoppen klikken of acties uitvoeren op een webpagina","Vragen beantwoorden over pagina-inhoud"],"correct":2,"uitleg":"De Chrome-extensie kan alleen lezen en adviseren. Hij voert geen acties uit op pagina's, zoals knoppen klikken of formulieren invullen."},
-  {"vraag":"Welke beperking geldt voor de Microsoft 365-integratie van Claude?","opties":["Claude kan geen Nederlandse teksten verwerken in Excel","Claude kan geen opmaak aanpassen of macro's schrijven","Claude kan alleen in Word worden gebruikt, niet in Excel","Claude werkt niet samen met bestaande Excel-formules"],"correct":1,"uitleg":"De Excel- en PowerPoint-integraties zijn beperkt tot tekst en data. Claude kan geen opmaak aanpassen, geen macro's schrijven en geen bestanden automatisch opslaan."},
+  {"vraag":"Hoe gebruik je Claude het meest effectief naast Excel?","opties":["Via een ingebouwde Claude-plugin in Excel","Claude naast Excel openhouden en data via copy-paste uitwisselen","Een API-koppeling instellen tussen Claude en Excel","Via Microsoft 365 Copilot, dat gebruikt Claude"],"correct":1,"uitleg":"Er is geen directe Claude-plugin in Excel. De gangbare werkwijze is copy-paste: kopieer data of formules naar Claude, stel je vraag en plak het resultaat terug. Dit werkt altijd en vereist geen extra installatie."},
   {"vraag":"Voor welk type gebruiker is de Claude API bedoeld?","opties":["Iedereen die Claude dagelijks gebruikt","Gebruikers met een Pro-abonnement","Bedrijven die Claude willen inbouwen in eigen systemen","Mensen die de desktop-app willen upgraden"],"correct":2,"uitleg":"De API is voor bedrijven en developers die Claude technisch willen integreren in eigen software of workflows. Niet voor dagelijkse kantoorgebruikers die zelf met Claude werken."},
   {"vraag":"Wat is een privacyaandachtspunt bij de Chrome-extensie?","opties":["De extensie stuurt je wachtwoorden naar Anthropic","De extensie heeft toegang tot de inhoud van pagina's die je bezoekt","De extensie werkt alleen als je bent ingelogd bij Google","De extensie deelt je browsegeschiedenis met andere gebruikers"],"correct":1,"uitleg":"De Chrome-extensie leest de inhoud van de pagina's die je bezoekt om je te kunnen helpen. Wees je hiervan bewust bij pagina's met gevoelige of vertrouwelijke informatie."},
   {"vraag":"Waar begin je het best als je Claude wilt leren gebruiken voor kantoorwerk?","opties":["Met de API om Claude in je systemen te integreren","Met de web-app of desktop-app","Met de Chrome-extensie voor browserwerk","Met de Excel-integratie voor data-analyse"],"correct":1,"uitleg":"Voor de meeste kantoren is de web-app of desktop-app het beste startpunt. Die zijn eenvoudig in gebruik, vereisen geen technische kennis en dekken de meeste kantoorbehoeften."}

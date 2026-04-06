@@ -6,264 +6,206 @@
 <title>E-learning Bibliotheek | Umely</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://instant.page/5.2.0" type="module"></script>
 <style>
-  :root {
-    --amber: #FF8514;
-    --flame: #FF4D00;
-    --gold: #FFD964;
-    --charcoal: #27292D;
-    --warm-white: #FFF8F2;
-    --white: #FFFFFF;
-    --cream: #F7E6C2;
-    --peach: #FFD7AD;
-    --gray-text: #4A4A4A;
-    --gray-border: #EDE0D4;
-    --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; display: flex; flex-direction: column; }
-  main { flex: 1; }
+:root {
+  --amber: #FF8514;
+  --flame: #FF4D00;
+  --charcoal: #27292D;
+  --warm-white: #FFF8F2;
+  --white: #FFFFFF;
+  --gray-text: #5A5A5A;
+  --gray-light: #F0E6DC;
+  --gray-border: #E8D9CC;
+  --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); min-height: 100vh; display: flex; flex-direction: column; }
 
-  /* ── AUTH OVERLAY ── */
-  #authOverlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(39,41,45,0.85); backdrop-filter: blur(6px);
-    z-index: 1000; align-items: center; justify-content: center;
-  }
-  .auth-card {
-    background: var(--white); border-radius: 20px; padding: 48px;
-    max-width: 400px; width: 90%;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
-  }
-  .auth-card .auth-logo { text-align: center; margin-bottom: 28px; }
-  .auth-card .auth-logo .auth-icon { font-size: 40px; display: block; margin-bottom: 8px; }
-  .auth-card .auth-logo h2 { font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 6px; }
-  .auth-card .auth-logo p { font-size: 14px; color: var(--gray-text); }
-  .auth-field { margin-bottom: 14px; }
-  .auth-field label { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
-  .auth-field input {
-    width: 100%; padding: 12px 16px;
-    border: 2px solid var(--gray-border); border-radius: 10px;
-    font-family: 'Inter', system-ui, sans-serif; font-size: 14px;
-    color: var(--charcoal); outline: none; transition: border-color 0.15s;
-  }
-  .auth-field input:focus { border-color: var(--amber); }
-  #authError {
-    display: none; background: #FEF2F2; border: 1px solid #FCA5A5;
-    border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;
-    font-size: 13px; color: #991B1B;
-  }
-  #loginBtn {
-    width: 100%; padding: 14px; background: var(--gradient);
-    color: white; border: none; border-radius: 50px;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    transition: opacity 0.2s; margin-top: 6px;
-  }
-  #loginBtn:hover:not(:disabled) { opacity: 0.88; }
-  #loginBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+/* ── AUTH OVERLAY ── */
+#authOverlay { display: none; position: fixed; inset: 0; background: rgba(39,41,45,0.88); backdrop-filter: blur(6px); z-index: 1000; align-items: center; justify-content: center; }
+.auth-card { background: var(--white); border-radius: 20px; padding: 48px; max-width: 400px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.3); }
+.auth-card .auth-logo { text-align: center; margin-bottom: 28px; }
+.auth-card .auth-logo h2 { font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 6px; }
+.auth-card .auth-logo p { font-size: 14px; color: var(--gray-text); }
+.auth-field { margin-bottom: 14px; }
+.auth-field label { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
+.auth-field input { width: 100%; padding: 12px 16px; border: 2px solid var(--gray-border); border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--charcoal); outline: none; transition: border-color 0.15s; }
+.auth-field input:focus { border-color: var(--amber); }
+#authError { display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px; color: #991B1B; }
+#loginBtn { width: 100%; padding: 14px; background: var(--gradient); color: white; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; margin-top: 6px; }
+#loginBtn:hover:not(:disabled) { opacity: 0.88; }
+#loginBtn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  header {
-    background: var(--charcoal); border-bottom: none;
-    padding: 0 32px; height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; color: white; text-decoration: none; }
-  .header-actions { display: flex; gap: 10px; align-items: center; }
-  .header-user { font-size: 13px; color: rgba(255,255,255,0.85); display: none; }
-  .btn-sm {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700;
-    cursor: pointer; text-decoration: none; border: none;
-    transition: all 0.15s;
-  }
-  .btn-primary { background: var(--gradient); color: white; }
-  .btn-primary:hover { opacity: 0.88; }
-  .btn-ghost { background: rgba(255,255,255,0.25); color: white; border: 2px solid rgba(255,255,255,0.6); backdrop-filter: blur(4px); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.35); }
-  .btn-logout {
-    background: none; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.4);
-    padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
-    cursor: pointer; display: none; transition: all 0.15s;
-  }
-  .btn-logout:hover { background: rgba(255,255,255,0.15); color: white; }
+/* ── HEADER ── */
+header { background: var(--charcoal); height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; flex-shrink: 0; }
+.logo { display: flex; align-items: center; gap: 8px; color: white; text-decoration: none; font-size: 18px; font-weight: 800; }
+.logo img { height: 38px; filter: brightness(0) invert(1); }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.user-pill { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border-radius: 50px; padding: 5px 14px 5px 5px; color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 600; display: none; }
+.user-avatar { width: 28px; height: 28px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: white; }
+.btn-header-ghost { padding: 7px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; border: 1.5px solid rgba(255,255,255,0.35); background: none; color: rgba(255,255,255,0.85); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: all 0.15s; }
+.btn-header-ghost:hover { background: rgba(255,255,255,0.12); color: white; }
+.btn-logout { display: none; padding: 7px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; border: 1px solid rgba(255,255,255,0.25); background: none; color: rgba(255,255,255,0.65); cursor: pointer; transition: all 0.15s; }
+.btn-logout:hover { background: rgba(255,255,255,0.1); color: white; }
 
-  main { width: 100%; padding: 40px 48px; }
+/* ── LAYOUT ── */
+.layout { display: flex; flex: 1; min-height: calc(100vh - 64px); }
 
-  .page-header { margin-bottom: 24px; }
-  .page-header h1 { font-size: 32px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; }
-  .page-header p { font-size: 15px; color: var(--gray-text); }
+/* ── SIDEBAR ── */
+.sidebar { width: 240px; background: white; border-right: 1px solid var(--gray-border); padding: 16px 12px; flex-shrink: 0; display: flex; flex-direction: column; position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; }
+.sidebar-label { font-size: 10px; font-weight: 700; color: #C0B8B0; text-transform: uppercase; letter-spacing: 0.8px; padding: 0 10px; margin: 16px 0 4px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 13.5px; font-weight: 500; color: var(--gray-text); cursor: pointer; border-radius: 10px; text-decoration: none; transition: all 0.12s; white-space: nowrap; border: none; }
+.nav-item:hover { background: var(--warm-white); color: var(--charcoal); }
+.nav-item.active { background: #FFF0E5; color: var(--amber); font-weight: 700; }
+.nav-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+.nav-badge { margin-left: auto; background: #F3EDE7; color: #A0887A; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 50px; }
+.nav-item.active .nav-badge { background: #FFD7AD; color: var(--flame); }
+.sidebar-bottom { margin-top: auto; padding: 14px 10px; border-top: 1px solid var(--gray-border); }
+.prog-label { font-size: 11.5px; color: var(--gray-text); margin-bottom: 7px; display: flex; justify-content: space-between; }
+.prog-track { background: var(--gray-light); border-radius: 50px; height: 5px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--gradient); border-radius: 50px; transition: width 0.5s; }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 20px;
-  }
+/* ── MAIN ── */
+.main { flex: 1; padding: 28px 32px; overflow-y: auto; min-width: 0; background: #F5F5F7; }
 
-  .module-card {
-    background: var(--white); border: 1px solid var(--gray-border);
-    border-radius: 14px; padding: 28px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    display: flex; flex-direction: column; gap: 12px;
-    transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
-    text-decoration: none; color: inherit;
-    border-left: 3px solid transparent;
-  }
-  .module-card:hover { box-shadow: 0 6px 24px rgba(255,77,0,0.15); transform: translateY(-2px); border-left-color: var(--amber); }
-  .module-card.sortable-ghost { opacity: 0.35; }
-  .module-card.sortable-drag { box-shadow: 0 12px 40px rgba(255,77,0,0.25); transform: scale(1.02); }
+/* ── CONTINUE CARD ── */
+#continueSection { display: none; margin-bottom: 28px; }
+.continue-card { background: var(--charcoal); border-radius: 20px; padding: 22px 26px; display: flex; align-items: center; gap: 18px; position: relative; overflow: hidden; box-shadow: 0 4px 16px rgba(39,41,45,0.18); }
+.continue-card::after { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; background: rgba(255,133,20,0.12); border-radius: 50%; pointer-events: none; }
+.continue-icon { width: 48px; height: 48px; background: var(--gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.continue-info { flex: 1; min-width: 0; }
+.continue-tag { font-size: 10px; font-weight: 700; color: var(--amber); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; }
+.continue-title { font-size: 16px; font-weight: 800; color: white; margin-bottom: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.continue-prog-row { display: flex; align-items: center; gap: 10px; }
+.continue-track { flex: 1; background: rgba(255,255,255,0.15); border-radius: 50px; height: 4px; overflow: hidden; }
+.continue-fill { height: 100%; background: var(--gradient); border-radius: 50px; width: 60%; }
+.continue-pct { font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 600; white-space: nowrap; }
+.btn-continue { background: var(--gradient); color: white; border: none; border-radius: 50px; padding: 11px 22px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0; text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.15s; }
+.btn-continue:hover { opacity: 0.88; }
 
-  .drag-handle {
-    position: absolute; top: 10px; right: 10px;
-    color: #ccc; font-size: 14px; cursor: grab; padding: 4px;
-    line-height: 1; user-select: none;
-  }
-  .drag-handle:active { cursor: grabbing; }
-  .module-card { position: relative; }
+/* ── STATS ── */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border: none; }
+.stat-label { font-size: 12px; color: #AAA; font-weight: 500; margin-bottom: 4px; }
+.stat-value { font-size: 30px; font-weight: 800; color: var(--charcoal); letter-spacing: -0.5px; line-height: 1; }
+.stat-sub { font-size: 11px; color: #CCC; font-weight: 500; margin-top: 3px; }
 
-  .module-icon { font-size: 32px; }
-  .module-title { font-size: 17px; font-weight: 700; color: var(--charcoal); line-height: 1.3; }
-  .module-date { font-size: 12px; color: #aaa; }
-  .module-badge {
-    display: inline-block; padding: 3px 12px;
-    background: var(--cream); color: var(--flame);
-    border-radius: 50px; font-size: 11px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    align-self: flex-start;
-  }
-  .module-footer {
-    margin-top: auto; padding-top: 12px;
-    border-top: 1px solid var(--gray-border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .module-link {
-    font-size: 13px; font-weight: 700; color: var(--flame);
-    display: flex; align-items: center; gap: 4px;
-  }
-  .card-actions { display: flex; gap: 4px; }
-  .btn-delete, .btn-rename {
-    background: none; border: none; cursor: pointer;
-    color: #ccc; font-size: 16px; padding: 4px 6px; border-radius: 6px;
-    transition: color 0.15s, background 0.15s; line-height: 1;
-  }
-  .btn-delete:hover { color: #EF4444; background: #FEF2F2; }
-  .btn-rename:hover { color: var(--amber); background: var(--cream); }
+/* ── SECTION HEADER ── */
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.section-title { font-size: 17px; font-weight: 800; color: var(--charcoal); }
+.search-input-wrap { position: relative; }
+.search-input-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+#searchInput { padding: 8px 14px 8px 36px; border: 1.5px solid var(--gray-border); border-radius: 50px; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--charcoal); background: white; outline: none; width: 200px; transition: border-color 0.15s; }
+#searchInput:focus { border-color: var(--amber); }
+#searchInput::placeholder { color: #BBB; }
 
-  .empty-state { text-align: center; padding: 80px 20px; }
-  .empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
-  .empty-state h2 { font-size: 22px; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; }
-  .empty-state p { color: var(--gray-text); margin-bottom: 24px; }
 
-  .loading { text-align: center; padding: 80px; color: var(--gray-text); font-size: 15px; }
+/* ── CATEGORY ACCORDION ── */
+#grid { display: flex; flex-direction: column; gap: 8px; }
+.cat-group { border-radius: 16px; overflow: hidden; background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.cat-group-header { display: flex; align-items: center; gap: 12px; padding: 15px 20px; cursor: pointer; background: white; color: var(--charcoal); user-select: none; transition: background 0.15s; border-bottom: 1px solid transparent; }
+.cat-group-header:hover { background: #FAFAFA; }
+.cat-group.open .cat-group-header { border-bottom-color: var(--gray-border); }
+.cat-group-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--warm-white); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.cat-group-title { font-size: 14.5px; font-weight: 700; flex: 1; color: var(--charcoal); }
+.cat-group-meta { font-size: 12px; color: #AAA; display: flex; align-items: center; gap: 10px; }
+.cat-group-chevron { font-size: 11px; color: #CCC; transition: transform 0.25s; }
+.cat-group.open .cat-group-chevron { transform: rotate(180deg); }
+.cat-group-body { display: none; padding: 14px; background: #FAFAFA; }
+.cat-group.open .cat-group-body { display: block; }
+.cat-inner-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
 
-  .search-wrap { margin-bottom: 24px; position: relative; }
-  .search-wrap input {
-    width: 100%; padding: 12px 16px 12px 42px;
-    border: 2px solid var(--gray-border); border-radius: 50px;
-    font-family: 'Inter', system-ui, sans-serif; font-size: 14px;
-    color: var(--charcoal); background: var(--white); outline: none;
-    transition: border-color 0.15s;
-  }
-  .search-wrap input:focus { border-color: var(--amber); }
-  .search-wrap input::placeholder { color: #aaa; }
-  .search-wrap .search-icon {
-    position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-    font-size: 16px; pointer-events: none;
-  }
-  .no-results { text-align: center; padding: 40px; color: var(--gray-text); font-size: 15px; }
+/* ── MODULE CARDS ── */
+.module-card { background: white; border-radius: 14px; padding: 18px; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.07); cursor: pointer; transition: all 0.18s; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; }
+.module-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.10); transform: translateY(-2px); }
+.module-card.done { background: #F7FDF9; }
+.module-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.cat-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; padding: 3px 9px; border-radius: 50px; flex-shrink: 0; }
+.cat-a { background: #FFF0E5; color: #D4500A; }
+.cat-b { background: #EEF2FF; color: #3451B2; }
+.cat-c { background: #EDFAF3; color: #1A7A4A; }
+.cat-d { background: #FFF0F0; color: #B91C1C; }
+.cat-e { background: #F5F0FF; color: #5B21B6; }
+.cat-i { background: #FFFBEB; color: #92400E; }
+.mod-status { font-size: 11px; font-weight: 600; color: #BBB; white-space: nowrap; flex-shrink: 0; }
+.mod-status.started { color: var(--amber); }
+.mod-status.done { color: #16A34A; }
+.module-title { font-size: 14.5px; font-weight: 700; color: var(--charcoal); line-height: 1.35; }
+.module-meta { display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: #AAA; font-weight: 500; }
+.prog-bar-wrap { background: var(--gray-light); border-radius: 50px; height: 3px; overflow: hidden; }
+.prog-bar { height: 100%; background: var(--gradient); border-radius: 50px; transition: width 0.4s; }
+.prog-bar.done { background: #22C55E; }
+.module-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 6px; }
+.module-link { font-size: 12.5px; font-weight: 700; color: var(--amber); display: flex; align-items: center; gap: 3px; }
+.card-actions { display: flex; gap: 2px; }
+.btn-delete, .btn-rename { background: none; border: none; cursor: pointer; color: #DDD; font-size: 14px; padding: 3px 5px; border-radius: 5px; transition: color 0.12s, background 0.12s; line-height: 1; }
+.btn-delete:hover { color: #EF4444; background: #FEF2F2; }
+.btn-rename:hover { color: var(--amber); background: #FFF0E5; }
 
-  .drag-hint { font-size: 12px; color: #bbb; text-align: right; margin-bottom: 12px; }
+/* ── STATES ── */
+.loading-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--gray-text); font-size: 15px; }
+.empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; }
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state h2 { font-size: 20px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; }
+.empty-state p { color: var(--gray-text); margin-bottom: 20px; font-size: 14px; }
+.btn-primary-pill { display: inline-flex; align-items: center; gap: 6px; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 700; background: var(--gradient); color: white; text-decoration: none; }
+.no-results { grid-column: 1/-1; text-align: center; padding: 32px; color: var(--gray-text); font-size: 14px; }
 
-  .category-group { margin-bottom: 1rem; border: 1px solid var(--gray-border); border-radius: 12px; overflow: hidden; }
-  .category-header {
-    display: flex; align-items: center; gap: 12px;
-    padding: 16px 20px; cursor: pointer;
-    background: var(--charcoal); color: white;
-    transition: background 0.2s; user-select: none;
-  }
-  .category-header:hover { background: #333538; }
-  .category-icon { font-size: 20px; }
-  .category-title { font-weight: 700; font-size: 15px; flex: 1; }
-  .category-count { font-size: 12px; color: rgba(255,255,255,0.6); }
-  .category-chevron { font-size: 12px; color: rgba(255,255,255,0.5); transition: transform 0.3s; }
-  .category-group.open .category-chevron { transform: rotate(180deg); }
-  .category-modules { display: none; padding: 20px; background: var(--warm-white); }
-  .category-group.open .category-modules { display: block; }
-  .category-modules .grid { margin: 0; }
+/* ── SKELETON ── */
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.skeleton-card { background: white; border-radius: 13px; padding: 18px; border: 1.5px solid var(--gray-border); display: flex; flex-direction: column; gap: 10px; }
+.sk { border-radius: 6px; background: linear-gradient(90deg, #ececec 25%, #f8f8f8 50%, #ececec 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+.sk.h12 { height: 12px; }
+.sk.h16 { height: 16px; }
+.sk.w100 { width: 100%; }
+.sk.w70 { width: 70%; }
+.sk.w40 { width: 40%; }
+.sk.w25 { width: 25%; }
 
-  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); margin-top: 0; }
-  footer p { font-size: 13px; color: rgba(255,255,255,0.85); }
-  footer a { color: white; font-weight: 700; text-decoration: none; }
+/* ── NEWSLETTER POPUP ── */
+#newsletterPopup { display: none; position: fixed; inset: 0; background: rgba(39,41,45,0.75); backdrop-filter: blur(4px); z-index: 500; align-items: center; justify-content: center; }
+#newsletterPopup.open { display: flex; }
+.newsletter-modal { background: var(--white); border-radius: 20px; padding: 40px; max-width: 440px; width: 92%; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.25); text-align: center; }
+.newsletter-close { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 20px; cursor: pointer; color: #bbb; line-height: 1; padding: 4px; }
+.newsletter-close:hover { color: var(--charcoal); }
+.newsletter-modal .nl-icon { font-size: 40px; margin-bottom: 12px; }
+.newsletter-modal h2 { font-size: 21px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; }
+.newsletter-modal p { font-size: 14px; color: var(--gray-text); line-height: 1.6; margin-bottom: 20px; }
+.nl-email-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.nl-email-row input { flex: 1; padding: 12px 16px; border: 2px solid var(--gray-border); border-radius: 50px; font-size: 14px; font-family: 'Inter', system-ui, sans-serif; color: var(--charcoal); outline: none; transition: border-color 0.15s; }
+.nl-email-row input:focus { border-color: var(--amber); }
+.nl-submit { padding: 12px 22px; background: var(--gradient); color: white; border: none; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; white-space: nowrap; }
+.nl-submit:hover { opacity: 0.88; }
+.nl-skip { background: none; border: none; color: #aaa; font-size: 13px; cursor: pointer; text-decoration: underline; }
+.nl-skip:hover { color: var(--charcoal); }
+.nl-success { color: #15803D; font-size: 14px; font-weight: 600; margin-top: 8px; display: none; }
 
-  /* ── NEWSLETTER POPUP ── */
-  #newsletterPopup {
-    display: none; position: fixed; inset: 0;
-    background: rgba(39,41,45,0.75); backdrop-filter: blur(4px);
-    z-index: 500; align-items: center; justify-content: center;
-  }
-  #newsletterPopup.open { display: flex; }
-  .newsletter-modal {
-    background: var(--white); border-radius: 20px; padding: 40px;
-    max-width: 440px; width: 92%; position: relative;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.25); text-align: center;
-  }
-  .newsletter-close {
-    position: absolute; top: 14px; right: 18px;
-    background: none; border: none; font-size: 20px; cursor: pointer;
-    color: #bbb; line-height: 1; padding: 4px;
-  }
-  .newsletter-close:hover { color: var(--charcoal); }
-  .newsletter-modal .nl-icon { font-size: 40px; margin-bottom: 12px; }
-  .newsletter-modal h2 { font-size: 21px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; }
-  .newsletter-modal p { font-size: 14px; color: var(--gray-text); line-height: 1.6; margin-bottom: 20px; }
-  .nl-email-row { display: flex; gap: 8px; margin-bottom: 12px; }
-  .nl-email-row input {
-    flex: 1; padding: 12px 16px; border: 2px solid var(--gray-border);
-    border-radius: 50px; font-size: 14px; font-family: 'Inter', system-ui, sans-serif;
-    color: var(--charcoal); outline: none; transition: border-color 0.15s;
-  }
-  .nl-email-row input:focus { border-color: var(--amber); }
-  .nl-submit {
-    padding: 12px 22px; background: var(--gradient); color: white;
-    border: none; border-radius: 50px; font-size: 14px; font-weight: 700;
-    cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
-  }
-  .nl-submit:hover { opacity: 0.88; }
-  .nl-skip { background: none; border: none; color: #aaa; font-size: 13px; cursor: pointer; text-decoration: underline; }
-  .nl-skip:hover { color: var(--charcoal); }
-  .nl-success { color: #15803D; font-size: 14px; font-weight: 600; margin-top: 8px; display: none; }
+/* ── FOOTER ── */
+footer { padding: 24px 28px; text-align: center; background: var(--charcoal); }
+footer p { font-size: 13px; color: rgba(255,255,255,0.75); display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+footer img { height: 36px; filter: brightness(0) invert(1); vertical-align: middle; }
+footer a { color: white; font-weight: 700; text-decoration: none; }
 
-  .progress-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-top: 2px; }
-  .progress-status.done { background: #D1FAE5; color: #065F46; }
-  .progress-status.started { background: var(--cream); color: #92400E; }
-  .progress-status svg { flex-shrink: 0; }
-
-  /* ── SKELETON LOADERS ── */
-  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  .skeleton-group { margin-bottom: 1rem; border: 1px solid var(--gray-border); border-radius: 12px; overflow: hidden; }
-  .skeleton-header { height: 56px; background: var(--charcoal); opacity: 0.8; }
-  .skeleton-body { padding: 20px; background: var(--warm-white); display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
-  .skeleton-card { background: white; border: 1px solid var(--gray-border); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
-  .skeleton-line { border-radius: 6px; background: linear-gradient(90deg, #ececec 25%, #f8f8f8 50%, #ececec 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-  .skeleton-line.w100 { height: 14px; width: 100%; }
-  .skeleton-line.w60 { height: 14px; width: 60%; }
-  .skeleton-line.w40 { height: 12px; width: 40%; }
-  .skeleton-line.icon { height: 32px; width: 32px; border-radius: 8px; }
-
-  @media(max-width:900px) {
-    .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-  }
-  @media(max-width:600px) {
-    .grid { grid-template-columns: 1fr; }
-    main { padding: 24px 16px; }
-  }
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  #grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .main { padding: 20px 16px; }
+}
+@media (max-width: 560px) {
+  .stats-row { grid-template-columns: 1fr; }
+  #grid { grid-template-columns: 1fr; }
+  #searchInput { width: 150px; }
+  .continue-card { flex-direction: column; align-items: flex-start; }
+  .btn-continue { width: 100%; justify-content: center; }
+}
 </style>
 </head>
 <body>
 
 <!-- Email bevestigd toast -->
-<div id="emailConfirmedToast" style="display:none;position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#27292D;color:#fff;border-radius:12px;padding:16px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.25);display:none;align-items:center;gap:12px;font-size:15px;font-weight:500;max-width:90vw;">
-  <span style="font-size:20px;">✓</span>
+<div id="emailConfirmedToast" style="display:none;position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#27292D;color:#fff;border-radius:12px;padding:14px 22px;box-shadow:0 8px 32px rgba(0,0,0,0.25);align-items:center;gap:10px;font-size:14px;font-weight:500;max-width:90vw;">
+  <span style="font-size:18px;">&#10003;</span>
   <span>Je e-mailadres is bevestigd. Welkom bij Umely!</span>
   <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;margin-left:8px;line-height:1;">&times;</button>
 </div>
@@ -272,7 +214,7 @@
 <div id="authOverlay" style="display:none;">
   <div class="auth-card">
     <div class="auth-logo">
-      <img src="/logo.png" alt="Umely" style="height:80px;">
+      <img src="/logo.png" alt="Umely" style="height:72px;margin-bottom:12px;">
       <h2>Welkom bij Umely</h2>
       <p>Log in om de bibliotheek te bekijken.</p>
     </div>
@@ -292,33 +234,130 @@
   </div>
 </div>
 
+<!-- Header -->
 <header>
   <a class="logo" href="/">
-    <img src="/logo.png" alt="Umely" style="height:65px;filter:brightness(0) invert(1);">
+    <img src="/logo.png" alt="Umely">
   </a>
-  <div class="header-actions">
-    <span class="header-user" id="headerUser"></span>
-    <a class="btn-sm btn-ghost" href="/account.html">Mijn account</a>
-    <a class="btn-sm btn-primary" href="/">+ Nieuwe e-learning</a>
+  <div class="header-right">
+    <div class="user-pill" id="userPill">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <span id="headerUser"></span>
+    </div>
+    <a class="btn-header-ghost" href="/account.html">Account</a>
     <button class="btn-logout" id="logoutBtn" onclick="logout()">Uitloggen</button>
   </div>
 </header>
 
-<main>
-  <div class="page-header">
-    <h1>E-learning Bibliotheek</h1>
-    <p>Alle gegenereerde e-learning modules, direct te openen in je browser.</p>
-  </div>
+<!-- Layout -->
+<div class="layout">
 
-  <div class="search-wrap" id="searchWrap" style="display:none">
-    <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round" style="display:block"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-    <input type="text" id="searchInput" placeholder="Zoek op naam..." oninput="filterModules()">
-  </div>
-  <p class="drag-hint" id="dragHint" style="display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="#bbb" style="vertical-align:-2px;margin-right:4px"><circle cx="9" cy="7" r="1.5"/><circle cx="15" cy="7" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="17" r="1.5"/><circle cx="15" cy="17" r="1.5"/></svg>Sleep kaarten om de volgorde te wijzigen</p>
-  <div id="grid" class="loading">Modules laden...</div>
-</main>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-label">Menu</div>
+    <a class="nav-item active" id="nav-all" href="#" onclick="setFilter('all',this);return false;">
+      <span class="nav-icon">📚</span> Alle modules
+      <span class="nav-badge" id="nb-all">0</span>
+    </a>
+    <a class="nav-item" id="nav-account" href="/account.html">
+      <span class="nav-icon">👤</span> Account
+    </a>
 
-<!-- Newsletter signup popup (eenmalig bij eerste login) -->
+    <div class="sidebar-label" style="margin-top:6px;">Categorieën</div>
+    <a class="nav-item" id="nav-a" href="#" onclick="setFilter('a',this);return false;">
+      <span class="nav-icon">🎓</span> A — Introductie
+      <span class="nav-badge" id="nb-a">0</span>
+    </a>
+    <a class="nav-item" id="nav-b" href="#" onclick="setFilter('b',this);return false;">
+      <span class="nav-icon">🔒</span> B — Veiligheid
+      <span class="nav-badge" id="nb-b">0</span>
+    </a>
+    <a class="nav-item" id="nav-c" href="#" onclick="setFilter('c',this);return false;">
+      <span class="nav-icon">💻</span> C — Gebruik
+      <span class="nav-badge" id="nb-c">0</span>
+    </a>
+    <a class="nav-item" id="nav-d" href="#" onclick="setFilter('d',this);return false;">
+      <span class="nav-icon">⌨️</span> D — Claude Code
+      <span class="nav-badge" id="nb-d">0</span>
+    </a>
+    <a class="nav-item" id="nav-e" href="#" onclick="setFilter('e',this);return false;">
+      <span class="nav-icon">🔌</span> E — MCP & Skills
+      <span class="nav-badge" id="nb-e">0</span>
+    </a>
+    <a class="nav-item" id="nav-i" href="#" onclick="setFilter('i',this);return false;">
+      <span class="nav-icon">🏆</span> I — Afsluiting
+      <span class="nav-badge" id="nb-i">0</span>
+    </a>
+
+    <div class="sidebar-bottom">
+      <div class="prog-label">
+        <span>Geopend</span>
+        <span id="progText">0 / 0</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" id="progFill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- Doorgaan -->
+    <div id="continueSection">
+      <div style="font-size:15px;font-weight:800;color:var(--charcoal);margin-bottom:12px;">Doorgaan waar je gebleven was</div>
+      <div class="continue-card">
+        <div class="continue-icon" id="continueIcon">📘</div>
+        <div class="continue-info">
+          <div class="continue-tag" id="continueTag">Module</div>
+          <div class="continue-title" id="continueTitle">...</div>
+          <div class="continue-prog-row">
+            <div class="continue-track"><div class="continue-fill"></div></div>
+            <div class="continue-pct">Gestart</div>
+          </div>
+        </div>
+        <a class="btn-continue" id="continueBtn" href="#">Verder &#8250;</a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow" style="display:none;">
+      <div class="stat-card">
+        <div class="stat-label">Modules beschikbaar</div>
+        <div class="stat-value" id="statTotal">0</div>
+        <div class="stat-sub">in de bibliotheek</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Al geopend</div>
+        <div class="stat-value" id="statOpened">0</div>
+        <div class="stat-sub">van de modules</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Categorieën</div>
+        <div class="stat-value" id="statCats">0</div>
+        <div class="stat-sub">beschikbaar</div>
+      </div>
+    </div>
+
+    <!-- Section header + search -->
+    <div class="section-header">
+      <div class="section-title" id="sectionTitle">Alle modules</div>
+      <div class="search-input-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BBB" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Zoeken..." oninput="filterModules()" style="display:none;">
+      </div>
+    </div>
+
+
+    <!-- Grid -->
+    <div id="grid">
+      <div class="loading-state">Modules laden...</div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Newsletter popup -->
 <div id="newsletterPopup">
   <div class="newsletter-modal">
     <button class="newsletter-close" onclick="closeNewsletter()">&#x2715;</button>
@@ -336,56 +375,64 @@
 </div>
 
 <footer>
-  <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
-    <img src="/logo.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
-    <span style="color:rgba(255,255,255,0.5);">|</span>
+  <p>
+    <img src="/logo.png" alt="Umely">
+    <span style="color:rgba(255,255,255,0.4);">|</span>
     <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
   </p>
 </footer>
 
 <script>
-const icons = ['📘','🎯','🧠','🚀','💡','🌿','📈','🤝','🔥','⚙️','💻','🍷','🦁'];
-const ORDER_KEY = 'umely_module_order';
+// ── CONFIG ──
+const CATEGORIES = {
+  a: { title: 'A — Introductie tot Claude', icon: '🎓' },
+  b: { title: 'B — Veiligheid & beperkingen', icon: '🔒' },
+  c: { title: 'C — Claude gebruiken', icon: '💻' },
+  d: { title: 'D — Claude Code', icon: '⌨️' },
+  e: { title: 'E — MCP & Skills', icon: '🔌' },
+  i: { title: 'I — Afsluiting', icon: '🏆' }
+};
+const CAT_ICONS = { a:'🎓', b:'🔒', c:'💻', d:'⌨️', e:'🔌', i:'🏆' };
 
-const CATEGORIES = [
-  { prefix: 'a', title: 'A - Introductie tot Claude', icon: '🎓' },
-  { prefix: 'b', title: 'B - Veiligheid & beperkingen', icon: '🔒' },
-  { prefix: 'c', title: 'C - Claude gebruiken', icon: '💻' },
-  { prefix: 'd', title: 'D - Claude Code', icon: '⌨️' },
-  { prefix: 'e', title: 'E - MCP & Skills', icon: '🔌' },
-  { prefix: 'i', title: 'I - Praktijktoets & certificaat', icon: '📋' }
-];
+const OPENED_KEY  = 'umely_opened';   // JSON array of slugs (most recent first)
+const LAST_KEY    = 'umely_last';     // JSON {slug, title, url, cat}
 
-function getCategoryForModule(slug) {
-  var match = slug.match(/^elearning-([a-z])\d/);
-  return match ? match[1] : null;
+let _supabase = null;
+let _session  = null;
+let allModules = [];
+let activeFilter = 'all';
+let userRole = 'user';
+
+// ── PROGRESS TRACKING ──
+function getOpened() { try { return JSON.parse(localStorage.getItem(OPENED_KEY)) || []; } catch { return []; } }
+
+function markOpened(slug) {
+  let arr = getOpened().filter(s => s !== slug);
+  arr.unshift(slug);
+  localStorage.setItem(OPENED_KEY, JSON.stringify(arr));
 }
 
-function renderModuleCard(m, idx, isAdmin) {
-  var icon = icons[idx % icons.length];
-  var dateFormatted = new Date(m.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
-  var adminActions = isAdmin ? `
-        <div class="card-actions">
-          <button class="btn-rename" title="Naam wijzigen" onclick="renameModule('${m.slug}', this)">✏️</button>
-          <button class="btn-delete" title="Verwijder module" onclick="deleteModule('${m.slug}', '${m.title.replace(/'/g, "\\'")}', this)">🗑</button>
-        </div>` : '';
-  return `
-    <div class="module-card" data-slug="${m.slug}">
-      <div class="module-icon">${icon}</div>
-      <div class="module-badge">Umely E-learning</div>
-      <a class="module-title" href="${m.url}" target="_blank" style="color:var(--charcoal);text-decoration:none;">${m.title}</a>
-      <div class="module-date">Aangemaakt op ${dateFormatted}</div>
-      <div class="module-footer">
-        <a class="module-link" href="${m.url}" target="_blank">Bekijk module</a>
-        ${adminActions}
-      </div>
-    </div>`;
+function isOpened(slug) { return getOpened().includes(slug); }
+
+function saveLast(module) {
+  localStorage.setItem(LAST_KEY, JSON.stringify({ slug: module.slug, title: module.title, url: module.url, cat: getCat(module.slug) }));
+}
+
+function getLast() { try { return JSON.parse(localStorage.getItem(LAST_KEY)); } catch { return null; } }
+
+function getCat(slug) {
+  const m = slug.match(/^elearning-([a-z])\d/);
+  return m ? m[1] : null;
+}
+
+function getCatLabel(slug) {
+  const cat = getCat(slug);
+  const m = slug.match(/^elearning-([a-z])(\d+)/);
+  if (!m) return '';
+  return (m[1].toUpperCase() + m[2]);
 }
 
 // ── AUTH ──
-let _supabase = null;
-let _session = null;
-
 async function initAuth() {
   try {
     const config = await fetch('/api/config').then(r => r.json());
@@ -408,7 +455,7 @@ async function initAuth() {
       else if (event === 'SIGNED_OUT') showLogin();
     });
   } catch (e) {
-    console.error('Auth initialisatie mislukt:', e);
+    console.error('Auth mislukt:', e);
     showLogin();
   }
 }
@@ -420,39 +467,33 @@ function showLogin() {
 async function showApp(session) {
   document.getElementById('authOverlay').style.display = 'none';
   document.getElementById('logoutBtn').style.display = 'block';
-  const userEl = document.getElementById('headerUser');
-  userEl.style.display = 'block';
+  const pill = document.getElementById('userPill');
+  pill.style.display = 'flex';
   try {
-    const { data: profile } = await _supabase
-      .from('profiles')
-      .select('first_name')
-      .eq('id', session.user.id)
-      .single();
-    userEl.textContent = profile?.first_name || session.user.email;
+    const { data: profile } = await _supabase.from('profiles').select('first_name').eq('id', session.user.id).single();
+    const name = profile?.first_name || session.user.email.split('@')[0];
+    document.getElementById('headerUser').textContent = name;
+    document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
   } catch {
-    userEl.textContent = session.user.email;
+    const name = session.user.email.split('@')[0];
+    document.getElementById('headerUser').textContent = name;
+    document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
   }
 }
 
 let isSignupMode = false;
-
 function toggleAuthMode(e) {
   e.preventDefault();
   isSignupMode = !isSignupMode;
   const btn = document.getElementById('loginBtn');
   const toggle = document.getElementById('toggleSignup');
-  const errEl = document.getElementById('authError');
-  errEl.style.display = 'none';
+  document.getElementById('authError').style.display = 'none';
   if (isSignupMode) {
-    btn.textContent = 'Registreer';
-    btn.setAttribute('onclick', 'signup()');
-    toggle.textContent = 'Inloggen';
-    toggle.parentElement.firstChild.textContent = 'Al een account? ';
+    btn.textContent = 'Registreer'; btn.setAttribute('onclick','signup()');
+    toggle.textContent = 'Inloggen'; toggle.parentElement.firstChild.textContent = 'Al een account? ';
   } else {
-    btn.textContent = 'Inloggen';
-    btn.setAttribute('onclick', 'login()');
-    toggle.textContent = 'Registreer';
-    toggle.parentElement.firstChild.textContent = 'Nog geen account? ';
+    btn.textContent = 'Inloggen'; btn.setAttribute('onclick','login()');
+    toggle.textContent = 'Registreer'; toggle.parentElement.firstChild.textContent = 'Nog geen account? ';
   }
 }
 
@@ -461,18 +502,10 @@ async function login() {
   const password = document.getElementById('authPassword').value;
   const btn = document.getElementById('loginBtn');
   const errEl = document.getElementById('authError');
-
   errEl.style.display = 'none';
-  btn.disabled = true;
-  btn.textContent = 'Inloggen...';
-
+  btn.disabled = true; btn.textContent = 'Inloggen...';
   const { error } = await _supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    errEl.textContent = error.message;
-    errEl.style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = 'Inloggen';
-  }
+  if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Inloggen'; }
 }
 
 async function signup() {
@@ -480,367 +513,286 @@ async function signup() {
   const password = document.getElementById('authPassword').value;
   const btn = document.getElementById('loginBtn');
   const errEl = document.getElementById('authError');
-
-  if (password.length < 6) {
-    errEl.textContent = 'Wachtwoord moet minimaal 6 tekens zijn.';
-    errEl.style.display = 'block';
-    return;
-  }
-
+  if (password.length < 6) { errEl.textContent = 'Wachtwoord moet minimaal 6 tekens zijn.'; errEl.style.display = 'block'; return; }
   errEl.style.display = 'none';
-  btn.disabled = true;
-  btn.textContent = 'Registreren...';
-
+  btn.disabled = true; btn.textContent = 'Registreren...';
   const { error } = await _supabase.auth.signUp({ email, password });
-  if (error) {
-    errEl.textContent = error.message;
-    errEl.style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = 'Registreer';
-  } else {
-    errEl.style.display = 'block';
-    errEl.style.background = '#F0FDF4';
-    errEl.style.borderColor = '#BBF7D0';
-    errEl.style.color = '#15803D';
-    errEl.textContent = 'Account aangemaakt! Check je e-mail om te bevestigen, of log direct in.';
-    btn.disabled = false;
-    btn.textContent = 'Registreer';
+  if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Registreer'; }
+  else {
+    errEl.style.cssText += ';display:block;background:#F0FDF4;border-color:#BBF7D0;color:#15803D;';
+    errEl.textContent = 'Account aangemaakt! Check je e-mail om te bevestigen.';
+    btn.disabled = false; btn.textContent = 'Registreer';
   }
 }
 
 async function logout() {
   const btn = document.getElementById('logoutBtn');
-  btn.textContent = '...';
-  btn.disabled = true;
+  btn.textContent = '...'; btn.disabled = true;
   await _supabase.auth.signOut();
   window.location.reload();
 }
 
-function authHeader() {
-  return _session ? { 'Authorization': `Bearer ${_session.access_token}` } : {};
-}
+function authHeader() { return _session ? { 'Authorization': `Bearer ${_session.access_token}` } : {}; }
 
-// ── MODULE VOLGORDE ──
-function getSavedOrder() {
-  try { return JSON.parse(localStorage.getItem(ORDER_KEY)) || []; } catch { return []; }
-}
-
-function saveOrder() {
-  const slugs = [...document.querySelectorAll('.module-card')].map(c => c.dataset.slug);
-  localStorage.setItem(ORDER_KEY, JSON.stringify(slugs));
-}
-
-function applyOrder(modules) {
-  const saved = getSavedOrder();
-  if (!saved.length) return modules;
-  const map = Object.fromEntries(modules.map(m => [m.slug, m]));
-  const ordered = saved.filter(s => map[s]).map(s => map[s]);
-  const rest = modules.filter(m => !saved.includes(m.slug));
-  return [...ordered, ...rest];
-}
-
-let userRole = 'user';
-
-function skeletonCard() {
-  return `<div class="skeleton-card">
-    <div class="skeleton-line icon"></div>
-    <div class="skeleton-line w100"></div>
-    <div class="skeleton-line w60"></div>
-    <div class="skeleton-line w40"></div>
-  </div>`;
-}
-
-function showSkeleton(grid) {
-  grid.className = '';
-  grid.innerHTML = [1,2,3].map(() => `
-    <div class="skeleton-group">
-      <div class="skeleton-header"></div>
-      <div class="skeleton-body">
-        ${skeletonCard()}${skeletonCard()}${skeletonCard()}
-      </div>
-    </div>`).join('');
-}
-
-const OPEN_CATS_KEY = 'umely_open_cats';
-
-function saveOpenCats() {
-  const open = [...document.querySelectorAll('.category-group.open')].map(g => g.dataset.cat);
-  localStorage.setItem(OPEN_CATS_KEY, JSON.stringify(open));
-}
-
-function getOpenCats() {
-  try { return JSON.parse(localStorage.getItem(OPEN_CATS_KEY)) || []; } catch { return []; }
-}
-
+// ── LOAD MODULES ──
 async function loadModules() {
   const grid = document.getElementById('grid');
-  showSkeleton(grid);
+  grid.innerHTML = skeletonHTML();
   try {
     const res = await fetch('/api/modules', { headers: authHeader() });
     if (res.status === 401) { showLogin(); return; }
     const json = await res.json();
     if (!res.ok) throw new Error(json.error || 'Server fout ' + res.status);
     userRole = json.role || 'user';
-    const modules = applyOrder(json.modules || []);
-    const isAdmin = userRole === 'admin';
+    allModules = json.modules || [];
 
-    if (modules.length === 0) {
-      document.getElementById('searchWrap').style.display = 'none';
-      document.getElementById('dragHint').style.display = 'none';
-      grid.className = '';
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">📭</div>
-          <h2>Nog geen modules</h2>
-          <p>Genereer je eerste e-learning via de homepage.</p>
-          <a href="/" class="btn-sm btn-primary" style="display:inline-flex;align-items:center;gap:6px;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:700;background:linear-gradient(135deg,#FF8514,#FF4D00);color:white;text-decoration:none;">Maak eerste e-learning</a>
-        </div>`;
-      return;
-    }
+    updateSidebar();
+    updateStats();
+    showContinue();
+    renderGrid();
 
-    document.getElementById('searchWrap').style.display = 'block';
-    document.getElementById('dragHint').style.display = 'none';
-    grid.className = '';
-    grid.innerHTML = '';
-
-    var globalIdx = 0;
-    var uncategorized = [];
-
-    for (var c = 0; c < CATEGORIES.length; c++) {
-      var cat = CATEGORIES[c];
-      var catModules = modules.filter(function(m) {
-        return getCategoryForModule(m.slug) === cat.prefix;
-      });
-      if (catModules.length === 0) continue;
-
-      var group = document.createElement('div');
-      group.className = 'category-group';
-      group.dataset.cat = cat.prefix;
-
-      var header = document.createElement('div');
-      header.className = 'category-header';
-      header.innerHTML = '<span class="category-icon">' + cat.icon + '</span>' +
-        '<span class="category-title">' + cat.title + '</span>' +
-        '<span class="category-count">' + catModules.length + ' module' + (catModules.length !== 1 ? 's' : '') + '</span>' +
-        '<span class="category-chevron">&#9660;</span>';
-      header.onclick = function(el) {
-        return function() { el.classList.toggle('open'); saveOpenCats(); };
-      }(group);
-
-      var modulesDiv = document.createElement('div');
-      modulesDiv.className = 'category-modules';
-      var innerGrid = document.createElement('div');
-      innerGrid.className = 'grid';
-
-      for (var i = 0; i < catModules.length; i++) {
-        innerGrid.innerHTML += renderModuleCard(catModules[i], globalIdx++, isAdmin);
-      }
-
-      modulesDiv.appendChild(innerGrid);
-      group.appendChild(header);
-      group.appendChild(modulesDiv);
-      grid.appendChild(group);
-    }
-
-    // Modules without a recognized category
-    uncategorized = modules.filter(function(m) {
-      return getCategoryForModule(m.slug) === null;
-    });
-    if (uncategorized.length > 0) {
-      var group = document.createElement('div');
-      group.className = 'category-group';
-
-      var header = document.createElement('div');
-      header.className = 'category-header';
-      header.innerHTML = '<span class="category-icon">📦</span>' +
-        '<span class="category-title">Overige modules</span>' +
-        '<span class="category-count">' + uncategorized.length + ' module' + (uncategorized.length !== 1 ? 's' : '') + '</span>' +
-        '<span class="category-chevron">&#9660;</span>';
-      header.onclick = function(el) {
-        return function() { el.classList.toggle('open'); };
-      }(group);
-
-      var modulesDiv = document.createElement('div');
-      modulesDiv.className = 'category-modules';
-      var innerGrid = document.createElement('div');
-      innerGrid.className = 'grid';
-
-      for (var i = 0; i < uncategorized.length; i++) {
-        innerGrid.innerHTML += renderModuleCard(uncategorized[i], globalIdx++, isAdmin);
-      }
-
-      modulesDiv.appendChild(innerGrid);
-      group.appendChild(header);
-      group.appendChild(modulesDiv);
-      grid.appendChild(group);
-    }
-
-    // Herstel open categorieën
-    var openCats = getOpenCats();
-    if (openCats.length === 0) {
-      // Standaard: eerste categorie open
-      var first = grid.querySelector('.category-group');
-      if (first) first.classList.add('open');
-    } else {
-      openCats.forEach(function(prefix) {
-        var g = grid.querySelector('.category-group[data-cat="' + prefix + '"]');
-        if (g) g.classList.add('open');
-      });
-    }
-
-    // Laad voortgang na het renderen van kaarten
-    loadProgress();
-
+    document.getElementById('searchInput').style.display = '';
+    document.getElementById('statsRow').style.display = 'grid';
   } catch (e) {
     grid.innerHTML = '<div class="empty-state"><p>Kon modules niet laden. Is de server actief?</p></div>';
   }
 }
 
-async function loadProgress() {
-  try {
-    const res = await fetch('/api/user/progress', { headers: authHeader() });
-    if (!res.ok) return;
-    const { progress } = await res.json();
-    progress.forEach(function(p) {
-      var card = document.querySelector('.module-card[data-slug="' + p.module_slug + '"]');
-      if (!card) return;
-      var existing = card.querySelector('.progress-status');
-      if (existing) existing.remove();
-      var badge = document.createElement('div');
-      if (p.completed) {
-        badge.className = 'progress-status done';
-        badge.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Afgerond &mdash; ' + p.score_pct + '%';
-      } else if (p.score_pct > 0) {
-        badge.className = 'progress-status started';
-        badge.innerHTML = '&#9654; Bezig &mdash; ' + p.score_pct + '%';
-      } else {
-        badge.className = 'progress-status started';
-        badge.innerHTML = '&#9654; Gestart';
-      }
-      var footer = card.querySelector('.module-footer');
-      if (footer) card.insertBefore(badge, footer);
-    });
-  } catch(e) {}
+// ── SIDEBAR COUNTS ──
+function updateSidebar() {
+  const cats = Object.keys(CATEGORIES);
+  document.getElementById('nb-all').textContent = allModules.length;
+  cats.forEach(cat => {
+    const count = allModules.filter(m => getCat(m.slug) === cat).length;
+    const el = document.getElementById('nb-' + cat);
+    if (el) el.textContent = count;
+  });
+
+  // Progress: how many have been opened
+  const opened = getOpened();
+  const openedCount = allModules.filter(m => opened.includes(m.slug)).length;
+  document.getElementById('progText').textContent = openedCount + ' / ' + allModules.length;
+  const pct = allModules.length ? Math.round((openedCount / allModules.length) * 100) : 0;
+  document.getElementById('progFill').style.width = pct + '%';
 }
 
+// ── STATS ──
+function updateStats() {
+  const opened = getOpened();
+  const openedCount = allModules.filter(m => opened.includes(m.slug)).length;
+  const activeCats = new Set(allModules.map(m => getCat(m.slug)).filter(Boolean)).size;
+  document.getElementById('statTotal').textContent = allModules.length;
+  document.getElementById('statOpened').textContent = openedCount;
+  document.getElementById('statCats').textContent = activeCats;
+}
+
+// ── CONTINUE CARD ──
+function showContinue() {
+  const last = getLast();
+  if (!last || !allModules.find(m => m.slug === last.slug)) return;
+  const cat = last.cat;
+  const icon = CAT_ICONS[cat] || '📘';
+  const label = getCatLabel(last.slug);
+  document.getElementById('continueIcon').textContent = icon;
+  document.getElementById('continueTag').textContent = label + (CATEGORIES[cat] ? ' — ' + CATEGORIES[cat].title.split(' — ')[1] : '');
+  document.getElementById('continueTitle').textContent = last.title;
+  document.getElementById('continueBtn').href = last.url;
+  document.getElementById('continueSection').style.display = 'block';
+}
+
+// ── FILTER ──
+function setFilter(cat, sidebarEl) {
+  activeFilter = cat;
+
+  // Sync sidebar active state
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const sNav = document.getElementById('nav-' + (cat === 'all' ? 'all' : cat));
+  if (sNav) sNav.classList.add('active');
+
+  // Update section title
+  const titleMap = { all: 'Alle modules', a: 'A — Introductie tot Claude', b: 'B — Veiligheid & beperkingen', c: 'C — Claude gebruiken', d: 'D — Claude Code', e: 'E — MCP & Skills', i: 'I — Afsluiting' };
+  document.getElementById('sectionTitle').textContent = titleMap[cat] || 'Modules';
+
+  renderGrid();
+}
+
+// ── RENDER GRID ──
+const OPEN_CATS_KEY = 'umely_open_cats';
+function getOpenCats() { try { return JSON.parse(localStorage.getItem(OPEN_CATS_KEY)) || []; } catch { return []; } }
+function saveOpenCats() {
+  const open = [...document.querySelectorAll('.cat-group.open')].map(g => g.dataset.cat);
+  localStorage.setItem(OPEN_CATS_KEY, JSON.stringify(open));
+}
+
+function renderModuleCard(m) {
+  const cat = getCat(m.slug) || 'a';
+  const label = getCatLabel(m.slug);
+  const wasOpened = getOpened().includes(m.slug);
+  const isAdmin = userRole === 'admin';
+  const adminActions = isAdmin ? `
+    <div class="card-actions">
+      <button class="btn-rename" title="Naam wijzigen" onclick="event.preventDefault();renameModule('${m.slug}', this)">✏️</button>
+      <button class="btn-delete" title="Verwijderen" onclick="event.preventDefault();deleteModule('${m.slug}', '${m.title.replace(/'/g,"\\'")}', this)">🗑</button>
+    </div>` : '';
+  return `<a class="module-card${wasOpened ? ' opened' : ''}" href="${m.url}" target="_blank"
+      onclick="trackOpen('${m.slug}','${m.title.replace(/'/g,"\\'")}','${m.url}','${cat}')"
+      data-slug="${m.slug}" data-cat="${cat}">
+    <div class="module-card-top">
+      <span class="cat-badge cat-${cat}">${label}</span>
+      <span class="mod-status${wasOpened ? ' started' : ''}">${wasOpened ? '● Geopend' : 'Nog te starten'}</span>
+    </div>
+    <div class="module-title">${m.title}</div>
+    <div class="module-meta"><span>⏱ ca. 20 min</span><span>❓ 5 vragen</span></div>
+    <div class="prog-bar-wrap"><div class="prog-bar" style="width:${wasOpened ? '100' : '0'}%"></div></div>
+    <div class="module-footer">
+      <span class="module-link">${wasOpened ? 'Opnieuw starten' : 'Starten'} ›</span>
+      ${adminActions}
+    </div>
+  </a>`;
+}
+
+function renderGrid() {
+  const q = (document.getElementById('searchInput').value || '').toLowerCase();
+  const grid = document.getElementById('grid');
+
+  if (allModules.length === 0) {
+    grid.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">📭</div>
+      <h2>Nog geen modules</h2>
+      <p>Genereer je eerste e-learning via de homepage.</p>
+      <a href="/" class="btn-primary-pill">Maak eerste e-learning</a>
+    </div>`;
+    return;
+  }
+
+  // Determine which categories to show
+  const catsToShow = activeFilter === 'all'
+    ? Object.keys(CATEGORIES)
+    : [activeFilter];
+
+  const savedOpen = getOpenCats();
+  let html = '';
+  let anyVisible = false;
+
+  catsToShow.forEach(cat => {
+    let catModules = allModules.filter(m => getCat(m.slug) === cat);
+    if (q) catModules = catModules.filter(m => m.title.toLowerCase().includes(q));
+    if (catModules.length === 0) return;
+    anyVisible = true;
+
+    const openedCount = catModules.filter(m => getOpened().includes(m.slug)).length;
+    const isOpen = activeFilter !== 'all' || savedOpen.includes(cat) || (savedOpen.length === 0 && cat === catsToShow[0]);
+    const info = CATEGORIES[cat];
+    const catIcon = CAT_ICONS[cat] || '📘';
+
+    html += `<div class="cat-group${isOpen ? ' open' : ''}" data-cat="${cat}">
+      <div class="cat-group-header" onclick="toggleCat(this.parentElement)">
+        <span class="cat-group-icon">${catIcon}</span>
+        <span class="cat-group-title">${info.title}</span>
+        <span class="cat-group-meta">
+          <span>${catModules.length} module${catModules.length !== 1 ? 's' : ''}</span>
+          ${openedCount > 0 ? `<span style="color:rgba(255,200,100,0.8);">● ${openedCount} geopend</span>` : ''}
+        </span>
+        <span class="cat-group-chevron">&#9660;</span>
+      </div>
+      <div class="cat-group-body">
+        <div class="cat-inner-grid">
+          ${catModules.map(m => renderModuleCard(m)).join('')}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  if (!anyVisible) {
+    grid.innerHTML = '<div class="no-results">Geen modules gevonden.</div>';
+    return;
+  }
+
+  grid.innerHTML = html;
+}
+
+function toggleCat(group) {
+  group.classList.toggle('open');
+  saveOpenCats();
+}
+
+function filterModules() { renderGrid(); }
+
+function trackOpen(slug, title, url, cat) {
+  markOpened(slug);
+  saveLast({ slug, title, url, cat });
+  updateSidebar();
+  updateStats();
+  showContinue();
+  // Update the card status without re-rendering
+  const card = document.querySelector(`.module-card[data-slug="${slug}"]`);
+  if (card) {
+    card.classList.add('opened');
+    const statusEl = card.querySelector('.mod-status');
+    if (statusEl) { statusEl.textContent = '● Geopend'; statusEl.className = 'mod-status started'; }
+    const bar = card.querySelector('.prog-bar');
+    if (bar) bar.style.width = '100%';
+    const link = card.querySelector('.module-link');
+    if (link) link.textContent = 'Opnieuw starten ›';
+  }
+}
+
+function filterModules() {
+  renderGrid();
+}
+
+// ── ADMIN ACTIONS ──
 async function renameModule(slug, btn) {
   const card = btn.closest('.module-card');
   const titleEl = card.querySelector('.module-title');
   const currentTitle = titleEl.textContent;
-
   const newTitle = prompt('Nieuwe naam voor deze e-learning:', currentTitle);
   if (!newTitle || newTitle.trim() === currentTitle) return;
-
-  btn.disabled = true;
-  btn.textContent = '⏳';
+  btn.disabled = true; btn.textContent = '⏳';
   try {
     const res = await fetch(`/api/modules/${slug}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...authHeader() },
       body: JSON.stringify({ title: newTitle.trim() })
     });
-    if (!res.ok) throw new Error(`Server gaf ${res.status} terug`);
+    if (!res.ok) throw new Error('Server gaf ' + res.status + ' terug');
     titleEl.textContent = newTitle.trim();
-  } catch (e) {
-    alert('Fout: ' + e.message);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '✏️';
-  }
+    const mod = allModules.find(m => m.slug === slug);
+    if (mod) mod.title = newTitle.trim();
+  } catch (e) { alert('Fout: ' + e.message); }
+  finally { btn.disabled = false; btn.textContent = '✏️'; }
 }
 
 async function deleteModule(slug, title, btn) {
   if (!confirm(`Weet je zeker dat je "${title}" wilt verwijderen?`)) return;
-  btn.disabled = true;
-  btn.textContent = '⏳';
+  btn.disabled = true; btn.textContent = '⏳';
   try {
-    const res = await fetch(`/api/modules/${slug}`, {
-      method: 'DELETE',
-      headers: authHeader()
-    });
-    if (!res.ok) throw new Error(`Server gaf ${res.status} terug`);
-    const card = btn.closest('.module-card');
-    const categoryGroup = card.closest('.category-group');
-    card.remove();
-    // Remove empty category group
-    if (categoryGroup && categoryGroup.querySelectorAll('.module-card').length === 0) {
-      categoryGroup.remove();
-    }
-    saveOrder();
-    const grid = document.getElementById('grid');
-    if (grid.querySelectorAll('.module-card').length === 0) {
-      document.getElementById('searchWrap').style.display = 'none';
-      document.getElementById('dragHint').style.display = 'none';
-      grid.className = '';
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">📭</div>
-          <h2>Nog geen modules</h2>
-          <p>Genereer je eerste e-learning via de homepage.</p>
-          <a href="/" class="btn-sm btn-primary" style="display:inline-flex;align-items:center;gap:6px;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:700;background:linear-gradient(135deg,#FF8514,#FF4D00);color:white;text-decoration:none;">✨ Maak eerste e-learning</a>
-        </div>`;
-    }
-  } catch (e) {
-    btn.disabled = false;
-    btn.textContent = '🗑';
-    alert('Fout: ' + e.message);
-  }
+    const res = await fetch(`/api/modules/${slug}`, { method: 'DELETE', headers: authHeader() });
+    if (!res.ok) throw new Error('Server gaf ' + res.status + ' terug');
+    allModules = allModules.filter(m => m.slug !== slug);
+    updateSidebar(); updateStats(); renderGrid();
+  } catch (e) { btn.disabled = false; btn.textContent = '🗑'; alert('Fout: ' + e.message); }
 }
 
-function filterModules() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.module-card');
-  let visible = 0;
-  cards.forEach(card => {
-    const title = card.querySelector('.module-title').textContent.toLowerCase();
-    const show = title.includes(q);
-    card.style.display = show ? '' : 'none';
-    if (show) visible++;
-  });
-  // Show/hide category groups based on whether they have visible cards
-  document.querySelectorAll('.category-group').forEach(group => {
-    const visibleCards = group.querySelectorAll('.module-card:not([style*="display: none"])');
-    group.style.display = visibleCards.length > 0 ? '' : 'none';
-    // Auto-open groups when searching, collapse when cleared
-    if (q && visibleCards.length > 0) {
-      group.classList.add('open');
-    } else if (!q) {
-      const savedOpen = getOpenCats();
-      const cat = group.dataset.cat;
-      if (savedOpen.includes(cat)) {
-        group.classList.add('open');
-      } else {
-        group.classList.remove('open');
-      }
-    }
-  });
-  const grid = document.getElementById('grid');
-  let noResults = grid.querySelector('.no-results');
-  if (visible === 0 && q) {
-    if (!noResults) {
-      noResults = document.createElement('p');
-      noResults.className = 'no-results';
-      grid.appendChild(noResults);
-    }
-    noResults.textContent = `Geen modules gevonden voor "${q}".`;
-  } else if (noResults) {
-    noResults.remove();
-  }
+// ── SKELETON ──
+function skeletonHTML() {
+  const card = () => `<div class="skeleton-card">
+    <div class="sk h12 w25"></div>
+    <div class="sk h16 w100"></div>
+    <div class="sk h12 w70"></div>
+    <div class="sk h12 w40"></div>
+  </div>`;
+  return [1,2,3,4,5,6].map(card).join('');
 }
 
-initAuth();
-
-// ── Newsletter popup ──
+// ── NEWSLETTER ──
 async function checkNewsletterPopup(session) {
   if (localStorage.getItem('umely_nl_shown')) return;
   try {
     const res = await fetch('/api/user/profile', { headers: authHeader() });
     if (res.ok) {
       const { profile } = await res.json();
-      if (profile?.newsletter_subscribed) {
-        localStorage.setItem('umely_nl_shown', '1');
-        return;
-      }
+      if (profile?.newsletter_subscribed) { localStorage.setItem('umely_nl_shown', '1'); return; }
     }
   } catch(e) {}
   document.getElementById('nlEmailInput').value = session?.user?.email || '';
@@ -856,8 +808,7 @@ async function subscribeNewsletter() {
   const email = document.getElementById('nlEmailInput').value.trim();
   if (!email) return;
   const btn = document.querySelector('.nl-submit');
-  btn.disabled = true;
-  btn.textContent = 'Bezig...';
+  btn.disabled = true; btn.textContent = 'Bezig...';
   try {
     await fetch('/api/newsletter/subscribe', {
       method: 'POST',
@@ -869,6 +820,8 @@ async function subscribeNewsletter() {
   document.getElementById('nlSuccess').style.display = 'block';
   setTimeout(() => closeNewsletter(), 2000);
 }
+
+initAuth();
 </script>
 </body>
 </html>

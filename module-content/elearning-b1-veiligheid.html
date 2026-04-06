@@ -46,7 +46,7 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>Ga naar claude.ai, klik op je profielafbeelding rechtsonder, kies Instellingen en dan Privacy. Hier zie je exact welke opties voor jou van toepassing zijn.</p>
+    <p>Ga naar claude.ai, klik op je profielafbeelding of initialen rechtsboven, kies Instellingen en dan Privacy. Hier zie je exact welke opties voor jou van toepassing zijn.</p>
   </div>
   <div class="btn-wrap"><button class="btn" onclick="goTo('screen-module-1-2')">Volgende</button></div>
 </div>
@@ -136,7 +136,7 @@
   <div class="content-card">
     <p>Voor structureel gebruik van Claude met gevoelige of zakelijke gegevens is een zakelijk abonnement noodzakelijk. Anthropic biedt twee zakelijke varianten: <strong>Teams</strong> en <strong>Enterprise</strong>.</p>
     <p>Bij het <strong>Teams-abonnement</strong> worden gesprekken standaard niet gebruikt voor modeltraining. Dat is een wezenlijk verschil met de gratis versie, waar je dat zelf moet uitschakelen.</p>
-    <p>Het <strong>Enterprise-abonnement</strong> biedt aanvullende beveiligingsopties: Single Sign-On via SAML, uitgebreide auditlogs, betere beheermogelijkheden en de mogelijkheid om een formele verwerkersovereenkomst af te sluiten.</p>
+    <p>Het <strong>Teams-abonnement</strong> biedt al een standaard verwerkersovereenkomst (DPA) en gesprekken worden niet voor training gebruikt. Het <strong>Enterprise-abonnement</strong> voegt aanvullende beveiligingsopties toe: Single Sign-On via SAML, uitgebreide auditlogs en betere beheermogelijkheden.</p>
   </div>
   <div class="tip-box">
     <div class="tip-box-label info">Wat is de AVG?</div>
@@ -205,7 +205,7 @@
     <p class="scenario-tekst">Een advocatenkantoor wil Claude structureel inzetten om dossiers samen te vatten. In die dossiers staan namen, geboortedata en juridische informatie van cliënten. Ze overwegen de gratis versie te gebruiken om kosten te besparen. Is dit verstandig?</p>
     <div class="scenario-keuzes">
       <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Dat is niet het goede advies. Gratis gebruik met persoonsgegevens van cliënten is een AVG-overtreding. Er is geen verwerkersovereenkomst beschikbaar en gesprekken kunnen voor training worden gebruikt.')">Ja, de gratis versie volstaat als ze de training uitschakelen</button>
-      <button class="scenario-keuze" onclick="checkScenario(2, this, true, 'Precies. Advocaten werken met bijzonder gevoelige persoonsgegevens. Voor structureel gebruik is een Enterprise-abonnement met verwerkersovereenkomst vereist. Dit is geen luxe maar een wettelijke verplichting.')">Nee, bij structureel gebruik met cliëntdata is Enterprise met verwerkersovereenkomst vereist</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, true, 'Precies. Advocaten werken met bijzonder gevoelige persoonsgegevens. Voor structureel gebruik is minimaal een Teams-abonnement met verwerkersovereenkomst nodig. Voor grotere kantoren met strengere beveiligingseisen is Enterprise de aangewezen keuze.')">Nee, bij structureel gebruik met cliëntdata is minimaal Teams of Enterprise met verwerkersovereenkomst nodig</button>
       <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Dat is onvolledig. Claude mag wel worden gebruikt door advocaten, maar dan met het juiste abonnement en de juiste contractuele basis.')">Claude mag sowieso niet worden gebruikt in juridische contexten</button>
     </div>
     <div id="scenario-feedback-2" class="scenario-feedback"></div>
@@ -224,7 +224,7 @@
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Nee. De AVG is van toepassing zodra je persoonsgegevens van Europese burgers verwerkt, ongeacht de grootte van je organisatie.')">Alleen bij organisaties met meer dan 50 medewerkers</button>
       <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Nee, dat is te strikt. Veel zakelijk gebruik met anonieme data is prima zonder verwerkersovereenkomst. Het gaat specifiek om persoonsgegevens van Europese burgers.')">Bij elk zakelijk gebruik van Claude</button>
-      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Correct. Zodra je persoonsgegevens van Europese burgers invoert in Claude, ben jij als verwerkingsverantwoordelijke verplicht een verwerkersovereenkomst te hebben met Anthropic als verwerker. Dat is alleen mogelijk via Enterprise.')">Bij structureel gebruik waarbij persoonsgegevens van Europese burgers worden ingevoerd</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Correct. Zodra je persoonsgegevens van Europese burgers invoert in Claude, ben jij als verwerkingsverantwoordelijke verplicht een verwerkersovereenkomst te hebben met Anthropic als verwerker. Dit is mogelijk via Teams of Enterprise.')">Bij structureel gebruik waarbij persoonsgegevens van Europese burgers worden ingevoerd</button>
     </div>
     <div id="kc-feedback-2" class="kc-feedback"></div>
   </div>
