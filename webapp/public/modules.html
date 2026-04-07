@@ -658,8 +658,8 @@ function renderModuleCard(m) {
   const isAdmin = userRole === 'admin';
   const adminActions = isAdmin ? `
     <div class="card-actions">
-      <button class="btn-rename" title="Naam wijzigen" onclick="event.preventDefault();renameModule('${m.slug}', this)">✏️</button>
-      <button class="btn-delete" title="Verwijderen" onclick="event.preventDefault();deleteModule('${m.slug}', '${m.title.replace(/'/g,"\\'")}', this)">🗑</button>
+      <button class="btn-rename" title="Naam wijzigen" onclick="event.preventDefault();event.stopPropagation();renameModule('${m.slug}', this)">✏️</button>
+      <button class="btn-delete" title="Verwijderen" onclick="event.preventDefault();event.stopPropagation();deleteModule('${m.slug}', '${m.title.replace(/'/g,"\\'")}', this)">🗑</button>
     </div>` : '';
   return `<a class="module-card${cardClass}" href="${m.url}" target="_blank"
       onclick="trackOpen('${m.slug}','${m.title.replace(/'/g,"\\'")}','${m.url}','${cat}')"

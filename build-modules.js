@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.module-header').forEach(function(header) {
     var nameDiv = document.createElement('div');
     nameDiv.className = 'module-naam';
-    nameDiv.textContent = '${title}';
+    nameDiv.textContent = ${JSON.stringify(title)};
     header.insertBefore(nameDiv, header.firstChild);
   });
   // Inject nav-buttons class into each screen (except welcome, quiz, result)
