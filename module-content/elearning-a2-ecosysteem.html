@@ -393,8 +393,8 @@
         <div class="fc-hint">Klik voor uitleg</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Kan niet: acties uitvoeren</div>
-        <div class="fc-uitleg">De extensie kan alleen lezen en adviseren. Hij kan geen knoppen klikken, formulieren invullen of andere acties uitvoeren op een pagina. Claude leest mee, maar je doet het zelf.</div>
+        <div class="fc-term">Kan niet: andere tabbladen lezen</div>
+        <div class="fc-uitleg">De extensie heeft alleen toegang tot de pagina die je op dat moment open hebt. Hij kan geen andere tabbladen lezen, geen bestanden van je computer openen en niet buiten het actieve browservenster werken.</div>
         <div class="fc-hint">Klik voor uitleg</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
@@ -436,7 +436,7 @@
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'De extensie kan wel tekst samenvatten op een pagina. Dat is juist een van de kernfuncties.')">Tekst op een pagina samenvatten</button>
       <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'De extensie kan wel helpen bij het schrijven van e-mails in Gmail.')">Helpen bij het schrijven van e-mails in Gmail</button>
-      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. De extensie kan alleen lezen en adviseren. Hij kan geen acties uitvoeren zoals knoppen klikken, formulieren invullen of bestanden downloaden.')">Knoppen klikken of acties uitvoeren op een pagina</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. De extensie heeft alleen toegang tot het actieve tabblad. Andere tabbladen, lokale bestanden of andere browservensters zijn niet zichtbaar voor de extensie.')">Andere tabbladen of browservensters lezen</button>
       <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'De extensie kan wel vragen beantwoorden over de inhoud van een pagina.')">Vragen beantwoorden over de inhoud van een pagina</button>
     </div>
     <div id="kc-feedback-3" class="kc-feedback"></div>
@@ -530,7 +530,7 @@
 [
   {"vraag":"Wat is de eenvoudigste manier om Claude te gebruiken zonder iets te installeren?","opties":["De desktop-app downloaden","De API inrichten","Via claude.ai in een browser","De Chrome-extensie installeren"],"correct":2,"uitleg":"Claude.ai is de web-app die direct werkt in elke browser. Geen installatie nodig, alleen een account aanmaken."},
   {"vraag":"Wat is een voordeel van de Claude desktop-app ten opzichte van de web-app?","opties":["De desktop-app is goedkoper","De desktop-app kan bestanden op je computer lezen zonder uploaden","De desktop-app heeft toegang tot meer functies","De desktop-app werkt sneller op elk apparaat"],"correct":1,"uitleg":"De desktop-app kan bestanden op je computer direct lezen. Dat is handig als je lokale documenten wilt verwerken zonder ze te hoeven uploaden."},
-  {"vraag":"Wat kan de Claude Chrome-extensie NIET doen?","opties":["Tekst op een webpagina samenvatten","Helpen bij e-mails schrijven in Gmail","Knoppen klikken of acties uitvoeren op een webpagina","Vragen beantwoorden over pagina-inhoud"],"correct":2,"uitleg":"De Chrome-extensie kan alleen lezen en adviseren. Hij voert geen acties uit op pagina's, zoals knoppen klikken of formulieren invullen."},
+  {"vraag":"Wat kan de Claude Chrome-extensie NIET doen?","opties":["Tekst op een webpagina samenvatten","Helpen bij e-mails schrijven in Gmail","Andere tabbladen of browservensters lezen","Vragen beantwoorden over pagina-inhoud"],"correct":2,"uitleg":"De extensie heeft alleen toegang tot het tabblad dat je op dat moment open hebt. Andere tabbladen, lokale bestanden en andere browservensters zijn niet zichtbaar voor de extensie."},
   {"vraag":"Hoe gebruik je Claude het meest effectief naast Excel?","opties":["Via een ingebouwde Claude-plugin in Excel","Claude naast Excel openhouden en data via copy-paste uitwisselen","Een API-koppeling instellen tussen Claude en Excel","Via Microsoft 365 Copilot, dat gebruikt Claude"],"correct":1,"uitleg":"Er is geen directe Claude-plugin in Excel. De gangbare werkwijze is copy-paste: kopieer data of formules naar Claude, stel je vraag en plak het resultaat terug. Dit werkt altijd en vereist geen extra installatie."},
   {"vraag":"Voor welk type gebruiker is de Claude API bedoeld?","opties":["Iedereen die Claude dagelijks gebruikt","Gebruikers met een Pro-abonnement","Bedrijven die Claude willen inbouwen in eigen systemen","Mensen die de desktop-app willen upgraden"],"correct":2,"uitleg":"De API is voor bedrijven en developers die Claude technisch willen integreren in eigen software of workflows. Niet voor dagelijkse kantoorgebruikers die zelf met Claude werken."},
   {"vraag":"Wat is een privacyaandachtspunt bij de Chrome-extensie?","opties":["De extensie stuurt je wachtwoorden naar Anthropic","De extensie heeft toegang tot de inhoud van pagina's die je bezoekt","De extensie werkt alleen als je bent ingelogd bij Google","De extensie deelt je browsegeschiedenis met andere gebruikers"],"correct":1,"uitleg":"De Chrome-extensie leest de inhoud van de pagina's die je bezoekt om je te kunnen helpen. Wees je hiervan bewust bij pagina's met gevoelige of vertrouwelijke informatie."},
