@@ -72,28 +72,37 @@ function validateProfileInput(body) {
  * @param {Function} requireAuth - bestaande auth middleware
  */
 module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
-  const COMMUNITY_BETA = process.env.COMMUNITY_BETA === 'true';
-
   /**
-   * Middleware: blokkeert niet-admins als COMMUNITY_BETA=true.
+   * Middleware: blokkeert toegang als community_enabled=false in app_settings.
+   * Admins komen altijd door.
    */
   async function requireCommunityAccess(req, res, next) {
-    if (!COMMUNITY_BETA) return next();
     try {
+      const { data: setting } = await supabase
+        .from('app_settings')
+        .select('value')
+        .eq('key', 'community_enabled')
+        .single();
+
+      const enabled = !setting || setting.value !== 'false';
+      if (enabled) return next();
+
+      // Community uit — admins mogen er altijd in
       const { data: profile } = await supabase
         .from('profiles')
         .select('role')
         .eq('id', req.user.id)
         .single();
 
-      if (!profile || profile.role !== 'admin') {
-        return res.status(403).json({ error: 'Community is nog niet publiek beschikbaar.' });
+      if (profile?.role === 'admin') {
+        req.isAdmin = true;
+        return next();
       }
-      req.isAdmin = true;
-      next();
+
+      return res.status(403).json({ error: 'Community is momenteel uitgeschakeld.' });
     } catch (err) {
       console.error('[community/access]', err.message);
-      res.status(500).json({ error: 'Kon toegang niet controleren.' });
+      next(); // fail-open
     }
   }
 

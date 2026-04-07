@@ -599,6 +599,27 @@ app.post('/api/auth/resend-verification', async (req, res) => {
   }
 });
 
+// ── App settings ──────────────────────────────────────────────────────────────
+
+app.get('/api/admin/settings', requireAuth, requireAdmin, async (req, res) => {
+  const { data, error } = await supabase.from('app_settings').select('key, value');
+  if (error) return res.status(500).json({ error: error.message });
+  const settings = {};
+  (data || []).forEach(row => { settings[row.key] = row.value; });
+  res.json(settings);
+});
+
+app.post('/api/admin/settings', requireAuth, requireAdmin, async (req, res) => {
+  const { key, value } = req.body;
+  if (!key || value === undefined) return res.status(400).json({ error: 'key en value zijn verplicht.' });
+  const { error } = await supabase.from('app_settings').upsert(
+    { key, value: String(value), updated_at: new Date().toISOString() },
+    { onConflict: 'key' }
+  );
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
+});
+
 require('./community-routes')(app, supabase, requireAuth);
 
 const PORT = process.env.PORT || 3000;

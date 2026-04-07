@@ -332,15 +332,18 @@ async function init() {
   _userLevel = levelData.level || 0;
   _isAdmin = levelData.isAdmin || false;
 
-  // Profiel-gate: bij netwerk/serverfout fail-open zodat gebruikers niet geblokkeerd raken
-  const profileRes = await fetch('/api/community/profile/me', {
-    headers: { 'Authorization': 'Bearer ' + _token }
-  });
-  if (profileRes.ok) {
-    const profileData = await profileRes.json();
-    if (!profileData.complete) {
-      window.location.href = '/profile-setup.html?redirect=/community.html';
-      return;
+  // Profiel-gate: admins slaan de gate over zodat ze altijd kunnen testen
+  if (!_isAdmin) {
+    const profileRes = await fetch('/api/community/profile/me', {
+      headers: { 'Authorization': 'Bearer ' + _token }
+    });
+    // Bij netwerk/serverfout fail-open zodat gebruikers niet geblokkeerd raken
+    if (profileRes.ok) {
+      const profileData = await profileRes.json();
+      if (!profileData.complete) {
+        window.location.href = '/profile-setup.html?redirect=/community.html';
+        return;
+      }
     }
   }
 
