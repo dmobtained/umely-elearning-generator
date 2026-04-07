@@ -192,7 +192,7 @@ async function init() {
       }
       if (profile.avatar_url) {
         const preview = document.getElementById('avatarPreview');
-        preview.innerHTML = `<img src="${profile.avatar_url}" alt="Avatar"><input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" onchange="handleAvatarChange(this)">`;
+        preview.innerHTML = `<img src="${escHtml(profile.avatar_url)}" alt="Avatar"><input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" onchange="handleAvatarChange(this)">`;
       }
     }
   }

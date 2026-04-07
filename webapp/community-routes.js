@@ -1,5 +1,7 @@
 'use strict';
 
+const multer = require('multer');
+
 /**
  * computeLevel — pure functie, makkelijk te testen.
  * @param {Array<{slug: string}>} allModules - alle modules uit elearning.modules
@@ -57,7 +59,9 @@ function validateProfileInput(body) {
   const { bio, specializations } = body || {};
   if (!bio || bio.trim().length === 0) return 'Bio is verplicht.';
   if (bio.length > 300) return 'Bio mag maximaal 300 tekens bevatten.';
-  if (!specializations || specializations.length === 0) return 'Minimaal één specialisatie is verplicht.';
+  if (!Array.isArray(specializations) || specializations.length === 0) return 'Minimaal één specialisatie is verplicht.';
+  if (specializations.some(s => typeof s !== 'string' || s.trim().length === 0 || s.length > 50))
+    return 'Specialisaties mogen maximaal 50 tekens bevatten.';
   return null;
 }
 
@@ -358,7 +362,6 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
    * POST /api/community/profile/avatar
    * Upload avatar to Supabase Storage.
    */
-  const multer = require('multer');
   const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 2 * 1024 * 1024 },
@@ -368,7 +371,15 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
     },
   });
 
-  app.post('/api/community/profile/avatar', requireAuth, upload.single('avatar'), async (req, res) => {
+  app.post('/api/community/profile/avatar', requireAuth, (req, res, next) => {
+    upload.single('avatar')(req, res, (err) => {
+      if (err && err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ error: 'Bestand is te groot. Max 2MB.' });
+      }
+      if (err) return res.status(400).json({ error: err.message });
+      next();
+    });
+  }, async (req, res) => {
     try {
       if (!req.file) return res.status(400).json({ error: 'Geen bestand ontvangen.' });
 
@@ -384,11 +395,12 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
       if (uploadError) return res.status(500).json({ error: uploadError.message });
 
       const { data: urlData } = supabase.storage.from('community-avatars').getPublicUrl(path);
-      const avatarUrl = urlData.publicUrl + '?t=' + Date.now();
+      const avatarUrl = urlData.publicUrl;
 
       const { error: dbError } = await supabase
         .from('community_profiles')
-        .upsert({ user_id: req.user.id, avatar_url: avatarUrl, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+        .update({ avatar_url: avatarUrl, updated_at: new Date().toISOString() })
+        .eq('user_id', req.user.id);
 
       if (dbError) return res.status(500).json({ error: dbError.message });
 
