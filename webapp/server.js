@@ -601,6 +601,11 @@ app.post('/api/auth/resend-verification', async (req, res) => {
 
 // ── App settings ──────────────────────────────────────────────────────────────
 
+app.get('/api/community/status', async (req, res) => {
+  const { data } = await supabase.from('app_settings').select('value').eq('key', 'community_enabled').single();
+  res.json({ enabled: !data || data.value !== 'false' });
+});
+
 app.get('/api/admin/settings', requireAuth, requireAdmin, async (req, res) => {
   const { data, error } = await supabase.from('app_settings').select('key, value');
   if (error) return res.status(500).json({ error: error.message });

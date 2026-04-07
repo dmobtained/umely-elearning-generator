@@ -247,9 +247,12 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
       </button>
     </div>
     <div class="sidebar-footer" id="sidebarFooter" style="display:none">
-      <div class="sidebar-avatar" id="sidebarAvatar"></div>
-      <span class="sidebar-username" id="sidebarUsername"></span>
-      <div class="sidebar-badges" id="sidebarBadges"></div>
+      <div class="sidebar-avatar" id="sidebarAvatar" style="cursor:pointer;" onclick="window.location.href='/profile-setup.html?redirect=/community.html'" title="Profiel bewerken"></div>
+      <div style="flex:1;min-width:0;">
+        <span class="sidebar-username" id="sidebarUsername"></span>
+        <div class="sidebar-badges" id="sidebarBadges"></div>
+      </div>
+      <a href="/profile-setup.html?redirect=/community.html" title="Profiel bewerken" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;flex-shrink:0;">✏</a>
     </div>
   </aside>
 
@@ -493,13 +496,13 @@ async function loadMessages() {
     const avatarHtml = `<div class="msg-avatar${isOwn ? '' : ' clickable'}" style="background:${color}" ${isOwn ? '' : `data-userid="${escHtml(m.user_id)}"`}>${initials}</div>`;
     if (isOwn) {
       return `<div class="message own${isNew ? ' new' : ''}">
+        ${avatarHtml}
         <div class="msg-body">
           <div class="msg-meta">
             <span class="msg-time">${time}</span>
           </div>
           <div class="msg-bubble own">${escHtml(m.content)}</div>
         </div>
-        ${avatarHtml}
       </div>`;
     }
     return `<div class="message${isNew ? ' new' : ''}">
