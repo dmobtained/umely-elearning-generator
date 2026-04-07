@@ -51,6 +51,17 @@ function canAccessRoom(userLevel, roomLevel) {
 }
 
 /**
+ * Validates profile input. Returns error string or null.
+ */
+function validateProfileInput(body) {
+  const { bio, specializations } = body || {};
+  if (!bio || bio.trim().length === 0) return 'Bio is verplicht.';
+  if (bio.length > 300) return 'Bio mag maximaal 300 tekens bevatten.';
+  if (!specializations || specializations.length === 0) return 'Minimaal één specialisatie is verplicht.';
+  return null;
+}
+
+/**
  * Mounts alle community routes op de Express app.
  * @param {object} app - Express app
  * @param {object} supabase - Supabase client (schema: elearning)
@@ -209,7 +220,161 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
     if (error) return res.status(500).json({ error: error.message });
     res.json({ ok: true });
   });
+
+  // ── PROFILE ENDPOINTS ────────────────────────────────────────────────────
+
+  /**
+   * GET /api/community/profile/me
+   * Returns own profile + whether it is complete.
+   */
+  app.get('/api/community/profile/me', requireAuth, async (req, res) => {
+    try {
+      const { data, error } = await supabase
+        .from('community_profiles')
+        .select('*')
+        .eq('user_id', req.user.id)
+        .single();
+
+      if (error && error.code === 'PGRST116') {
+        return res.json({ profile: null, complete: false });
+      }
+      if (error) return res.status(500).json({ error: error.message });
+
+      const complete = data.bio.length > 0 && data.specializations.length > 0;
+      res.json({ profile: data, complete });
+    } catch (err) {
+      console.error('[community/profile/me]', err.message);
+      res.status(500).json({ error: 'Kon profiel niet ophalen.' });
+    }
+  });
+
+  /**
+   * PUT /api/community/profile/me
+   * Create or update own profile.
+   */
+  app.put('/api/community/profile/me', requireAuth, async (req, res) => {
+    const validationError = validateProfileInput(req.body);
+    if (validationError) return res.status(400).json({ error: validationError });
+
+    const { bio, specializations, company, website, instagram, twitter, linkedin, is_public } = req.body;
+
+    const { error } = await supabase
+      .from('community_profiles')
+      .upsert({
+        user_id: req.user.id,
+        bio: bio.trim(),
+        specializations,
+        company: company || null,
+        website: website || null,
+        instagram: instagram || null,
+        twitter: twitter || null,
+        linkedin: linkedin || null,
+        is_public: is_public !== false,
+        updated_at: new Date().toISOString(),
+      }, { onConflict: 'user_id' });
+
+    if (error) return res.status(500).json({ error: error.message });
+    res.json({ ok: true });
+  });
+
+  /**
+   * GET /api/community/profile/:userId
+   * Returns public profile of any user.
+   */
+  app.get('/api/community/profile/:userId', requireAuth, async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const isOwnProfile = userId === req.user.id;
+
+      const { data, error } = await supabase
+        .from('community_profiles')
+        .select('user_id, bio, specializations, company, website, instagram, twitter, linkedin, avatar_url, is_public')
+        .eq('user_id', userId)
+        .single();
+
+      if (error && error.code === 'PGRST116') {
+        return res.status(404).json({ error: 'Profiel niet gevonden.' });
+      }
+      if (error) return res.status(500).json({ error: error.message });
+
+      // Module stats
+      const [{ data: allModules }, { data: progress }] = await Promise.all([
+        supabase.from('modules').select('slug'),
+        supabase.from('user_progress').select('module_slug, score_pct, completed').eq('user_id', userId),
+      ]);
+      const totalModules = (allModules || []).length;
+      const completedModules = (progress || []).filter(p => p.completed && p.score_pct >= 70).length;
+      const level = computeLevel(allModules || [], progress || []);
+
+      // Follow stats
+      const [{ count: followers }, { count: following }] = await Promise.all([
+        supabase.from('community_follows').select('*', { count: 'exact', head: true }).eq('target_id', userId).eq('status', 'accepted'),
+        supabase.from('community_follows').select('*', { count: 'exact', head: true }).eq('requester_id', userId).eq('status', 'accepted'),
+      ]);
+
+      // Admin check
+      const { data: profileRow } = await supabase.from('profiles').select('role').eq('id', userId).single();
+      const isAdmin = profileRow?.role === 'admin';
+
+      // Auth.users metadata for display name
+      const { data: authUser } = await supabase.auth.admin.getUserById(userId);
+      const meta = authUser?.user?.user_metadata || {};
+      const displayName = [meta.firstName, meta.lastName].filter(Boolean).join(' ')
+        || meta.full_name || meta.name || authUser?.user?.email?.split('@')[0] || 'Gebruiker';
+
+      res.json({
+        profile: data,
+        display_name: displayName,
+        module_stats: { completed: completedModules, total: totalModules },
+        follow_stats: { followers: followers || 0, following: following || 0 },
+        level,
+        is_admin: isAdmin,
+        is_own: isOwnProfile,
+      });
+    } catch (err) {
+      console.error('[community/profile/:userId]', err.message);
+      res.status(500).json({ error: 'Kon profiel niet ophalen.' });
+    }
+  });
+
+  /**
+   * POST /api/community/profile/avatar
+   * Upload avatar to Supabase Storage.
+   */
+  const multer = require('multer');
+  const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 2 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+      if (['image/jpeg', 'image/png', 'image/webp'].includes(file.mimetype)) cb(null, true);
+      else cb(new Error('Alleen JPEG, PNG of WebP toegestaan.'));
+    },
+  });
+
+  app.post('/api/community/profile/avatar', requireAuth, upload.single('avatar'), async (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'Geen bestand ontvangen.' });
+
+    const path = `avatars/${req.user.id}.jpg`;
+    const { error } = await supabase.storage
+      .from('community-avatars')
+      .upload(path, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: true,
+      });
+
+    if (error) return res.status(500).json({ error: error.message });
+
+    const { data: urlData } = supabase.storage.from('community-avatars').getPublicUrl(path);
+    const avatarUrl = urlData.publicUrl + '?t=' + Date.now();
+
+    await supabase
+      .from('community_profiles')
+      .upsert({ user_id: req.user.id, avatar_url: avatarUrl, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+
+    res.json({ ok: true, avatar_url: avatarUrl });
+  });
 };
 
 // Exporteer computeLevel apart zodat tests het direct kunnen importeren
 module.exports.computeLevel = computeLevel;
+module.exports.validateProfileInput = validateProfileInput;

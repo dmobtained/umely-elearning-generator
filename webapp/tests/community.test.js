@@ -91,3 +91,33 @@ describe('computeLevel', () => {
     expect(computeLevel([], [])).toBe(0);
   });
 });
+
+// ── Profile validation ────────────────────────────────────────────────────────
+const { validateProfileInput } = require('../community-routes');
+
+describe('validateProfileInput', () => {
+  test('accepts valid input', () => {
+    const result = validateProfileInput({ bio: 'Hallo', specializations: ['AI'] });
+    expect(result).toBeNull();
+  });
+
+  test('rejects empty bio', () => {
+    const result = validateProfileInput({ bio: '', specializations: ['AI'] });
+    expect(result).toBe('Bio is verplicht.');
+  });
+
+  test('rejects bio over 300 chars', () => {
+    const result = validateProfileInput({ bio: 'x'.repeat(301), specializations: ['AI'] });
+    expect(result).toBe('Bio mag maximaal 300 tekens bevatten.');
+  });
+
+  test('rejects empty specializations', () => {
+    const result = validateProfileInput({ bio: 'Hallo', specializations: [] });
+    expect(result).toBe('Minimaal één specialisatie is verplicht.');
+  });
+
+  test('rejects missing specializations', () => {
+    const result = validateProfileInput({ bio: 'Hallo' });
+    expect(result).toBe('Minimaal één specialisatie is verplicht.');
+  });
+});
