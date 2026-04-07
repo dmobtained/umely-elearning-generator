@@ -145,6 +145,46 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
   .sidebar-overlay.open { display: block; }
   .hamburger { display: flex; }
 }
+
+/* Profile modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+.profile-modal { background: white; border-radius: 20px; width: 360px; max-width: calc(100vw - 32px); box-shadow: 0 24px 64px rgba(0,0,0,0.25); overflow: hidden; transform: translateY(12px); transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); }
+.modal-overlay.open .profile-modal { transform: translateY(0); }
+.modal-band { background: #1C1E21; padding: 24px 20px 18px; position: relative; }
+.modal-close { position: absolute; top: 12px; right: 14px; width: 28px; height: 28px; background: rgba(255,255,255,0.1); border: none; border-radius: 50%; color: rgba(255,255,255,0.7); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.modal-close:hover { background: rgba(255,255,255,0.18); }
+.modal-header-row { display: flex; gap: 14px; align-items: flex-start; }
+.modal-big-avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; overflow: hidden; border: 2px solid rgba(255,255,255,0.15); }
+.modal-big-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.modal-header-info { flex: 1; min-width: 0; }
+.modal-display-name { font-size: 16px; font-weight: 700; color: white; }
+.modal-badges-row { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+.modal-stat-row { display: flex; gap: 16px; margin-top: 10px; }
+.modal-stat { text-align: center; }
+.modal-stat-num { font-size: 14px; font-weight: 700; color: white; }
+.modal-stat-label { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+.modal-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+.modal-bio-text { font-size: 13.5px; color: #374151; line-height: 1.6; }
+.modal-section { display: flex; flex-direction: column; gap: 5px; }
+.modal-section-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #9CA3AF; }
+.modal-spec-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.modal-spec-tag { background: #FFF3E8; color: #FF6B00; font-size: 11px; font-weight: 500; padding: 2px 9px; border-radius: 20px; border: 1px solid rgba(255,133,20,0.2); }
+.modal-progress-row { display: flex; align-items: center; gap: 10px; }
+.modal-progress-bar { flex: 1; height: 5px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.modal-progress-fill { height: 100%; background: var(--gradient); border-radius: 3px; }
+.modal-progress-label { font-size: 11px; color: var(--text-secondary); white-space: nowrap; font-weight: 500; }
+.modal-social-links { display: flex; flex-direction: column; gap: 5px; }
+.modal-social-link { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #374151; text-decoration: none; }
+.modal-social-link:hover { color: var(--amber); }
+.modal-social-icon { width: 24px; height: 24px; border-radius: 6px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; }
+.modal-divider { border: none; border-top: 1px solid #F3F4F6; }
+.modal-actions { display: flex; gap: 8px; }
+.btn-modal-primary { flex: 1; background: var(--gradient); color: white; border: none; border-radius: 10px; padding: 9px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: opacity 0.15s; }
+.btn-modal-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-modal-secondary { flex: 1; background: #F3F4F6; color: #374151; border: none; border-radius: 10px; padding: 9px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; }
+.btn-modal-secondary:hover { background: #E5E7EB; }
+.modal-private-note { font-size: 12px; color: var(--text-secondary); text-align: center; padding: 8px 0; }
 </style>
 </head>
 <body>
@@ -214,6 +254,24 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
   </aside>
 
   <div class="chat-area" id="chatArea"></div>
+</div>
+
+<!-- Profile modal -->
+<div class="modal-overlay" id="profileModalOverlay" onclick="closeProfileModal(event)">
+  <div class="profile-modal" id="profileModal">
+    <div class="modal-band">
+      <button class="modal-close" onclick="closeProfileModalDirect()">×</button>
+      <div class="modal-header-row">
+        <div class="modal-big-avatar" id="modalAvatar"></div>
+        <div class="modal-header-info">
+          <div class="modal-display-name" id="modalName"></div>
+          <div class="modal-badges-row" id="modalBadges"></div>
+          <div class="modal-stat-row" id="modalStats"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
 </div>
 
 <script>
@@ -500,6 +558,125 @@ function renderLockedDefault() {
 
 function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function closeProfileModal(e) {
+  if (e.target === document.getElementById('profileModalOverlay')) closeProfileModalDirect();
+}
+function closeProfileModalDirect() {
+  document.getElementById('profileModalOverlay').classList.remove('open');
+}
+
+async function openProfileModal(userId) {
+  const overlay = document.getElementById('profileModalOverlay');
+  overlay.classList.add('open');
+
+  // Reset
+  document.getElementById('modalAvatar').innerHTML = '<div class="spinner" style="width:24px;height:24px;border-width:2px"></div>';
+  document.getElementById('modalName').textContent = '...';
+  document.getElementById('modalBadges').innerHTML = '';
+  document.getElementById('modalStats').innerHTML = '';
+  document.getElementById('modalBody').innerHTML = '';
+
+  let data;
+  try {
+    const res = await fetch('/api/community/profile/' + userId, {
+      headers: { 'Authorization': 'Bearer ' + _token }
+    });
+    if (!res.ok) {
+      document.getElementById('modalBody').innerHTML = '<p class="modal-private-note">Profiel niet beschikbaar.</p>';
+      return;
+    }
+    data = await res.json();
+  } catch {
+    document.getElementById('modalBody').innerHTML = '<p class="modal-private-note">Kon profiel niet laden.</p>';
+    return;
+  }
+
+  const { profile, display_name, module_stats, follow_stats, level, is_admin, is_own } = data;
+
+  // Avatar
+  const avatarEl = document.getElementById('modalAvatar');
+  if (profile.avatar_url) {
+    avatarEl.innerHTML = `<img src="${escHtml(profile.avatar_url)}" alt="">`;
+  } else {
+    const initials = display_name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    avatarEl.textContent = initials;
+    avatarEl.style.background = getAvatarColor(display_name);
+  }
+
+  // Name + badges
+  document.getElementById('modalName').textContent = display_name;
+  const lvl = is_admin ? Math.max(level, 1) : level;
+  document.getElementById('modalBadges').innerHTML =
+    `<span class="badge-pill badge-level">Lv.${lvl}</span>${is_admin ? '<span class="badge-pill badge-admin">Admin</span>' : ''}`;
+
+  // Stats
+  document.getElementById('modalStats').innerHTML = `
+    <div class="modal-stat"><div class="modal-stat-num">${follow_stats.followers}</div><div class="modal-stat-label">Volgers</div></div>
+    <div class="modal-stat"><div class="modal-stat-num">${follow_stats.following}</div><div class="modal-stat-label">Volgend</div></div>
+    <div class="modal-stat"><div class="modal-stat-num">${module_stats.completed}/${module_stats.total}</div><div class="modal-stat-label">Modules</div></div>
+  `;
+
+  // Body — check privacy
+  const isPrivateForViewer = !profile.is_public && !is_own;
+  const bodyEl = document.getElementById('modalBody');
+
+  if (isPrivateForViewer) {
+    bodyEl.innerHTML = `
+      <p class="modal-private-note">Dit profiel is privé. Verbind om het volledige profiel te zien.</p>
+      <div class="modal-actions">
+        <button class="btn-modal-primary" disabled title="Volgsysteem komt binnenkort">Volgverzoek sturen</button>
+      </div>`;
+    return;
+  }
+
+  let html = '';
+
+  // Bio
+  if (profile.bio) {
+    html += `<div class="modal-bio-text">${escHtml(profile.bio)}</div>`;
+  }
+
+  // Specialisaties
+  if (profile.specializations && profile.specializations.length > 0) {
+    html += `<div class="modal-section">
+      <div class="modal-section-label">Specialisaties</div>
+      <div class="modal-spec-tags">${profile.specializations.map(s => `<span class="modal-spec-tag">${escHtml(s)}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  // Module voortgang
+  const pct = module_stats.total > 0 ? Math.round(module_stats.completed / module_stats.total * 100) : 0;
+  html += `<div class="modal-section">
+    <div class="modal-section-label">Module voortgang</div>
+    <div class="modal-progress-row">
+      <div class="modal-progress-bar"><div class="modal-progress-fill" style="width:${pct}%"></div></div>
+      <div class="modal-progress-label">${module_stats.completed} / ${module_stats.total}</div>
+    </div>
+  </div>`;
+
+  // Links
+  const links = [];
+  if (profile.website) links.push(`<a class="modal-social-link" href="${escHtml(profile.website)}" target="_blank" rel="noopener"><span class="modal-social-icon">🌐</span>${escHtml(profile.website.replace(/^https?:\/\//, ''))}</a>`);
+  if (profile.instagram) links.push(`<a class="modal-social-link" href="https://instagram.com/${encodeURIComponent(profile.instagram.replace('@',''))}" target="_blank" rel="noopener"><span class="modal-social-icon">📷</span>${escHtml(profile.instagram)}</a>`);
+  if (profile.twitter) links.push(`<a class="modal-social-link" href="https://x.com/${encodeURIComponent(profile.twitter.replace('@',''))}" target="_blank" rel="noopener"><span class="modal-social-icon">𝕏</span>${escHtml(profile.twitter)}</a>`);
+  if (profile.linkedin) links.push(`<a class="modal-social-link" href="${escHtml(profile.linkedin)}" target="_blank" rel="noopener"><span class="modal-social-icon">in</span>LinkedIn</a>`);
+  if (links.length > 0) {
+    html += `<hr class="modal-divider"><div class="modal-section"><div class="modal-section-label">Links</div><div class="modal-social-links">${links.join('')}</div></div>`;
+  }
+
+  // Actions
+  html += '<hr class="modal-divider"><div class="modal-actions">';
+  if (is_own) {
+    html += `<button class="btn-modal-secondary" onclick="window.location.href='/profile-setup.html?redirect=/community.html'">Profiel bewerken</button>`;
+  } else {
+    html += `<button class="btn-modal-primary" disabled title="Volgsysteem komt binnenkort">Volgverzoek sturen</button>
+             <button class="btn-modal-secondary" disabled title="DMs komen binnenkort">DM</button>`;
+  }
+  html += '</div>';
+
+  bodyEl.innerHTML = html;
 }
 
 init();
