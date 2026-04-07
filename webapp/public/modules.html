@@ -534,12 +534,31 @@ async function logout() {
 
 function authHeader() { return _session ? { 'Authorization': `Bearer ${_session.access_token}` } : {}; }
 
+// ── SUPABASE PROGRESS ──
+let supabaseProgress = {}; // slug → { score_pct, completed, completed_at }
+
+async function loadProgress() {
+  try {
+    const res = await fetch('/api/user/progress', { headers: authHeader() });
+    if (!res.ok) return;
+    const { progress } = await res.json();
+    supabaseProgress = {};
+    (progress || []).forEach(p => { supabaseProgress[p.module_slug] = p; });
+  } catch {}
+}
+
+function isCompleted(slug) { return supabaseProgress[slug]?.completed === true; }
+function getScore(slug) { return supabaseProgress[slug]?.score_pct ?? null; }
+
 // ── LOAD MODULES ──
 async function loadModules() {
   const grid = document.getElementById('grid');
   grid.innerHTML = skeletonHTML();
   try {
-    const res = await fetch('/api/modules', { headers: authHeader() });
+    const [res] = await Promise.all([
+      fetch('/api/modules', { headers: authHeader() }),
+      loadProgress()
+    ]);
     if (res.status === 401) { showLogin(); return; }
     const json = await res.json();
     if (!res.ok) throw new Error(json.error || 'Server fout ' + res.status);
@@ -568,21 +587,22 @@ function updateSidebar() {
     if (el) el.textContent = count;
   });
 
-  // Progress: how many have been opened
+  // Progress: completed modules (Supabase) or opened (localStorage)
+  const completedCount = allModules.filter(m => isCompleted(m.slug)).length;
   const opened = getOpened();
-  const openedCount = allModules.filter(m => opened.includes(m.slug)).length;
-  document.getElementById('progText').textContent = openedCount + ' / ' + allModules.length;
-  const pct = allModules.length ? Math.round((openedCount / allModules.length) * 100) : 0;
+  const openedCount = allModules.filter(m => opened.includes(m.slug) && !isCompleted(m.slug)).length;
+  const doneOrOpened = completedCount + openedCount;
+  document.getElementById('progText').textContent = completedCount + ' / ' + allModules.length;
+  const pct = allModules.length ? Math.round((completedCount / allModules.length) * 100) : 0;
   document.getElementById('progFill').style.width = pct + '%';
 }
 
 // ── STATS ──
 function updateStats() {
-  const opened = getOpened();
-  const openedCount = allModules.filter(m => opened.includes(m.slug)).length;
+  const completedCount = allModules.filter(m => isCompleted(m.slug)).length;
   const activeCats = new Set(allModules.map(m => getCat(m.slug)).filter(Boolean)).size;
   document.getElementById('statTotal').textContent = allModules.length;
-  document.getElementById('statOpened').textContent = openedCount;
+  document.getElementById('statOpened').textContent = completedCount;
   document.getElementById('statCats').textContent = activeCats;
 }
 
@@ -628,24 +648,31 @@ function renderModuleCard(m) {
   const cat = getCat(m.slug) || 'a';
   const label = getCatLabel(m.slug);
   const wasOpened = getOpened().includes(m.slug);
+  const done = isCompleted(m.slug);
+  const score = getScore(m.slug);
+  const barWidth = done ? (score ?? 100) : (wasOpened ? 100 : 0);
+  const statusClass = done ? ' done' : (wasOpened ? ' started' : '');
+  const statusText = done ? `✓ Afgerond${score !== null ? ' (' + score + '%)' : ''}` : (wasOpened ? '● Geopend' : 'Nog te starten');
+  const linkText = (done || wasOpened) ? 'Opnieuw starten' : 'Starten';
+  const cardClass = done ? ' opened done' : (wasOpened ? ' opened' : '');
   const isAdmin = userRole === 'admin';
   const adminActions = isAdmin ? `
     <div class="card-actions">
       <button class="btn-rename" title="Naam wijzigen" onclick="event.preventDefault();renameModule('${m.slug}', this)">✏️</button>
       <button class="btn-delete" title="Verwijderen" onclick="event.preventDefault();deleteModule('${m.slug}', '${m.title.replace(/'/g,"\\'")}', this)">🗑</button>
     </div>` : '';
-  return `<a class="module-card${wasOpened ? ' opened' : ''}" href="${m.url}" target="_blank"
+  return `<a class="module-card${cardClass}" href="${m.url}" target="_blank"
       onclick="trackOpen('${m.slug}','${m.title.replace(/'/g,"\\'")}','${m.url}','${cat}')"
       data-slug="${m.slug}" data-cat="${cat}">
     <div class="module-card-top">
       <span class="cat-badge cat-${cat}">${label}</span>
-      <span class="mod-status${wasOpened ? ' started' : ''}">${wasOpened ? '● Geopend' : 'Nog te starten'}</span>
+      <span class="mod-status${statusClass}">${statusText}</span>
     </div>
     <div class="module-title">${m.title}</div>
     <div class="module-meta"><span>⏱ ca. 20 min</span><span>❓ 5 vragen</span></div>
-    <div class="prog-bar-wrap"><div class="prog-bar" style="width:${wasOpened ? '100' : '0'}%"></div></div>
+    <div class="prog-bar-wrap"><div class="prog-bar${done ? ' done' : ''}" style="width:${barWidth}%"></div></div>
     <div class="module-footer">
-      <span class="module-link">${wasOpened ? 'Opnieuw starten' : 'Starten'} ›</span>
+      <span class="module-link">${linkText} ›</span>
       ${adminActions}
     </div>
   </a>`;
