@@ -240,7 +240,7 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
       }
       if (error) return res.status(500).json({ error: error.message });
 
-      const complete = data.bio.length > 0 && data.specializations.length > 0;
+      const complete = (data.bio || '').length > 0 && (data.specializations || []).length > 0;
       res.json({ profile: data, complete });
     } catch (err) {
       console.error('[community/profile/me]', err.message);
@@ -354,7 +354,8 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
   app.post('/api/community/profile/avatar', requireAuth, upload.single('avatar'), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'Geen bestand ontvangen.' });
 
-    const path = `avatars/${req.user.id}.jpg`;
+    const ext = req.file.mimetype === 'image/webp' ? 'webp' : req.file.mimetype === 'image/png' ? 'png' : 'jpg';
+    const path = `avatars/${req.user.id}.${ext}`;
     const { error } = await supabase.storage
       .from('community-avatars')
       .upload(path, req.file.buffer, {
