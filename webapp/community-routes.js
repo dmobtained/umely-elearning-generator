@@ -253,28 +253,33 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
    * Create or update own profile.
    */
   app.put('/api/community/profile/me', requireAuth, async (req, res) => {
-    const validationError = validateProfileInput(req.body);
-    if (validationError) return res.status(400).json({ error: validationError });
+    try {
+      const validationError = validateProfileInput(req.body);
+      if (validationError) return res.status(400).json({ error: validationError });
 
-    const { bio, specializations, company, website, instagram, twitter, linkedin, is_public } = req.body;
+      const { bio, specializations, company, website, instagram, twitter, linkedin, is_public } = req.body;
 
-    const { error } = await supabase
-      .from('community_profiles')
-      .upsert({
-        user_id: req.user.id,
-        bio: bio.trim(),
-        specializations,
-        company: company || null,
-        website: website || null,
-        instagram: instagram || null,
-        twitter: twitter || null,
-        linkedin: linkedin || null,
-        is_public: is_public !== false,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: 'user_id' });
+      const { error } = await supabase
+        .from('community_profiles')
+        .upsert({
+          user_id: req.user.id,
+          bio: bio.trim(),
+          specializations,
+          company: company || null,
+          website: website || null,
+          instagram: instagram || null,
+          twitter: twitter || null,
+          linkedin: linkedin || null,
+          is_public: is_public !== false,
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id' });
 
-    if (error) return res.status(500).json({ error: error.message });
-    res.json({ ok: true });
+      if (error) return res.status(500).json({ error: error.message });
+      res.json({ ok: true });
+    } catch (err) {
+      console.error('[community/profile/me PUT]', err.message);
+      res.status(500).json({ error: 'Kon profiel niet opslaan.' });
+    }
   });
 
   /**
@@ -322,6 +327,18 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
       const displayName = [meta.firstName, meta.lastName].filter(Boolean).join(' ')
         || meta.full_name || meta.name || authUser?.user?.email?.split('@')[0] || 'Gebruiker';
 
+      if (!data.is_public && !isOwnProfile) {
+        return res.json({
+          profile: { is_public: false },
+          display_name: displayName,
+          module_stats: { completed: 0, total: totalModules },
+          follow_stats: { followers: followers || 0, following: following || 0 },
+          level,
+          is_admin: isAdmin,
+          is_own: false,
+        });
+      }
+
       res.json({
         profile: data,
         display_name: displayName,
@@ -352,27 +369,34 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
   });
 
   app.post('/api/community/profile/avatar', requireAuth, upload.single('avatar'), async (req, res) => {
-    if (!req.file) return res.status(400).json({ error: 'Geen bestand ontvangen.' });
+    try {
+      if (!req.file) return res.status(400).json({ error: 'Geen bestand ontvangen.' });
 
-    const ext = req.file.mimetype === 'image/webp' ? 'webp' : req.file.mimetype === 'image/png' ? 'png' : 'jpg';
-    const path = `avatars/${req.user.id}.${ext}`;
-    const { error } = await supabase.storage
-      .from('community-avatars')
-      .upload(path, req.file.buffer, {
-        contentType: req.file.mimetype,
-        upsert: true,
-      });
+      const ext = req.file.mimetype === 'image/webp' ? 'webp' : req.file.mimetype === 'image/png' ? 'png' : 'jpg';
+      const path = `avatars/${req.user.id}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from('community-avatars')
+        .upload(path, req.file.buffer, {
+          contentType: req.file.mimetype,
+          upsert: true,
+        });
 
-    if (error) return res.status(500).json({ error: error.message });
+      if (uploadError) return res.status(500).json({ error: uploadError.message });
 
-    const { data: urlData } = supabase.storage.from('community-avatars').getPublicUrl(path);
-    const avatarUrl = urlData.publicUrl + '?t=' + Date.now();
+      const { data: urlData } = supabase.storage.from('community-avatars').getPublicUrl(path);
+      const avatarUrl = urlData.publicUrl + '?t=' + Date.now();
 
-    await supabase
-      .from('community_profiles')
-      .upsert({ user_id: req.user.id, avatar_url: avatarUrl, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+      const { error: dbError } = await supabase
+        .from('community_profiles')
+        .upsert({ user_id: req.user.id, avatar_url: avatarUrl, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
 
-    res.json({ ok: true, avatar_url: avatarUrl });
+      if (dbError) return res.status(500).json({ error: dbError.message });
+
+      res.json({ ok: true, avatar_url: avatarUrl });
+    } catch (err) {
+      console.error('[community/profile/avatar]', err.message);
+      res.status(500).json({ error: 'Kon foto niet uploaden.' });
+    }
   });
 };
 
