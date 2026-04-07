@@ -100,7 +100,7 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
       </div>
       <div class="avatar-hint">
         <strong>Profielfoto</strong>
-        Klik om een foto te uploaden.<br>Max 2MB &mdash; JPEG, PNG of WebP.
+        Klik om een foto te uploaden.<br>Max 2MB · JPEG, PNG of WebP.
       </div>
     </div>
 
@@ -149,7 +149,7 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
     <div class="field">
       <div class="privacy-row">
         <input type="checkbox" id="isPublic" checked>
-        <label for="isPublic">Profiel openbaar &mdash; anderen kunnen je bio, specialisaties en links zien. Schakel uit om je profiel te verbergen voor mensen die niet met je verbonden zijn.</label>
+        <label for="isPublic">Profiel openbaar · anderen kunnen je bio, specialisaties en links zien. Schakel uit om je profiel te verbergen voor mensen die niet met je verbonden zijn.</label>
       </div>
     </div>
 
@@ -312,8 +312,9 @@ async function saveProfile() {
     return;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  window.location.href = params.get('redirect') || '/community.html';
+  const raw = new URLSearchParams(window.location.search).get('redirect') || '';
+  const safe = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/community.html';
+  window.location.href = safe;
 }
 
 function escHtml(str) {

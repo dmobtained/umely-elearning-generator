@@ -274,7 +274,7 @@ async function init() {
   _userLevel = levelData.level || 0;
   _isAdmin = levelData.isAdmin || false;
 
-  // Profiel-gate: controleer of profiel compleet is
+  // Profiel-gate: bij netwerk/serverfout fail-open zodat gebruikers niet geblokkeerd raken
   const profileRes = await fetch('/api/community/profile/me', {
     headers: { 'Authorization': 'Bearer ' + _token }
   });
