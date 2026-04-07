@@ -96,6 +96,9 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
 .msg-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
 .msg-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
 .badge-admin-msg { font-size: 10px; font-weight: 600; background: var(--charcoal); color: white; padding: 1px 7px; border-radius: 10px; }
+.msg-delete-btn { display: none; background: none; border: none; color: #cc3333; font-size: 16px; line-height: 1; padding: 0 3px; cursor: pointer; border-radius: 4px; }
+.msg-delete-btn:hover { background: rgba(204,51,51,0.1); }
+.message:hover .msg-delete-btn { display: inline-block; }
 .msg-time { font-size: 11px; color: var(--text-secondary); opacity: 0; transition: opacity 0.15s; }
 .message:hover .msg-time { opacity: 1; }
 .msg-bubble { font-size: 14px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; padding: 9px 13px; border-radius: 14px; max-width: 70%; }
@@ -494,11 +497,13 @@ async function loadMessages() {
     const adminBadge = m.is_admin ? '<span class="badge-admin-msg">Admin</span>' : '';
     const isNew = !isFirstLoad && idx >= prevCount;
     const avatarHtml = `<div class="msg-avatar${isOwn ? '' : ' clickable'}" style="background:${color}" ${isOwn ? '' : `data-userid="${escHtml(m.user_id)}"`}>${initials}</div>`;
+    const deleteBtn = _isAdmin ? `<button class="msg-delete-btn" data-msgid="${escHtml(String(m.id))}" title="Verwijder bericht">×</button>` : '';
     if (isOwn) {
       return `<div class="message own${isNew ? ' new' : ''}">
         ${avatarHtml}
         <div class="msg-body">
           <div class="msg-meta">
+            ${deleteBtn}
             <span class="msg-time">${time}</span>
           </div>
           <div class="msg-bubble own">${escHtml(m.content)}</div>
@@ -512,6 +517,7 @@ async function loadMessages() {
           <span class="msg-name">${escHtml(m.user_name)}</span>
           ${adminBadge}
           <span class="msg-time">${time}</span>
+          ${deleteBtn}
         </div>
         <div class="msg-bubble">${escHtml(m.content)}</div>
       </div>
@@ -522,7 +528,25 @@ async function loadMessages() {
     el.addEventListener('click', () => openProfileModal(el.dataset.userid));
   });
 
+  list.querySelectorAll('.msg-delete-btn[data-msgid]').forEach(el => {
+    el.addEventListener('click', () => deleteMessage(el.dataset.msgid));
+  });
+
   if (wasAtBottom) list.scrollTop = list.scrollHeight;
+}
+
+async function deleteMessage(msgId) {
+  if (!confirm('Weet je zeker dat je dit bericht wilt verwijderen?')) return;
+  const res = await fetch(`/api/community/messages/${encodeURIComponent(msgId)}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': 'Bearer ' + _token },
+  });
+  if (res.ok) {
+    await loadMessages();
+  } else {
+    const err = await res.json().catch(() => ({}));
+    alert(err.error || 'Kon bericht niet verwijderen.');
+  }
 }
 
 async function sendMessage() {

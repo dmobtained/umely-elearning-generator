@@ -234,6 +234,35 @@ module.exports = function mountCommunityRoutes(app, supabase, requireAuth) {
     res.json({ ok: true });
   });
 
+  /**
+   * DELETE /api/community/messages/:id
+   * Admin kan elk bericht verwijderen.
+   */
+  app.delete('/api/community/messages/:id', requireAuth, async (req, res) => {
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', req.user.id)
+        .single();
+
+      if (profile?.role !== 'admin') {
+        return res.status(403).json({ error: 'Alleen admins kunnen berichten verwijderen.' });
+      }
+
+      const { error } = await supabase
+        .from('community_messages')
+        .delete()
+        .eq('id', req.params.id);
+
+      if (error) return res.status(500).json({ error: error.message });
+      res.json({ ok: true });
+    } catch (err) {
+      console.error('[community/delete-message]', err.message);
+      res.status(500).json({ error: 'Serverfout.' });
+    }
+  });
+
   // ── PROFILE ENDPOINTS ────────────────────────────────────────────────────
 
   /**
