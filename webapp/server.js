@@ -599,6 +599,8 @@ app.post('/api/auth/resend-verification', async (req, res) => {
   }
 });
 
+require('./community-routes')(app, supabase, requireAuth);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Umely E-learning Generator draait op http://localhost:${PORT}`);
