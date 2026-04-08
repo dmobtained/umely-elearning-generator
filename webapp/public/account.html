@@ -106,6 +106,18 @@
   .nl-card { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .nl-card p { font-size: 14px; color: var(--gray-text); margin: 0; flex: 1; min-width: 200px; }
 
+  /* ── ABONNEMENT ── */
+  .sub-card { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .sub-info { display: flex; flex-direction: column; gap: 4px; }
+  .sub-status { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; }
+  .sub-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sub-dot.active { background: #22C55E; }
+  .sub-dot.inactive { background: #D1D5DB; }
+  .sub-status.active { color: #15803D; }
+  .sub-status.inactive { color: #9CA3AF; }
+  .sub-meta { font-size: 13px; color: #aaa; }
+  .sub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
   /* ── ADMIN ── */
   .admin-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
   .users-table { width: 100%; border-collapse: separate; border-spacing: 0; }
@@ -183,6 +195,12 @@
   <div class="section">
     <div class="section-title">Mijn certificaten</div>
     <div id="certGrid" class="loading">Laden...</div>
+  </div>
+
+  <!-- Abonnement -->
+  <div class="section">
+    <div class="section-title">Abonnement</div>
+    <div id="subSection" class="loading">Laden...</div>
   </div>
 
   <!-- Nieuwsbrief -->
@@ -431,6 +449,9 @@ async function loadAccount() {
       }).join('')}</div>`;
     }
 
+    // Abonnement sectie
+    renderSubscriptionSection(profile);
+
     // Nieuwsbrief sectie
     renderNewsletterSection(profile.newsletter_subscribed);
 
@@ -447,6 +468,34 @@ async function loadAccount() {
     document.getElementById('certGrid').innerHTML = '';
     document.getElementById('nlSection').innerHTML = '';
   }
+}
+
+function renderSubscriptionSection(profile) {
+  const status = profile.subscription_status || 'inactive';
+  const isActive = status === 'active';
+  const lidSinds = profile.created_at
+    ? new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
+    : '—';
+  const verlooptOp = profile.subscription_end
+    ? new Date(profile.subscription_end).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
+    : null;
+
+  const actieKnop = isActive
+    ? ''
+    : `<a href="/pricing.html" class="btn-sm btn-primary" style="display:inline-flex;padding:9px 20px;font-size:13px;">Abonneer nu &rarr;</a>`;
+
+  document.getElementById('subSection').innerHTML = `
+    <div class="sub-card">
+      <div class="sub-info">
+        <div class="sub-status ${isActive ? 'active' : 'inactive'}">
+          <span class="sub-dot ${isActive ? 'active' : 'inactive'}"></span>
+          ${isActive ? 'Actief abonnement' : 'Geen actief abonnement'}
+        </div>
+        <div class="sub-meta">Lid sinds ${escapeHtml(lidSinds)}</div>
+        ${verlooptOp ? `<div class="sub-meta">Verloopt op ${escapeHtml(verlooptOp)}</div>` : ''}
+      </div>
+      <div class="sub-actions">${actieKnop}</div>
+    </div>`;
 }
 
 function renderNewsletterSection(subscribed) {
