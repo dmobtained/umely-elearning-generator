@@ -327,10 +327,8 @@
 <!-- Mobile tabs (only visible on small screens) -->
 <nav class="mobile-tabs" id="mobileTabs">
   <div class="mobile-tab active" data-section="profiel" onclick="showSection('profiel')">&#128100; Profiel</div>
-  <div class="mobile-tab" data-section="voortgang" onclick="showSection('voortgang')">&#128202; Voortgang</div>
   <div class="mobile-tab" data-section="certificaten" onclick="showSection('certificaten')">&#127942; Certificaten</div>
   <div class="mobile-tab" data-section="abonnement" onclick="showSection('abonnement')">&#128179; Abonnement</div>
-  <div class="mobile-tab" data-section="nieuwsbrief" onclick="showSection('nieuwsbrief')">&#128140; Nieuwsbrief</div>
   <div class="mobile-tab mobile-tab-admin" data-section="gebruikers" onclick="showSection('gebruikers')">&#128101; Gebruikers</div>
   <div class="mobile-tab mobile-tab-admin" data-section="activiteit" onclick="showSection('activiteit')">&#128203; Activiteit</div>
   <div class="mobile-tab mobile-tab-admin" data-section="instellingen" onclick="showSection('instellingen')">&#9881; Instellingen</div>
@@ -343,19 +341,13 @@
     <div class="nav-section-label">Mijn account</div>
 
     <div class="nav-item active" data-section="profiel" onclick="showSection('profiel')">
-      <span>&#128100;</span> Profiel
-    </div>
-    <div class="nav-item" data-section="voortgang" onclick="showSection('voortgang')">
-      <span>&#128202;</span> Voortgang
+      <span>&#128100;</span> Profiel &amp; voortgang
     </div>
     <div class="nav-item" data-section="certificaten" onclick="showSection('certificaten')">
       <span>&#127942;</span> Certificaten
     </div>
     <div class="nav-item" data-section="abonnement" onclick="showSection('abonnement')">
       <span>&#128179;</span> Abonnement
-    </div>
-    <div class="nav-item" data-section="nieuwsbrief" onclick="showSection('nieuwsbrief')">
-      <span>&#128140;</span> Nieuwsbrief
     </div>
 
     <!-- Admin section (hidden until admin role confirmed) -->
@@ -377,17 +369,13 @@
   <!-- Content -->
   <main class="content">
 
-    <!-- PROFIEL -->
+    <!-- PROFIEL + VOORTGANG -->
     <div class="content-section" id="section-profiel">
       <div class="section-card">
         <div class="section-card-title">Profiel</div>
         <div id="profileCard" class="loading">Laden...</div>
       </div>
-    </div>
-
-    <!-- VOORTGANG -->
-    <div class="content-section" id="section-voortgang">
-      <div class="section-card">
+      <div class="section-card" style="margin-top:20px;">
         <div class="section-card-title">Mijn voortgang</div>
         <div id="statsGrid" class="loading">Laden...</div>
       </div>
@@ -401,21 +389,20 @@
       </div>
     </div>
 
-    <!-- ABONNEMENT -->
+    <!-- ABONNEMENT + NIEUWSBRIEF -->
     <div class="content-section" id="section-abonnement">
       <div class="section-card">
         <div class="section-card-title">Abonnement</div>
         <div id="subSection" class="loading">Laden...</div>
       </div>
-    </div>
-
-    <!-- NIEUWSBRIEF -->
-    <div class="content-section" id="section-nieuwsbrief">
-      <div class="section-card">
+      <div class="section-card" style="margin-top:20px;">
         <div class="section-card-title">Nieuwsbrief</div>
         <div id="nlSection" class="loading">Laden...</div>
       </div>
     </div>
+
+    <!-- NIEUWSBRIEF (hidden, zit nu in abonnement sectie) -->
+    <div id="nlSection-placeholder" style="display:none;"></div>
 
     <!-- GEBRUIKERS (admin) -->
     <div class="content-section" id="section-gebruikers">
