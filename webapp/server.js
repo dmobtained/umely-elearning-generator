@@ -120,7 +120,8 @@ const FULL_PROMPT = SYSTEM_PROMPT + '\n\n## BOILERPLATE\n\nGebruik dit als exact
 app.get('/api/config', (req, res) => {
   res.json({
     supabaseUrl: process.env.SUPABASE_URL,
-    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || ''
+    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY || ''
   });
 });
 
