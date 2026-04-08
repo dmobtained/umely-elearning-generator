@@ -591,22 +591,23 @@ app.delete('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => 
 // ── Admin: activiteitenlog ──────────────────────────────────────────────────
 app.get('/api/admin/activity', requireAuth, requireAdmin, async (req, res) => {
   try {
-    const [{ data: profiles }, { data: progress }] = await Promise.all([
-      supabase.from('profiles').select('id, email, created_at').order('created_at', { ascending: false }).limit(50),
-      supabase.from('user_progress').select('user_id, module_slug, score_pct, completed, completed_at, updated_at').order('updated_at', { ascending: false }).limit(200)
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+    const [{ data: recentProfiles }, { data: progress }, { data: allProfiles }] = await Promise.all([
+      supabase.from('profiles').select('id, email, created_at').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }),
+      supabase.from('user_progress').select('user_id, module_slug, score_pct, completed, completed_at, updated_at').gte('updated_at', sevenDaysAgo).order('updated_at', { ascending: false }),
+      supabase.from('profiles').select('id, email')
     ]);
 
     const profileMap = {};
-    (profiles || []).forEach(p => { profileMap[p.id] = p.email; });
+    (allProfiles || []).forEach(p => { profileMap[p.id] = p.email; });
 
     const events = [];
 
-    // Registraties
-    (profiles || []).forEach(p => {
+    (recentProfiles || []).forEach(p => {
       events.push({ type: 'registered', email: p.email, ts: p.created_at });
     });
 
-    // Module gestart / afgerond
     (progress || []).forEach(p => {
       const email = profileMap[p.user_id] || p.user_id;
       const moduleName = (p.module_slug || '').replace(/^elearning-/, '').replace(/-\d{8}$/, '').replace(/-/g, ' ');
@@ -617,10 +618,8 @@ app.get('/api/admin/activity', requireAuth, requireAdmin, async (req, res) => {
       }
     });
 
-    // Sorteren op tijd, nieuwste eerst
     events.sort((a, b) => new Date(b.ts) - new Date(a.ts));
-
-    res.json(events.slice(0, 100));
+    res.json(events);
   } catch (err) {
     console.error('Activity log fout:', err);
     res.status(500).json({ error: 'Kon activiteit niet ophalen' });
