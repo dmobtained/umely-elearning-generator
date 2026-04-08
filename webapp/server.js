@@ -101,9 +101,15 @@ async function requireAuth(req, res, next) {
   next();
 }
 
-// In-memory job store
+// In-memory job store (automatische cleanup na 1 uur)
 const jobs = {};
 const generateTimestamps = {};
+setInterval(() => {
+  const cutoff = Date.now() - 60 * 60 * 1000;
+  for (const id of Object.keys(jobs)) {
+    if (jobs[id].createdAt && jobs[id].createdAt < cutoff) delete jobs[id];
+  }
+}, 10 * 60 * 1000);
 
 const SYSTEM_PROMPT = fs.readFileSync(path.join(__dirname, 'prompt.md'), 'utf8');
 const BOILERPLATE = fs.readFileSync(path.join(__dirname, 'boilerplate.html'), 'utf8');
@@ -138,7 +144,7 @@ app.post('/generate', requireAuth, async (req, res) => {
   }
 
   const jobId = Date.now().toString(36) + Math.random().toString(36).slice(2);
-  jobs[jobId] = { status: 'generating', progress: 0 };
+  jobs[jobId] = { status: 'generating', progress: 0, createdAt: Date.now() };
   res.json({ jobId });
 
   // Genereer op de achtergrond

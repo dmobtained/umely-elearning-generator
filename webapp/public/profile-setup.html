@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profiel instellen | Umely</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --amber: #FF8514; --flame: #FF4D00; --charcoal: #27292D;
+  --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
+  --border: #EBEBEB; --text-primary: #1A1A1A; --text-secondary: #6B7280;
+  --focus-ring: rgba(255,133,20,0.2);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAFA; color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; }
+
+header { background: var(--charcoal); height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.header-logo img { height: 32px; }
+
+main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 48px 24px; }
+.form-card { background: white; border-radius: 20px; padding: 40px; width: 100%; max-width: 520px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.form-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+.form-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.5; }
+
+/* Avatar upload */
+.avatar-section { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+.avatar-preview { width: 80px; height: 80px; border-radius: 50%; background: #E5E7EB; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: white; cursor: pointer; overflow: hidden; flex-shrink: 0; border: 2px solid var(--border); transition: opacity 0.15s; position: relative; }
+.avatar-preview:hover { opacity: 0.85; }
+.avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-preview input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.avatar-hint { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.avatar-hint strong { color: var(--text-primary); display: block; margin-bottom: 2px; }
+
+/* Form fields */
+.field { margin-bottom: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+.field label .required { color: var(--amber); margin-left: 3px; }
+.field label .optional { color: var(--text-secondary); font-weight: 400; font-size: 12px; margin-left: 4px; }
+.field textarea, .field input[type=text], .field input[type=url] {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 14px;
+  font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-primary);
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s; background: #FAFAFA;
+}
+.field textarea:focus, .field input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--focus-ring); }
+.field textarea { resize: none; line-height: 1.5; }
+.char-count { text-align: right; font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+.char-count.warn { color: #EF4444; }
+
+/* Tag input */
+.tag-input-wrap { border: 1.5px solid var(--border); border-radius: 10px; padding: 8px; display: flex; flex-wrap: wrap; gap: 6px; background: #FAFAFA; cursor: text; transition: border-color 0.2s, box-shadow 0.2s; }
+.tag-input-wrap:focus-within { border-color: var(--amber); box-shadow: 0 0 0 3px var(--focus-ring); }
+.tag { background: #FFF3E8; color: #FF6B00; font-size: 12px; font-weight: 500; padding: 3px 8px 3px 10px; border-radius: 20px; border: 1px solid rgba(255,133,20,0.2); display: flex; align-items: center; gap: 5px; }
+.tag button { background: none; border: none; cursor: pointer; color: #FF6B00; font-size: 14px; line-height: 1; padding: 0; }
+.tag-input { border: none; outline: none; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-primary); background: transparent; min-width: 120px; flex: 1; padding: 2px 4px; }
+.tag-hint { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+
+/* Divider */
+.section-divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-secondary); margin-bottom: 16px; }
+
+/* Submit */
+.submit-btn { width: 100%; background: var(--gradient); color: white; border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: opacity 0.15s, transform 0.1s; margin-top: 8px; }
+.submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.submit-btn:not(:disabled):hover { opacity: 0.9; }
+.submit-btn:not(:disabled):active { transform: scale(0.98); }
+.submit-note { text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
+
+.privacy-row { display: flex; align-items: flex-start; gap: 10px; }
+.privacy-row input[type=checkbox] { margin-top: 3px; accent-color: var(--amber); width: 16px; height: 16px; flex-shrink: 0; }
+.privacy-row label { font-size: 13px; color: var(--text-secondary); line-height: 1.5; cursor: pointer; }
+
+#loadingScreen { position: fixed; inset: 0; background: #FAFAFA; display: flex; align-items: center; justify-content: center; z-index: 999; }
+.spinner { width: 32px; height: 32px; border: 3px solid rgba(255,133,20,0.2); border-top-color: var(--amber); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div id="loadingScreen"><div class="spinner"></div></div>
+
+<header>
+  <a href="/modules.html" class="header-logo">
+    <img src="/logo-small.png" alt="Umely">
+  </a>
+</header>
+
+<main>
+  <div class="form-card">
+    <h1 class="form-title">Stel je profiel in</h1>
+    <p class="form-sub">Voordat je de community betreedt, hebben we een korte introductie nodig. Je kunt dit later altijd aanpassen.</p>
+
+    <!-- Avatar -->
+    <div class="avatar-section">
+      <div class="avatar-preview" id="avatarPreview">
+        <span id="avatarInitials">?</span>
+        <input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" onchange="handleAvatarChange(this)">
+      </div>
+      <div class="avatar-hint">
+        <strong>Profielfoto</strong>
+        Klik om een foto te uploaden.<br>Max 2MB · JPEG, PNG of WebP.
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="field">
+      <label for="bio">Over jezelf <span class="required">*</span></label>
+      <textarea id="bio" rows="3" placeholder="Wie ben je en wat doe je? (max 300 tekens)" maxlength="300" oninput="updateCharCount()"></textarea>
+      <div class="char-count" id="charCount">0 / 300</div>
+    </div>
+
+    <!-- Specialisaties -->
+    <div class="field">
+      <label>Specialisaties <span class="required">*</span></label>
+      <div class="tag-input-wrap" id="tagWrap" onclick="document.getElementById('tagInput').focus()">
+        <input type="text" id="tagInput" class="tag-input" placeholder="Typ een specialisatie en druk Enter" onkeydown="handleTagInput(event)">
+      </div>
+      <div class="tag-hint">Bijv. Claude AI &middot; Automatisering &middot; SaaS &middot; Copywriting</div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-label">Optioneel</div>
+
+    <div class="field">
+      <label for="company">Bedrijf <span class="optional">(optioneel)</span></label>
+      <input type="text" id="company" placeholder="Jouw bedrijfsnaam">
+    </div>
+    <div class="field">
+      <label for="website">Website <span class="optional">(optioneel)</span></label>
+      <input type="url" id="website" placeholder="https://jouwsite.nl">
+    </div>
+    <div class="field">
+      <label for="instagram">Instagram <span class="optional">(optioneel)</span></label>
+      <input type="text" id="instagram" placeholder="@gebruikersnaam">
+    </div>
+    <div class="field">
+      <label for="twitter">X / Twitter <span class="optional">(optioneel)</span></label>
+      <input type="text" id="twitter" placeholder="@gebruikersnaam">
+    </div>
+    <div class="field">
+      <label for="linkedin">LinkedIn <span class="optional">(optioneel)</span></label>
+      <input type="url" id="linkedin" placeholder="https://linkedin.com/in/...">
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="field">
+      <div class="privacy-row">
+        <input type="checkbox" id="isPublic" checked>
+        <label for="isPublic">Profiel openbaar · anderen kunnen je bio, specialisaties en links zien. Schakel uit om je profiel te verbergen voor mensen die niet met je verbonden zijn.</label>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="saveProfile()" disabled>Profiel opslaan en verdergaan</button>
+    <p class="submit-note">Je kunt dit later altijd aanpassen via je profiel.</p>
+  </div>
+</main>
+
+<script>
+let _supabase, _token, _tags = [], _avatarFile = null;
+
+async function init() {
+  const config = await fetch('/api/config').then(r => r.json());
+  _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+
+  const { data: { session } } = await _supabase.auth.getSession();
+  if (!session) { window.location.href = '/?redirect=/profile-setup.html'; return; }
+  _token = session.access_token;
+
+  // Prefill initials in avatar
+  const meta = session.user.user_metadata || {};
+  const name = meta.full_name || meta.name || session.user.email.split('@')[0];
+  document.getElementById('avatarInitials').textContent = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+
+  // Load existing profile if any (for editing)
+  const res = await fetch('/api/community/profile/me', { headers: { 'Authorization': 'Bearer ' + _token } });
+  if (res.ok) {
+    const { profile } = await res.json();
+    if (profile) {
+      document.getElementById('bio').value = profile.bio || '';
+      document.getElementById('company').value = profile.company || '';
+      document.getElementById('website').value = profile.website || '';
+      document.getElementById('instagram').value = profile.instagram || '';
+      document.getElementById('twitter').value = profile.twitter || '';
+      document.getElementById('linkedin').value = profile.linkedin || '';
+      document.getElementById('isPublic').checked = profile.is_public !== false;
+      if (profile.specializations) {
+        _tags = [...profile.specializations];
+        renderTags();
+      }
+      if (profile.avatar_url) {
+        const preview = document.getElementById('avatarPreview');
+        preview.innerHTML = `<img src="${escHtml(profile.avatar_url)}" alt="Avatar"><input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" onchange="handleAvatarChange(this)">`;
+      }
+    }
+  }
+
+  updateCharCount();
+  updateSubmitBtn();
+  document.getElementById('loadingScreen').style.display = 'none';
+}
+
+function updateCharCount() {
+  const val = document.getElementById('bio').value;
+  const el = document.getElementById('charCount');
+  el.textContent = val.length + ' / 300';
+  el.className = 'char-count' + (val.length > 280 ? ' warn' : '');
+  updateSubmitBtn();
+}
+
+function updateSubmitBtn() {
+  const bio = document.getElementById('bio').value.trim();
+  const ok = bio.length > 0 && bio.length <= 300 && _tags.length > 0;
+  document.getElementById('submitBtn').disabled = !ok;
+}
+
+function handleTagInput(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,$/, '');
+    if (val && _tags.length < 10) {
+      _tags.push(val);
+      renderTags();
+    }
+    e.target.value = '';
+    updateSubmitBtn();
+  }
+  if (e.key === 'Backspace' && e.target.value === '' && _tags.length > 0) {
+    _tags.pop();
+    renderTags();
+    updateSubmitBtn();
+  }
+}
+
+function removeTag(idx) {
+  _tags.splice(idx, 1);
+  renderTags();
+  updateSubmitBtn();
+}
+
+function renderTags() {
+  const wrap = document.getElementById('tagWrap');
+  const input = document.getElementById('tagInput');
+  wrap.innerHTML = '';
+  _tags.forEach((tag, i) => {
+    const el = document.createElement('span');
+    el.className = 'tag';
+    el.innerHTML = `${escHtml(tag)}<button type="button" onclick="removeTag(${i})">×</button>`;
+    wrap.appendChild(el);
+  });
+  wrap.appendChild(input);
+}
+
+function handleAvatarChange(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { alert('Bestand is te groot. Max 2MB.'); return; }
+  _avatarFile = file;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const preview = document.getElementById('avatarPreview');
+    preview.innerHTML = `<img src="${e.target.result}" alt="Avatar"><input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" onchange="handleAvatarChange(this)">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function saveProfile() {
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Opslaan...';
+
+  // Upload avatar if new file selected
+  if (_avatarFile) {
+    const formData = new FormData();
+    formData.append('avatar', _avatarFile);
+    const avatarRes = await fetch('/api/community/profile/avatar', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + _token },
+      body: formData,
+    });
+    if (!avatarRes.ok) {
+      const err = await avatarRes.json();
+      alert(err.error || 'Kon foto niet uploaden.');
+      btn.disabled = false;
+      btn.textContent = 'Profiel opslaan en verdergaan';
+      return;
+    }
+  }
+
+  const res = await fetch('/api/community/profile/me', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _token },
+    body: JSON.stringify({
+      bio: document.getElementById('bio').value.trim(),
+      specializations: _tags,
+      company: document.getElementById('company').value.trim() || null,
+      website: document.getElementById('website').value.trim() || null,
+      instagram: document.getElementById('instagram').value.trim() || null,
+      twitter: document.getElementById('twitter').value.trim() || null,
+      linkedin: document.getElementById('linkedin').value.trim() || null,
+      is_public: document.getElementById('isPublic').checked,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    alert(err.error || 'Kon profiel niet opslaan.');
+    btn.disabled = false;
+    btn.textContent = 'Profiel opslaan en verdergaan';
+    return;
+  }
+
+  const raw = new URLSearchParams(window.location.search).get('redirect') || '';
+  // Alleen echte relatieve paden toestaan — geen //, /\ of andere bypass-varianten
+  const safe = /^\/[a-zA-Z0-9\-_./]*$/.test(raw) ? raw : '/community.html';
+  window.location.href = safe;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+init();
+</script>
+</body>
+</html>

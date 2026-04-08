@@ -582,7 +582,7 @@ async function loadUsers() {
               <tr>
                 <td>${escapeHtml(u.email)}</td>
                 <td>
-                  <select class="role-select" onchange="changeRole('${escapeHtml(u.id)}', this.value)" ${_session && u.id === _session.user.id ? 'disabled title="Je kunt je eigen rol niet wijzigen"' : ''}>
+                  <select class="role-select" data-userid="${escapeHtml(u.id)}" onchange="changeRole(this.dataset.userid, this.value)" ${_session && u.id === _session.user.id ? 'disabled title="Je kunt je eigen rol niet wijzigen"' : ''}>
                     <option value="user" ${u.role === 'user' ? 'selected' : ''}>Gebruiker</option>
                     <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Admin</option>
                   </select>
@@ -613,8 +613,8 @@ async function changeRole(userId, newRole) {
       throw new Error(msg);
     }
   } catch (e) {
-    alert(e.message);
-    loadUsers();
+    document.getElementById('usersTable').innerHTML = `<p style="color:#B91C1C;padding:12px;">${escapeHtml(e.message)}</p>`;
+    setTimeout(loadUsers, 1500);
   }
 }
 
