@@ -242,7 +242,7 @@ app.get('/api/job/:jobId', requireAuth, (req, res) => {
 });
 
 // ── API: lijst van alle modules + gebruikersrol ──
-app.get('/api/modules', requireAuth, async (req, res) => {
+app.get('/api/modules', requireAuth, requireSubscription, async (req, res) => {
   let { data, error } = await supabase
     .from('modules')
     .select('filename, slug, title, created_at, created_date')
@@ -277,7 +277,7 @@ app.get('/api/modules', requireAuth, async (req, res) => {
 });
 
 // ── Beveiligd HTML-endpoint (Bearer token vereist) ──
-app.get('/api/module-html/:slug', requireAuth, async (req, res) => {
+app.get('/api/module-html/:slug', requireAuth, requireSubscription, async (req, res) => {
   let { data, error } = await supabase
     .from('modules')
     .select('html')
@@ -329,6 +329,10 @@ app.get('/modules/:slug', (req, res) => {
   const res = await fetch('/api/module-html/${slug}', {
     headers: { 'Authorization': 'Bearer ' + token }
   });
+  if (res.status === 402) {
+    window.location.href = '/pricing.html';
+    return;
+  }
   if (!res.ok) {
     document.body.innerHTML = '<div style="text-align:center;padding:80px;font-family:system-ui"><h2>Module niet gevonden</h2><a href="/modules.html" style="color:#FF8514">← Terug naar bibliotheek</a></div>';
     return;
@@ -350,6 +354,18 @@ app.get('/modules/:slug', (req, res) => {
 </body>
 </html>`);
 });
+
+// ── Subscription middleware ──
+async function requireSubscription(req, res, next) {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('role, subscription_status')
+    .eq('id', req.user.id)
+    .single();
+  if (error) return res.status(500).json({ error: 'Profiel ophalen mislukt' });
+  if (data?.role === 'admin' || data?.subscription_status === 'active') return next();
+  return res.status(402).json({ error: 'Actief abonnement vereist', redirect: '/pricing.html' });
+}
 
 // ── Admin middleware ──
 async function requireAdmin(req, res, next) {
