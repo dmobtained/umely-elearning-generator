@@ -588,6 +588,45 @@ app.delete('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => 
   res.json({ ok: true });
 });
 
+// ── Admin: activiteitenlog ──────────────────────────────────────────────────
+app.get('/api/admin/activity', requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const [{ data: profiles }, { data: progress }] = await Promise.all([
+      supabase.from('profiles').select('id, email, created_at').order('created_at', { ascending: false }).limit(50),
+      supabase.from('user_progress').select('user_id, module_slug, score_pct, completed, completed_at, updated_at').order('updated_at', { ascending: false }).limit(200)
+    ]);
+
+    const profileMap = {};
+    (profiles || []).forEach(p => { profileMap[p.id] = p.email; });
+
+    const events = [];
+
+    // Registraties
+    (profiles || []).forEach(p => {
+      events.push({ type: 'registered', email: p.email, ts: p.created_at });
+    });
+
+    // Module gestart / afgerond
+    (progress || []).forEach(p => {
+      const email = profileMap[p.user_id] || p.user_id;
+      const moduleName = (p.module_slug || '').replace(/^elearning-/, '').replace(/-\d{8}$/, '').replace(/-/g, ' ');
+      if (p.completed && p.completed_at) {
+        events.push({ type: 'completed', email, module: moduleName, score: p.score_pct, ts: p.completed_at });
+      } else {
+        events.push({ type: 'started', email, module: moduleName, ts: p.updated_at });
+      }
+    });
+
+    // Sorteren op tijd, nieuwste eerst
+    events.sort((a, b) => new Date(b.ts) - new Date(a.ts));
+
+    res.json(events.slice(0, 100));
+  } catch (err) {
+    console.error('Activity log fout:', err);
+    res.status(500).json({ error: 'Kon activiteit niet ophalen' });
+  }
+});
+
 // ── Task 6: POST /api/auth/signup ──
 app.post('/api/auth/signup', async (req, res) => {
   try {

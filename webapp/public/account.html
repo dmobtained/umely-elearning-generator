@@ -118,6 +118,21 @@
   .sub-meta { font-size: 13px; color: #aaa; }
   .sub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
+  /* ── ACTIVITEIT ── */
+  .activity-feed { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .activity-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #F3EDE6; }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .activity-icon.registered { background: #EFF6FF; }
+  .activity-icon.started { background: #FFFBEB; }
+  .activity-icon.completed { background: #F0FDF4; }
+  .activity-body { flex: 1; min-width: 0; }
+  .activity-text { font-size: 13.5px; color: var(--charcoal); line-height: 1.4; }
+  .activity-text strong { font-weight: 700; }
+  .activity-time { font-size: 11.5px; color: #bbb; margin-top: 2px; }
+  .activity-score { display: inline-block; background: var(--amber); color: white; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 50px; margin-left: 6px; vertical-align: middle; }
+  .activity-empty { padding: 32px; text-align: center; color: #aaa; font-size: 14px; }
+
   /* ── ADMIN ── */
   .admin-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
   .users-table { width: 100%; border-collapse: separate; border-spacing: 0; }
@@ -215,6 +230,12 @@
     <div class="admin-card">
       <div id="usersTable" class="loading">Laden...</div>
     </div>
+  </div>
+
+  <!-- Admin: activiteitenlog -->
+  <div class="section" id="adminActivitySection" style="display:none;">
+    <div class="section-title">Recente activiteit</div>
+    <div class="activity-feed" id="activityFeed"><div class="activity-empty">Laden...</div></div>
   </div>
 
   <!-- Admin: tools -->
@@ -458,8 +479,10 @@ async function loadAccount() {
     // Admin sectie
     if (profile.role === 'admin') {
       document.getElementById('adminSection').style.display = 'block';
+      document.getElementById('adminActivitySection').style.display = 'block';
       document.getElementById('adminToolsSection').style.display = 'block';
       loadUsers();
+      loadActivity();
     }
   } catch (e) {
     console.error(e);
@@ -591,6 +614,55 @@ async function changeRole(userId, newRole) {
   } catch (e) {
     alert(e.message);
     loadUsers();
+  }
+}
+
+async function loadActivity() {
+  try {
+    const res = await fetch('/api/admin/activity', { headers: authHeader() });
+    if (!res.ok) throw new Error('Ophalen mislukt');
+    const events = await res.json();
+    const feed = document.getElementById('activityFeed');
+    if (!events || events.length === 0) {
+      feed.innerHTML = '<div class="activity-empty">Nog geen activiteit.</div>';
+      return;
+    }
+    feed.innerHTML = events.map(e => {
+      const time = e.ts ? new Date(e.ts).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+      const email = escapeHtml(e.email || '');
+      if (e.type === 'registered') {
+        return `<div class="activity-item">
+          <div class="activity-icon registered">👤</div>
+          <div class="activity-body">
+            <div class="activity-text">Nieuw account: <strong>${email}</strong></div>
+            <div class="activity-time">${time}</div>
+          </div>
+        </div>`;
+      }
+      if (e.type === 'completed') {
+        const module = escapeHtml((e.module || '').charAt(0).toUpperCase() + (e.module || '').slice(1));
+        return `<div class="activity-item">
+          <div class="activity-icon completed">✅</div>
+          <div class="activity-body">
+            <div class="activity-text"><strong>${email}</strong> rondde af: ${module}<span class="activity-score">${e.score}%</span></div>
+            <div class="activity-time">${time}</div>
+          </div>
+        </div>`;
+      }
+      if (e.type === 'started') {
+        const module = escapeHtml((e.module || '').charAt(0).toUpperCase() + (e.module || '').slice(1));
+        return `<div class="activity-item">
+          <div class="activity-icon started">📖</div>
+          <div class="activity-body">
+            <div class="activity-text"><strong>${email}</strong> startte: ${module}</div>
+            <div class="activity-time">${time}</div>
+          </div>
+        </div>`;
+      }
+      return '';
+    }).join('');
+  } catch (e) {
+    document.getElementById('activityFeed').innerHTML = '<div class="activity-empty">Kon activiteit niet laden.</div>';
   }
 }
 
