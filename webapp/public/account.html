@@ -28,6 +28,7 @@
   .auth-field input { width: 100%; padding: 12px 16px; border: 2px solid var(--gray-border); border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--charcoal); outline: none; transition: border-color 0.15s; }
   .auth-field input:focus { border-color: var(--amber); }
   #authError { display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px; color: #991B1B; }
+  .users-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   #loginBtn { width: 100%; padding: 14px; background: var(--gradient); color: white; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; margin-top: 6px; }
   #loginBtn:hover:not(:disabled) { opacity: 0.88; }
   #loginBtn:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -130,20 +131,20 @@
 <body>
 
 <!-- Auth overlay -->
-<div id="authOverlay" style="display:none;">
+<div id="authOverlay" style="display:none;" aria-hidden="true">
   <div class="auth-card">
     <div class="auth-logo">
       <img src="/logo-small.png" alt="Umely" style="height:80px;">
       <h2>Welkom bij Umely</h2>
       <p>Log in om je account te bekijken.</p>
     </div>
-    <div id="authError"></div>
+    <div id="authError" role="alert" aria-live="polite"></div>
     <div class="auth-field">
-      <label>E-mailadres</label>
+      <label for="authEmail">E-mailadres</label>
       <input id="authEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
     </div>
     <div class="auth-field">
-      <label>Wachtwoord</label>
+      <label for="authPassword">Wachtwoord</label>
       <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
     </div>
     <button id="loginBtn" onclick="login()">Inloggen</button>
@@ -212,11 +213,15 @@
   <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
     <img src="/logo-small.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
     <span style="color:rgba(255,255,255,0.5);">|</span>
-    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank" rel="noopener noreferrer">umely.ai</a></span>
   </p>
 </footer>
 
 <script>
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 let _supabase = null;
 let _session = null;
 
@@ -241,11 +246,15 @@ async function initAuth() {
 }
 
 function showLogin() {
-  document.getElementById('authOverlay').style.display = 'flex';
+  const overlay = document.getElementById('authOverlay');
+  overlay.style.display = 'flex';
+  overlay.removeAttribute('aria-hidden');
 }
 
 async function showApp(session) {
-  document.getElementById('authOverlay').style.display = 'none';
+  const overlay = document.getElementById('authOverlay');
+  overlay.style.display = 'none';
+  overlay.setAttribute('aria-hidden', 'true');
   document.getElementById('logoutBtn').style.display = 'block';
   const userEl = document.getElementById('headerUser');
   userEl.style.display = 'block';
@@ -355,11 +364,11 @@ async function loadAccount() {
 
     document.getElementById('profileCard').innerHTML = `
       <div class="profile-hero">
-        <div class="profile-avatar">${initial}</div>
+        <div class="profile-avatar">${escapeHtml(initial)}</div>
         <div class="profile-info">
-          <h3>${profile.email}</h3>
+          <h3>${escapeHtml(profile.email)}</h3>
           <div class="member-since">Lid sinds ${new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-          <span class="role-badge ${profile.role}">${profile.role === 'admin' ? 'Admin' : 'Gebruiker'}</span>
+          <span class="role-badge ${escapeHtml(profile.role)}">${profile.role === 'admin' ? 'Admin' : 'Gebruiker'}</span>
         </div>
         <div class="hero-progress">
           <div class="prog-numbers"><strong>${completed}</strong> / ${totalModules}</div>
@@ -411,13 +420,13 @@ async function loadAccount() {
         return `<div class="cert-card">
           <div class="cert-badge">Behaald</div>
           <div class="cert-icon">&#127942;</div>
-          <h4>${titleCap}</h4>
+          <h4>${escapeHtml(titleCap)}</h4>
           <div class="cert-score-row">
-            <div class="cert-score">${p.score_pct}%</div>
+            <div class="cert-score">${escapeHtml(String(p.score_pct))}%</div>
             <div class="cert-score-label">quizscore</div>
           </div>
-          <div class="cert-date">${dateStr}</div>
-          <a href="/modules/${p.module_slug}" target="_blank">Module openen &rarr;</a>
+          <div class="cert-date">${escapeHtml(dateStr)}</div>
+          <a href="/modules/${encodeURIComponent(p.module_slug)}" target="_blank" rel="noopener noreferrer">Module openen &rarr;</a>
         </div>`;
       }).join('')}</div>`;
     }
@@ -478,6 +487,7 @@ async function loadUsers() {
     const users = await res.json();
 
     document.getElementById('usersTable').innerHTML = `
+      <div class="users-table-wrap">
       <table class="users-table">
         <thead>
           <tr>
@@ -497,9 +507,9 @@ async function loadUsers() {
             const avg = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : '-';
             return `
               <tr>
-                <td>${u.email}</td>
+                <td>${escapeHtml(u.email)}</td>
                 <td>
-                  <select class="role-select" onchange="changeRole('${u.id}', this.value)" ${_session && u.id === _session.user.id ? 'disabled title="Je kunt je eigen rol niet wijzigen"' : ''}>
+                  <select class="role-select" onchange="changeRole('${escapeHtml(u.id)}', this.value)" ${_session && u.id === _session.user.id ? 'disabled title="Je kunt je eigen rol niet wijzigen"' : ''}>
                     <option value="user" ${u.role === 'user' ? 'selected' : ''}>Gebruiker</option>
                     <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Admin</option>
                   </select>
@@ -510,7 +520,8 @@ async function loadUsers() {
               </tr>`;
           }).join('')}
         </tbody>
-      </table>`;
+      </table>
+      </div>`;
   } catch (e) {
     document.getElementById('usersTable').innerHTML = '<p>Kon gebruikers niet laden.</p>';
   }

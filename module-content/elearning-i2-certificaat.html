@@ -1,20 +1,19 @@
-<!-- TITLE: I2 - Umely Certificaat: beoordeling en feedback -->
+<!-- TITLE: I2 - Het Umely Certificaat -->
 <!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Het Umely Certificaat','screen-module-2':'Het gesprek met Sonny','screen-module-3':'Beoordelingscriteria','screen-module-4':'Na het certificaat','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat is het certificaat','screen-module-2':'Hoe je het ontvangt','screen-module-3':'Wat er op staat','screen-module-4':'Wat het betekent','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>I2 - Umely Certificaat: beoordeling en feedback</h1>
-    <p>Leer hoe de beoordeling werkt, wat het gesprek met Sonny inhoudt en wat het Umely Certificaat betekent.</p>
+    <h1>Het Umely Certificaat</h1>
+    <p>Wat het certificaat inhoudt, hoe je het ontvangt en wat het voor jou betekent.</p>
   </div>
   <div class="leerdoelen">
     <h3>Na deze module kun je:</h3>
     <ul>
-      <li>Uitleggen hoe de beoordeling en het gesprek werken</li>
-      <li>Je project presenteren als live demonstratie</li>
-      <li>De beoordelingscriteria benoemen</li>
-      <li>Begrijpen wat het Umely Certificaat inhoudt</li>
+      <li>Uitleggen wanneer je het Umely Certificaat ontvangt</li>
+      <li>Beschrijven wat er op het certificaat staat</li>
+      <li>Benoemen wat het certificaat in de praktijk betekent</li>
     </ul>
   </div>
   <div class="tijdsbadge">Geschatte tijd: 10 minuten</div>
@@ -26,44 +25,44 @@
 <div id="screen-module-1" class="screen">
   <div class="module-header">
     <div class="module-num">Module 1 van 4</div>
-    <h2>Het Umely Certificaat</h2>
+    <h2>Wat is het certificaat</h2>
   </div>
   <div class="content-card">
-    <p>Het Umely Certificaat is het bewijs dat je het volledige leertraject hebt doorlopen en de praktijktoets succesvol hebt afgerond. Het is geen automatisch certificaat op basis van een score. Het wordt uitgereikt na een persoonlijk gesprek met Sonny de Leeuw, oprichter van Umely.</p>
-    <p>Dat gesprek is geen examen. Het is een professioneel gesprek waarbij je laat zien wat je hebt gebouwd, hoe je het hebt aangepakt en wat je ervan hebt geleerd.</p>
+    <p>Het Umely Certificaat is het bewijs dat je het volledige leertraject hebt doorlopen en de praktijktoets succesvol hebt afgerond. Het laat zien dat je Claude zelfstandig en verantwoord kunt inzetten in een echte werksituatie.</p>
+    <p>Het is geen automatisch certificaat op basis van alleen quizscores. Je rondt het traject af met een praktijktoets waarbij je een werkende workflow bouwt en aantoont dat je de stof kunt toepassen.</p>
   </div>
   <div class="content-card">
-    <h3>Wat staat er op het certificaat?</h3>
+    <h3>Wat maakt het certificaat waardevol?</h3>
     <div class="flashcard-set">
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Je naam</div>
-        <div class="fc-uitleg">Je volledige naam als bewijs dat jij het traject hebt afgerond.</div>
+        <div class="fc-term">Praktijkgericht</div>
+        <div class="fc-uitleg">Je toont aan dat je Claude kunt toepassen op een echt werkproces, niet alleen theorie begrijpt.</div>
         <div class="fc-hint">Klik voor details</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Datum</div>
-        <div class="fc-uitleg">De datum van voltooiing van het traject.</div>
+        <div class="fc-term">Volledig traject</div>
+        <div class="fc-uitleg">Je hebt alle onderdelen doorlopen: begrip, toepassing, tools, én de praktijktoets.</div>
         <div class="fc-hint">Klik voor details</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Onderwerp</div>
-        <div class="fc-uitleg">Het onderwerp van je praktijktoets, zodat duidelijk is welk werkproces je hebt geautomatiseerd.</div>
+        <div class="fc-term">Verifieerbaar</div>
+        <div class="fc-uitleg">Het certificaat bevat je naam, de datum en het onderwerp van je praktijktoets.</div>
         <div class="fc-hint">Klik voor details</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
-        <div class="fc-term">Handtekening</div>
-        <div class="fc-uitleg">Een handtekening van Sonny de Leeuw, oprichter van Umely.</div>
+        <div class="fc-term">Eerlijk</div>
+        <div class="fc-uitleg">Het certificaat zegt niet dat je perfecte AI bent. Het zegt dat je het verantwoord kunt inzetten.</div>
         <div class="fc-hint">Klik voor details</div>
       </div>
     </div>
   </div>
   <div id="kc-1" class="kennischeck">
     <h3>Kennischeck</h3>
-    <p class="kc-vraag">Hoe krijg je het Umely Certificaat?</p>
+    <p class="kc-vraag">Wat toont het Umely Certificaat aan?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Het certificaat is niet automatisch. Het wordt uitgereikt na een persoonlijk gesprek over je praktijktoets.')">Automatisch na het afronden van alle modules</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Na het indienen van je praktijktoets heb je een persoonlijk gesprek met Sonny. Daarin presenteer je je project en bespreek je je keuzes.')">Na een persoonlijk gesprek met Sonny over je praktijktoets</button>
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Er is geen online examen. De beoordeling is een persoonlijk gesprek met een live demonstratie van je project.')">Door een online examen te maken</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Het certificaat gaat niet over hoe snel je het traject hebt doorlopen.')">Dat je het traject snel hebt afgerond</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Het certificaat bewijst dat je Claude zelfstandig en verantwoord kunt inzetten in een echte werksituatie.')">Dat je Claude zelfstandig en verantwoord kunt inzetten</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Het gaat niet over het aantal tools dat je hebt gebruikt, maar om vakbekwaam en verantwoord gebruik.')">Dat je zoveel mogelijk tools hebt gebruikt</button>
     </div>
     <div id="kc-feedback-1" class="kc-feedback"></div>
   </div>
@@ -72,102 +71,94 @@
 <div id="screen-module-2" class="screen">
   <div class="module-header">
     <div class="module-num">Module 2 van 4</div>
-    <h2>Het gesprek met Sonny</h2>
+    <h2>Hoe je het ontvangt</h2>
   </div>
   <div class="content-card">
-    <h3>Wat gebeurt er in het gesprek?</h3>
+    <h3>Het traject stap voor stap</h3>
     <div class="stappen-lijst">
       <div class="stap-item">
         <div class="stap-nummer">1</div>
         <div class="stap-content">
-          <h4>Presenteer je project</h4>
-          <p>Geen PowerPoint. Een live demonstratie van de workflow die je hebt opgebouwd. Claude voert de taken uit terwijl Sonny meekijkt.</p>
+          <h4>Doorloop alle modules</h4>
+          <p>Alle tracks A t/m E plus de I-modules. Elke module sluit af met een quiz. Je hebt minimaal 70% nodig om een module als afgerond te tellen.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-nummer">2</div>
         <div class="stap-content">
-          <h4>Bespreek je keuzes</h4>
-          <p>Waarom dit werkproces? Welke alternatieven overwogen? Waarom bepaalde beslissingen bij de mens gehouden?</p>
+          <h4>Rond de praktijktoets af</h4>
+          <p>In module I1 bouw je een werkende workflow voor een echt werkproces. Je legt uit wat je hebt gemaakt, waarom je bepaalde keuzes hebt gemaakt en wat de beperkingen zijn.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-nummer">3</div>
         <div class="stap-content">
-          <h4>Benoem de beperkingen</h4>
-          <p>Wat werkt niet perfect? Wat zou je anders doen? Eerlijkheid is een beoordelingscriterium.</p>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-nummer">4</div>
-        <div class="stap-content">
-          <h4>Ontvang feedback</h4>
-          <p>Sonny geeft praktische, directe feedback op wat goed is en wat beter kan.</p>
+          <h4>Ontvang je certificaat</h4>
+          <p>Na het succesvol afronden van de praktijktoets ontvang je het Umely Certificaat. Het certificaat wordt op je naam uitgegeven.</p>
         </div>
       </div>
     </div>
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>Het gesprek duurt 30-45 minuten. Bereid een live demonstratie voor, geen presentatie. Laat zien dat je workflow echt werkt.</p>
+    <p>Je praktijktoets is sterker als je een werkproces kiest dat je al goed kent. Dan kun je duidelijk uitleggen waarom je bepaalde stappen wel of niet hebt geautomatiseerd.</p>
   </div>
-  <div id="scenario-1" class="scenario-blok">
-    <div class="scenario-label">Praktijksituatie</div>
-    <p class="scenario-tekst">Tijdens het gesprek vraagt Sonny waarom je stap 4 van je workflow handmatig hebt gehouden in plaats van geautomatiseerd. Wat is het beste antwoord?</p>
-    <div class="scenario-keuzes">
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Dit is geen goed antwoord. Het laat niet zien dat je een bewuste afweging hebt gemaakt.')">Ik wist niet hoe ik het moest automatiseren</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Dit laat zien dat je een bewuste keuze hebt gemaakt op basis van de inhoud. Precies wat de beoordeling meet.')">Omdat die stap menselijk oordeel vereist. Een fout daar heeft gevolgen voor de klantrelatie, dus die houd ik bewust bij de mens.</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Tijdgebrek is geen sterke verantwoording. Het gesprek meet of je bewuste keuzes hebt gemaakt.')">Ik had geen tijd meer om die stap te bouwen</button>
+  <div id="kc-2" class="kennischeck">
+    <h3>Kennischeck</h3>
+    <p class="kc-vraag">Wat is de laatste stap voor je het certificaat ontvangt?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Alle quizzen halen is onderdeel van het traject, maar het certificaat vereist ook de praktijktoets.')">Alle module-quizzen halen</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3', 'Correct. Na het succesvol afronden van de praktijktoets ontvang je het certificaat.')">De praktijktoets succesvol afronden</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Er is geen apart online examen. De praktijktoets is de afsluitende beoordeling.')">Een apart online examen maken</button>
     </div>
-    <div id="scenario-feedback-1" class="scenario-feedback"></div>
+    <div id="kc-feedback-2" class="kc-feedback"></div>
   </div>
 </div>
 
 <div id="screen-module-3" class="screen">
   <div class="module-header">
     <div class="module-num">Module 3 van 4</div>
-    <h2>Beoordelingscriteria</h2>
+    <h2>Wat er op staat</h2>
   </div>
   <div class="content-card">
-    <h3>Waarop wordt beoordeeld?</h3>
+    <h3>De inhoud van het certificaat</h3>
     <table class="vergelijk-tabel">
-      <thead><tr><th>Criterium</th><th>Wat wordt beoordeeld</th></tr></thead>
+      <thead><tr><th>Gegeven</th><th>Toelichting</th></tr></thead>
       <tbody>
-        <tr><td>Begrip</td><td>Begrijp je wat je hebt gebouwd en waarom het werkt?</td></tr>
-        <tr><td>Toepassing</td><td>Heb je de juiste tools en technieken gekozen?</td></tr>
-        <tr><td>Eerlijkheid</td><td>Ben je eerlijk over de beperkingen?</td></tr>
-        <tr><td>Zelfstandigheid</td><td>Heb je de keuzes zelf gemaakt en kun je ze verantwoorden?</td></tr>
-        <tr><td>Praktische waarde</td><td>Levert de oplossing daadwerkelijk tijdwinst op?</td></tr>
+        <tr><td>Je naam</td><td>Je volledige naam als bewijs dat jij het traject hebt afgerond.</td></tr>
+        <tr><td>Datum</td><td>De datum waarop je de praktijktoets hebt afgerond.</td></tr>
+        <tr><td>Onderwerp</td><td>Het werkproces van je praktijktoets, zodat duidelijk is wat je hebt geautomatiseerd.</td></tr>
+        <tr><td>Traject</td><td>Vermelding dat je het volledige Umely-leertraject hebt doorlopen.</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="tip-box waarschuwing">
-    <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Als de beoordeling niet voldoende is, krijg je concrete feedback over wat er beter moet. Je kunt het project aanpassen en een tweede gesprek inplannen. Er is geen limiet aan het aantal pogingen.</p>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Gebruik</div>
+    <p>Het certificaat kun je gebruiken als bewijs van vakbekwaamheid — voor jezelf, voor je werkgever of voor opdrachtgevers. Het laat zien dat je Claude niet alleen gebruikt, maar ook begrijpt wat je doet.</p>
   </div>
-  <div id="kc-2" class="kennischeck">
+  <div id="kc-3" class="kennischeck">
     <h3>Kennischeck</h3>
-    <p class="kc-vraag">Wat meet de beoordeling NIET?</p>
+    <p class="kc-vraag">Wat staat er op het certificaat als onderwerp?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Perfectie wordt niet verwacht. De beoordeling meet begrip, toepassing, eerlijkheid, zelfstandigheid en praktische waarde.')">Perfectie: alles moet foutloos werken</button>
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Begrip is juist een van de beoordelingscriteria. Je moet kunnen uitleggen wat je hebt gebouwd en waarom.')">Begrip van wat je hebt gebouwd</button>
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Eerlijkheid over beperkingen is juist een belangrijk criterium.')">Eerlijkheid over beperkingen</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4', 'Je quizscore staat niet op het certificaat.')">Je gemiddelde quizscore</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4', 'De naam van de module is niet het onderwerp op het certificaat.')">De naam van de laatste module</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4', 'Correct. Het werkproces van je praktijktoets staat als onderwerp op het certificaat, zodat duidelijk is wat je hebt gebouwd.')">Het werkproces van je praktijktoets</button>
     </div>
-    <div id="kc-feedback-2" class="kc-feedback"></div>
+    <div id="kc-feedback-3" class="kc-feedback"></div>
   </div>
 </div>
 
 <div id="screen-module-4" class="screen">
   <div class="module-header">
     <div class="module-num">Module 4 van 4</div>
-    <h2>Na het certificaat</h2>
+    <h2>Wat het betekent</h2>
   </div>
   <div class="content-card">
     <p>Het traject is afgerond maar het leren stopt niet. Claude krijgt regelmatig nieuwe functies. Houd de releasenotes bij via het Anthropic-blog of de changelog in de app. Experimenteer actief met nieuwe functies in je eigen werkproces zodra ze beschikbaar komen.</p>
     <p>Als er fundamentele wijzigingen zijn in hoe Claude werkt, ontvangen gecertificeerde deelnemers een notificatie via het e-mailadres waarmee je bent geregistreerd.</p>
   </div>
   <div class="content-card">
-    <h3>Wat het certificaat betekent</h3>
+    <h3>Wat het certificaat in de praktijk zegt</h3>
     <div class="processtroom">
       <div class="proces-blok"><h4>Vakbekwaam</h4><p>Je kunt Claude zelfstandig inzetten</p></div>
       <div class="proces-pijl">&#9658;</div>
@@ -180,7 +171,7 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>Het certificaat is bedoeld als bewijs van vakbekwaamheid: voor jezelf, voor je werkgever of voor klanten die willen weten met wie ze werken. Niet perfect, maar zelfstandig en verantwoord.</p>
+    <p>Het certificaat is geen eindpunt. Claude blijft zich ontwikkelen. Gebruik het als vertrekpunt om te blijven experimenteren in je eigen werksituatie.</p>
   </div>
   <div class="btn-wrap">
   </div>
@@ -188,10 +179,10 @@
 
 <!-- QUIZ_START -->
 [
-  {"vraag":"Hoe wordt het Umely Certificaat uitgereikt?","opties":["Automatisch na het afronden van alle modules","Na een persoonlijk gesprek met Sonny over je praktijktoets","Door een online examen te maken","Per post na betaling"],"correct":1,"uitleg":"Het certificaat wordt uitgereikt na een persoonlijk gesprek van 30-45 minuten met Sonny, waarin je je project presenteert en je keuzes bespreekt."},
-  {"vraag":"Wat presenteer je in het gesprek?","opties":["Een PowerPoint presentatie","Een live demonstratie van je werkende workflow","Een schriftelijk verslag","Een video-opname"],"correct":1,"uitleg":"Je laat een live demonstratie zien van de workflow die je hebt gebouwd. Claude voert de taken uit terwijl Sonny meekijkt."},
-  {"vraag":"Wat is een van de beoordelingscriteria?","opties":["Hoeveel tools je hebt gekoppeld","Eerlijkheid over de beperkingen van je oplossing","Hoe snel je het project hebt gebouwd","Of je geen hulp hebt gevraagd"],"correct":1,"uitleg":"Eerlijkheid over beperkingen is een belangrijk criterium. Het is beter om eerlijk te beschrijven wat niet werkt dan te doen alsof alles perfect is."},
-  {"vraag":"Wat gebeurt er als de beoordeling niet voldoende is?","opties":["Je krijgt geen tweede kans","Je krijgt feedback en kunt een tweede gesprek inplannen","Je moet het hele traject opnieuw doen","Je certificaat wordt later alsnog uitgereikt"],"correct":1,"uitleg":"Bij onvoldoende resultaat krijg je concrete feedback over wat er beter moet. Je past je project aan en plant een nieuw gesprek. Er is geen limiet aan het aantal pogingen."},
-  {"vraag":"Wat betekent het Umely Certificaat?","opties":["Dat je perfect bent in AI","Dat je Claude vakbekwaam, zelfstandig en verantwoord kunt inzetten","Dat je een AI-developer bent","Dat je geen fouten meer maakt"],"correct":1,"uitleg":"Het certificaat bewijst dat je Claude zelfstandig en verantwoord kunt inzetten. Niet perfect, maar vakbekwaam: je kent de mogelijkheden en de grenzen."}
+  {"vraag":"Wat toont het Umely Certificaat aan?","opties":["Dat je alle modules perfect hebt afgerond","Dat je Claude vakbekwaam en verantwoord kunt inzetten","Dat je een AI-developer bent","Dat je het traject als eerste hebt afgerond"],"correct":1,"uitleg":"Het certificaat bewijst vakbekwaamheid: je kunt Claude zelfstandig en verantwoord inzetten. Niet perfect, maar met begrip van de mogelijkheden en de grenzen."},
+  {"vraag":"Wat is de afsluitende stap van het traject?","opties":["Het halen van alle quizzen met 100%","Het schrijven van een verslag","De praktijktoets succesvol afronden","Een mondelinge presentatie geven"],"correct":2,"uitleg":"Na het doorlopen van alle modules sluit je het traject af met de praktijktoets. Na een succesvol resultaat ontvang je het certificaat."},
+  {"vraag":"Wat staat er als onderwerp op het certificaat?","opties":["Je gemiddelde quizscore","De datum van de eerste module","Het werkproces van je praktijktoets","De naam van de cursus"],"correct":2,"uitleg":"Het werkproces dat je hebt geautomatiseerd in de praktijktoets staat als onderwerp op het certificaat. Zo is het direct toepasbaar als bewijs van relevante ervaring."},
+  {"vraag":"Voor wie is het certificaat bedoeld?","opties":["Alleen voor IT-professionals","Voor iedereen die Claude vakbekwaam wil inzetten in zijn of haar werk","Alleen voor developers","Alleen voor managers"],"correct":1,"uitleg":"Het traject is opgezet voor iedereen die Claude zelfstandig en verantwoord wil gebruiken in een werksituatie, ongeacht achtergrond of functie."},
+  {"vraag":"Wat betekent het certificaat NIET?","opties":["Dat je Claude vakbekwaam kunt inzetten","Dat je de grenzen en risico's kent","Dat je nooit meer fouten maakt met Claude","Dat je praktische waarde kunt leveren"],"correct":2,"uitleg":"Het certificaat zegt niet dat je foutloos bent. Het zegt dat je weet wat Claude kan en wat niet, en dat je er verantwoord mee omgaat."}
 ]
 <!-- QUIZ_END -->

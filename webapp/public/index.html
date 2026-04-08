@@ -242,7 +242,7 @@
 </head>
 <body>
 
-<div id="authOverlay" style="display:none;">
+<div id="authOverlay" style="display:none;" aria-hidden="true">
   <div class="auth-card">
     <!-- AUTH HEADER -->
     <div class="auth-logo">
@@ -252,19 +252,21 @@
     </div>
 
     <!-- ERROR BOX -->
-    <div id="authError"></div>
+    <div id="authError" role="alert" aria-live="polite"></div>
 
     <!-- LOGIN FORM -->
     <div id="loginForm" style="display:block;">
-      <div class="auth-field">
-        <label>E-mailadres</label>
-        <input id="authEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
-      </div>
-      <div class="auth-field">
-        <label>Wachtwoord</label>
-        <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
-      </div>
-      <button id="loginBtn" onclick="login()" style="margin-top:6px;">Inloggen</button>
+      <form id="loginFormEl" onsubmit="login(); return false;">
+        <div class="auth-field">
+          <label for="authEmail">E-mailadres</label>
+          <input id="authEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label for="authPassword">Wachtwoord</label>
+          <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button id="loginBtn" type="submit" style="margin-top:6px;">Inloggen</button>
+      </form>
       <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray-text);">
         Nog geen account? <a href="#" id="toggleSignup" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Registreer</a>
       </p>
@@ -272,27 +274,29 @@
 
     <!-- SIGNUP FORM -->
     <div id="signupForm" style="display:none;">
-      <div class="auth-field">
-        <label>Voornaam</label>
-        <span class="auth-hint">Je voornaam</span>
-        <input id="authFirstName" type="text" placeholder="Jan" autocomplete="given-name">
-      </div>
-      <div class="auth-field">
-        <label>Achternaam</label>
-        <span class="auth-hint">Je achternaam</span>
-        <input id="authLastName" type="text" placeholder="Jansen" autocomplete="family-name">
-      </div>
-      <div class="auth-field">
-        <label>E-mailadres</label>
-        <span class="auth-hint">Gebruik je werk-emailadres</span>
-        <input id="signupEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
-      </div>
-      <div class="auth-field">
-        <label>Wachtwoord</label>
-        <span class="auth-hint">Min. 8 tekens, 1 hoofletter, 1 cijfer</span>
-        <input id="signupPassword" type="password" placeholder="••••••••" autocomplete="new-password">
-      </div>
-      <button id="signupBtn" onclick="signup()" style="margin-top:6px;">Account aanmaken</button>
+      <form id="signupFormEl" onsubmit="signup(); return false;">
+        <div class="auth-field">
+          <label for="authFirstName">Voornaam</label>
+          <span class="auth-hint">Je voornaam</span>
+          <input id="authFirstName" type="text" placeholder="Jan" autocomplete="given-name">
+        </div>
+        <div class="auth-field">
+          <label for="authLastName">Achternaam</label>
+          <span class="auth-hint">Je achternaam</span>
+          <input id="authLastName" type="text" placeholder="Jansen" autocomplete="family-name">
+        </div>
+        <div class="auth-field">
+          <label for="signupEmail">E-mailadres</label>
+          <span class="auth-hint">Gebruik je werk-emailadres</span>
+          <input id="signupEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label for="signupPassword">Wachtwoord</label>
+          <span class="auth-hint">Min. 8 tekens, 1 hoofletter, 1 cijfer</span>
+          <input id="signupPassword" type="password" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <button id="signupBtn" type="submit" style="margin-top:6px;">Account aanmaken</button>
+      </form>
       <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray-text);">
         Al een account? <a href="#" id="toggleLogin" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Inloggen</a>
       </p>
@@ -361,7 +365,7 @@
       <span id="btnText">Genereer e-learning</span>
     </button>
 
-    <div id="status">
+    <div id="status" aria-live="polite">
       <div class="status-loading">
         <div class="spinner"></div>
         <div style="flex:1">
@@ -443,7 +447,9 @@ async function initAuth() {
 }
 
 function showLogin() {
-  document.getElementById('authOverlay').style.display = 'flex';
+  const overlay = document.getElementById('authOverlay');
+  overlay.style.display = 'flex';
+  overlay.removeAttribute('aria-hidden');
 }
 
 async function showApp(session) {
@@ -459,7 +465,9 @@ async function showApp(session) {
       return;
     }
 
-    document.getElementById('authOverlay').style.display = 'none';
+    const authOverlay = document.getElementById('authOverlay');
+    authOverlay.style.display = 'none';
+    authOverlay.setAttribute('aria-hidden', 'true');
     document.getElementById('logoutBtn').style.display = 'block';
     const userEl = document.getElementById('headerUser');
     userEl.style.display = 'block';
@@ -691,9 +699,17 @@ fileInput.addEventListener('change', () => {
 });
 
 async function handleFile(file) {
+  if (file.size > 20 * 1024 * 1024) {
+    showAuthError('Bestand is groter dan 20 MB.');
+    return;
+  }
   const badge = document.getElementById('fileBadge');
   badge.style.display = 'block';
-  badge.innerHTML = `<span class="file-badge">⏳ ${file.name} laden...</span>`;
+  badge.innerHTML = '';
+  const loadingSpan = document.createElement('span');
+  loadingSpan.className = 'file-badge';
+  loadingSpan.textContent = `⏳ ${file.name} laden...`;
+  badge.appendChild(loadingSpan);
 
   const formData = new FormData();
   formData.append('file', file);
@@ -703,7 +719,16 @@ async function handleFile(file) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Kon bestand niet lezen');
     document.getElementById('transcription').value = data.text;
-    badge.innerHTML = `<span class="file-badge">📄 ${file.name} <button onclick="clearFile()" title="Verwijder bestand">✕</button></span>`;
+    badge.innerHTML = '';
+    const fileSpan = document.createElement('span');
+    fileSpan.className = 'file-badge';
+    fileSpan.textContent = `📄 ${file.name} `;
+    const removeBtn = document.createElement('button');
+    removeBtn.onclick = clearFile;
+    removeBtn.title = 'Verwijder bestand';
+    removeBtn.textContent = '✕';
+    fileSpan.appendChild(removeBtn);
+    badge.appendChild(fileSpan);
   } catch (err) {
     badge.innerHTML = '';
     badge.style.display = 'none';
@@ -773,6 +798,7 @@ async function generate() {
     const { jobId } = await response.json();
 
     await new Promise((resolve, reject) => {
+      if (pollInterval) clearInterval(pollInterval);
       pollInterval = setInterval(async () => {
         try {
           const poll = await fetch(`/api/job/${jobId}`);
@@ -860,10 +886,13 @@ function togglePreview() {
   previewVisible = !previewVisible;
   if (previewVisible) {
     iframe.style.display = 'block';
+    if (iframe._blobUrl) URL.revokeObjectURL(iframe._blobUrl);
     const blob = new Blob([generatedHTML], { type: 'text/html' });
-    iframe.src = URL.createObjectURL(blob);
+    iframe._blobUrl = URL.createObjectURL(blob);
+    iframe.src = iframe._blobUrl;
   } else {
     iframe.style.display = 'none';
+    if (iframe._blobUrl) { URL.revokeObjectURL(iframe._blobUrl); iframe._blobUrl = null; }
     iframe.src = '';
   }
 }

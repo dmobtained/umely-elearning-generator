@@ -13,6 +13,21 @@ app.use(express.json({ limit: '10mb' }));
 app.get('/', (req, res) => res.redirect('/modules.html'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  const origin = process.env.ALLOWED_ORIGIN || '*';
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 3 });
@@ -35,6 +50,7 @@ async function requireAuth(req, res, next) {
 
 // In-memory job store
 const jobs = {};
+const generateTimestamps = {};
 
 const SYSTEM_PROMPT = fs.readFileSync(path.join(__dirname, 'prompt.md'), 'utf8');
 const BOILERPLATE = fs.readFileSync(path.join(__dirname, 'boilerplate.html'), 'utf8');
@@ -51,6 +67,15 @@ app.get('/api/config', (req, res) => {
 
 // ── Start genereren (geeft direct jobId terug) ──
 app.post('/generate', requireAuth, async (req, res) => {
+  const userId = req.user.id;
+  const now = Date.now();
+  const window = 15 * 60 * 1000;
+  generateTimestamps[userId] = (generateTimestamps[userId] || []).filter(t => now - t < window);
+  if (generateTimestamps[userId].length >= 3) {
+    return res.status(429).json({ error: 'Je hebt de limiet van 3 generaties per 15 minuten bereikt. Probeer het later opnieuw.' });
+  }
+  generateTimestamps[userId].push(now);
+
   const { transcription } = req.body;
   if (!transcription || transcription.trim().length < 10) {
     return res.status(400).json({ error: 'Transcriptie is te kort of leeg.' });
@@ -613,9 +638,16 @@ app.post('/api/auth/resend-verification', async (req, res) => {
   }
 });
 
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Interne serverfout' });
+});
+
 require('./community-routes')(app, supabase, requireAuth);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Umely E-learning Generator draait op http://localhost:${PORT}`);
 });
+process.on('SIGTERM', () => server.close(() => process.exit(0)));
+process.on('SIGINT', () => server.close(() => process.exit(0)));

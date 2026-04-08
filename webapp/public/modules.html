@@ -328,7 +328,7 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
         <div class="stat-sub">in de bibliotheek</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Al geopend</div>
+        <div class="stat-label">Geopend</div>
         <div class="stat-value" id="statOpened">0</div>
         <div class="stat-sub">van de modules</div>
       </div>
@@ -383,6 +383,18 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
 </footer>
 
 <script>
+// ── HELPERS ──
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function safeUrl(url) {
+  try {
+    const u = new URL(url, location.origin);
+    return u.pathname.startsWith('/modules/') ? url : '#';
+  } catch { return '#'; }
+}
+
 // ── CONFIG ──
 const CATEGORIES = {
   a: { title: 'A — Introductie tot Claude', icon: '🎓' },
@@ -409,6 +421,7 @@ function getOpened() { try { return JSON.parse(localStorage.getItem(OPENED_KEY))
 function markOpened(slug) {
   let arr = getOpened().filter(s => s !== slug);
   arr.unshift(slug);
+  if (arr.length > 200) arr = arr.slice(0, 200);
   localStorage.setItem(OPENED_KEY, JSON.stringify(arr));
 }
 
@@ -573,6 +586,31 @@ async function loadModules() {
     showContinue();
     renderGrid();
 
+    // Event delegation voor module-klik en admin-acties (eenmalig registreren)
+    document.getElementById('grid').addEventListener('click', (e) => {
+      // Admin: rename
+      const renameBtn = e.target.closest('[data-action="rename"]');
+      if (renameBtn) {
+        e.preventDefault(); e.stopPropagation();
+        const card = renameBtn.closest('.module-card');
+        if (card) renameModule(card.dataset.slug, renameBtn);
+        return;
+      }
+      // Admin: delete
+      const deleteBtn = e.target.closest('[data-action="delete"]');
+      if (deleteBtn) {
+        e.preventDefault(); e.stopPropagation();
+        const card = deleteBtn.closest('.module-card');
+        if (card) deleteModule(card.dataset.slug, card.dataset.title, deleteBtn);
+        return;
+      }
+      // Module open tracking
+      const link = e.target.closest('.module-card-link');
+      if (link) {
+        trackOpen(link.dataset.slug, link.dataset.title, link.dataset.url, link.dataset.cat);
+      }
+    });
+
     document.getElementById('searchInput').style.display = '';
     document.getElementById('statsRow').style.display = 'grid';
   } catch (e) {
@@ -663,17 +701,16 @@ function renderModuleCard(m) {
   const isAdmin = userRole === 'admin';
   const adminActions = isAdmin ? `
     <div class="card-actions">
-      <button class="btn-rename" title="Naam wijzigen" onclick="event.preventDefault();event.stopPropagation();renameModule('${m.slug}', this)">✏️</button>
-      <button class="btn-delete" title="Verwijderen" onclick="event.preventDefault();event.stopPropagation();deleteModule('${m.slug}', '${m.title.replace(/'/g,"\\'")}', this)">🗑</button>
+      <button class="btn-rename" title="Naam wijzigen" data-action="rename">✏️</button>
+      <button class="btn-delete" title="Verwijderen" data-action="delete">🗑</button>
     </div>` : '';
-  return `<a class="module-card${cardClass}" href="${m.url}" target="_blank"
-      onclick="trackOpen('${m.slug}','${m.title.replace(/'/g,"\\'")}','${m.url}','${cat}')"
-      data-slug="${m.slug}" data-cat="${cat}">
+  return `<a class="module-card${cardClass} module-card-link" href="${escHtml(safeUrl(m.url))}" target="_blank"
+      data-slug="${escHtml(m.slug)}" data-title="${escHtml(m.title)}" data-url="${escHtml(safeUrl(m.url))}" data-cat="${escHtml(cat)}">
     <div class="module-card-top">
       <span class="cat-badge cat-${cat}">${label}</span>
       <span class="mod-status${statusClass}">${statusText}</span>
     </div>
-    <div class="module-title">${m.title}</div>
+    <div class="module-title">${escHtml(m.title)}</div>
     <div class="module-meta"><span>⏱ ca. 20 min</span><span>❓ 5 vragen</span></div>
     <div class="prog-bar-wrap"><div class="prog-bar${done ? ' done' : ''}" style="width:${barWidth}%"></div></div>
     <div class="module-footer">
@@ -855,7 +892,11 @@ async function checkNewsletterPopup(session) {
     }
   } catch(e) {}
   document.getElementById('nlEmailInput').value = session?.user?.email || '';
-  setTimeout(() => document.getElementById('newsletterPopup').classList.add('open'), 1200);
+  setTimeout(() => {
+    document.getElementById('newsletterPopup').classList.add('open');
+    const onNlEsc = (e) => { if (e.key === 'Escape') { closeNewsletter(); document.removeEventListener('keydown', onNlEsc); } };
+    document.addEventListener('keydown', onNlEsc);
+  }, 1200);
 }
 
 function closeNewsletter() {
