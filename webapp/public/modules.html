@@ -483,8 +483,7 @@ async function showApp(session) {
   const pill = document.getElementById('userPill');
   pill.style.display = 'flex';
   try {
-    const { data: profile } = await _supabase.from('profiles').select('first_name').eq('id', session.user.id).single();
-    const name = profile?.first_name || session.user.email.split('@')[0];
+    const name = session.user.user_metadata?.firstName || session.user.email.split('@')[0];
     document.getElementById('headerUser').textContent = name;
     document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
   } catch {
@@ -529,7 +528,9 @@ async function signup() {
   const btn = document.getElementById('loginBtn');
   const errEl = document.getElementById('authError');
   if (!email) { errEl.textContent = 'Vul je e-mailadres in.'; errEl.style.display = 'block'; return; }
-  if (password.length < 6) { errEl.textContent = 'Wachtwoord moet minimaal 6 tekens zijn.'; errEl.style.display = 'block'; return; }
+  if (password.length < 8) { errEl.textContent = 'Wachtwoord moet minimaal 8 tekens zijn.'; errEl.style.display = 'block'; return; }
+  if (!/[A-Z]/.test(password)) { errEl.textContent = 'Wachtwoord moet minimaal 1 hoofdletter bevatten.'; errEl.style.display = 'block'; return; }
+  if (!/[0-9]/.test(password)) { errEl.textContent = 'Wachtwoord moet minimaal 1 cijfer bevatten.'; errEl.style.display = 'block'; return; }
   errEl.style.display = 'none';
   btn.disabled = true; btn.textContent = 'Registreren...';
   const { error } = await _supabase.auth.signUp({ email, password });
