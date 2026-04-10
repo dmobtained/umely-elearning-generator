@@ -9,13 +9,20 @@
 <script src="https://instant.page/5.2.0" type="module"></script>
 <style>
   :root {
-    --amber: #FF8514; --flame: #FF4D00; --gold: #FFD964;
-    --charcoal: #27292D; --warm-white: #FFF8F2; --white: #FFFFFF;
-    --gray-text: #5A5A5A; --gray-border: #E8D9CC; --gray-light: #F5F0EA;
+    --amber: #FF8514;
+    --flame: #FF4D00;
+    --gold: #FFD964;
+    --charcoal: #27292D;
+    --warm-white: #FFF8F2;
+    --white: #FFFFFF;
+    --gray-text: #5A5A5A;
+    --gray-border: #E8D9CC;
+    --gray-light: #F5F0EA;
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
+    --sidebar-width: 220px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: #F5F5F7; color: var(--charcoal); min-height: 100vh; display: flex; flex-direction: column; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #F5F5F7; color: var(--charcoal); min-height: 100vh; }
 
   /* ── AUTH OVERLAY ── */
   #authOverlay { display: none; position: fixed; inset: 0; background: rgba(39,41,45,0.88); backdrop-filter: blur(6px); z-index: 1000; align-items: center; justify-content: center; }
@@ -46,49 +53,124 @@
   .btn-logout:hover { background: rgba(255,255,255,0.1); color: white; }
   .btn-admin-new { display: none; }
 
-  /* ── MAIN ── */
-  main { flex: 1; max-width: 900px; margin: 0 auto; width: 100%; padding: 32px 20px 64px; }
+  /* ── LAYOUT ── */
+  .page-body { display: flex; min-height: calc(100vh - 64px); }
 
-  /* ── PROFILE HERO ── */
-  .profile-hero {
-    background: var(--charcoal); border-radius: 20px; padding: 28px 32px;
-    display: flex; gap: 20px; align-items: center; margin-bottom: 20px;
-    position: relative; overflow: hidden;
-    box-shadow: 0 4px 20px rgba(39,41,45,0.18);
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-width);
+    background: white;
+    border-right: 1px solid #EEE;
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 20px 0;
+    z-index: 50;
   }
-  .profile-avatar { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,133,20,0.08); border: 1.5px solid rgba(255,133,20,0.35); display: flex; align-items: center; justify-content: center; font-size: 22px; color: #FF8514; font-weight: 700; flex-shrink: 0; }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+    user-select: none;
+  }
+  .nav-item:hover { background: #FFF8F2; color: var(--charcoal); }
+  .nav-item.active { background: #FFF3E8; color: var(--amber); font-weight: 700; border-left-color: var(--amber); }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #BBB;
+    padding: 16px 20px 6px;
+  }
+  .nav-divider { border: none; border-top: 1px solid #EEE; margin: 8px 0; }
+
+  /* Admin nav items hidden by default */
+  .nav-admin { display: none; }
+
+  /* ── CONTENT ── */
+  .content {
+    margin-left: var(--sidebar-width);
+    padding: 32px 28px;
+    min-height: calc(100vh - 64px);
+    flex: 1;
+  }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-section { display: none; }
+  .content-section.active { display: block; }
+
+  /* ── SECTION CARD ── */
+  .section-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+  }
+  .section-card-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  /* ── PROFILE CARD ── */
+  .profile-hero {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .profile-avatar-lg {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: var(--amber);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
   .profile-info { flex: 1; min-width: 0; }
-  .profile-info h3 { font-size: 18px; font-weight: 800; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .profile-info .member-since { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-  .role-badge { display: inline-block; padding: 3px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; }
-  .role-badge.admin { background: rgba(255,133,20,0.25); color: #FF8514; }
-  .role-badge.user { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
-  .hero-progress { flex-shrink: 0; text-align: right; min-width: 160px; }
-  .hero-progress .prog-numbers { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
-  .hero-progress .prog-numbers strong { font-size: 22px; font-weight: 800; color: white; }
-  .prog-track { background: rgba(255,255,255,0.12); border-radius: 50px; height: 6px; overflow: hidden; }
+  .profile-info h3 { font-size: 18px; font-weight: 800; color: var(--charcoal); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+  .profile-info .member-since { font-size: 13px; color: #999; margin-bottom: 6px; }
+  .role-badge { display: inline-block; padding: 3px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .role-badge.admin { background: rgba(255,133,20,0.15); color: var(--amber); }
+  .role-badge.user { background: #F0F0F0; color: #888; }
+  .hero-progress { margin-top: 20px; }
+  .prog-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .prog-label-text { font-size: 13px; color: #999; }
+  .prog-numbers { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+  .prog-track { background: #F0F0F0; border-radius: 50px; height: 8px; overflow: hidden; }
   .prog-fill { height: 100%; background: var(--gradient); border-radius: 50px; transition: width 0.6s ease; }
-  .hero-progress .prog-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 5px; }
 
-  /* ── LIBRARY CTA ── */
-  .library-cta { background: white; border-radius: 16px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-  .library-cta p { font-size: 14px; color: var(--gray-text); margin: 0; }
-  .library-cta strong { color: var(--charcoal); }
-
-  /* ── STATS ── */
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-  .stat-card { background: white; border-radius: 16px; padding: 20px 22px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  /* ── STATS GRID ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .stat-card { background: white; border-radius: 16px; padding: 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
   .stat-value { font-size: 32px; font-weight: 800; color: var(--charcoal); letter-spacing: -0.5px; line-height: 1; }
   .stat-label { font-size: 12px; color: #AAA; font-weight: 500; margin-top: 4px; }
   .stat-sub { font-size: 11px; color: #CCC; font-weight: 500; margin-top: 2px; }
 
-  /* ── SECTION ── */
-  .section { margin-bottom: 24px; }
-  .section-title { font-size: 16px; font-weight: 800; color: var(--charcoal); margin-bottom: 12px; }
-
   /* ── CERTIFICATES ── */
   .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; }
-  .cert-card { background: white; border-radius: 16px; padding: 22px; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-top: 3px solid var(--amber); }
+  .cert-card { background: white; border-radius: 16px; padding: 22px; position: relative; box-shadow: 0 1px 6px rgba(0,0,0,0.06); border-top: 3px solid var(--amber); }
   .cert-card .cert-badge { position: absolute; top: 14px; right: 14px; background: #D1FAE5; color: #065F46; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 50px; }
   .cert-card .cert-icon { font-size: 26px; margin-bottom: 10px; }
   .cert-card h4 { font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; line-height: 1.3; padding-right: 60px; }
@@ -98,15 +180,50 @@
   .cert-card .cert-date { font-size: 11px; color: #bbb; margin-top: 6px; }
   .cert-card a { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--amber); text-decoration: none; }
   .cert-card a:hover { color: var(--flame); }
-  .cert-empty { background: white; border-radius: 16px; padding: 32px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .cert-empty { background: white; border-radius: 16px; padding: 32px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
   .cert-empty p { font-size: 14px; color: #aaa; margin-bottom: 16px; }
 
   /* ── NEWSLETTER ── */
-  .nl-card { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .nl-card { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .nl-card p { font-size: 14px; color: var(--gray-text); margin: 0; flex: 1; min-width: 200px; }
 
-  /* ── ADMIN ── */
-  .admin-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  /* ── ABONNEMENT ── */
+  .sub-card { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .sub-info { display: flex; flex-direction: column; gap: 4px; }
+  .sub-status { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; }
+  .sub-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sub-dot.active { background: #22C55E; }
+  .sub-dot.inactive { background: #D1D5DB; }
+  .sub-status.active { color: #15803D; }
+  .sub-status.inactive { color: #9CA3AF; }
+  .sub-meta { font-size: 13px; color: #aaa; }
+  .sub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* ── ACTIVITEIT ── */
+  .users-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .activity-wrap { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+  .activity-table { width: 100%; border-collapse: collapse; }
+  .activity-table th { background: var(--charcoal); color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 11px 16px; text-align: left; }
+  .activity-table td { padding: 10px 16px; font-size: 13px; border-top: 1px solid var(--gray-border); color: var(--charcoal); vertical-align: middle; }
+  .activity-table tr:hover td { background: #FAFAFA; }
+  .activity-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 50px; }
+  .activity-badge.registered { background: #F3EDE7; color: #A0887A; }
+  .activity-badge.started { background: #FFF0E5; color: #D4500A; }
+  .activity-badge.completed { background: #F0FDF4; color: #166534; }
+  .activity-score { display: inline-block; background: var(--amber); color: white; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 50px; margin-left: 6px; }
+  .account-settings-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-top: 1px solid var(--gray-border); }
+  .account-settings-row:first-child { border-top: none; padding-top: 0; }
+  .account-settings-label { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+  .account-settings-sub { font-size: 12px; color: #AAA; margin-top: 2px; }
+  .btn-settings-action { padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; border: 1.5px solid var(--gray-border); background: none; color: var(--charcoal); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .btn-settings-action:hover { border-color: var(--amber); color: var(--amber); }
+  .activity-empty { padding: 32px; text-align: center; color: #aaa; font-size: 14px; }
+  .activity-more { padding: 12px; text-align: center; border-top: 1px solid var(--gray-border); }
+  .activity-more button { background: none; border: 1.5px solid var(--gray-border); border-radius: 50px; padding: 7px 20px; font-size: 13px; font-weight: 600; color: var(--charcoal); cursor: pointer; transition: border-color 0.15s; }
+  .activity-more button:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* ── ADMIN GEBRUIKERS ── */
+  .admin-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
   .users-table { width: 100%; border-collapse: separate; border-spacing: 0; }
   .users-table th { background: var(--charcoal); color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; }
   .users-table td { padding: 11px 16px; font-size: 13.5px; border-top: 1px solid var(--gray-border); color: var(--charcoal); }
@@ -115,35 +232,83 @@
   .role-select:focus { border-color: var(--amber); }
 
   .loading { text-align: center; padding: 40px; color: #aaa; font-size: 14px; }
+
+  /* ── COMMUNITY TOGGLE ── */
+  .community-toggle-wrap { display: flex; align-items: center; gap: 12px; }
+  .toggle-switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  #communityToggle { display: none; }
+  .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: #D1D5DB; border-radius: 50px; transition: background 0.2s; }
+  .toggle-slider:before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: transform 0.2s; }
+  #communityToggle:checked + .toggle-slider { background: var(--amber); }
+  #communityToggle:checked + .toggle-slider:before { transform: translateX(20px); }
+
   footer { padding: 28px 32px; text-align: center; background: var(--charcoal); }
   footer p { font-size: 13px; color: rgba(255,255,255,0.7); }
   footer a { color: white; font-weight: 700; text-decoration: none; }
 
-  @media(max-width:640px) {
+  /* ── MOBILE TABS ── */
+  .mobile-tabs {
+    display: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: white;
+    border-bottom: 1px solid #EEE;
+    padding: 0 12px;
+    gap: 4px;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .mobile-tabs::-webkit-scrollbar { display: none; }
+  .mobile-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #777;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .mobile-tab:hover { color: var(--charcoal); }
+  .mobile-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .mobile-tab-admin { display: none; }
+
+  @media (max-width: 767px) {
+    .sidebar { display: none; }
+    .content { margin-left: 0; padding: 20px 16px; }
+    .mobile-tabs { display: flex; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .profile-hero { flex-wrap: wrap; }
-    .hero-progress { text-align: left; min-width: 100%; }
-    .library-cta { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .section-card { padding: 20px 16px; }
   }
 </style>
 </head>
 <body>
 
 <!-- Auth overlay -->
-<div id="authOverlay" style="display:none;">
+<div id="authOverlay" style="display:none;" aria-hidden="true">
   <div class="auth-card">
     <div class="auth-logo">
       <img src="/logo-small.png" alt="Umely" style="height:80px;">
       <h2>Welkom bij Umely</h2>
       <p>Log in om je account te bekijken.</p>
     </div>
-    <div id="authError"></div>
+    <div id="authError" role="alert" aria-live="polite"></div>
     <div class="auth-field">
-      <label>E-mailadres</label>
+      <label for="authEmail">E-mailadres</label>
       <input id="authEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
     </div>
     <div class="auth-field">
-      <label>Wachtwoord</label>
+      <label for="authPassword">Wachtwoord</label>
       <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
     </div>
     <button id="loginBtn" onclick="login()">Inloggen</button>
@@ -165,76 +330,183 @@
   </div>
 </header>
 
-<main>
-  <!-- Profiel hero -->
-  <div id="profileCard" class="loading">Laden...</div>
+<!-- Mobile tabs (only visible on small screens) -->
+<nav class="mobile-tabs" id="mobileTabs">
+  <div class="mobile-tab active" data-section="profiel" onclick="showSection('profiel')">&#128100; Profiel</div>
+  <div class="mobile-tab" data-section="certificaten" onclick="showSection('certificaten')">&#127942; Certificaten</div>
+  <div class="mobile-tab" data-section="abonnement" onclick="showSection('abonnement')">&#128179; Abonnement</div>
+  <div class="mobile-tab" data-section="instellingen" onclick="showSection('instellingen')">&#9881; Instellingen</div>
+  <div class="mobile-tab mobile-tab-admin" data-section="gebruikers" onclick="showSection('gebruikers')">&#128101; Gebruikers</div>
+  <div class="mobile-tab mobile-tab-admin" data-section="activiteit" onclick="showSection('activiteit')">&#128203; Activiteit</div>
+</nav>
 
-  <!-- Bibliotheek CTA -->
-  <div class="library-cta">
-    <p><strong>Klaar om verder te leren?</strong> Ga naar de bibliotheek en kies een module.</p>
-    <a class="btn-sm btn-primary" href="/modules.html">Naar de bibliotheek &rarr;</a>
-  </div>
+<div class="page-body">
 
-  <!-- Statistieken -->
-  <div id="statsGrid" class="loading">Laden...</div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="nav-section-label">Mijn account</div>
 
-  <!-- Certificaten -->
-  <div class="section">
-    <div class="section-title">Mijn certificaten</div>
-    <div id="certGrid" class="loading">Laden...</div>
-  </div>
-
-  <!-- Nieuwsbrief -->
-  <div class="section">
-    <div class="section-title">Nieuwsbrief</div>
-    <div id="nlSection" class="loading">Laden...</div>
-  </div>
-
-  <!-- Admin: gebruikersbeheer -->
-  <div class="section" id="adminSection" style="display:none;">
-    <div class="section-title">Gebruikersbeheer</div>
-    <div class="admin-card">
-      <div id="usersTable" class="loading">Laden...</div>
+    <div class="nav-item active" data-section="profiel" onclick="showSection('profiel')">
+      <span>&#128100;</span> Profiel &amp; voortgang
     </div>
-  </div>
+    <div class="nav-item" data-section="certificaten" onclick="showSection('certificaten')">
+      <span>&#127942;</span> Certificaten
+    </div>
+    <div class="nav-item" data-section="abonnement" onclick="showSection('abonnement')">
+      <span>&#128179;</span> Abonnement
+    </div>
+    <div class="nav-item" data-section="instellingen" onclick="showSection('instellingen')" id="navInstellingen">
+      <span>&#9881;</span> Instellingen
+    </div>
 
-  <!-- Admin: tools -->
-  <div class="section" id="adminToolsSection" style="display:none;">
-    <div class="section-title">Beheerhulpmiddelen</div>
+    <!-- Admin section (hidden until admin role confirmed) -->
+    <div class="nav-admin" id="navAdminGroup">
+      <hr class="nav-divider">
+      <div class="nav-section-label">Beheer</div>
+      <div class="nav-item" data-section="gebruikers" onclick="showSection('gebruikers')">
+        <span>&#128101;</span> Gebruikers
+      </div>
+      <div class="nav-item" data-section="activiteit" onclick="showSection('activiteit')">
+        <span>&#128203;</span> Activiteit
+      </div>
+      <div class="nav-item" data-section="instellingen" onclick="showSection('instellingen')">
+        <span>&#9881;</span> Instellingen
+      </div>
+    </div>
+  </aside>
 
-    <!-- Community toggle -->
-    <div class="admin-card" style="margin-bottom:12px;">
-      <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--charcoal);">Community</div>
-          <div id="communityStatusText" style="font-size:12px;color:var(--gray-text);margin-top:2px;">Laden...</div>
-        </div>
-        <label style="position:relative;display:inline-block;width:44px;height:24px;flex-shrink:0;">
-          <input type="checkbox" id="communityToggle" style="opacity:0;width:0;height:0;" onchange="setCommunityEnabled(this.checked)">
-          <span id="communitySlider" style="position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:24px;transition:background 0.2s;"></span>
-          <span id="communityThumb" style="position:absolute;width:18px;height:18px;background:white;border-radius:50%;top:3px;left:3px;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></span>
-        </label>
+  <!-- Content -->
+  <main class="content">
+
+    <!-- PROFIEL + VOORTGANG -->
+    <div class="content-section" id="section-profiel">
+      <div class="section-card">
+        <div class="section-card-title">Profiel</div>
+        <div id="profileCard" class="loading">Laden...</div>
+      </div>
+      <div class="section-card" style="margin-top:20px;">
+        <div class="section-card-title">Mijn voortgang</div>
+        <div id="statsGrid" class="loading">Laden...</div>
       </div>
     </div>
 
-    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-      <a href="/admin/review" target="_blank" class="btn-sm btn-primary" style="display:inline-flex;">Module review openen</a>
-      <p style="font-size:13px;color:var(--gray-text);margin:0;">Toont alle modules als broncode — gebruik met de Chrome-extensie voor kwaliteitsbeoordeling.</p>
+    <!-- CERTIFICATEN -->
+    <div class="content-section" id="section-certificaten">
+      <div class="section-card">
+        <div class="section-card-title">Mijn certificaten</div>
+        <div id="certGrid" class="loading">Laden...</div>
+      </div>
     </div>
-  </div>
-</main>
+
+    <!-- ABONNEMENT + NIEUWSBRIEF -->
+    <div class="content-section" id="section-abonnement">
+      <div class="section-card">
+        <div class="section-card-title">Abonnement</div>
+        <div id="subSection" class="loading">Laden...</div>
+      </div>
+      <div class="section-card" style="margin-top:20px;">
+        <div class="section-card-title">Nieuwsbrief</div>
+        <div id="nlSection" class="loading">Laden...</div>
+      </div>
+    </div>
+
+    <!-- INSTELLINGEN -->
+    <div class="content-section" id="section-instellingen" style="display:none;">
+      <div class="section-card">
+        <div class="section-card-title">Accountinstellingen</div>
+        <div class="account-settings-row">
+          <div>
+            <div class="account-settings-label">Wachtwoord</div>
+            <div class="account-settings-sub">Ontvang een reset-link via e-mail</div>
+          </div>
+          <button class="btn-settings-action" id="btnChangePassword" onclick="sendPasswordReset()">Wachtwoord wijzigen</button>
+        </div>
+        <div id="passwordResetMsg" style="display:none;font-size:13px;color:#166534;padding:10px 0 0;"></div>
+      </div>
+    </div>
+
+    <!-- NIEUWSBRIEF (hidden, zit nu in abonnement sectie) -->
+    <div id="nlSection-placeholder" style="display:none;"></div>
+
+    <!-- GEBRUIKERS (admin) -->
+    <div class="content-section" id="section-gebruikers">
+      <div id="adminSection" style="display:none;">
+        <div class="section-card">
+          <div class="section-card-title">Gebruikersbeheer</div>
+          <div class="admin-card">
+            <div id="usersTable" class="loading">Laden...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITEIT (admin) -->
+    <div class="content-section" id="section-activiteit">
+      <div id="adminActivitySection" style="display:none;">
+        <div class="section-card">
+          <div class="section-card-title">Recente activiteit <span style="font-size:12px;font-weight:500;color:#aaa;">— afgelopen 7 dagen</span></div>
+          <div class="activity-wrap" id="activityWrap"><div class="activity-empty">Laden...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTELLINGEN (admin) -->
+    <div class="content-section" id="section-instellingen">
+      <div id="adminToolsSection" style="display:none;">
+        <div class="section-card">
+          <div class="section-card-title">Beheerhulpmiddelen</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+            <a href="/admin/review" target="_blank" class="btn-sm btn-primary" style="display:inline-flex;">Module review openen</a>
+            <p style="font-size:13px;color:var(--gray-text);margin:0;">Toont alle modules als broncode — gebruik met de Chrome-extensie voor kwaliteitsbeoordeling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
 
 <footer>
   <p style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
     <img src="/logo-small.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
     <span style="color:rgba(255,255,255,0.5);">|</span>
-    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank" rel="noopener noreferrer">umely.ai</a></span>
   </p>
 </footer>
 
 <script>
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 let _supabase = null;
 let _session = null;
+
+// ── SECTIE-SWITCHING ──
+let _activityLoaded = false;
+let _usersLoaded = false;
+
+function showSection(name) {
+  // Verberg alle content-secties
+  document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+  // Toon gevraagde sectie
+  const target = document.getElementById('section-' + name);
+  if (target) target.style.display = 'block';
+  // Update actieve sidebar item
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  const navItem = document.querySelector(`.nav-item[data-section="${name}"]`);
+  if (navItem) navItem.classList.add('active');
+  // Update actieve mobile tab
+  document.querySelectorAll('.mobile-tab').forEach(i => i.classList.remove('active'));
+  const mobileTab = document.querySelector(`.mobile-tab[data-section="${name}"]`);
+  if (mobileTab) {
+    mobileTab.classList.add('active');
+    mobileTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+  // Lazy load admin secties
+  if (name === 'activiteit' && !_activityLoaded) { _activityLoaded = true; loadActivity(); }
+  if (name === 'gebruikers' && !_usersLoaded) { _usersLoaded = true; loadUsers(); }
+}
 
 async function initAuth() {
   try {
@@ -257,24 +529,19 @@ async function initAuth() {
 }
 
 function showLogin() {
-  document.getElementById('authOverlay').style.display = 'flex';
+  const overlay = document.getElementById('authOverlay');
+  overlay.style.display = 'flex';
+  overlay.removeAttribute('aria-hidden');
 }
 
 async function showApp(session) {
-  document.getElementById('authOverlay').style.display = 'none';
+  const overlay = document.getElementById('authOverlay');
+  overlay.style.display = 'none';
+  overlay.setAttribute('aria-hidden', 'true');
   document.getElementById('logoutBtn').style.display = 'block';
   const userEl = document.getElementById('headerUser');
   userEl.style.display = 'block';
-  try {
-    const { data: profile } = await _supabase
-      .from('profiles')
-      .select('first_name')
-      .eq('id', session.user.id)
-      .single();
-    userEl.textContent = profile?.first_name || session.user.email;
-  } catch {
-    userEl.textContent = session.user.email;
-  }
+  userEl.textContent = session.user.email;
 }
 
 let isSignupMode = false;
@@ -286,16 +553,17 @@ function toggleAuthMode(e) {
   const toggle = document.getElementById('toggleSignup');
   const errEl = document.getElementById('authError');
   errEl.style.display = 'none';
+  const switchPara = toggle.parentElement;
   if (isSignupMode) {
     btn.textContent = 'Registreer';
     btn.setAttribute('onclick', 'signup()');
     toggle.textContent = 'Inloggen';
-    toggle.parentElement.firstChild.textContent = 'Al een account? ';
+    switchPara.innerHTML = 'Al een account? <a href="#" id="toggleSignup" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Inloggen</a>';
   } else {
     btn.textContent = 'Inloggen';
     btn.setAttribute('onclick', 'login()');
     toggle.textContent = 'Registreer';
-    toggle.parentElement.firstChild.textContent = 'Nog geen account? ';
+    switchPara.innerHTML = 'Nog geen account? <a href="#" id="toggleSignup" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Registreer</a>';
   }
 }
 
@@ -354,6 +622,31 @@ async function logout() {
   window.location.reload();
 }
 
+async function sendPasswordReset() {
+  const btn = document.getElementById('btnChangePassword');
+  const msg = document.getElementById('passwordResetMsg');
+  btn.disabled = true;
+  btn.textContent = 'Versturen...';
+  try {
+    const email = _session?.user?.email;
+    if (!email) throw new Error('Geen e-mailadres bekend.');
+    const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/reset-password.html'
+    });
+    if (error) throw error;
+    msg.textContent = 'Reset-link verstuurd naar ' + email + '. Controleer je inbox.';
+    msg.style.color = '#166534';
+    msg.style.display = 'block';
+    btn.textContent = 'Verstuurd ✓';
+  } catch (e) {
+    msg.textContent = e.message || 'Versturen mislukt. Probeer het opnieuw.';
+    msg.style.color = '#991B1B';
+    msg.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Wachtwoord wijzigen';
+  }
+}
+
 function authHeader() {
   return _session ? { 'Authorization': `Bearer ${_session.access_token}` } : {};
 }
@@ -362,7 +655,11 @@ async function loadAccount() {
   try {
     const res = await fetch('/api/user/profile', { headers: authHeader() });
     if (res.status === 401) { showLogin(); return; }
-    const { profile, progress } = await res.json();
+    const data = await res.json();
+    if (!data || !data.profile || !Array.isArray(data.progress)) {
+      throw new Error('Onverwacht antwoord van server');
+    }
+    const { profile, progress } = data;
 
     // Profiel hero
     const initial = (profile.email || '?')[0].toUpperCase();
@@ -375,22 +672,31 @@ async function loadAccount() {
 
     document.getElementById('profileCard').innerHTML = `
       <div class="profile-hero">
-        <div class="profile-avatar">${initial}</div>
+        <div class="profile-avatar-lg">${escapeHtml(initial)}</div>
         <div class="profile-info">
-          <h3>${profile.email}</h3>
+          <h3>${escapeHtml(profile.email)}</h3>
           <div class="member-since">Lid sinds ${new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-          <span class="role-badge ${profile.role}">${profile.role === 'admin' ? 'Admin' : 'Gebruiker'}</span>
+          <span class="role-badge ${escapeHtml(profile.role)}">${profile.role === 'admin' ? 'Admin' : 'Gebruiker'}</span>
         </div>
-        <div class="hero-progress">
-          <div class="prog-numbers"><strong>${completed}</strong> / ${totalModules}</div>
-          <div class="prog-track"><div class="prog-fill" style="width:${progPct}%"></div></div>
-          <div class="prog-label">modules afgerond</div>
+      </div>
+      <div class="hero-progress" style="margin-top:24px;">
+        <div class="prog-label-row">
+          <span class="prog-label-text">Modules afgerond</span>
+          <span class="prog-numbers">${completed} / ${totalModules}</span>
         </div>
+        <div class="prog-track"><div class="prog-fill" style="width:${progPct}%"></div></div>
       </div>`;
 
-    // Admin: toon nieuwe module knop
+    // Admin: toon nieuwe module knop + admin nav
     if (profile.role === 'admin') {
       document.getElementById('btnAdminNew').style.display = 'inline-flex';
+      document.getElementById('navAdminGroup').style.display = 'block';
+      // Toon admin tabs in mobile nav
+      document.querySelectorAll('.mobile-tab-admin').forEach(el => el.style.display = 'inline-flex');
+      // Toon admin content wrappers (zichtbaar via nav, niet automatisch)
+      document.getElementById('adminSection').style.display = 'block';
+      document.getElementById('adminActivitySection').style.display = 'block';
+      document.getElementById('adminToolsSection').style.display = 'block';
     }
 
     // Statistieken
@@ -408,7 +714,7 @@ async function loadAccount() {
         </div>
         <div class="stat-card">
           <div class="stat-label">Gemiddelde quizscore</div>
-          <div class="stat-value">${avgScore > 0 ? avgScore + '%' : '—'}</div>
+          <div class="stat-value">${avgScore > 0 ? avgScore + '%' : '&mdash;'}</div>
           <div class="stat-sub">${scores.length > 0 ? scores.length + ' quizzen gemaakt' : 'nog geen quizzen'}</div>
         </div>
       </div>`;
@@ -426,79 +732,109 @@ async function loadAccount() {
         const dateStr = p.completed_at
           ? new Date(p.completed_at).toLocaleDateString('nl-NL', { day:'numeric', month:'long', year:'numeric' })
           : '';
-        const title = p.module_slug.replace(/^elearning-/, '').replace(/-\d{8}$/, '').replace(/-/g, ' ');
+        const title = (p.module_slug || '').replace(/^elearning-/, '').replace(/-\d{8}$/, '').replace(/-/g, ' ') || 'Onbekende module';
         const titleCap = title.charAt(0).toUpperCase() + title.slice(1);
         return `<div class="cert-card">
           <div class="cert-badge">Behaald</div>
           <div class="cert-icon">&#127942;</div>
-          <h4>${titleCap}</h4>
+          <h4>${escapeHtml(titleCap)}</h4>
           <div class="cert-score-row">
-            <div class="cert-score">${p.score_pct}%</div>
+            <div class="cert-score">${escapeHtml(String(p.score_pct))}%</div>
             <div class="cert-score-label">quizscore</div>
           </div>
-          <div class="cert-date">${dateStr}</div>
-          <a href="/modules/${p.module_slug}" target="_blank">Module openen &rarr;</a>
+          <div class="cert-date">${escapeHtml(dateStr)}</div>
+          <a href="/modules/${encodeURIComponent(p.module_slug)}" target="_blank" rel="noopener noreferrer">Module openen &rarr;</a>
         </div>`;
       }).join('')}</div>`;
     }
 
+    // Abonnement sectie
+    renderSubscriptionSection(profile);
+
     // Nieuwsbrief sectie
     renderNewsletterSection(profile.newsletter_subscribed);
 
-    // Admin sectie
-    if (profile.role === 'admin') {
-      document.getElementById('adminSection').style.display = 'block';
-      document.getElementById('adminToolsSection').style.display = 'block';
-      loadUsers();
-      loadCommunityToggle();
-    }
+    // Toon standaard de profiel sectie
+    showSection('profiel');
+
   } catch (e) {
     console.error(e);
-    document.getElementById('profileCard').innerHTML = '<p>Kon profiel niet laden.</p>';
+    document.getElementById('profileCard').innerHTML = '<p>Kon profiel niet laden. Ververs de pagina om het opnieuw te proberen.</p>';
+    document.getElementById('statsGrid').innerHTML = '';
+    document.getElementById('certGrid').innerHTML = '';
+    document.getElementById('nlSection').innerHTML = '';
   }
 }
 
-async function loadCommunityToggle() {
-  try {
-    const res = await fetch('/api/admin/settings', { headers: { 'Authorization': 'Bearer ' + _token } });
-    if (!res.ok) return;
-    const settings = await res.json();
-    const enabled = settings.community_enabled !== 'false';
-    updateCommunityToggleUI(enabled);
-  } catch (e) { /* fail silent */ }
+function loadCommunityToggle(enabled) {
+  updateCommunityToggleUI(enabled);
 }
 
 function updateCommunityToggleUI(enabled) {
-  const checkbox = document.getElementById('communityToggle');
   const slider = document.getElementById('communitySlider');
   const thumb = document.getElementById('communityThumb');
-  const text = document.getElementById('communityStatusText');
-  if (!checkbox) return;
-  checkbox.checked = enabled;
-  slider.style.background = enabled ? '#FF8514' : '#ccc';
-  thumb.style.transform = enabled ? 'translateX(20px)' : 'translateX(0)';
-  text.textContent = enabled ? 'Aan — gebruikers hebben toegang tot de community.' : 'Uit — alleen admins hebben toegang.';
+  const statusText = document.getElementById('communityStatusText');
+  const toggle = document.getElementById('communityToggle');
+  if (toggle) toggle.checked = !!enabled;
+  if (statusText) statusText.textContent = enabled ? 'Ingeschakeld' : 'Uitgeschakeld';
 }
 
 async function setCommunityEnabled(enabled) {
-  updateCommunityToggleUI(enabled);
-  const res = await fetch('/api/admin/settings', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _token },
-    body: JSON.stringify({ key: 'community_enabled', value: enabled ? 'true' : 'false' }),
-  });
-  if (!res.ok) {
-    alert('Kon instelling niet opslaan.');
-    updateCommunityToggleUI(!enabled); // revert
+  try {
+    const res = await fetch('/api/admin/community', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeader() },
+      body: JSON.stringify({ enabled })
+    });
+    if (!res.ok) throw new Error();
+    updateCommunityToggleUI(enabled);
+  } catch (e) {
+    console.error('Community toggle mislukt', e);
   }
+}
+
+function renderSubscriptionSection(profile) {
+  const status = profile.subscription_status || 'inactive';
+  const isActive = status === 'active';
+  const lidSinds = profile.created_at
+    ? new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
+    : '—';
+  const endDate = profile.subscription_end ? new Date(profile.subscription_end) : null;
+  const verlooptOp = endDate
+    ? endDate.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
+    : null;
+  const isExpired = !isActive && endDate && endDate < new Date();
+
+  const actieKnop = isActive
+    ? ''
+    : `<a href="/pricing.html" class="btn-sm btn-primary" style="display:inline-flex;padding:9px 20px;font-size:13px;">Abonneer nu &rarr;</a>`;
+
+  let subMetaHtml = `<div class="sub-meta">Lid sinds ${escapeHtml(lidSinds)}</div>`;
+  if (isActive && verlooptOp) {
+    subMetaHtml += `<div class="sub-meta">Verloopt op ${escapeHtml(verlooptOp)}</div>`;
+  } else if (isExpired && verlooptOp) {
+    subMetaHtml += `<div class="sub-meta" style="color:#DC2626;">Verlopen op ${escapeHtml(verlooptOp)}</div>`;
+  }
+
+  document.getElementById('subSection').innerHTML = `
+    <div class="sub-card">
+      <div class="sub-info">
+        <div class="sub-status ${isActive ? 'active' : 'inactive'}">
+          <span class="sub-dot ${isActive ? 'active' : 'inactive'}"></span>
+          ${isActive ? 'Actief abonnement' : isExpired ? 'Abonnement verlopen' : 'Geen actief abonnement'}
+        </div>
+        ${subMetaHtml}
+      </div>
+      <div class="sub-actions">${actieKnop}</div>
+    </div>`;
 }
 
 function renderNewsletterSection(subscribed) {
   const el = document.getElementById('nlSection');
   if (subscribed) {
     el.innerHTML = `<div class="nl-card">
-      <p>✅ Je bent aangemeld voor de wekelijkse Umely AI-nieuwsbrief.</p>
-      <button onclick="toggleNewsletter(false)" style="background:none;border:1.5px solid #ddd;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:#aaa;cursor:pointer;white-space:nowrap;flex-shrink:0;">Afmelden</button>
+      <p>&#9989; Je bent aangemeld voor de wekelijkse Umely AI-nieuwsbrief.</p>
+      <button onclick="toggleNewsletter(false)" style="background:none;border:1.5px solid #CCC;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:#666;cursor:pointer;white-space:nowrap;flex-shrink:0;">Afmelden</button>
     </div>`;
   } else {
     el.innerHTML = `<div class="nl-card">
@@ -531,6 +867,7 @@ async function loadUsers() {
     const users = await res.json();
 
     document.getElementById('usersTable').innerHTML = `
+      <div class="users-table-wrap">
       <table class="users-table">
         <thead>
           <tr>
@@ -543,15 +880,16 @@ async function loadUsers() {
         </thead>
         <tbody>
           ${users.map(u => {
-            const started = u.progress.length;
-            const completed = u.progress.filter(p => p.completed).length;
-            const scores = u.progress.filter(p => p.score_pct > 0).map(p => p.score_pct);
+            const progress = Array.isArray(u.progress) ? u.progress : [];
+            const started = progress.length;
+            const completed = progress.filter(p => p.completed).length;
+            const scores = progress.filter(p => p.score_pct > 0).map(p => p.score_pct);
             const avg = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : '-';
             return `
               <tr>
-                <td>${u.email}</td>
+                <td>${escapeHtml(u.email)}</td>
                 <td>
-                  <select class="role-select" onchange="changeRole('${u.id}', this.value)" ${u.id === _session.user.id ? 'disabled title="Je kunt je eigen rol niet wijzigen"' : ''}>
+                  <select class="role-select" data-userid="${escapeHtml(u.id)}" onchange="changeRole(this.dataset.userid, this.value)" ${_session && u.id === _session.user.id ? 'disabled title="Je kunt je eigen rol niet wijzigen"' : ''}>
                     <option value="user" ${u.role === 'user' ? 'selected' : ''}>Gebruiker</option>
                     <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Admin</option>
                   </select>
@@ -562,7 +900,8 @@ async function loadUsers() {
               </tr>`;
           }).join('')}
         </tbody>
-      </table>`;
+      </table>
+      </div>`;
   } catch (e) {
     document.getElementById('usersTable').innerHTML = '<p>Kon gebruikers niet laden.</p>';
   }
@@ -575,13 +914,73 @@ async function changeRole(userId, newRole) {
       headers: { 'Content-Type': 'application/json', ...authHeader() },
       body: JSON.stringify({ role: newRole })
     });
-    if (!res.ok) throw new Error('Kon rol niet wijzigen');
+    if (!res.ok) {
+      let msg = 'Kon rol niet wijzigen.';
+      try { const err = await res.json(); msg = err.error || err.message || msg; } catch {}
+      throw new Error(msg);
+    }
   } catch (e) {
-    alert(e.message);
-    loadUsers();
+    document.getElementById('usersTable').innerHTML = `<p style="color:#B91C1C;padding:12px;">${escapeHtml(e.message)}</p>`;
+    setTimeout(loadUsers, 1500);
   }
 }
 
+let _activityEvents = [];
+const ACTIVITY_PAGE = 10;
+let _activityShown = ACTIVITY_PAGE;
+
+function renderActivityTable() {
+  const wrap = document.getElementById('activityWrap');
+  const visible = _activityEvents.slice(0, _activityShown);
+  const labels = { registered: 'Registratie', started: 'Gestart', completed: 'Afgerond' };
+
+  const rows = visible.map(e => {
+    const time = e.ts ? new Date(e.ts).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+    const email = escapeHtml(e.email || '—');
+    const badge = `<span class="activity-badge ${e.type}">${labels[e.type] || e.type}</span>`;
+    let detail = '—';
+    if (e.type === 'registered') detail = 'Nieuw account aangemaakt';
+    if (e.type === 'started') detail = escapeHtml((e.module || '').charAt(0).toUpperCase() + (e.module || '').slice(1));
+    if (e.type === 'completed') detail = escapeHtml((e.module || '').charAt(0).toUpperCase() + (e.module || '').slice(1)) + (e.score != null ? `<span class="activity-score">${e.score}%</span>` : '');
+    return `<tr><td>${time}</td><td>${email}</td><td>${badge}</td><td>${detail}</td></tr>`;
+  }).join('');
+
+  const meerBtn = _activityShown < _activityEvents.length
+    ? `<div class="activity-more"><button onclick="showMoreActivity()">Meer laden (${_activityEvents.length - _activityShown} resterend)</button></div>`
+    : '';
+
+  wrap.innerHTML = `
+    <table class="activity-table">
+      <thead><tr><th>Tijdstip</th><th>Gebruiker</th><th>Type</th><th>Detail</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${meerBtn}`;
+}
+
+function showMoreActivity() {
+  _activityShown += ACTIVITY_PAGE;
+  renderActivityTable();
+}
+
+async function loadActivity() {
+  try {
+    const res = await fetch('/api/admin/activity', { headers: authHeader() });
+    if (!res.ok) throw new Error('Ophalen mislukt');
+    _activityEvents = await res.json();
+    _activityShown = ACTIVITY_PAGE;
+    const wrap = document.getElementById('activityWrap');
+    if (!_activityEvents || _activityEvents.length === 0) {
+      wrap.innerHTML = '<div class="activity-empty">Geen activiteit in de afgelopen 7 dagen.</div>';
+      return;
+    }
+    renderActivityTable();
+  } catch (e) {
+    document.getElementById('activityWrap').innerHTML = '<div class="activity-empty">Kon activiteit niet laden.</div>';
+  }
+}
+
+// Initialiseer — toon standaard de profiel sectie alvast
+showSection('profiel');
 initAuth();
 </script>
 </body>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacybeleid | Umely</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber: #FF8514; --flame: #FF4D00;
+    --charcoal: #27292D; --warm-white: #FFF8F2; --white: #FFFFFF;
+    --gray-text: #4A4A4A; --gray-border: #E8D9CC;
+    --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--gray-text); min-height: 100vh; display: flex; flex-direction: column; }
+
+  header { background: var(--charcoal); height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; color: white; text-decoration: none; font-size: 18px; font-weight: 800; }
+
+  main { flex: 1; max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  h1 { font-size: 32px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; }
+  .updated { font-size: 13px; color: #999; margin-bottom: 48px; }
+
+  h2 { font-size: 18px; font-weight: 700; color: var(--charcoal); margin: 36px 0 12px; }
+  p { font-size: 15px; line-height: 1.75; margin-bottom: 14px; }
+  ul { padding-left: 20px; margin-bottom: 14px; }
+  li { font-size: 15px; line-height: 1.75; margin-bottom: 6px; }
+  a { color: var(--amber); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  footer a { color: white; font-weight: 700; text-decoration: none; }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 24px; }
+    main { padding: 32px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <img src="/logo-small.png" alt="Umely" style="height:76px;filter:brightness(0) invert(1);">
+  </a>
+</header>
+
+<main>
+  <h1>Privacybeleid</h1>
+  <p class="updated">Laatste update: april 2026</p>
+
+  <p>Umely is een product van Datalerion. Dit privacybeleid legt uit welke persoonsgegevens wij verzamelen, waarom wij dat doen en hoe wij daarmee omgaan. Wij houden ons aan de Algemene Verordening Gegevensbescherming (AVG).</p>
+
+  <h2>1. Wie zijn wij?</h2>
+  <p>
+    Datalerion<br>
+    Contactadres: <a href="mailto:info@umely.ai">info@umely.ai</a>
+  </p>
+
+  <h2>2. Welke gegevens verzamelen wij?</h2>
+  <ul>
+    <li><strong>Accountgegevens:</strong> naam en e-mailadres bij registratie</li>
+    <li><strong>Betalingsgegevens:</strong> verwerkt via Stripe. Wij slaan geen betaalkaartgegevens op. Wij ontvangen van Stripe uitsluitend een klant-ID en abonnementsstatus.</li>
+    <li><strong>Voortgangsgegevens:</strong> welke modules je hebt geopend, voltooiingspercentage en quizresultaten</li>
+    <li><strong>Technische gegevens:</strong> IP-adres en browser via standaard serverlogboeken (tijdelijk)</li>
+  </ul>
+
+  <h2>3. Waarvoor gebruiken wij je gegevens?</h2>
+  <ul>
+    <li>Het bijhouden en weergeven van jouw leervoortgang</li>
+    <li>Het verwerken en beheren van je abonnement</li>
+    <li>Het versturen van transactionele e-mails (verificatie, wachtwoordherstel)</li>
+    <li>Contact opnemen bij vragen over je account</li>
+  </ul>
+  <p>Wij verkopen je gegevens niet aan derden en gebruiken ze niet voor profilering of advertenties.</p>
+
+  <h2>4. Grondslag voor verwerking</h2>
+  <ul>
+    <li><strong>Uitvoering van de overeenkomst:</strong> het leveren van de e-learning dienst</li>
+    <li><strong>Gerechtvaardigd belang:</strong> beveiliging en fraudepreventie</li>
+    <li><strong>Wettelijke verplichting:</strong> het bijhouden van administratie</li>
+  </ul>
+
+  <h2>5. Bewaartermijnen</h2>
+  <p>Accountgegevens bewaren wij zolang je account actief is. Na opzegging verwijderen wij je gegevens binnen 30 dagen, met uitzondering van gegevens die wij wettelijk langer moeten bewaren (bijvoorbeeld voor de belastingdienst: 7 jaar).</p>
+
+  <h2>6. Derden en subverwerkers</h2>
+  <ul>
+    <li><strong>Supabase</strong> (auth en database) — servers in de EU</li>
+    <li><strong>Stripe</strong> (betalingsverwerking) — gecertificeerd PCI-DSS niveau 1</li>
+    <li><strong>Anthropic</strong> (AI-contentgeneratie) — alleen door beheerders gebruikt, geen gebruikersdata</li>
+  </ul>
+
+  <h2>7. Jouw rechten</h2>
+  <p>Je hebt het recht om je gegevens in te zien, te corrigeren of te laten verwijderen. Stuur hiervoor een e-mail naar <a href="mailto:info@umely.ai">info@umely.ai</a>. Wij reageren binnen 30 dagen.</p>
+
+  <h2>8. Beveiliging</h2>
+  <p>Alle verbindingen verlopen via HTTPS. Wachtwoorden worden gehasht opgeslagen door Supabase Auth. Betalingsgegevens worden uitsluitend verwerkt door Stripe en nooit door onze servers doorgegeven.</p>
+
+  <h2>9. Cookies</h2>
+  <p>Wij gebruiken uitsluitend technisch noodzakelijke cookies en sessionopslag voor authenticatie. Geen tracking- of advertentiecookies.</p>
+
+  <h2>10. Wijzigingen</h2>
+  <p>Wij kunnen dit beleid aanpassen. Bij ingrijpende wijzigingen ontvang je een e-mail. De meest recente versie staat altijd op deze pagina.</p>
+
+  <h2>11. Contact en klachten</h2>
+  <p>Vragen of klachten? Mail naar <a href="mailto:info@umely.ai">info@umely.ai</a>. Je hebt ook het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens via <a href="https://autoriteitpersoonsgegevens.nl" target="_blank">autoriteitpersoonsgegevens.nl</a>.</p>
+</main>
+
+<footer>
+  <p>
+    <img src="/logo-small.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
+    <span style="color:rgba(255,255,255,0.4);">|</span>
+    <a href="/privacy.html">Privacybeleid</a>
+    <span style="color:rgba(255,255,255,0.4);">&middot;</span>
+    <a href="/voorwaarden.html">Algemene voorwaarden</a>
+  </p>
+</footer>
+
+</body>
+</html>

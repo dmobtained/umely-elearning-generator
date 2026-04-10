@@ -9,112 +9,138 @@
 <style>
   :root {
     --amber: #FF8514; --flame: #FF4D00;
-    --charcoal: #27292D; --warm-white: #FFF8F2;
+    --charcoal: #27292D; --warm-white: #FFF8F2; --white: #FFFFFF;
     --gray-text: #5A5A5A; --gray-border: #E8D9CC; --gray-light: #F5F0EA;
     --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', system-ui, sans-serif; background: var(--warm-white); color: var(--charcoal); min-height: 100vh; display: flex; flex-direction: column; }
 
-  header {
-    background: var(--charcoal); padding: 0 32px; height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
+  /* ── HEADER ── */
+  header { background: var(--charcoal); height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .logo { display: flex; align-items: center; gap: 8px; color: white; text-decoration: none; font-size: 18px; font-weight: 800; }
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+  .btn-sm { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; border: none; transition: all 0.15s; }
+  .btn-ghost { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.3); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.22); color: white; }
+  .btn-logout { background: none; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; display: none; transition: all 0.15s; }
+  .btn-logout:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  /* ── MAIN ── */
+  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px 80px; }
+
+  .pricing-intro { text-align: center; max-width: 520px; margin-bottom: 40px; }
+  .pricing-intro h1 { font-size: 32px; font-weight: 800; color: var(--charcoal); line-height: 1.2; margin-bottom: 12px; }
+  .pricing-intro p { font-size: 16px; color: var(--gray-text); line-height: 1.6; }
+
+  /* ── PRICING CARD ── */
+  .pricing-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(39,41,45,0.12);
+    max-width: 440px;
+    width: 100%;
+    overflow: hidden;
   }
-  header .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  header .logo img { height: 32px; }
-  header .logo span { color: #fff; font-size: 18px; font-weight: 700; }
-  header nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 24px; transition: color 0.15s; }
-  header nav a:hover { color: #fff; }
-
-  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
-
-  .pricing-wrap { max-width: 480px; width: 100%; text-align: center; }
-  .pricing-wrap .eyebrow { font-size: 13px; font-weight: 700; color: var(--amber); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
-  .pricing-wrap h1 { font-size: 36px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
-  .pricing-wrap .sub { font-size: 16px; color: var(--gray-text); line-height: 1.6; margin-bottom: 40px; }
-
-  .card {
-    background: #fff; border-radius: 20px; padding: 40px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.08); text-align: left;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-    position: relative;
+  .card-header {
+    background: var(--charcoal);
+    padding: 32px 36px;
+    text-align: center;
   }
-  .card::before {
-    content: ''; position: absolute; inset: -2px; border-radius: 22px;
-    background: var(--gradient); z-index: -1;
+  .card-header .plan-name { font-size: 13px; font-weight: 700; color: var(--amber); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .card-header .price-row { display: flex; align-items: flex-start; justify-content: center; gap: 4px; }
+  .card-header .currency { font-size: 22px; font-weight: 700; color: white; margin-top: 8px; }
+  .card-header .amount { font-size: 60px; font-weight: 800; color: white; line-height: 1; letter-spacing: -2px; }
+  .card-header .period { font-size: 16px; color: rgba(255,255,255,0.55); font-weight: 500; align-self: flex-end; padding-bottom: 6px; }
+
+  .card-body { padding: 32px 36px; }
+  .feature-list { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
+  .feature-list li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: var(--charcoal); font-weight: 500; }
+  .feature-list li .check { width: 22px; height: 22px; background: linear-gradient(135deg, #FF8514, #FF4D00); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .feature-list li .check svg { width: 11px; height: 11px; stroke: white; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  .btn-subscribe {
+    width: 100%;
+    padding: 16px;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
+  .btn-subscribe:hover:not(:disabled) { opacity: 0.88; }
+  .btn-subscribe:disabled { opacity: 0.6; cursor: not-allowed; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .btn-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
 
-  .price-row { display: flex; align-items: flex-end; gap: 6px; margin-bottom: 6px; }
-  .price-amount { font-size: 52px; font-weight: 800; line-height: 1; }
-  .price-period { font-size: 16px; color: var(--gray-text); padding-bottom: 8px; }
-  .price-note { font-size: 13px; color: var(--gray-text); margin-bottom: 28px; }
+  .card-footer { padding: 0 36px 28px; text-align: center; }
+  .card-footer p { font-size: 12.5px; color: #AAA; line-height: 1.5; }
 
-  .features { list-style: none; margin-bottom: 32px; }
-  .features li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--gray-border); }
-  .features li:last-child { border-bottom: none; }
-  .features li .check { width: 20px; height: 20px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .features li .check svg { width: 11px; height: 11px; fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  /* ── ERROR ── */
+  #errorMsg { display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #991B1B; text-align: center; max-width: 440px; width: 100%; }
 
-  .cta-btn {
-    display: block; width: 100%; padding: 16px;
-    background: var(--gradient); color: #fff;
-    font-size: 16px; font-weight: 700; border: none; border-radius: 12px;
-    cursor: pointer; transition: opacity 0.15s; text-align: center;
-    text-decoration: none;
+  /* ── FOOTER ── */
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  footer a { color: white; font-weight: 700; text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .pricing-intro h1 { font-size: 24px; }
+    .pricing-card { border-radius: 16px; }
+    .card-header { padding: 24px 20px; }
+    .card-header .amount { font-size: 48px; }
+    .card-body { padding: 24px 20px; }
+    .card-footer { padding: 0 20px 20px; }
+    header { padding: 0 16px; }
+    .btn-sm span { display: none; }
   }
-  .cta-btn:hover { opacity: 0.9; }
-  .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  .terms { font-size: 12px; color: var(--gray-text); text-align: center; margin-top: 16px; line-height: 1.6; }
-
-  #successMsg {
-    display: none; background: #F0FDF4; border: 1px solid #86EFAC;
-    border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;
-    font-size: 14px; color: #166534; font-weight: 500;
-  }
-  #errorMsg {
-    display: none; background: #FEF2F2; border: 1px solid #FCA5A5;
-    border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;
-    font-size: 14px; color: #991B1B; font-weight: 500;
-  }
-
-  footer { background: var(--charcoal); color: rgba(255,255,255,0.5); text-align: center; padding: 20px; font-size: 13px; }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="logo" href="/modules.html">
-    <img src="/logo-small.png" alt="Umely">
-    <span>Umely</span>
+  <a class="logo" href="/">
+    <img src="/logo-small.png" alt="Umely" style="height:76px;filter:brightness(0) invert(1);">
   </a>
-  <nav>
-    <a href="/modules.html">Bibliotheek</a>
-    <a href="/account.html">Account</a>
-  </nav>
+  <div class="header-actions">
+    <a class="btn-sm btn-ghost" href="/modules.html" id="navLibrary" style="display:none;">Bibliotheek</a>
+    <a class="btn-sm btn-ghost" href="/account.html" id="navAccount" style="display:none;">Mijn account</a>
+    <button class="btn-logout" id="logoutBtn" onclick="logout()">Uitloggen</button>
+  </div>
 </header>
 
 <main>
-  <div class="pricing-wrap">
-    <div class="eyebrow">Toegang tot alle modules</div>
-    <h1>Leer alles over Claude AI</h1>
-    <p class="sub">Volledige toegang tot alle e-learning modules. Praktisch, direct toepasbaar, zonder opvulling.</p>
+  <div class="pricing-intro">
+    <h1>Toegang tot alle Umely e-learning modules</h1>
+    <p>Leer werken met Claude AI via praktische, interactieve modules. Altijd actueel, direct toepasbaar.</p>
+  </div>
 
-    <div id="successMsg">Betaling geslaagd. Je abonnement is actief — welkom bij Umely.</div>
-    <div id="errorMsg">Er ging iets mis. Probeer het opnieuw of neem contact op.</div>
-
-    <div class="card">
+  <div class="pricing-card">
+    <div class="card-header">
+      <div class="plan-name">Umely E-learning</div>
       <div class="price-row">
-        <span class="price-amount">€145</span>
-        <span class="price-period">/ kwartaal</span>
+        <span class="currency">&euro;</span>
+        <span class="amount">145</span>
+        <span class="period">/3 maanden</span>
       </div>
-      <p class="price-note">Minimaal 3 maanden &bull; daarna per kwartaal opzegbaar</p>
+    </div>
 
-      <ul class="features">
+    <div class="card-body">
+      <ul class="feature-list">
         <li>
           <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
-          Toegang tot alle huidige modules
+          Toegang tot alle beschikbare modules
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+          Certificaten bij het behalen van modules
         </li>
         <li>
           <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
@@ -122,68 +148,114 @@
         </li>
         <li>
           <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
-          Voortgang en certificaten bijgehouden
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
-          Geen verborgen kosten
+          Voortgangsbeheer en quizresultaten
         </li>
       </ul>
 
-      <button class="cta-btn" id="checkoutBtn" onclick="startCheckout()">Abonnement starten</button>
-      <p class="terms">Je wordt doorgestuurd naar Stripe voor veilige betaling. Na betaling is je account direct actief.</p>
+      <button class="btn-subscribe" id="subscribeBtn" onclick="startCheckout()">
+        Nu abonneren
+      </button>
+    </div>
+
+    <div class="card-footer">
+      <p>Gefactureerd per kwartaal. Minimale termijn 3 maanden, daarna per kwartaal opzegbaar. Veilige betaling via Stripe.</p>
     </div>
   </div>
+
+  <div id="errorMsg"></div>
 </main>
 
 <footer>
-  &copy; 2026 Umely &mdash; onderdeel van Datalerion
+  <p>
+    <img src="/logo-small.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;">
+    <span style="color:rgba(255,255,255,0.5);">|</span>
+    <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+    <span style="color:rgba(255,255,255,0.4);">|</span>
+    <a href="/privacy.html">Privacybeleid</a>
+    <span style="color:rgba(255,255,255,0.4);">&middot;</span>
+    <a href="/voorwaarden.html">Algemene voorwaarden</a>
+  </p>
 </footer>
 
 <script>
-let _supabase;
+let _supabase = null;
+let _session = null;
 
-(async () => {
-  const config = await fetch('/api/config').then(r => r.json());
-  _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+async function init() {
+  try {
+    const config = await fetch('/api/config').then(r => r.json());
+    _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
-  // Checkout success terugkeer
-  if (new URLSearchParams(location.search).get('checkout') === 'success') {
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('checkoutBtn').textContent = 'Naar mijn account';
-    document.getElementById('checkoutBtn').onclick = () => { location.href = '/account.html'; };
+    const { data: { session } } = await _supabase.auth.getSession();
+    if (!session) {
+      window.location.href = '/?redirect=' + encodeURIComponent('/pricing.html');
+      return;
+    }
+    _session = session;
+
+    // Toon navigatie
+    document.getElementById('navLibrary').style.display = 'inline-flex';
+    document.getElementById('navAccount').style.display = 'inline-flex';
+    document.getElementById('logoutBtn').style.display = 'block';
+
+    // Als al actief abonnement: doorsturen naar modules
+    const subRes = await fetch('/api/user/subscription', {
+      headers: { 'Authorization': 'Bearer ' + session.access_token }
+    });
+    if (subRes.ok) {
+      const sub = await subRes.json();
+      if (sub.subscription_status === 'active') {
+        window.location.href = '/modules.html';
+        return;
+      }
+    }
+  } catch (e) {
+    console.error('Init fout:', e);
   }
-})();
+}
 
 async function startCheckout() {
-  const btn = document.getElementById('checkoutBtn');
-  btn.disabled = true;
-  btn.textContent = 'Laden...';
-
-  const { data: { session } } = await _supabase.auth.getSession();
-  if (!session) {
-    location.href = '/?redirect=/pricing.html';
+  if (!_session) {
+    window.location.href = '/?redirect=' + encodeURIComponent('/pricing.html');
     return;
   }
+
+  const btn = document.getElementById('subscribeBtn');
+  const errEl = document.getElementById('errorMsg');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btn-spinner"></span>Doorsturen...';
 
   try {
     const res = await fetch('/api/stripe/create-checkout', {
       method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + _session.access_token
+      }
     });
+
     const data = await res.json();
-    if (data.url) {
-      location.href = data.url;
-    } else {
-      throw new Error(data.error || 'Onbekende fout');
+
+    if (!res.ok || !data.url) {
+      throw new Error(data.error || 'Kon betaalpagina niet openen.');
     }
-  } catch (err) {
-    document.getElementById('errorMsg').style.display = 'block';
-    document.getElementById('errorMsg').textContent = err.message;
+
+    window.location.href = data.url;
+  } catch (e) {
+    errEl.textContent = e.message || 'Er ging iets mis. Probeer het opnieuw.';
+    errEl.style.display = 'block';
     btn.disabled = false;
-    btn.textContent = 'Abonnement starten';
+    btn.innerHTML = 'Nu abonneren';
   }
 }
+
+async function logout() {
+  if (_supabase) await _supabase.auth.signOut();
+  window.location.href = '/';
+}
+
+init();
 </script>
 </body>
 </html>

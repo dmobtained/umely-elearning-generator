@@ -127,7 +127,7 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
 .cat-d { background: #FFF0F0; color: #B91C1C; }
 .cat-e { background: #F5F0FF; color: #5B21B6; }
 .cat-i { background: #FFFBEB; color: #92400E; }
-.mod-status { font-size: 11px; font-weight: 600; color: #BBB; white-space: nowrap; flex-shrink: 0; }
+.mod-status { font-size: 12px; font-weight: 600; color: #BBB; white-space: nowrap; flex-shrink: 0; }
 .mod-status.started { color: var(--amber); }
 .mod-status.done { color: #16A34A; }
 .module-title { font-size: 14.5px; font-weight: 700; color: var(--charcoal); line-height: 1.35; }
@@ -141,6 +141,10 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
 .btn-delete, .btn-rename { background: none; border: none; cursor: pointer; color: #DDD; font-size: 14px; padding: 3px 5px; border-radius: 5px; transition: color 0.12s, background 0.12s; line-height: 1; }
 .btn-delete:hover { color: #EF4444; background: #FEF2F2; }
 .btn-rename:hover { color: var(--amber); background: #FFF0E5; }
+@media (hover: none) {
+  .btn-delete { color: #EF4444; }
+  .btn-rename { color: var(--amber); }
+}
 
 /* ── STATES ── */
 .loading-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--gray-text); font-size: 15px; }
@@ -331,7 +335,7 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
         <div class="stat-sub">in de bibliotheek</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Al geopend</div>
+        <div class="stat-label">Geopend</div>
         <div class="stat-value" id="statOpened">0</div>
         <div class="stat-sub">van de modules</div>
       </div>
@@ -349,6 +353,7 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BBB" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <input type="text" id="searchInput" placeholder="Zoeken..." oninput="filterModules()" style="display:none;">
       </div>
+      <span id="searchCount" style="display:none;font-size:12px;color:var(--gray-text);margin-left:8px;white-space:nowrap;"></span>
     </div>
 
 
@@ -382,10 +387,26 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
     <img src="/logo-small.png" alt="Umely">
     <span style="color:rgba(255,255,255,0.4);">|</span>
     <span>Jouw vaste AI-partner &nbsp;&middot;&nbsp; <a href="https://umely.ai" target="_blank">umely.ai</a></span>
+    <span style="color:rgba(255,255,255,0.4);">|</span>
+    <a href="/privacy.html">Privacybeleid</a>
+    <span style="color:rgba(255,255,255,0.4);">&middot;</span>
+    <a href="/voorwaarden.html">Algemene voorwaarden</a>
   </p>
 </footer>
 
 <script>
+// ── HELPERS ──
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function safeUrl(url) {
+  try {
+    const u = new URL(url, location.origin);
+    return u.pathname.startsWith('/modules/') ? url : '#';
+  } catch { return '#'; }
+}
+
 // ── CONFIG ──
 const CATEGORIES = {
   a: { title: 'A — Introductie tot Claude', icon: '🎓' },
@@ -412,6 +433,7 @@ function getOpened() { try { return JSON.parse(localStorage.getItem(OPENED_KEY))
 function markOpened(slug) {
   let arr = getOpened().filter(s => s !== slug);
   arr.unshift(slug);
+  if (arr.length > 200) arr = arr.slice(0, 200);
   localStorage.setItem(OPENED_KEY, JSON.stringify(arr));
 }
 
@@ -480,8 +502,7 @@ async function showApp(session) {
   const pill = document.getElementById('userPill');
   pill.style.display = 'flex';
   try {
-    const { data: profile } = await _supabase.from('profiles').select('first_name').eq('id', session.user.id).single();
-    const name = profile?.first_name || session.user.email.split('@')[0];
+    const name = session.user.user_metadata?.firstName || session.user.email.split('@')[0];
     document.getElementById('headerUser').textContent = name;
     document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
   } catch {
@@ -512,10 +533,12 @@ async function login() {
   const password = document.getElementById('authPassword').value;
   const btn = document.getElementById('loginBtn');
   const errEl = document.getElementById('authError');
+  if (!email || !password) { errEl.textContent = 'Vul je e-mailadres en wachtwoord in.'; errEl.style.display = 'block'; return; }
   errEl.style.display = 'none';
   btn.disabled = true; btn.textContent = 'Inloggen...';
   const { error } = await _supabase.auth.signInWithPassword({ email, password });
   if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Inloggen'; }
+  else { btn.disabled = false; btn.textContent = 'Inloggen'; }
 }
 
 async function signup() {
@@ -523,7 +546,10 @@ async function signup() {
   const password = document.getElementById('authPassword').value;
   const btn = document.getElementById('loginBtn');
   const errEl = document.getElementById('authError');
-  if (password.length < 6) { errEl.textContent = 'Wachtwoord moet minimaal 6 tekens zijn.'; errEl.style.display = 'block'; return; }
+  if (!email) { errEl.textContent = 'Vul je e-mailadres in.'; errEl.style.display = 'block'; return; }
+  if (password.length < 8) { errEl.textContent = 'Wachtwoord moet minimaal 8 tekens zijn.'; errEl.style.display = 'block'; return; }
+  if (!/[A-Z]/.test(password)) { errEl.textContent = 'Wachtwoord moet minimaal 1 hoofdletter bevatten.'; errEl.style.display = 'block'; return; }
+  if (!/[0-9]/.test(password)) { errEl.textContent = 'Wachtwoord moet minimaal 1 cijfer bevatten.'; errEl.style.display = 'block'; return; }
   errEl.style.display = 'none';
   btn.disabled = true; btn.textContent = 'Registreren...';
   const { error } = await _supabase.auth.signUp({ email, password });
@@ -564,6 +590,33 @@ function getScore(slug) { return supabaseProgress[slug]?.score_pct ?? null; }
 async function loadModules() {
   const grid = document.getElementById('grid');
   grid.innerHTML = skeletonHTML();
+
+  // ── Subscription gate ──
+  try {
+    const subRes = await fetch('/api/user/subscription', { headers: authHeader() });
+    if (subRes.ok) {
+      const sub = await subRes.json();
+      // Admins hebben altijd toegang — check rol eerst via modules endpoint wordt later gedaan,
+      // maar we weten de rol pas na het laden. Geef users zonder actief abonnement geen toegang.
+      if (sub.subscription_status !== 'active') {
+        // Check of de gebruiker admin is via het profiel
+        const profileRes = await fetch('/api/user/profile', { headers: authHeader() });
+        if (profileRes.ok) {
+          const { profile } = await profileRes.json();
+          if (profile?.role !== 'admin') {
+            window.location.href = '/pricing.html';
+            return;
+          }
+        } else {
+          window.location.href = '/pricing.html';
+          return;
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Subscription check mislukt, doorgaan:', e.message);
+  }
+
   try {
     const [res] = await Promise.all([
       fetch('/api/modules', { headers: authHeader() }),
@@ -579,6 +632,31 @@ async function loadModules() {
     updateStats();
     showContinue();
     renderGrid();
+
+    // Event delegation voor module-klik en admin-acties (eenmalig registreren)
+    document.getElementById('grid').addEventListener('click', (e) => {
+      // Admin: rename
+      const renameBtn = e.target.closest('[data-action="rename"]');
+      if (renameBtn) {
+        e.preventDefault(); e.stopPropagation();
+        const card = renameBtn.closest('.module-card');
+        if (card) renameModule(card.dataset.slug, renameBtn);
+        return;
+      }
+      // Admin: delete
+      const deleteBtn = e.target.closest('[data-action="delete"]');
+      if (deleteBtn) {
+        e.preventDefault(); e.stopPropagation();
+        const card = deleteBtn.closest('.module-card');
+        if (card) deleteModule(card.dataset.slug, card.dataset.title, deleteBtn);
+        return;
+      }
+      // Module open tracking
+      const link = e.target.closest('.module-card-link');
+      if (link) {
+        trackOpen(link.dataset.slug, link.dataset.title, link.dataset.url, link.dataset.cat);
+      }
+    });
 
     document.getElementById('searchInput').style.display = '';
     document.getElementById('statsRow').style.display = 'grid';
@@ -609,10 +687,11 @@ function updateSidebar() {
 
 // ── STATS ──
 function updateStats() {
-  const completedCount = allModules.filter(m => isCompleted(m.slug)).length;
+  const opened = getOpened();
+  const openedCount = allModules.filter(m => opened.includes(m.slug) || isCompleted(m.slug)).length;
   const activeCats = new Set(allModules.map(m => getCat(m.slug)).filter(Boolean)).size;
   document.getElementById('statTotal').textContent = allModules.length;
-  document.getElementById('statOpened').textContent = completedCount;
+  document.getElementById('statOpened').textContent = openedCount;
   document.getElementById('statCats').textContent = activeCats;
 }
 
@@ -624,7 +703,8 @@ function showContinue() {
   const icon = CAT_ICONS[cat] || '📘';
   const label = getCatLabel(last.slug);
   document.getElementById('continueIcon').textContent = icon;
-  document.getElementById('continueTag').textContent = label + (CATEGORIES[cat] ? ' — ' + CATEGORIES[cat].title.split(' — ')[1] : '');
+  const catInfo = CATEGORIES[cat];
+  document.getElementById('continueTag').textContent = label + (catInfo ? ' — ' + (catInfo.title.split(' — ')[1] || catInfo.title) : '');
   document.getElementById('continueTitle').textContent = last.title;
   document.getElementById('continueBtn').href = last.url;
   document.getElementById('continueSection').style.display = 'block';
@@ -639,9 +719,14 @@ function setFilter(cat, sidebarEl) {
   const sNav = document.getElementById('nav-' + (cat === 'all' ? 'all' : cat));
   if (sNav) sNav.classList.add('active');
 
-  // Update section title
-  const titleMap = { all: 'Alle modules', a: 'A — Introductie tot Claude', b: 'B — Veiligheid & beperkingen', c: 'C — Claude gebruiken', d: 'D — Claude Code', e: 'E — MCP & Skills', i: 'I — Afsluiting' };
-  document.getElementById('sectionTitle').textContent = titleMap[cat] || 'Modules';
+  // Update section title — hide when single category (category header already shows it)
+  const titleEl = document.getElementById('sectionTitle');
+  if (cat === 'all') {
+    titleEl.textContent = 'Alle modules';
+    titleEl.style.display = '';
+  } else {
+    titleEl.style.display = 'none';
+  }
 
   renderGrid();
 }
@@ -660,7 +745,7 @@ function renderModuleCard(m) {
   const wasOpened = getOpened().includes(m.slug);
   const done = isCompleted(m.slug);
   const score = getScore(m.slug);
-  const barWidth = done ? (score ?? 100) : (wasOpened ? 100 : 0);
+  const barWidth = done ? (score ?? 100) : (wasOpened ? 10 : 0);
   const statusClass = done ? ' done' : (wasOpened ? ' started' : '');
   const statusText = done ? `✓ Afgerond${score !== null ? ' (' + score + '%)' : ''}` : (wasOpened ? '● Geopend' : 'Nog te starten');
   const linkText = (done || wasOpened) ? 'Opnieuw starten' : 'Starten';
@@ -668,17 +753,16 @@ function renderModuleCard(m) {
   const isAdmin = userRole === 'admin';
   const adminActions = isAdmin ? `
     <div class="card-actions">
-      <button class="btn-rename" title="Naam wijzigen" onclick="event.preventDefault();event.stopPropagation();renameModule('${m.slug}', this)">✏️</button>
-      <button class="btn-delete" title="Verwijderen" onclick="event.preventDefault();event.stopPropagation();deleteModule('${m.slug}', '${m.title.replace(/'/g,"\\'")}', this)">🗑</button>
+      <button class="btn-rename" title="Naam wijzigen" data-action="rename">✏️</button>
+      <button class="btn-delete" title="Verwijderen" data-action="delete">🗑</button>
     </div>` : '';
-  return `<a class="module-card${cardClass}" href="${m.url}" target="_blank"
-      onclick="trackOpen('${m.slug}','${m.title.replace(/'/g,"\\'")}','${m.url}','${cat}')"
-      data-slug="${m.slug}" data-cat="${cat}">
+  return `<a class="module-card${cardClass} module-card-link" href="${escHtml(safeUrl(m.url))}" target="_blank"
+      data-slug="${escHtml(m.slug)}" data-title="${escHtml(m.title)}" data-url="${escHtml(safeUrl(m.url))}" data-cat="${escHtml(cat)}">
     <div class="module-card-top">
       <span class="cat-badge cat-${cat}">${label}</span>
       <span class="mod-status${statusClass}">${statusText}</span>
     </div>
-    <div class="module-title">${m.title}</div>
+    <div class="module-title">${escHtml(m.title)}</div>
     <div class="module-meta"><span>⏱ ca. 20 min</span><span>❓ 5 vragen</span></div>
     <div class="prog-bar-wrap"><div class="prog-bar${done ? ' done' : ''}" style="width:${barWidth}%"></div></div>
     <div class="module-footer">
@@ -722,8 +806,9 @@ function renderGrid() {
     const info = CATEGORIES[cat];
     const catIcon = CAT_ICONS[cat] || '📘';
 
+    const toggleAttr = activeFilter === 'all' ? 'onclick="toggleCat(this.parentElement)"' : 'style="cursor:default;"';
     html += `<div class="cat-group${isOpen ? ' open' : ''}" data-cat="${cat}">
-      <div class="cat-group-header" onclick="toggleCat(this.parentElement)">
+      <div class="cat-group-header" ${toggleAttr}>
         <span class="cat-group-icon">${catIcon}</span>
         <span class="cat-group-title">${info.title}</span>
         <span class="cat-group-meta">
@@ -742,10 +827,22 @@ function renderGrid() {
 
   if (!anyVisible) {
     grid.innerHTML = '<div class="no-results">Geen modules gevonden.</div>';
+    if (q) { const sc = document.getElementById('searchCount'); sc.textContent = '0 resultaten'; sc.style.display = 'inline'; }
     return;
   }
 
   grid.innerHTML = html;
+
+  const sc = document.getElementById('searchCount');
+  if (q) {
+    const total = catsToShow.reduce((n, cat) => {
+      return n + allModules.filter(m => getCat(m.slug) === cat && m.title.toLowerCase().includes(q)).length;
+    }, 0);
+    sc.textContent = total + ' resultaat' + (total !== 1 ? 'en' : '');
+    sc.style.display = 'inline';
+  } else {
+    sc.style.display = 'none';
+  }
 }
 
 function toggleCat(group) {
@@ -768,14 +865,10 @@ function trackOpen(slug, title, url, cat) {
     const statusEl = card.querySelector('.mod-status');
     if (statusEl) { statusEl.textContent = '● Geopend'; statusEl.className = 'mod-status started'; }
     const bar = card.querySelector('.prog-bar');
-    if (bar) bar.style.width = '100%';
+    if (bar) bar.style.width = '10%';
     const link = card.querySelector('.module-link');
     if (link) link.textContent = 'Opnieuw starten ›';
   }
-}
-
-function filterModules() {
-  renderGrid();
 }
 
 // ── ADMIN ACTIONS ──
@@ -783,21 +876,65 @@ async function renameModule(slug, btn) {
   const card = btn.closest('.module-card');
   const titleEl = card.querySelector('.module-title');
   const currentTitle = titleEl.textContent;
-  const newTitle = prompt('Nieuwe naam voor deze e-learning:', currentTitle);
-  if (!newTitle || newTitle.trim() === currentTitle) return;
-  btn.disabled = true; btn.textContent = '⏳';
-  try {
-    const res = await fetch(`/api/modules/${slug}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', ...authHeader() },
-      body: JSON.stringify({ title: newTitle.trim() })
-    });
-    if (!res.ok) throw new Error('Server gaf ' + res.status + ' terug');
-    titleEl.textContent = newTitle.trim();
-    const mod = allModules.find(m => m.slug === slug);
-    if (mod) mod.title = newTitle.trim();
-  } catch (e) { alert('Fout: ' + e.message); }
-  finally { btn.disabled = false; btn.textContent = '✏️'; }
+
+  const wrap = document.createElement('span');
+  wrap.style.cssText = 'display:flex;align-items:center;gap:4px;width:100%;';
+  const input = document.createElement('input');
+  input.value = currentTitle;
+  input.style.cssText = 'flex:1;font:inherit;font-size:inherit;font-weight:600;border:none;border-bottom:2px solid #FF8514;outline:none;background:transparent;padding:0;min-width:0;';
+  const saveBtn = document.createElement('button');
+  saveBtn.textContent = '✓';
+  saveBtn.title = 'Opslaan (Enter)';
+  saveBtn.style.cssText = 'background:#FF8514;color:white;border:none;border-radius:4px;padding:2px 6px;font-size:13px;cursor:pointer;flex-shrink:0;line-height:1.4;';
+  wrap.appendChild(input);
+  wrap.appendChild(saveBtn);
+  titleEl.replaceWith(wrap);
+  input.focus();
+  input.select();
+  btn.style.display = 'none';
+
+  let saveTriggered = false;
+
+  async function save(overrideTitle) {
+    if (saveTriggered) return;
+    saveTriggered = true;
+    input.removeEventListener('blur', onBlur);
+    const newTitle = (overrideTitle !== undefined ? overrideTitle : input.value).trim();
+    const span = document.createElement('span');
+    span.className = 'module-title';
+    if (wrap.isConnected) wrap.replaceWith(span);
+    btn.style.display = '';
+    if (!newTitle || newTitle === currentTitle) { span.textContent = currentTitle; return; }
+    span.textContent = newTitle;
+    btn.disabled = true; btn.textContent = '⏳';
+    try {
+      const res = await fetch(`/api/modules/${slug}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
+        body: JSON.stringify({ title: newTitle })
+      });
+      if (!res.ok) throw new Error('Server gaf ' + res.status + ' terug');
+      const mod = allModules.find(m => m.slug === slug);
+      if (mod) mod.title = newTitle;
+    } catch (e) {
+      span.textContent = currentTitle;
+      span.style.color = 'red';
+      setTimeout(() => span.style.color = '', 2000);
+    } finally { btn.disabled = false; btn.textContent = '✏️'; }
+  }
+
+  function onBlur(e) {
+    // Blur naar saveBtn = niet opslaan via blur, saveBtn click handelt het af
+    if (e.relatedTarget === saveBtn) return;
+    save();
+  }
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); save(); }
+    if (e.key === 'Escape') { e.preventDefault(); save(currentTitle); }
+  });
+  input.addEventListener('blur', onBlur);
+  saveBtn.addEventListener('click', () => save());
 }
 
 async function deleteModule(slug, title, btn) {
@@ -833,7 +970,11 @@ async function checkNewsletterPopup(session) {
     }
   } catch(e) {}
   document.getElementById('nlEmailInput').value = session?.user?.email || '';
-  setTimeout(() => document.getElementById('newsletterPopup').classList.add('open'), 1200);
+  setTimeout(() => {
+    document.getElementById('newsletterPopup').classList.add('open');
+    const onNlEsc = (e) => { if (e.key === 'Escape') { closeNewsletter(); document.removeEventListener('keydown', onNlEsc); } };
+    document.addEventListener('keydown', onNlEsc);
+  }, 5000);
 }
 
 function closeNewsletter() {

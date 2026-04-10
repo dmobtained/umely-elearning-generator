@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profiel instellen | Umely</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root {
@@ -14,7 +14,7 @@
   --focus-ring: rgba(255,133,20,0.2);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAFA; color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #FAFAFA; color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; }
 
 header { background: var(--charcoal); height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
 .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -41,7 +41,7 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
 .field label .optional { color: var(--text-secondary); font-weight: 400; font-size: 12px; margin-left: 4px; }
 .field textarea, .field input[type=text], .field input[type=url] {
   width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 14px;
-  font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-primary);
+  font-size: 14px; font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary);
   outline: none; transition: border-color 0.2s, box-shadow 0.2s; background: #FAFAFA;
 }
 .field textarea:focus, .field input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--focus-ring); }
@@ -54,7 +54,7 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
 .tag-input-wrap:focus-within { border-color: var(--amber); box-shadow: 0 0 0 3px var(--focus-ring); }
 .tag { background: #FFF3E8; color: #FF6B00; font-size: 12px; font-weight: 500; padding: 3px 8px 3px 10px; border-radius: 20px; border: 1px solid rgba(255,133,20,0.2); display: flex; align-items: center; gap: 5px; }
 .tag button { background: none; border: none; cursor: pointer; color: #FF6B00; font-size: 14px; line-height: 1; padding: 0; }
-.tag-input { border: none; outline: none; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-primary); background: transparent; min-width: 120px; flex: 1; padding: 2px 4px; }
+.tag-input { border: none; outline: none; font-size: 13px; font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); background: transparent; min-width: 120px; flex: 1; padding: 2px 4px; }
 .tag-hint { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
 
 /* Divider */
@@ -62,11 +62,12 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
 .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-secondary); margin-bottom: 16px; }
 
 /* Submit */
-.submit-btn { width: 100%; background: var(--gradient); color: white; border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: opacity 0.15s, transform 0.1s; margin-top: 8px; }
+.submit-btn { width: 100%; background: var(--gradient); color: white; border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Inter', system-ui, sans-serif; transition: opacity 0.15s, transform 0.1s; margin-top: 8px; }
 .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .submit-btn:not(:disabled):hover { opacity: 0.9; }
 .submit-btn:not(:disabled):active { transform: scale(0.98); }
 .submit-note { text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
+.inline-error { display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 8px 12px; margin-top: 8px; font-size: 13px; color: #991B1B; }
 
 .privacy-row { display: flex; align-items: flex-start; gap: 10px; }
 .privacy-row input[type=checkbox] { margin-top: 3px; accent-color: var(--amber); width: 16px; height: 16px; flex-shrink: 0; }
@@ -103,11 +104,12 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
         Klik om een foto te uploaden.<br>Max 2MB · JPEG, PNG of WebP.
       </div>
     </div>
+    <div class="inline-error" id="avatarError"></div>
 
     <!-- Bio -->
     <div class="field">
       <label for="bio">Over jezelf <span class="required">*</span></label>
-      <textarea id="bio" rows="3" placeholder="Wie ben je en wat doe je? (max 300 tekens)" maxlength="300" oninput="updateCharCount()"></textarea>
+      <textarea id="bio" rows="3" placeholder="Wie ben je en wat doe je?" maxlength="300" oninput="updateCharCount()"></textarea>
       <div class="char-count" id="charCount">0 / 300</div>
     </div>
 
@@ -115,7 +117,7 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
     <div class="field">
       <label>Specialisaties <span class="required">*</span></label>
       <div class="tag-input-wrap" id="tagWrap" onclick="document.getElementById('tagInput').focus()">
-        <input type="text" id="tagInput" class="tag-input" placeholder="Typ een specialisatie en druk Enter" onkeydown="handleTagInput(event)">
+        <input type="text" id="tagInput" class="tag-input" placeholder="Typ en druk Enter of komma" onkeydown="handleTagInput(event)">
       </div>
       <div class="tag-hint">Bijv. Claude AI &middot; Automatisering &middot; SaaS &middot; Copywriting</div>
     </div>
@@ -125,11 +127,11 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
 
     <div class="field">
       <label for="company">Bedrijf <span class="optional">(optioneel)</span></label>
-      <input type="text" id="company" placeholder="Jouw bedrijfsnaam">
+      <input type="text" id="company" placeholder="Bedrijfsnaam">
     </div>
     <div class="field">
       <label for="website">Website <span class="optional">(optioneel)</span></label>
-      <input type="url" id="website" placeholder="https://jouwsite.nl">
+      <input type="url" id="website" placeholder="https://jouwwebsite.nl">
     </div>
     <div class="field">
       <label for="instagram">Instagram <span class="optional">(optioneel)</span></label>
@@ -153,7 +155,8 @@ main { flex: 1; display: flex; align-items: flex-start; justify-content: center;
       </div>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="saveProfile()" disabled>Profiel opslaan en verdergaan</button>
+    <div class="inline-error" id="formError"></div>
+    <button class="submit-btn" id="submitBtn" onclick="saveProfile()">Profiel opslaan en verdergaan</button>
     <p class="submit-note">Je kunt dit later altijd aanpassen via je profiel.</p>
   </div>
 </main>
@@ -211,9 +214,6 @@ function updateCharCount() {
 }
 
 function updateSubmitBtn() {
-  const bio = document.getElementById('bio').value.trim();
-  const ok = bio.length > 0 && bio.length <= 300 && _tags.length > 0;
-  document.getElementById('submitBtn').disabled = !ok;
 }
 
 function handleTagInput(e) {
@@ -256,7 +256,13 @@ function renderTags() {
 function handleAvatarChange(input) {
   const file = input.files[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { alert('Bestand is te groot. Max 2MB.'); return; }
+  const avatarErr = document.getElementById('avatarError');
+  if (file.size > 2 * 1024 * 1024) {
+    avatarErr.textContent = 'Bestand is te groot. Max 2MB.';
+    avatarErr.style.display = 'block';
+    return;
+  }
+  avatarErr.style.display = 'none';
   _avatarFile = file;
   const reader = new FileReader();
   reader.onload = e => {
@@ -268,6 +274,19 @@ function handleAvatarChange(input) {
 
 async function saveProfile() {
   const btn = document.getElementById('submitBtn');
+  const formErr = document.getElementById('formError');
+  const bio = document.getElementById('bio').value.trim();
+  if (!bio) {
+    formErr.textContent = 'Vul een korte introductie in.';
+    formErr.style.display = 'block';
+    return;
+  }
+  if (_tags.length === 0) {
+    formErr.textContent = 'Voeg minimaal één specialisatie toe.';
+    formErr.style.display = 'block';
+    return;
+  }
+  formErr.style.display = 'none';
   btn.disabled = true;
   btn.textContent = 'Opslaan...';
 
@@ -282,7 +301,9 @@ async function saveProfile() {
     });
     if (!avatarRes.ok) {
       const err = await avatarRes.json();
-      alert(err.error || 'Kon foto niet uploaden.');
+      const avatarErr = document.getElementById('avatarError');
+      avatarErr.textContent = err.error || 'Kon foto niet uploaden.';
+      avatarErr.style.display = 'block';
       btn.disabled = false;
       btn.textContent = 'Profiel opslaan en verdergaan';
       return;
@@ -306,15 +327,20 @@ async function saveProfile() {
 
   if (!res.ok) {
     const err = await res.json();
-    alert(err.error || 'Kon profiel niet opslaan.');
+    formErr.textContent = err.error || 'Kon profiel niet opslaan. Probeer het opnieuw.';
+    formErr.style.display = 'block';
     btn.disabled = false;
     btn.textContent = 'Profiel opslaan en verdergaan';
     return;
   }
 
+  btn.textContent = '✓ Opgeslagen!';
+  btn.style.background = '#22C55E';
+
   const raw = new URLSearchParams(window.location.search).get('redirect') || '';
-  const safe = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/community.html';
-  window.location.href = safe;
+  const allowed = ['/modules.html', '/account.html', '/pricing.html', '/community.html', '/'];
+  const safe = allowed.includes(raw) ? raw : '/modules.html';
+  setTimeout(() => { window.location.href = safe; }, 1200);
 }
 
 function escHtml(str) {

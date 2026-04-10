@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-mail bevestigen | Umely</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --amber: #FF8514;
+    --flame: #FF4D00;
+    --charcoal: #27292D;
+    --warm-white: #FFF8F2;
+    --white: #FFFFFF;
+    --gray-text: #4A4A4A;
+    --gray-border: #EDE0D4;
+    --gradient: linear-gradient(135deg, #FF8514, #FF4D00);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--warm-white);
+    color: var(--gray-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: var(--charcoal);
+    padding: 0 32px; height: 64px;
+    display: flex; align-items: center;
+  }
+  .logo { display: flex; align-items: center; }
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 52px 48px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.09);
+    text-align: center;
+  }
+  .icon { font-size: 52px; margin-bottom: 20px; line-height: 1; }
+  .title { font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 10px; }
+  .sub { font-size: 14px; color: var(--gray-text); line-height: 1.6; margin-bottom: 28px; }
+  .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn-ghost {
+    display: inline-block;
+    padding: 12px 32px;
+    border: 2px solid var(--amber);
+    color: var(--flame);
+    background: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-top: 12px;
+  }
+  .btn-ghost:hover { background: #FFF0E5; }
+  .spinner-wrap { display: flex; align-items: center; justify-content: center; padding: 48px 0; }
+  .spinner {
+    width: 28px; height: 28px;
+    border: 3px solid #EDE0D4;
+    border-top-color: var(--flame);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  footer { padding: 28px 32px; text-align: center; background: var(--charcoal); }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.7); }
+  footer a { color: white; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <img src="/logo-small.png" alt="Umely" style="height:76px;filter:brightness(0) invert(1);">
+  </a>
+</header>
+
+<main>
+  <div class="card">
+
+    <!-- LADEN -->
+    <div id="loadingState">
+      <div class="spinner-wrap"><div class="spinner"></div></div>
+    </div>
+
+    <!-- SUCCES -->
+    <div id="successState" style="display:none;">
+      <div class="icon">✅</div>
+      <p class="title">E-mail bevestigd!</p>
+      <p class="sub">Je account is geactiveerd. Je wordt doorgestuurd naar de modules.</p>
+      <a href="/modules.html" class="btn">Naar de modules</a>
+    </div>
+
+    <!-- VERLOPEN LINK -->
+    <div id="expiredState" style="display:none;">
+      <div class="icon">⏱️</div>
+      <p class="title">Link verlopen</p>
+      <p class="sub">Deze bevestigingslink is niet meer geldig. Log in en vraag via de loginpagina een nieuwe bevestigingsmail aan.</p>
+      <a href="/" class="btn">Nieuwe bevestigingsmail aanvragen</a>
+    </div>
+
+    <!-- ONGELDIGE LINK -->
+    <div id="invalidState" style="display:none;">
+      <div class="icon">🔗</div>
+      <p class="title">Ongeldige link</p>
+      <p class="sub">Deze link is niet geldig. Mogelijk is er iets misgegaan. Probeer opnieuw te registreren of neem contact op.</p>
+      <a href="/" class="btn-ghost">Terug naar inloggen</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>
+    <img src="/logo-small.png" alt="Umely" style="height:44px;filter:brightness(0) invert(1);vertical-align:middle;margin-right:12px;">
+    &copy; Umely &nbsp;&bull;&nbsp; <a href="https://umely.ai">umely.ai</a>
+  </p>
+</footer>
+
+<script>
+async function init() {
+  try {
+    const config = await fetch('/api/config').then(r => r.json());
+    const _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const errorParam = params.get('error');
+    const errorDescription = params.get('error_description') || '';
+
+    // Supabase stuurde een fout mee in de redirect (PKCE flow bij verlopen link)
+    if (errorParam) {
+      const isExpired = errorDescription.toLowerCase().includes('expired') ||
+                        errorDescription.toLowerCase().includes('otp');
+      show(isExpired ? 'expiredState' : 'invalidState');
+      return;
+    }
+
+    // PKCE flow: wissel ?code= in voor sessie
+    if (code) {
+      const { error } = await _supabase.auth.exchangeCodeForSession(code);
+      if (error) {
+        const isExpired = error.message.toLowerCase().includes('expired') ||
+                          error.message.toLowerCase().includes('otp');
+        show(isExpired ? 'expiredState' : 'invalidState');
+        return;
+      }
+      show('successState');
+      setTimeout(() => { window.location.href = '/modules.html'; }, 2500);
+      return;
+    }
+
+    // Implicit flow: hash met access_token
+    const hash = window.location.hash;
+    if (hash.includes('access_token') && hash.includes('type=signup')) {
+      // Wacht op SIGNED_IN event, maximaal 5 seconden
+      const signedIn = await new Promise(resolve => {
+        const { data: { subscription } } = _supabase.auth.onAuthStateChange((event) => {
+          if (event === 'SIGNED_IN') {
+            subscription.unsubscribe();
+            resolve(true);
+          }
+        });
+        setTimeout(() => { subscription.unsubscribe(); resolve(false); }, 5000);
+      });
+      if (signedIn) {
+        show('successState');
+        setTimeout(() => { window.location.href = '/modules.html'; }, 2500);
+        return;
+      }
+    }
+
+    // Niets gevonden
+    show('invalidState');
+
+  } catch (e) {
+    console.error('Auth callback fout:', e);
+    show('invalidState');
+  }
+}
+
+function show(id) {
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('successState').style.display = 'none';
+  document.getElementById('expiredState').style.display = 'none';
+  document.getElementById('invalidState').style.display = 'none';
+  document.getElementById(id).style.display = 'block';
+}
+
+init();
+</script>
+</body>
+</html>

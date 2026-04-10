@@ -3,3 +3,4 @@ webapp/node_modules/
 webapp/.env
 output/
 .worktrees/
+.superpowers/

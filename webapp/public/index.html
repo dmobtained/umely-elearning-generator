@@ -83,6 +83,25 @@
   }
   #verifyCheckBtn:hover:not(:disabled) { opacity: 0.88; }
   #verifyCheckBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+  #forgotBtn {
+    width: 100%; padding: 14px; background: var(--gradient);
+    color: white; border: none; border-radius: 50px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: opacity 0.2s; margin-top: 6px;
+  }
+  #forgotBtn:hover:not(:disabled) { opacity: 0.88; }
+  #forgotBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .forgot-link {
+    display: block; text-align: right; font-size: 12px;
+    color: var(--amber); font-weight: 600; text-decoration: none;
+    margin-top: 4px; margin-bottom: 2px;
+  }
+  .forgot-link:hover { text-decoration: underline; }
+  .auth-success {
+    background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px;
+    padding: 14px 16px; text-align: center; font-size: 14px;
+    color: #15803D; font-weight: 500;
+  }
 
   header {
     background: var(--charcoal); border-bottom: none;
@@ -242,7 +261,7 @@
 </head>
 <body>
 
-<div id="authOverlay" style="display:none;">
+<div id="authOverlay" style="display:none;" aria-hidden="true">
   <div class="auth-card">
     <!-- AUTH HEADER -->
     <div class="auth-logo">
@@ -251,20 +270,26 @@
       <p id="authSubtitle">Log in om de e-learning generator te gebruiken.</p>
     </div>
 
+    <!-- REDIRECT NOTICE -->
+    <div id="redirectNotice" style="display:none;background:#FFF0E5;border:1.5px solid #FFD0A0;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#8A4000;text-align:center;"></div>
+
     <!-- ERROR BOX -->
-    <div id="authError"></div>
+    <div id="authError" role="alert" aria-live="polite"></div>
 
     <!-- LOGIN FORM -->
     <div id="loginForm" style="display:block;">
-      <div class="auth-field">
-        <label>E-mailadres</label>
-        <input id="authEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
-      </div>
-      <div class="auth-field">
-        <label>Wachtwoord</label>
-        <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
-      </div>
-      <button id="loginBtn" onclick="login()" style="margin-top:6px;">Inloggen</button>
+      <form id="loginFormEl" onsubmit="login(); return false;">
+        <div class="auth-field">
+          <label for="authEmail">E-mailadres</label>
+          <input id="authEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label for="authPassword">Wachtwoord</label>
+          <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+          <a href="#" class="forgot-link" onclick="showForgotState(event)">Wachtwoord vergeten?</a>
+        </div>
+        <button id="loginBtn" type="submit" style="margin-top:6px;">Inloggen</button>
+      </form>
       <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray-text);">
         Nog geen account? <a href="#" id="toggleSignup" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Registreer</a>
       </p>
@@ -272,27 +297,29 @@
 
     <!-- SIGNUP FORM -->
     <div id="signupForm" style="display:none;">
-      <div class="auth-field">
-        <label>Voornaam</label>
-        <span class="auth-hint">Je voornaam</span>
-        <input id="authFirstName" type="text" placeholder="Jan" autocomplete="given-name">
-      </div>
-      <div class="auth-field">
-        <label>Achternaam</label>
-        <span class="auth-hint">Je achternaam</span>
-        <input id="authLastName" type="text" placeholder="Jansen" autocomplete="family-name">
-      </div>
-      <div class="auth-field">
-        <label>E-mailadres</label>
-        <span class="auth-hint">Gebruik je werk-emailadres</span>
-        <input id="signupEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
-      </div>
-      <div class="auth-field">
-        <label>Wachtwoord</label>
-        <span class="auth-hint">Min. 8 tekens, 1 hoofletter, 1 cijfer</span>
-        <input id="signupPassword" type="password" placeholder="••••••••" autocomplete="new-password">
-      </div>
-      <button id="signupBtn" onclick="signup()" style="margin-top:6px;">Account aanmaken</button>
+      <form id="signupFormEl" onsubmit="signup(); return false;">
+        <div class="auth-field">
+          <label for="authFirstName">Voornaam</label>
+          <span class="auth-hint">Je voornaam</span>
+          <input id="authFirstName" type="text" placeholder="Jan" autocomplete="given-name">
+        </div>
+        <div class="auth-field">
+          <label for="authLastName">Achternaam</label>
+          <span class="auth-hint">Je achternaam</span>
+          <input id="authLastName" type="text" placeholder="Jansen" autocomplete="family-name">
+        </div>
+        <div class="auth-field">
+          <label for="signupEmail">E-mailadres</label>
+          <span class="auth-hint">Gebruik je werk-emailadres</span>
+          <input id="signupEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label for="signupPassword">Wachtwoord</label>
+          <span class="auth-hint">Min. 8 tekens</span>
+          <input id="signupPassword" type="password" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <button id="signupBtn" type="submit" style="margin-top:6px;">Account aanmaken</button>
+      </form>
       <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray-text);">
         Al een account? <a href="#" id="toggleLogin" onclick="toggleAuthMode(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Inloggen</a>
       </p>
@@ -309,18 +336,40 @@
         Controleer je inbox (en spam-map) en klik op de link.
       </p>
       <button id="verifyCheckBtn" onclick="checkVerification()" style="margin-bottom:8px;">
-        ✓ Ik heb mijn email geverifieerd
+        Ik heb de link geklikt, ga verder
       </button>
       <p style="font-size:12px;margin-top:12px;">
         Nog geen mail? <a href="#" id="resendEmailLink" onclick="resendVerificationEmail(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Stuur opnieuw</a>
       </p>
+      <p id="resendSuccessMsg" style="display:none;font-size:12px;color:#15803D;margin-top:8px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:6px;padding:8px 12px;"></p>
+    </div>
+
+    <!-- WACHTWOORD VERGETEN STATE -->
+    <div id="forgotState" style="display:none;">
+      <div id="forgotForm">
+        <div class="auth-field">
+          <label>E-mailadres</label>
+          <input id="forgotEmail" type="email" placeholder="naam@bedrijf.nl" autocomplete="email" onkeydown="if(event.key==='Enter')sendResetEmail()">
+        </div>
+        <button id="forgotBtn" onclick="sendResetEmail()">Verstuur herstelmail</button>
+        <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray-text);">
+          <a href="#" onclick="showLoginState(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Terug naar inloggen</a>
+        </p>
+      </div>
+      <div id="forgotSuccess" style="display:none;">
+        <div style="font-size:48px;text-align:center;margin-bottom:16px;">📬</div>
+        <div class="auth-success">Check je inbox voor de herstelmail. De link is 1 uur geldig.</div>
+        <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--gray-text);">
+          <a href="#" onclick="showLoginState(event)" style="color:var(--amber);font-weight:600;text-decoration:none;">Terug naar inloggen</a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <header>
   <a class="logo" href="#">
-    <img src="/logo-small.png" alt="Umely" style="height:65px;filter:brightness(0) invert(1);">
+    <img src="/logo-small.png" alt="Umely" style="height:76px;filter:brightness(0) invert(1);">
   </a>
   <div class="header-right">
     <span class="header-user" id="headerUser"></span>
@@ -360,7 +409,7 @@
       <span id="btnText">Genereer e-learning</span>
     </button>
 
-    <div id="status">
+    <div id="status" aria-live="polite">
       <div class="status-loading">
         <div class="spinner"></div>
         <div style="flex:1">
@@ -417,10 +466,15 @@ let pollInterval = null;
 // ── AUTH ──
 let _supabase = null;
 let _session = null;
+let _verifyEmail = null;
+let _verifyPassword = null;
 
 async function initAuth() {
   try {
-    const config = await fetch('/api/config').then(r => r.json());
+    const configRes = await fetch('/api/config');
+    if (!configRes.ok) throw new Error('Config ophalen mislukt (HTTP ' + configRes.status + ')');
+    const config = await configRes.json();
+    if (!config.supabaseUrl || !config.supabaseAnonKey) throw new Error('Ongeldige config: supabaseUrl of supabaseAnonKey ontbreekt');
     _supabase = supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
     const { data: { session } } = await _supabase.auth.getSession();
@@ -429,12 +483,7 @@ async function initAuth() {
 
     _supabase.auth.onAuthStateChange((event, session) => {
       _session = session;
-      if (event === 'SIGNED_IN') {
-        if (window.location.hash.includes('type=signup')) {
-          sessionStorage.setItem('emailJustConfirmed', '1');
-        }
-        showApp(session);
-      }
+      if (event === 'SIGNED_IN') showApp(session);
       else if (event === 'SIGNED_OUT') showLogin();
     });
   } catch (e) {
@@ -444,7 +493,16 @@ async function initAuth() {
 }
 
 function showLogin() {
-  document.getElementById('authOverlay').style.display = 'flex';
+  const overlay = document.getElementById('authOverlay');
+  overlay.style.display = 'flex';
+  overlay.removeAttribute('aria-hidden');
+
+  const redirectParam = new URLSearchParams(window.location.search).get('redirect');
+  if (redirectParam) {
+    const notice = document.getElementById('redirectNotice');
+    notice.textContent = 'Log in om verder te gaan.';
+    notice.style.display = 'block';
+  }
 }
 
 async function showApp(session) {
@@ -456,11 +514,15 @@ async function showApp(session) {
       .single();
 
     if (!profile || profile.role !== 'admin') {
-      window.location.href = '/modules.html';
+      const allowed = ['/modules.html', '/account.html', '/pricing.html', '/community.html', '/'];
+      const raw = new URLSearchParams(window.location.search).get('redirect') || '';
+      window.location.href = allowed.includes(raw) ? raw : '/modules.html';
       return;
     }
 
-    document.getElementById('authOverlay').style.display = 'none';
+    const authOverlay = document.getElementById('authOverlay');
+    authOverlay.style.display = 'none';
+    authOverlay.setAttribute('aria-hidden', 'true');
     document.getElementById('logoutBtn').style.display = 'block';
     const userEl = document.getElementById('headerUser');
     userEl.style.display = 'block';
@@ -504,6 +566,14 @@ async function login() {
   errEl.style.display = 'none';
   btn.disabled = true;
   btn.textContent = 'Inloggen...';
+
+  if (!_supabase) {
+    errEl.textContent = 'App nog niet geladen. Herlaad de pagina.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Inloggen';
+    return;
+  }
 
   const { error } = await _supabase.auth.signInWithPassword({ email, password });
   if (error) {
@@ -562,8 +632,9 @@ async function signup() {
     document.getElementById('authSubtitle').textContent = '';
     document.getElementById('verificationEmail').textContent = email;
 
-    // Store email for polling
-    window._verifyEmail = email;
+    // Store credentials for verification check (password field gets hidden after this)
+    _verifyEmail = email;
+    _verifyPassword = password;
 
   } catch (err) {
     showAuthError(err.message);
@@ -588,8 +659,13 @@ function authHeader() {
 
 
 async function checkVerification() {
-  const email = window._verifyEmail;
-  const password = document.getElementById('signupPassword').value;
+  const email = _verifyEmail;
+  const password = _verifyPassword || document.getElementById('signupPassword').value;
+
+  if (!email || !password) {
+    showAuthError('Sessie verlopen. Ga terug en registreer opnieuw.');
+    return;
+  }
 
   document.getElementById('verifyCheckBtn').disabled = true;
   document.getElementById('verifyCheckBtn').textContent = 'Controleren...';
@@ -608,27 +684,83 @@ async function checkVerification() {
 
     // Successfully logged in = email is verified
     hideAuthError();
-    document.getElementById('authOverlay').style.display = 'none';
-    document.getElementById('logoutBtn').style.display = 'inline';
+    _verifyPassword = null;
     if (data?.session) showApp(data.session);
 
   } finally {
     document.getElementById('verifyCheckBtn').disabled = false;
-    document.getElementById('verifyCheckBtn').textContent = 'Ik heb mijn email geverifieerd';
+    document.getElementById('verifyCheckBtn').textContent = 'Ik heb de link geklikt, ga verder';
+  }
+}
+
+function showForgotState(e) {
+  e.preventDefault();
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('verificationState').style.display = 'none';
+  document.getElementById('forgotState').style.display = 'block';
+  document.getElementById('authTitle').textContent = 'Wachtwoord herstellen';
+  document.getElementById('authSubtitle').textContent = 'Voer je e-mailadres in. Je ontvangt een link om je wachtwoord te resetten.';
+  hideAuthError();
+}
+
+function showLoginState(e) {
+  e.preventDefault();
+  document.getElementById('forgotState').style.display = 'none';
+  document.getElementById('verificationState').style.display = 'none';
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('authTitle').textContent = 'Welkom bij Umely';
+  document.getElementById('authSubtitle').textContent = 'Log in om de e-learning generator te gebruiken.';
+  isSignupMode = false;
+  hideAuthError();
+}
+
+async function sendResetEmail() {
+  const email = document.getElementById('forgotEmail').value.trim();
+  const btn = document.getElementById('forgotBtn');
+
+  if (!email) {
+    showAuthError('Vul je e-mailadres in.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Verzenden...';
+  hideAuthError();
+
+  try {
+    const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/reset-password.html'
+    });
+    if (error) throw error;
+
+    document.getElementById('forgotForm').style.display = 'none';
+    document.getElementById('forgotSuccess').style.display = 'block';
+    document.getElementById('authSubtitle').textContent = '';
+  } catch (err) {
+    showAuthError('Versturen mislukt. Controleer je e-mailadres en probeer opnieuw.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Verstuur herstelmail';
   }
 }
 
 async function resendVerificationEmail(e) {
   e.preventDefault();
   const resendLink = document.getElementById('resendEmailLink');
+  const successMsg = document.getElementById('resendSuccessMsg');
   resendLink.style.pointerEvents = 'none';
   resendLink.style.opacity = '0.5';
+  successMsg.style.display = 'none';
   hideAuthError();
 
   try {
-    const email = window._verifyEmail;
+    const email = _verifyEmail;
     if (!email) {
       showAuthError('Geen e-mailadres bekend. Probeer opnieuw te registreren.');
+      resendLink.style.pointerEvents = 'auto';
+      resendLink.style.opacity = '1';
       return;
     }
 
@@ -639,18 +771,24 @@ async function resendVerificationEmail(e) {
     });
 
     if (response.ok) {
-      showAuthError('Verificatiemail opnieuw verzonden. Controleer je inbox.');
-
+      successMsg.textContent = 'Verificatiemail verstuurd. Controleer je inbox (en spammap).';
+      successMsg.style.display = 'block';
+      resendLink.textContent = 'Wacht 30 seconden...';
+      // Re-enable after 30s cooldown
       setTimeout(() => {
         resendLink.style.pointerEvents = 'auto';
         resendLink.style.opacity = '1';
+        resendLink.textContent = 'Stuur opnieuw';
       }, 30000);
     } else {
       showAuthError('Kon email niet verzenden. Probeer later opnieuw.');
+      resendLink.style.pointerEvents = 'auto';
+      resendLink.style.opacity = '1';
     }
-  } catch (error) {
-    console.error('Resend error:', error);
-    showAuthError('Verbindingsfout.');
+  } catch (err) {
+    showAuthError('Verbindingsfout. Probeer het opnieuw.');
+    resendLink.style.pointerEvents = 'auto';
+    resendLink.style.opacity = '1';
   }
 }
 
@@ -671,9 +809,17 @@ fileInput.addEventListener('change', () => {
 });
 
 async function handleFile(file) {
+  if (file.size > 20 * 1024 * 1024) {
+    showAuthError('Bestand is groter dan 20 MB.');
+    return;
+  }
   const badge = document.getElementById('fileBadge');
   badge.style.display = 'block';
-  badge.innerHTML = `<span class="file-badge">⏳ ${file.name} laden...</span>`;
+  badge.innerHTML = '';
+  const loadingSpan = document.createElement('span');
+  loadingSpan.className = 'file-badge';
+  loadingSpan.textContent = `⏳ ${file.name} laden...`;
+  badge.appendChild(loadingSpan);
 
   const formData = new FormData();
   formData.append('file', file);
@@ -683,7 +829,16 @@ async function handleFile(file) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Kon bestand niet lezen');
     document.getElementById('transcription').value = data.text;
-    badge.innerHTML = `<span class="file-badge">📄 ${file.name} <button onclick="clearFile()" title="Verwijder bestand">✕</button></span>`;
+    badge.innerHTML = '';
+    const fileSpan = document.createElement('span');
+    fileSpan.className = 'file-badge';
+    fileSpan.textContent = `📄 ${file.name} `;
+    const removeBtn = document.createElement('button');
+    removeBtn.onclick = clearFile;
+    removeBtn.title = 'Verwijder bestand';
+    removeBtn.textContent = '✕';
+    fileSpan.appendChild(removeBtn);
+    badge.appendChild(fileSpan);
   } catch (err) {
     badge.innerHTML = '';
     badge.style.display = 'none';
@@ -745,16 +900,23 @@ async function generate() {
     });
 
     if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error || 'Server fout');
+      let errMsg = 'Server fout (HTTP ' + response.status + ')';
+      try { const err = await response.json(); errMsg = err.error || errMsg; } catch {}
+      throw new Error(errMsg);
     }
 
     const { jobId } = await response.json();
 
     await new Promise((resolve, reject) => {
+      if (pollInterval) clearInterval(pollInterval);
       pollInterval = setInterval(async () => {
         try {
           const poll = await fetch(`/api/job/${jobId}`);
+          if (!poll.ok) {
+            clearInterval(pollInterval);
+            reject(new Error('Job status ophalen mislukt (HTTP ' + poll.status + ')'));
+            return;
+          }
           const job = await poll.json();
 
           if (job.status === 'error') {
@@ -766,6 +928,10 @@ async function generate() {
           if (job.status === 'done') {
             clearInterval(pollInterval);
             const htmlRes = await fetch(job.url);
+            if (!htmlRes.ok) {
+              reject(new Error('Module ophalen mislukt (HTTP ' + htmlRes.status + ')'));
+              return;
+            }
             generatedHTML = await htmlRes.text();
             document.getElementById('moduleUrl').style.display = 'block';
             document.getElementById('moduleUrlText').textContent = job.url;
@@ -781,7 +947,7 @@ async function generate() {
       }, 2000);
     });
 
-    if (!generatedHTML.includes('<!DOCTYPE html>')) {
+    if (!generatedHTML.toLowerCase().includes('<!doctype html>')) {
       throw new Error('De gegenereerde output is ongeldig. Probeer opnieuw.');
     }
 
@@ -830,10 +996,13 @@ function togglePreview() {
   previewVisible = !previewVisible;
   if (previewVisible) {
     iframe.style.display = 'block';
+    if (iframe._blobUrl) URL.revokeObjectURL(iframe._blobUrl);
     const blob = new Blob([generatedHTML], { type: 'text/html' });
-    iframe.src = URL.createObjectURL(blob);
+    iframe._blobUrl = URL.createObjectURL(blob);
+    iframe.src = iframe._blobUrl;
   } else {
     iframe.style.display = 'none';
+    if (iframe._blobUrl) { URL.revokeObjectURL(iframe._blobUrl); iframe._blobUrl = null; }
     iframe.src = '';
   }
 }

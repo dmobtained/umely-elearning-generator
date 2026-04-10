@@ -1,5 +1,12 @@
+// ── Eenmalig uitvoeren in Supabase (SQL) ──────────────────────────────────────
+// ALTER TABLE elearning.profiles ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
+// ALTER TABLE elearning.profiles ADD COLUMN IF NOT EXISTS subscription_status TEXT DEFAULT 'inactive';
+// ALTER TABLE elearning.profiles ADD COLUMN IF NOT EXISTS subscription_end TEXT;
+// ─────────────────────────────────────────────────────────────────────────────
+
 require('dotenv').config();
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const Anthropic = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
@@ -7,22 +14,111 @@ const fs = require('fs');
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
 const mammoth = require('mammoth');
+const Stripe = require('stripe');
+const stripe = process.env.STRIPE_SECRET_KEY ? Stripe(process.env.STRIPE_SECRET_KEY) : null;
 
 const app = express();
-app.use(express.json({
-  limit: '10mb',
-  verify: (req, res, buf) => {
-    if (req.path === '/api/stripe/webhook') req.rawBody = buf;
+
+// ── Stripe webhook moet raw body ontvangen — VOOR express.json() ──
+app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  if (!stripe) return res.status(500).json({ error: 'Stripe niet geconfigureerd' });
+
+  const sig = req.headers['stripe-signature'];
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    console.error('Stripe webhook verificatie mislukt:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
+
+  const subscription = event.data.object;
+
+  if (
+    event.type === 'customer.subscription.created' ||
+    event.type === 'customer.subscription.updated'
+  ) {
+    const status = subscription.status === 'active' ? 'active' : 'inactive';
+    const endDate = subscription.current_period_end
+      ? new Date(subscription.current_period_end * 1000).toISOString()
+      : null;
+
+    const { error } = await supabase
+      .from('profiles')
+      .update({ subscription_status: status, subscription_end: endDate })
+      .eq('stripe_customer_id', subscription.customer);
+
+    if (error) {
+      console.error('Webhook: subscription update fout:', error.message);
+      return res.status(500).json({ error: 'Database update mislukt' });
+    }
+  }
+
+  if (event.type === 'customer.subscription.deleted') {
+    const { error } = await supabase
+      .from('profiles')
+      .update({ subscription_status: 'inactive', subscription_end: null })
+      .eq('stripe_customer_id', subscription.customer);
+
+    if (error) {
+      console.error('Webhook: subscription delete fout:', error.message);
+      return res.status(500).json({ error: 'Database update mislukt' });
+    }
+  }
+
+  res.json({ received: true });
+});
+
+app.use(express.json({ limit: '10mb' }));
+app.get('/', (req, res) => res.redirect('/modules.html'));
+
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Content-Security-Policy', [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://instant.page",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' data: https:",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+    "frame-ancestors 'none'"
+  ].join('; '));
+  const origin = process.env.ALLOWED_ORIGIN || '*';
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    return res.sendStatus(204);
+  }
+  next();
+});
+
+// ── Rate limiting ──
+app.use('/api/', rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minuten
+  max: 200,                  // max 200 requests per IP per venster
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Te veel verzoeken. Probeer het over 15 minuten opnieuw.' }
 }));
+
+app.use('/generate', rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 uur
+  max: 10,                   // max 10 generaties per IP per uur
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Generatielimiet bereikt. Probeer het over een uur opnieuw.' }
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 3 });
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { db: { schema: 'elearning' } });
-const supabaseAdmin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { db: { schema: 'elearning' } });
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // ── Auth middleware ──
 async function requireAuth(req, res, next) {
@@ -39,8 +135,23 @@ async function requireAuth(req, res, next) {
   next();
 }
 
-// In-memory job store
+// In-memory job store (automatische cleanup na 1 uur)
 const jobs = {};
+const generateTimestamps = {};
+setInterval(() => {
+  const now = Date.now();
+  const maxAge = 60 * 60 * 1000;       // 1 uur: job verwijderen
+  const stuckAge = 10 * 60 * 1000;     // 10 minuten: generating → error
+  for (const id of Object.keys(jobs)) {
+    const age = now - (jobs[id].createdAt || 0);
+    if (age > maxAge) {
+      delete jobs[id];
+    } else if (jobs[id].status === 'generating' && age > stuckAge) {
+      jobs[id].status = 'error';
+      jobs[id].error = 'Generatie duurde te lang. Probeer opnieuw.';
+    }
+  }
+}, 10 * 60 * 1000);
 
 const SYSTEM_PROMPT = fs.readFileSync(path.join(__dirname, 'prompt.md'), 'utf8');
 const BOILERPLATE = fs.readFileSync(path.join(__dirname, 'boilerplate.html'), 'utf8');
@@ -51,19 +162,32 @@ const FULL_PROMPT = SYSTEM_PROMPT + '\n\n## BOILERPLATE\n\nGebruik dit als exact
 app.get('/api/config', (req, res) => {
   res.json({
     supabaseUrl: process.env.SUPABASE_URL,
-    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || ''
+    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY || ''
   });
 });
 
 // ── Start genereren (geeft direct jobId terug) ──
 app.post('/generate', requireAuth, async (req, res) => {
+  const userId = req.user.id;
+  const now = Date.now();
+  const window = 15 * 60 * 1000;
+  generateTimestamps[userId] = (generateTimestamps[userId] || []).filter(t => now - t < window);
+  if (generateTimestamps[userId].length >= 3) {
+    return res.status(429).json({ error: 'Je hebt de limiet van 3 generaties per 15 minuten bereikt. Probeer het later opnieuw.' });
+  }
+  generateTimestamps[userId].push(now);
+
   const { transcription } = req.body;
   if (!transcription || transcription.trim().length < 10) {
     return res.status(400).json({ error: 'Transcriptie is te kort of leeg.' });
   }
+  if (transcription.length > 500000) {
+    return res.status(400).json({ error: 'Transcriptie is te lang (max. 500.000 tekens).' });
+  }
 
   const jobId = Date.now().toString(36) + Math.random().toString(36).slice(2);
-  jobs[jobId] = { status: 'generating', progress: 0 };
+  jobs[jobId] = { status: 'generating', progress: 0, createdAt: Date.now() };
   res.json({ jobId });
 
   // Genereer op de achtergrond
@@ -94,22 +218,27 @@ app.post('/generate', requireAuth, async (req, res) => {
         const rawTitle = titleMatch
           ? titleMatch[1].replace(' | Umely E-learning', '').trim()
           : 'elearning';
-        const slug = rawTitle
+        const slugBase = rawTitle
           .toLowerCase()
-          .replace(/[^a-z0-9]+/gi, '-')
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // strip diacritics
+          .replace(/[^a-z0-9]+/g, '-')
           .replace(/^-|-$/g, '')
-          .slice(0, 40);
+          .slice(0, 40) || ('module-' + Date.now().toString(36));  // fallback met unieke suffix als slug leeg is
         const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-        const filename = `elearning-${slug}-${date}.html`;
+        const filename = `elearning-${slugBase}-${date}.html`;
 
         const dbSlug = filename.replace('.html', '');
-        await supabase.from('modules').insert({ filename, slug: dbSlug, title: rawTitle, html: fullHtml });
-
-        jobs[jobId] = {
-          status: 'done',
-          slug: filename.replace('.html', ''),
-          url: `/modules/${filename.replace('.html', '')}`
-        };
+        const { error: insertErr } = await supabase.from('modules').insert({ filename, slug: dbSlug, title: rawTitle, html: fullHtml });
+        if (insertErr) {
+          console.error('DB insert fout na generatie:', insertErr.message);
+          jobs[jobId] = { status: 'error', error: 'Module gegenereerd maar opslaan mislukt: ' + insertErr.message };
+        } else {
+          jobs[jobId] = {
+            status: 'done',
+            slug: dbSlug,
+            url: `/modules/${dbSlug}`
+          };
+        }
       } else {
         jobs[jobId] = { status: 'error', error: 'Gegenereerde output is ongeldig.' };
       }
@@ -148,7 +277,7 @@ app.post('/extract-text', requireAuth, upload.single('file'), async (req, res) =
 });
 
 // ── Poll job status ──
-app.get('/api/job/:jobId', (req, res) => {
+app.get('/api/job/:jobId', requireAuth, (req, res) => {
   const job = jobs[req.params.jobId];
   if (!job) return res.status(404).json({ error: 'Job niet gevonden' });
   res.json(job);
@@ -191,6 +320,9 @@ app.get('/api/modules', requireAuth, requireSubscription, async (req, res) => {
 
 // ── Beveiligd HTML-endpoint (Bearer token vereist) ──
 app.get('/api/module-html/:slug', requireAuth, requireSubscription, async (req, res) => {
+  if (!/^[a-z0-9-]{1,80}$/.test(req.params.slug)) {
+    return res.status(400).json({ error: 'Ongeldige module-URL' });
+  }
   let { data, error } = await supabase
     .from('modules')
     .select('html')
@@ -211,6 +343,9 @@ app.get('/api/module-html/:slug', requireAuth, requireSubscription, async (req, 
 // ── Auth-wrapper voor directe module-URL's ──
 app.get('/modules/:slug', (req, res) => {
   const slug = req.params.slug;
+  if (!/^[a-z0-9-]{1,80}$/.test(slug)) {
+    return res.status(400).send('Ongeldige module-URL');
+  }
   res.setHeader('Content-Type', 'text/html');
   res.send(`<!DOCTYPE html>
 <html lang="nl">
@@ -354,6 +489,9 @@ app.patch('/api/users/:userId/role', requireAuth, requireAdmin, async (req, res)
   if (!role || !['admin', 'user'].includes(role)) {
     return res.status(400).json({ error: 'Ongeldige rol. Kies "admin" of "user".' });
   }
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(req.params.userId)) {
+    return res.status(400).json({ error: 'Ongeldig gebruikers-ID.' });
+  }
   const { error } = await supabase
     .from('profiles')
     .update({ role })
@@ -380,10 +518,9 @@ app.post('/api/user/progress', requireAuth, async (req, res) => {
   const isStartedOnly = (score_pct ?? 0) === 0 && !completed;
   let error;
   if (isStartedOnly) {
-    // Eerste bezoek: alleen invoegen als er nog geen record is
-    const result = await supabase.from('user_progress').insert(record);
+    // Eerste bezoek: alleen invoegen als er nog geen record is — negeer conflict atomair
+    const result = await supabase.from('user_progress').upsert(record, { onConflict: 'user_id,module_slug', ignoreDuplicates: true });
     error = result.error;
-    if (error && error.code === '23505') error = null; // conflict = al gestart, negeer
   } else {
     // Quiz afgerond: altijd opslaan
     const result = await supabase.from('user_progress').upsert(record, { onConflict: 'user_id,module_slug' });
@@ -408,9 +545,13 @@ app.get('/api/user/progress', requireAuth, async (req, res) => {
 
 // ── Hernoem een module (admin) ──
 app.patch('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => {
+  if (!/^[a-z0-9-]{1,80}$/.test(req.params.slug)) {
+    return res.status(400).json({ error: 'Ongeldige module-URL' });
+  }
   const filename = req.params.slug + '.html';
   const { title } = req.body;
   if (!title || !title.trim()) return res.status(400).json({ error: 'Titel mag niet leeg zijn.' });
+  if (title.trim().length > 200) return res.status(400).json({ error: 'Titel mag maximaal 200 tekens zijn.' });
   const { error } = await supabase.from('modules').update({ title: title.trim() }).eq('filename', filename);
   if (error) return res.status(500).json({ error: error.message });
   res.json({ ok: true });
@@ -517,10 +658,51 @@ app.get('/admin/review-data', requireAuth, requireAdmin, async (req, res) => {
 
 // ── Verwijder een module (admin) ──
 app.delete('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => {
+  if (!/^[a-z0-9-]{1,80}$/.test(req.params.slug)) {
+    return res.status(400).json({ error: 'Ongeldige module-URL' });
+  }
   const filename = req.params.slug + '.html';
   const { error } = await supabase.from('modules').delete().eq('filename', filename);
   if (error) return res.status(500).json({ error: error.message });
   res.json({ ok: true });
+});
+
+// ── Admin: activiteitenlog ──────────────────────────────────────────────────
+app.get('/api/admin/activity', requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+    const [{ data: recentProfiles }, { data: progress }, { data: allProfiles }] = await Promise.all([
+      supabase.from('profiles').select('id, email, created_at').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }),
+      supabase.from('user_progress').select('user_id, module_slug, score_pct, completed, completed_at, updated_at').gte('updated_at', sevenDaysAgo).order('updated_at', { ascending: false }),
+      supabase.from('profiles').select('id, email')
+    ]);
+
+    const profileMap = {};
+    (allProfiles || []).forEach(p => { profileMap[p.id] = p.email; });
+
+    const events = [];
+
+    (recentProfiles || []).forEach(p => {
+      events.push({ type: 'registered', email: p.email, ts: p.created_at });
+    });
+
+    (progress || []).forEach(p => {
+      const email = profileMap[p.user_id] || p.user_id;
+      const moduleName = (p.module_slug || '').replace(/^elearning-/, '').replace(/-\d{8}$/, '').replace(/-/g, ' ');
+      if (p.completed && p.completed_at) {
+        events.push({ type: 'completed', email, module: moduleName, score: p.score_pct, ts: p.completed_at });
+      } else {
+        events.push({ type: 'started', email, module: moduleName, ts: p.updated_at });
+      }
+    });
+
+    events.sort((a, b) => new Date(b.ts) - new Date(a.ts));
+    res.json(events);
+  } catch (err) {
+    console.error('Activity log fout:', err);
+    res.status(500).json({ error: 'Kon activiteit niet ophalen' });
+  }
 });
 
 // ── Task 6: POST /api/auth/signup ──
@@ -536,13 +718,21 @@ app.post('/api/auth/signup', async (req, res) => {
     if (password.length < 8) {
       return res.status(400).json({ error: 'Wachtwoord moet minstens 8 tekens zijn.' });
     }
+    if (!/[A-Z]/.test(password)) {
+      return res.status(400).json({ error: 'Wachtwoord moet minimaal 1 hoofdletter bevatten.' });
+    }
+    if (!/[0-9]/.test(password)) {
+      return res.status(400).json({ error: 'Wachtwoord moet minimaal 1 cijfer bevatten.' });
+    }
 
     // Standaard signUp: werkt met anon én service role key, verstuurt verificatiemail via Resend
+    const siteUrl = process.env.SITE_URL || 'https://umely-elearning-generator-dev.up.railway.app';
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
-        data: { firstName, lastName }
+        data: { firstName, lastName },
+        emailRedirectTo: siteUrl + '/auth-callback.html'
       }
     });
 
@@ -564,8 +754,7 @@ app.post('/api/auth/signup', async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Account aangemaakt. Controleer je email voor verificatie.',
-      userId: data.user?.id
+      message: 'Account aangemaakt. Controleer je email voor verificatie.'
     });
 
   } catch (error) {
@@ -586,14 +775,14 @@ app.get('/api/user/email-verified', async (req, res) => {
     const token = authHeader.substring(7);
 
     // Verify token with Supabase
-    const { data: { user }, error } = await supabaseAdmin.auth.getUser(token);
+    const { data: { user }, error } = await supabase.auth.getUser(token);
 
     if (error || !user) {
       return res.status(401).json({ emailVerified: false, error: 'Token ongeldig' });
     }
 
     // Check if email is confirmed
-    const emailVerified = user.email_confirmed_at !== null;
+    const emailVerified = !!user.email_confirmed_at;
 
     res.json({ emailVerified });
 
@@ -609,7 +798,7 @@ app.post('/api/auth/resend-verification', async (req, res) => {
   if (!email) return res.status(400).json({ error: 'Email vereist' });
 
   try {
-    const { error } = await supabaseAdmin.auth.resend({
+    const { error } = await supabase.auth.resend({
       type: 'signup',
       email: email
     });
@@ -621,124 +810,79 @@ app.post('/api/auth/resend-verification', async (req, res) => {
   }
 });
 
-// ── App settings ──────────────────────────────────────────────────────────────
-
-app.get('/api/community/status', async (req, res) => {
-  const { data } = await supabase.from('app_settings').select('value').eq('key', 'community_enabled').single();
-  res.json({ enabled: !data || data.value !== 'false' });
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Interne serverfout' });
 });
 
-app.get('/api/admin/settings', requireAuth, requireAdmin, async (req, res) => {
-  const { data, error } = await supabase.from('app_settings').select('key, value');
-  if (error) return res.status(500).json({ error: error.message });
-  const settings = {};
-  (data || []).forEach(row => { settings[row.key] = row.value; });
-  res.json(settings);
-});
-
-app.post('/api/admin/settings', requireAuth, requireAdmin, async (req, res) => {
-  const { key, value } = req.body;
-  if (!key || value === undefined) return res.status(400).json({ error: 'key en value zijn verplicht.' });
-  const { error } = await supabase.from('app_settings').upsert(
-    { key, value: String(value), updated_at: new Date().toISOString() },
-    { onConflict: 'key' }
-  );
-  if (error) return res.status(500).json({ error: error.message });
-  res.json({ ok: true });
-});
-
-// ── Stripe: maak checkout sessie aan ──
+// ── Stripe: maak checkout sessie aan ──────────────────────────────────────────
 app.post('/api/stripe/create-checkout', requireAuth, async (req, res) => {
+  if (!stripe) return res.status(500).json({ error: 'Stripe niet geconfigureerd' });
+
   try {
-    const { data: profile } = await supabase
+    // Haal bestaand stripe_customer_id op uit profiel
+    const { data: profile, error: profileErr } = await supabase
       .from('profiles')
-      .select('email, stripe_customer_id')
+      .select('stripe_customer_id, email')
       .eq('id', req.user.id)
       .single();
 
+    if (profileErr) return res.status(500).json({ error: profileErr.message });
+
     let customerId = profile?.stripe_customer_id;
 
-    // Zoek of maak Stripe customer
+    // Maak nieuwe Stripe customer aan als die nog niet bestaat
     if (!customerId) {
       const customer = await stripe.customers.create({
         email: profile?.email || req.user.email,
-        metadata: { supabase_id: req.user.id }
+        metadata: { supabase_user_id: req.user.id }
       });
       customerId = customer.id;
+
+      // Sla customer ID op in profiel
       await supabase
         .from('profiles')
         .update({ stripe_customer_id: customerId })
         .eq('id', req.user.id);
     }
 
-    const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       mode: 'subscription',
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-      client_reference_id: req.user.id,
-      success_url: `${siteUrl}/account.html?checkout=success`,
-      cancel_url: `${siteUrl}/pricing.html`,
+      success_url: process.env.STRIPE_SUCCESS_URL || `${req.headers.origin || ''}/modules.html?subscribed=1`,
+      cancel_url: process.env.STRIPE_CANCEL_URL || `${req.headers.origin || ''}/pricing.html`,
+      allow_promotion_codes: true
     });
 
     res.json({ url: session.url });
   } catch (err) {
-    console.error('Stripe checkout fout:', err.message);
-    res.status(500).json({ error: 'Checkout aanmaken mislukt' });
+    console.error('Stripe checkout fout:', err);
+    res.status(500).json({ error: 'Betaling starten mislukt. Probeer het opnieuw.' });
   }
 });
 
-// ── Stripe: webhook ──
-app.post('/api/stripe/webhook', async (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  let event;
+// ── Subscription status ophalen ───────────────────────────────────────────────
+app.get('/api/user/subscription', requireAuth, async (req, res) => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('subscription_status, subscription_end')
+    .eq('id', req.user.id)
+    .single();
 
-  try {
-    event = stripe.webhooks.constructEvent(req.rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
-  } catch (err) {
-    console.error('Webhook signature fout:', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+  if (error) return res.status(500).json({ error: error.message });
 
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    const userId = session.client_reference_id;
-    if (userId) {
-      await supabase
-        .from('profiles')
-        .update({ subscription_status: 'active' })
-        .eq('id', userId);
-    }
-  }
-
-  if (event.type === 'customer.subscription.deleted') {
-    const sub = event.data.object;
-    const { data: profiles } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('stripe_customer_id', sub.customer);
-    if (profiles?.length) {
-      await supabase
-        .from('profiles')
-        .update({ subscription_status: 'inactive' })
-        .eq('stripe_customer_id', sub.customer);
-    }
-  }
-
-  if (event.type === 'invoice.payment_failed') {
-    const invoice = event.data.object;
-    await supabase
-      .from('profiles')
-      .update({ subscription_status: 'inactive' })
-      .eq('stripe_customer_id', invoice.customer);
-  }
-
-  res.json({ received: true });
+  res.json({
+    subscription_status: data?.subscription_status || 'inactive',
+    subscription_end: data?.subscription_end || null
+  });
 });
 
 require('./community-routes')(app, supabase, requireAuth);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Umely E-learning Generator draait op http://localhost:${PORT}`);
 });
+process.on('SIGTERM', () => server.close(() => process.exit(0)));
+process.on('SIGINT', () => server.close(() => process.exit(0)));
