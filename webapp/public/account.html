@@ -838,7 +838,7 @@ function renderSubscriptionSection(profile) {
 
   let subMetaHtml = `<div class="sub-meta">Lid sinds ${escapeHtml(lidSinds)}</div>`;
   if (isActive) {
-    subMetaHtml += `<div class="sub-meta">&euro;95 per maand &mdash; kwartaalfacturatie</div>`;
+    subMetaHtml += `<div class="sub-meta">&euro;95 per maand</div>`;
   }
   if (isActive && verlooptOp) {
     subMetaHtml += `<div class="sub-meta">Volgende facturatie: ${escapeHtml(verlooptOp)}</div>`;
