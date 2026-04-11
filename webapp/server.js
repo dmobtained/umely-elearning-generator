@@ -271,13 +271,20 @@ app.get('/modules/:slug', (req, res) => {
   const html = await res.text();
   const userEmail = session.user.email || '';
   const userName  = session.user.user_metadata?.full_name || session.user.user_metadata?.name || userEmail.split('@')[0] || '';
+  // Rol ophalen om admins van protection vrij te stellen
+  let userRole = 'user';
+  try {
+    const profileRes = await fetch('/api/user/profile', { headers: { 'Authorization': 'Bearer ' + token } });
+    if (profileRes.ok) { const p = await profileRes.json(); userRole = p.profile?.role || 'user'; }
+  } catch (e) {}
+  const isAdmin = userRole === 'admin';
   const tokenScript =
     '<script>' +
     'window.__AUTH_TOKEN__  = ' + JSON.stringify(token)     + ';' +
     'window.__USER_EMAIL__  = ' + JSON.stringify(userEmail) + ';' +
     'window.__USER_NAME__   = ' + JSON.stringify(userName)  + ';' +
     '<' + '/script>' +
-    '<script src="/protection.js"><' + '/script>';
+    (isAdmin ? '' : '<script src="/protection.js"><' + '/script>');
   const injected = html.replace('</head>', tokenScript + '</head>');
   document.open();
   document.write(injected);
