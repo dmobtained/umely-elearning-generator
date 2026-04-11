@@ -435,11 +435,32 @@ app.patch('/api/modules/:slug', requireAuth, requireAdmin, async (req, res) => {
 
 // ── Nieuwsbrief aanmelden ──
 app.post('/api/newsletter/subscribe', requireAuth, async (req, res) => {
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('email')
+    .eq('id', req.user.id)
+    .single();
+  if (profileError) return res.status(500).json({ error: profileError.message });
+
+  // Supabase bijwerken
   const { error } = await supabase
     .from('profiles')
     .update({ newsletter_subscribed: true })
     .eq('id', req.user.id);
   if (error) return res.status(500).json({ error: error.message });
+
+  // MailerLite toevoegen (fire-and-forget, niet blocking)
+  if (process.env.MAILERLITE_API_KEY && profile?.email) {
+    fetch('https://connect.mailerlite.com/api/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.MAILERLITE_API_KEY
+      },
+      body: JSON.stringify({ email: profile.email })
+    }).catch(err => console.error('MailerLite subscribe fout:', err));
+  }
+
   res.json({ ok: true });
 });
 
