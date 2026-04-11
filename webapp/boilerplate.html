@@ -142,6 +142,7 @@ header{position:sticky;top:0;z-index:100;background:var(--fg);border-bottom:1px 
 .certificaat-title{font-family:var(--font-h);font-size:1rem;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;}
 .certificaat h2{font-family:var(--font-h);font-size:1.4rem;margin-bottom:0.5rem;}
 .certificaat-datum{font-size:0.85rem;color:rgba(39,41,45,0.6);margin-top:0.5rem;}
+@media print{body>*:not(#screen-result){display:none!important;}.module-header,.nav-btn,.btn-wrap,.voortgangsbalk{display:none!important;}#certificaat-blok{display:block!important;border:2px solid #EAE6E0;}.btn-print{display:none!important;}}
 footer{background:var(--fg);color:rgba(255,248,242,0.7);text-align:center;padding:1.5rem;font-size:0.8rem;margin-top:3rem;}
 footer strong{color:var(--gold);}
 footer a{color:var(--peach);}
@@ -196,6 +197,7 @@ footer a{color:var(--peach);}
     <h2>[ECHTE MODULETITEL]</h2>
     <p>Je hebt alle modules succesvol doorlopen en de quiz behaald.</p>
     <div class="certificaat-datum" id="cert-datum"></div>
+    <button class="btn btn-outline btn-print" onclick="window.print()" style="margin-top:1.5rem;display:inline-flex;align-items:center;gap:6px;">&#11015; Downloaden als PDF</button>
   </div>
   <div class="btn-wrap">
     <button class="btn btn-outline" onclick="herstart()">Opnieuw beginnen</button>
