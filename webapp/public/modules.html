@@ -579,7 +579,15 @@ async function loadProgress() {
     if (!res.ok) return;
     const { progress } = await res.json();
     supabaseProgress = {};
-    (progress || []).forEach(p => { supabaseProgress[p.module_slug] = p; });
+    const normalizeSlug = s => (s || '').replace(/-\d{8}$/, '');
+    (progress || []).forEach(p => {
+      const key = normalizeSlug(p.module_slug);
+      const existing = supabaseProgress[key];
+      if (!existing || (p.completed && !existing.completed) ||
+          (p.completed === existing.completed && (p.score_pct || 0) > (existing.score_pct || 0))) {
+        supabaseProgress[key] = { ...p, module_slug: key };
+      }
+    });
   } catch {}
 }
 
@@ -687,8 +695,7 @@ function updateSidebar() {
 
 // ── STATS ──
 function updateStats() {
-  const opened = getOpened();
-  const openedCount = allModules.filter(m => opened.includes(m.slug) || isCompleted(m.slug)).length;
+  const openedCount = allModules.filter(m => supabaseProgress[m.slug] != null).length;
   const activeCats = new Set(allModules.map(m => getCat(m.slug)).filter(Boolean)).size;
   document.getElementById('statTotal').textContent = allModules.length;
   document.getElementById('statOpened').textContent = openedCount;

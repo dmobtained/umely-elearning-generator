@@ -661,11 +661,24 @@ async function loadAccount() {
     }
     const { profile, progress } = data;
 
+    // Dedupliceer progress op genormaliseerde slug (strip datum-suffix zoals -20260401)
+    const normalizeSlug = s => (s || '').replace(/-\d{8}$/, '');
+    const progressMap = new Map();
+    progress.forEach(p => {
+      const key = normalizeSlug(p.module_slug);
+      const existing = progressMap.get(key);
+      if (!existing || (p.completed && !existing.completed) ||
+          (p.completed === existing.completed && (p.score_pct || 0) > (existing.score_pct || 0))) {
+        progressMap.set(key, { ...p, module_slug: key });
+      }
+    });
+    const deduped = Array.from(progressMap.values());
+
     // Profiel hero
     const initial = (profile.email || '?')[0].toUpperCase();
-    const started = progress.length;
-    const completed = progress.filter(p => p.completed).length;
-    const scores = progress.filter(p => p.score_pct > 0).map(p => p.score_pct);
+    const started = deduped.length;
+    const completed = deduped.filter(p => p.completed).length;
+    const scores = deduped.filter(p => p.score_pct > 0).map(p => p.score_pct);
     const avgScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
     const totalModules = 25;
     const progPct = Math.round((completed / totalModules) * 100);
@@ -720,7 +733,7 @@ async function loadAccount() {
       </div>`;
 
     // Certificaten
-    const certs = progress.filter(p => p.completed && p.score_pct >= 70);
+    const certs = deduped.filter(p => p.completed && p.score_pct >= 70);
     if (certs.length === 0) {
       document.getElementById('certGrid').innerHTML = `
         <div class="cert-empty">
@@ -863,7 +876,7 @@ async function toggleNewsletter(subscribe) {
 async function loadUsers() {
   try {
     const res = await fetch('/api/users', { headers: authHeader() });
-    if (!res.ok) return;
+    if (!res.ok) { document.getElementById('usersTable').innerHTML = '<p>Kon gebruikers niet laden.</p>'; return; }
     const users = await res.json();
 
     document.getElementById('usersTable').innerHTML = `
