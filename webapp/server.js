@@ -40,10 +40,19 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
     const endDate = subscription.current_period_end
       ? new Date(subscription.current_period_end * 1000).toISOString()
       : null;
+    const startDate = subscription.start_date
+      ? new Date(subscription.start_date * 1000).toISOString()
+      : (subscription.created ? new Date(subscription.created * 1000).toISOString() : null);
+
+    // subscription_start alleen zetten bij 'created', niet overschrijven bij updates
+    const updateData = { subscription_status: status, subscription_end: endDate };
+    if (event.type === 'customer.subscription.created' && startDate) {
+      updateData.subscription_start = startDate;
+    }
 
     const { error } = await supabase
       .from('profiles')
-      .update({ subscription_status: status, subscription_end: endDate })
+      .update(updateData)
       .eq('stripe_customer_id', subscription.customer);
 
     if (error) {
@@ -789,7 +798,7 @@ app.post('/api/stripe/create-checkout', requireAuth, async (req, res) => {
 app.get('/api/user/subscription', requireAuth, async (req, res) => {
   const { data, error } = await supabase
     .from('profiles')
-    .select('subscription_status, subscription_end')
+    .select('subscription_status, subscription_end, subscription_start')
     .eq('id', req.user.id)
     .single();
 
@@ -797,8 +806,47 @@ app.get('/api/user/subscription', requireAuth, async (req, res) => {
 
   res.json({
     subscription_status: data?.subscription_status || 'inactive',
-    subscription_end: data?.subscription_end || null
+    subscription_end:    data?.subscription_end    || null,
+    subscription_start:  data?.subscription_start  || null
   });
+});
+
+// ── Abonnement opzeggen (alleen na minimale termijn van 3 maanden) ─────────────
+app.post('/api/stripe/cancel-subscription', requireAuth, async (req, res) => {
+  if (!stripe) return res.status(500).json({ error: 'Stripe niet geconfigureerd' });
+
+  const { data: profile, error: pErr } = await supabase
+    .from('profiles')
+    .select('stripe_customer_id, subscription_start, subscription_status')
+    .eq('id', req.user.id)
+    .single();
+
+  if (pErr || !profile) return res.status(500).json({ error: 'Profiel ophalen mislukt' });
+  if (profile.subscription_status !== 'active') return res.status(400).json({ error: 'Geen actief abonnement' });
+
+  // Controleer minimale termijn van 3 maanden
+  if (profile.subscription_start) {
+    const start = new Date(profile.subscription_start);
+    const minEndDate = new Date(start);
+    minEndDate.setMonth(minEndDate.getMonth() + 3);
+    if (new Date() < minEndDate) {
+      return res.status(403).json({ error: 'Minimale termijn van 3 maanden nog niet verstreken', earliest_cancel: minEndDate.toISOString() });
+    }
+  }
+
+  // Zoek actief Stripe abonnement voor deze klant
+  const subscriptions = await stripe.subscriptions.list({
+    customer: profile.stripe_customer_id,
+    status: 'active',
+    limit: 1
+  });
+
+  if (!subscriptions.data.length) return res.status(404).json({ error: 'Geen actief Stripe abonnement gevonden' });
+
+  // Opzeggen aan het einde van de huidige periode
+  await stripe.subscriptions.update(subscriptions.data[0].id, { cancel_at_period_end: true });
+
+  res.json({ ok: true, cancel_at: new Date(subscriptions.data[0].current_period_end * 1000).toISOString() });
 });
 
 require('./community-routes')(app, supabase, requireAuth);

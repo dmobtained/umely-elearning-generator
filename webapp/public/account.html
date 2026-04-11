@@ -818,13 +818,30 @@ function renderSubscriptionSection(profile) {
     : null;
   const isExpired = !isActive && endDate && endDate < new Date();
 
+  // Opzegknop tonen na minimale termijn van 3 maanden
+  let cancelKnop = '';
+  if (isActive && profile.subscription_start) {
+    const start = new Date(profile.subscription_start);
+    const minEnd = new Date(start);
+    minEnd.setMonth(minEnd.getMonth() + 3);
+    if (new Date() >= minEnd) {
+      cancelKnop = `<button onclick="cancelSubscription()" style="background:none;border:1.5px solid #DC2626;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:#DC2626;cursor:pointer;margin-top:10px;">Abonnement opzeggen</button>`;
+    } else {
+      const earliestStr = minEnd.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+      cancelKnop = `<div style="font-size:12px;color:#999;margin-top:10px;">Opzeggen mogelijk vanaf ${earliestStr}</div>`;
+    }
+  }
+
   const actieKnop = isActive
-    ? ''
+    ? cancelKnop
     : `<a href="/pricing.html" class="btn-sm btn-primary" style="display:inline-flex;padding:9px 20px;font-size:13px;">Abonneer nu &rarr;</a>`;
 
   let subMetaHtml = `<div class="sub-meta">Lid sinds ${escapeHtml(lidSinds)}</div>`;
+  if (isActive) {
+    subMetaHtml += `<div class="sub-meta">&euro;95 per maand &mdash; kwartaalfacturatie</div>`;
+  }
   if (isActive && verlooptOp) {
-    subMetaHtml += `<div class="sub-meta">Verloopt op ${escapeHtml(verlooptOp)}</div>`;
+    subMetaHtml += `<div class="sub-meta">Volgende facturatie: ${escapeHtml(verlooptOp)}</div>`;
   } else if (isExpired && verlooptOp) {
     subMetaHtml += `<div class="sub-meta" style="color:#DC2626;">Verlopen op ${escapeHtml(verlooptOp)}</div>`;
   }
@@ -838,8 +855,30 @@ function renderSubscriptionSection(profile) {
         </div>
         ${subMetaHtml}
       </div>
-      <div class="sub-actions">${actieKnop}</div>
-    </div>`;
+      <div class="sub-actions" style="display:flex;flex-direction:column;align-items:flex-end;">${actieKnop}</div>
+    </div>
+    <div id="cancelMsg" style="font-size:13px;margin-top:10px;display:none;"></div>`;
+}
+
+async function cancelSubscription() {
+  if (!confirm('Weet je zeker dat je je abonnement wilt opzeggen? Je behoudt toegang tot het einde van de huidige periode.')) return;
+  const msgEl = document.getElementById('cancelMsg');
+  msgEl.style.display = 'none';
+  try {
+    const res = await fetch('/api/stripe/cancel-subscription', { method: 'POST', headers: authHeader() });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Opzeggen mislukt');
+    const cancelDate = data.cancel_at ? new Date(data.cancel_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    msgEl.style.color = '#166534';
+    msgEl.textContent = 'Je abonnement is opgezegd. Je behoudt toegang tot ' + cancelDate + '.';
+    msgEl.style.display = 'block';
+    // Herlaad sectie na 2 seconden
+    setTimeout(() => loadProfile(), 2000);
+  } catch (e) {
+    msgEl.style.color = '#DC2626';
+    msgEl.textContent = e.message;
+    msgEl.style.display = 'block';
+  }
 }
 
 function renderNewsletterSection(subscribed) {
