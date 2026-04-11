@@ -749,7 +749,7 @@ function saveOpenCats() {
 function renderModuleCard(m) {
   const cat = getCat(m.slug) || 'a';
   const label = getCatLabel(m.slug);
-  const wasOpened = getOpened().includes(m.slug);
+  const wasOpened = !isCompleted(m.slug) && supabaseProgress[m.slug] != null;
   const done = isCompleted(m.slug);
   const score = getScore(m.slug);
   const barWidth = done ? (score ?? 100) : (wasOpened ? 10 : 0);
@@ -808,7 +808,7 @@ function renderGrid() {
     if (catModules.length === 0) return;
     anyVisible = true;
 
-    const openedCount = catModules.filter(m => getOpened().includes(m.slug)).length;
+    const openedCount = catModules.filter(m => supabaseProgress[m.slug] != null && !isCompleted(m.slug)).length;
     const isOpen = activeFilter !== 'all' || savedOpen.includes(cat) || (savedOpen.length === 0 && cat === catsToShow[0]);
     const info = CATEGORIES[cat];
     const catIcon = CAT_ICONS[cat] || '📘';
@@ -860,7 +860,6 @@ function toggleCat(group) {
 function filterModules() { renderGrid(); }
 
 function trackOpen(slug, title, url, cat) {
-  markOpened(slug);
   saveLast({ slug, title, url, cat });
   updateSidebar();
   updateStats();
