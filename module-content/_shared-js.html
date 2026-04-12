@@ -196,7 +196,16 @@ function checkSorteer(lijstId, correcteVolgorde, feedbackId) {
   }
 }
 
-let quizScore = 0, quizHuidig = 0;
+let quizScore = 0, quizHuidig = 0, _quizCorrectIdx = 0;
+
+function _shuffleIndices(n) {
+  const idx = Array.from({length: n}, (_, i) => i);
+  for (let i = idx.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  return idx;
+}
 
 function laadQuizVraag() {
   if (quizHuidig >= quizVragen.length) { toonResultaat(); return; }
@@ -204,9 +213,11 @@ function laadQuizVraag() {
   document.getElementById('quiz-voortgang').textContent = 'Vraag ' + (quizHuidig+1) + ' van ' + quizVragen.length;
   document.getElementById('quiz-vraag-tekst').textContent = v.vraag;
   const el = document.getElementById('quiz-opties'); el.innerHTML = '';
-  v.opties.forEach((opt, i) => {
-    const btn = document.createElement('button'); btn.className = 'quiz-optie'; btn.textContent = opt;
-    btn.onclick = () => beantwoordQuiz(i, btn); el.appendChild(btn);
+  const indices = _shuffleIndices(v.opties.length);
+  _quizCorrectIdx = indices.indexOf(v.correct);
+  indices.forEach((origIdx, displayPos) => {
+    const btn = document.createElement('button'); btn.className = 'quiz-optie'; btn.textContent = v.opties[origIdx];
+    btn.onclick = () => beantwoordQuiz(displayPos, btn); el.appendChild(btn);
   });
   document.getElementById('quiz-feedback').className = 'quiz-feedback';
   document.getElementById('quiz-volgende-btn').style.display = 'none';
@@ -214,9 +225,9 @@ function laadQuizVraag() {
 
 function beantwoordQuiz(gekozen, btn) {
   document.querySelectorAll('.quiz-optie').forEach(o => o.style.pointerEvents = 'none');
-  const v = quizVragen[quizHuidig]; const isCorrect = gekozen === v.correct;
+  const v = quizVragen[quizHuidig]; const isCorrect = gekozen === _quizCorrectIdx;
   btn.classList.add(isCorrect ? 'correct' : 'fout');
-  document.querySelectorAll('.quiz-optie')[v.correct].classList.add('correct');
+  document.querySelectorAll('.quiz-optie')[_quizCorrectIdx].classList.add('correct');
   if (isCorrect) quizScore++;
   const fb = document.getElementById('quiz-feedback');
   fb.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'fout');

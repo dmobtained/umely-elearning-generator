@@ -141,6 +141,17 @@
   <div class="tip-box">
     <strong>Let op:</strong> Pad B vereist drempelbereidheid — geen programmeerkennis, maar wel de bereidheid om een terminal te openen en stappen te volgen die je nog niet kent. Als die bereidheid er niet is, is Pad A de eerlijkste keuze.
   </div>
+
+  <div class="kennischeck" id="kc-1">
+    <p class="kc-vraag">Een makelaar gebruikt Claude dagelijks om bezichtigingsrapporten te schrijven en e-mails samen te vatten. Welk pad past hier het best?</p>
+    <div class="kc-opties">
+      <div class="kc-optie" onclick="checkKC(1, this, false, null, 'Nee. Pad B is voor wie systemen wil koppelen of processen wil automatiseren — niet voor dagelijks gebruik via de interface.')">Pad B — Claude koppelen aan systemen</div>
+      <div class="kc-optie" onclick="checkKC(1, this, true, null, 'Precies. Schrijven, samenvatten en analyseren via de interface is klassiek Pad A-gebruik. De browser en desktop zijn hier meer dan genoeg.')">Pad A — de browser en desktop zijn genoeg</div>
+      <div class="kc-optie" onclick="checkKC(1, this, false, null, 'Niet van toepassing. Claude Code is bedoeld voor wie meerdere stappen automatisch wil laten uitvoeren — dat is hier niet nodig.')">Claude Code installeren</div>
+      <div class="kc-optie" onclick="checkKC(1, this, false, null, 'Beide paden zijn beschikbaar, maar de vraag is welk pad het best past. Voor dagelijkse schrijftaken is dat duidelijk Pad A.')">Beide paden zijn gelijkwaardig</div>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-1"></div>
+  </div>
 </div>
 
 <!-- MODULE 2 -->
@@ -191,6 +202,17 @@
 
   <div class="tip-box">
     <strong>Je hoeft nu geen definitieve keuze te maken.</strong> Volg de modules en stop of verdiep op het punt dat past bij waar jij staat. Pad A en Pad B sluiten elkaar niet uit.
+  </div>
+
+  <div class="kennischeck" id="kc-2">
+    <p class="kc-vraag">Wat is het belangrijkste signaal dat Pad B de moeite waard is?</p>
+    <div class="kc-opties">
+      <div class="kc-optie" onclick="checkKC(2, this, false, null, 'Niet beslissend. Hoe lang je Claude al gebruikt zegt niets over of automatisering zinvol is.')">Je gebruikt Claude al meer dan drie maanden</div>
+      <div class="kc-optie" onclick="checkKC(2, this, false, null, 'Niet relevant. Het abonnementsniveau bepaalt niet of Pad B loont — dat gaat over wat je ermee wilt doen.')">Je hebt een Pro-abonnement</div>
+      <div class="kc-optie" onclick="checkKC(2, this, false, null, 'Niet per se. Collega\'s kunnen Pad A gebruiken terwijl jij baat hebt bij Pad B, of andersom.')">Je collega\'s gebruiken Claude ook</div>
+      <div class="kc-optie" onclick="checkKC(2, this, true, null, 'Precies. Een wekelijkse taak die meerdere stappen heeft en informatie uit verschillende systemen combineert — dat is het klassieke geval waar Pad B structureel tijd bespaart.')">Je doet minstens wekelijks een meerstapstaak waarbij je informatie uit verschillende systemen combineert</div>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-2"></div>
   </div>
 </div>
 
