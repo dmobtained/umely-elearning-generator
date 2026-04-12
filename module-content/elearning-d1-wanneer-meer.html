@@ -1,6 +1,6 @@
 <!-- TITLE: D1 - Wanneer heb je meer nodig dan de browser? -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-kc','screen-module-2-1','screen-module-2-kc','screen-module-3-1','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-module-1-1':'De twee paden','screen-module-1-2':'Herken jouw situatie','screen-module-1-kc':'Kennischeck','screen-module-2-1':'Wat houdt elk pad in?','screen-module-2-kc':'Kennischeck','screen-module-3-1':'Wat volgt er in het traject?' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Module 1','screen-module-2':'Module 2','screen-module-3':'Module 3','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 <!-- QUIZ_START -->
 [
   {
@@ -37,20 +37,32 @@
 <!-- QUIZ_END -->
 
 <div id="screen-welcome" class="screen start">
-  <div class="welcome-badge">D0</div>
-  <h1>Wanneer heb je meer nodig dan de browser?</h1>
-  <p>Je hebt Claude leren kennen via de web-app, desktop-app en aanverwante tools. Voor een groot deel van de mensen is dat genoeg. Maar Claude kan meer — en afhankelijk van wat je wilt bereiken, loont het om verder te gaan.</p>
-  <ul class="leerdoelen">
-    <li>Je weet wanneer de web-app en desktop-app voldoende zijn</li>
-    <li>Je kent de twee paden en wat elk pad vraagt</li>
-    <li>Je kunt zelf bepalen welk pad bij jouw situatie past</li>
-    <li>Je weet wat je kunt verwachten in de modules D en E</li>
-  </ul>
-  <div class="tijdsbadge">⏱ circa 10 minuten</div>
+  <div class="welcome-hero">
+    <div class="welcome-badge">Umely E-learning</div>
+    <h1>D1 - Wanneer heb je meer nodig dan de browser?</h1>
+    <p>Je hebt Claude leren kennen via de web-app, desktop-app en aanverwante tools. Voor een groot deel van de mensen is dat genoeg. Maar Claude kan meer — en afhankelijk van wat je wilt bereiken, loont het om verder te gaan. In deze module ontdek je welk pad bij jou past.</p>
+  </div>
+  <div class="leerdoelen">
+    <h3>Na deze module kun je:</h3>
+    <ul>
+      <li>Uitleggen wanneer de web-app en desktop-app voldoende zijn</li>
+      <li>De twee paden beschrijven en wat elk pad vraagt</li>
+      <li>Zelf bepalen welk pad bij jouw situatie past</li>
+      <li>Benoemen wat je kunt verwachten in de modules D en E</li>
+    </ul>
+  </div>
+  <div class="tijdsbadge">Geschatte tijd: 10 minuten</div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1')">Start de module</button>
+  </div>
 </div>
 
-<div id="screen-module-1-1" class="screen">
-  <div class="module-header">De twee paden</div>
+<!-- MODULE 1 -->
+<div id="screen-module-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 3</div>
+    <h2>De twee paden</h2>
+  </div>
 
   <div class="content-card">
     <p>Tot hier heb je geleerd hoe je Claude gebruikt via de interface. Voor een groot deel van de mensen in elk vakgebied is dat genoeg om dagelijks flinke tijdwinst te boeken.</p>
@@ -60,13 +72,17 @@
   <div class="visual-block">
     <svg viewBox="0 0 580 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
       <defs>
-        <linearGradient id="d0-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1E2128"/><stop offset="100%" stop-color="#16181D"/></linearGradient>
-        <linearGradient id="d0-amber" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FF8514"/><stop offset="100%" stop-color="#FF4D00"/></linearGradient>
-        <linearGradient id="d0-blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#6366F1"/></linearGradient>
+        <linearGradient id="d1-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1E2128"/><stop offset="100%" stop-color="#16181D"/></linearGradient>
+        <linearGradient id="d1-blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#6366F1"/></linearGradient>
+        <marker id="d1-arr-l" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M6,0 L0,3 L6,6" fill="none" stroke="rgba(255,133,20,0.6)" stroke-width="1.2"/>
+        </marker>
+        <marker id="d1-arr-r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6" fill="none" stroke="rgba(99,102,241,0.6)" stroke-width="1.2"/>
+        </marker>
       </defs>
 
-      <!-- Background -->
-      <rect width="580" height="310" fill="url(#d0-bg)" rx="10"/>
+      <rect width="580" height="310" fill="url(#d1-bg)" rx="10"/>
 
       <!-- Centre: Claude circle -->
       <circle cx="290" cy="155" r="34" fill="#27292D" stroke="#FF8514" stroke-width="2"/>
@@ -79,8 +95,6 @@
       <rect x="20" y="84" width="215" height="12" rx="0" fill="#27292D"/>
       <text x="127" y="83" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Pad A</text>
       <text x="127" y="96" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">Browser &amp; desktop zijn genoeg</text>
-
-      <!-- Pad A bullet points -->
       <circle cx="40" cy="122" r="3" fill="#FF8514"/>
       <text x="50" y="126" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Teksten schrijven en verbeteren</text>
       <circle cx="40" cy="142" r="3" fill="#FF8514"/>
@@ -89,8 +103,6 @@
       <text x="50" y="166" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Vragen stellen via de browser</text>
       <circle cx="40" cy="182" r="3" fill="#FF8514"/>
       <text x="50" y="186" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Cowork voor bestandstaken</text>
-
-      <!-- Pad A tag -->
       <rect x="32" y="218" width="90" height="20" rx="10" fill="rgba(255,133,20,0.15)" stroke="rgba(255,133,20,0.4)" stroke-width="1"/>
       <text x="77" y="232" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="#FF8514" text-anchor="middle">Geen setup nodig</text>
 
@@ -100,73 +112,81 @@
       <rect x="345" y="84" width="215" height="12" rx="0" fill="#27292D"/>
       <text x="452" y="83" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Pad B</text>
       <text x="452" y="96" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">Claude koppelen aan je systemen</text>
-
-      <!-- Pad B bullet points -->
-      <circle cx="365" cy="122" r="3" fill="url(#d0-blue)"/>
+      <circle cx="365" cy="122" r="3" fill="url(#d1-blue)"/>
       <text x="375" y="126" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Automatisch data ophalen uit Gmail</text>
-      <circle cx="365" cy="142" r="3" fill="url(#d0-blue)"/>
+      <circle cx="365" cy="142" r="3" fill="url(#d1-blue)"/>
       <text x="375" y="146" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Herhalende processen automatiseren</text>
-      <circle cx="365" cy="162" r="3" fill="url(#d0-blue)"/>
+      <circle cx="365" cy="162" r="3" fill="url(#d1-blue)"/>
       <text x="375" y="166" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Tools en websites bouwen</text>
-      <circle cx="365" cy="182" r="3" fill="url(#d0-blue)"/>
+      <circle cx="365" cy="182" r="3" fill="url(#d1-blue)"/>
       <text x="375" y="186" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Meerdere stappen automatisch</text>
-
-      <!-- Pad B tag -->
       <rect x="357" y="218" width="90" height="20" rx="10" fill="rgba(59,130,246,0.15)" stroke="rgba(99,102,241,0.4)" stroke-width="1"/>
       <text x="402" y="232" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="#6366F1" text-anchor="middle">~1-2u setup</text>
 
-      <!-- Arrows from centre to pads -->
-      <line x1="256" y1="145" x2="235" y2="145" stroke="rgba(255,133,20,0.6)" stroke-width="1.5" marker-end="url(#d0-arr-l)"/>
-      <line x1="324" y1="145" x2="345" y2="145" stroke="rgba(99,102,241,0.6)" stroke-width="1.5" marker-end="url(#d0-arr-r)"/>
+      <!-- Arrows -->
+      <line x1="256" y1="145" x2="235" y2="145" stroke="rgba(255,133,20,0.6)" stroke-width="1.5" marker-end="url(#d1-arr-l)"/>
+      <line x1="324" y1="145" x2="345" y2="145" stroke="rgba(99,102,241,0.6)" stroke-width="1.5" marker-end="url(#d1-arr-r)"/>
 
-      <defs>
-        <marker id="d0-arr-l" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-          <path d="M6,0 L0,3 L6,6" fill="none" stroke="rgba(255,133,20,0.6)" stroke-width="1.2"/>
-        </marker>
-        <marker id="d0-arr-r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6" fill="none" stroke="rgba(99,102,241,0.6)" stroke-width="1.2"/>
-        </marker>
-      </defs>
-
-      <!-- Bottom label -->
       <text x="290" y="275" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)" text-anchor="middle">Beide paden zijn goede keuzes — afhankelijk van jouw situatie</text>
     </svg>
   </div>
 
+  <div class="content-card">
+    <h3>Stel jezelf deze drie vragen</h3>
+    <p><strong>1. Is er een taak die je minstens wekelijks doet, die meerdere stappen heeft, en waarbij je informatie uit verschillende systemen bij elkaar brengt?</strong><br>Als ja: Pad B loont. Herhalend, meerstaps werk dat systemen combineert is precies wat automatisering oplost.</p>
+    <p><strong>2. Heb je het gevoel dat je al veel tijdwinst boekt met Claude, maar dat er nog een laag zit die je niet bereikt?</strong><br>Als ja: Pad B loont. Je hebt het fundament al en bent klaar om verder te gaan.</p>
+    <p><strong>3. Ben je bereid om één middag te investeren in een setup die daarna automatisch voor je werkt?</strong><br>Als nee: blijf op Pad A. Dat is geen zwakte — het is een bewuste keuze.</p>
+  </div>
+
   <div class="tip-box">
-    <strong>Let op:</strong> Pad B vereist bereidheid om iets nieuws in te richten — geen programmeerkennis, maar wel de bereidheid om een terminal te openen en stappen te volgen die je nog niet kent. Als die bereidheid er niet is, is Pad A de eerlijkste keuze.
+    <strong>Let op:</strong> Pad B vereist drempelbereidheid — geen programmeerkennis, maar wel de bereidheid om een terminal te openen en stappen te volgen die je nog niet kent. Als die bereidheid er niet is, is Pad A de eerlijkste keuze.
   </div>
 </div>
 
-<div id="screen-module-1-2" class="screen">
-  <div class="module-header">Herken jouw situatie</div>
-
-  <div class="content-card">
-    <p>Stel jezelf deze drie vragen. Ze helpen je bepalen welk pad bij jouw situatie past — zonder dat je een definitieve keuze hoeft te maken.</p>
+<!-- MODULE 2 -->
+<div id="screen-module-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 2 van 3</div>
+    <h2>Wat houdt elk pad in?</h2>
   </div>
 
-  <div class="stappen-lijst">
-    <div class="stap-item">
-      <div class="stap-nummer">1</div>
-      <div class="stap-inhoud">
-        <strong>Is er een taak die je minstens wekelijks doet, die meerdere stappen heeft, en waarbij je informatie uit verschillende systemen bij elkaar brengt?</strong>
-        <p>Als ja: Pad B loont. Dit is het sterkste signaal — herhalend, meerstaps werk dat systemen combineert is precies wat automatisering oplost.</p>
-      </div>
-    </div>
-    <div class="stap-item">
-      <div class="stap-nummer">2</div>
-      <div class="stap-inhoud">
-        <strong>Heb je het gevoel dat je nu al veel tijdwinst boekt met Claude, maar dat er nog een laag zit die je niet bereikt?</strong>
-        <p>Als ja: Pad B loont. Je hebt het fundament al, je bent klaar om verder te gaan.</p>
-      </div>
-    </div>
-    <div class="stap-item">
-      <div class="stap-nummer">3</div>
-      <div class="stap-inhoud">
-        <strong>Ben je bereid om één middag te investeren in een setup die je daarna automatisch voor je werkt?</strong>
-        <p>Als nee: blijf op Pad A. Dat is geen zwakte — het is een bewuste keuze. Pad A levert al substantieel meer op dan geen AI gebruiken.</p>
-      </div>
-    </div>
+  <div class="content-card">
+    <p><strong>Pad A: de browser en desktop zijn genoeg</strong></p>
+    <p>Je gebruikt Claude zoals je nu al doet. Je kunt het gebruik verdiepen door betere prompts te schrijven, Projects aan te maken per klant of onderwerp, en Cowork te gebruiken voor bestandstaken. De modules D en E zijn dan informatief — goed om te weten wat er bestaat, maar je hoeft het niet zelf in te richten.</p>
+  </div>
+
+  <div class="content-card">
+    <p><strong>Pad B: Claude koppelen aan je systemen</strong></p>
+    <p>Je gaat verder met <strong>Claude Code</strong> (modules D2-D4) en <strong>MCP, Connectors en Skills</strong> (module E). Claude Code draait via de terminal en voert meerdere stappen achter elkaar uit. MCP en Connectors koppelen Claude aan externe systemen zoals Gmail, je agenda of een CRM.</p>
+    <p>Geen programmeerkennis vereist — maar wel drempelbereidheid. Eenmalig investeren, structureel terugverdienen.</p>
+  </div>
+
+  <div class="visual-block">
+    <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <rect width="580" height="200" fill="#1E2128" rx="10"/>
+      <!-- Headers -->
+      <rect x="20" y="20" width="250" height="24" rx="6" fill="#27292D"/>
+      <text x="145" y="36" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">Pad A</text>
+      <rect x="310" y="20" width="250" height="24" rx="6" fill="#27292D"/>
+      <text x="435" y="36" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">Pad B</text>
+      <!-- Row labels -->
+      <text x="20" y="72" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.45)">Setup nodig?</text>
+      <text x="20" y="100" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.45)">Technische kennis?</text>
+      <text x="20" y="128" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.45)">Systemen koppelen?</text>
+      <text x="20" y="156" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.45)">Geschikt voor?</text>
+      <!-- Pad A values -->
+      <text x="145" y="72" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Nee</text>
+      <text x="145" y="100" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Niet vereist</text>
+      <text x="145" y="128" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Nee</text>
+      <text x="145" y="156" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Dagelijks gebruik</text>
+      <!-- Pad B values -->
+      <text x="435" y="72" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Ja (~1-2 uur)</text>
+      <text x="435" y="100" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Drempelbereidheid</text>
+      <text x="435" y="128" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Ja</text>
+      <text x="435" y="156" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Repetitief meerstapswerk</text>
+      <!-- Divider -->
+      <line x1="280" y1="55" x2="280" y2="170" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </svg>
   </div>
 
   <div class="tip-box">
@@ -174,120 +194,33 @@
   </div>
 </div>
 
-<div id="screen-module-1-kc" class="screen">
-  <div class="module-header">Kennischeck</div>
-  <div class="kennischeck" id="kc1">
-    <p class="kc-vraag">Iemand gebruikt Claude dagelijks via de web-app voor e-mails, samenvattingen en vragen over documenten. Welk pad past hier?</p>
-    <div class="kc-opties">
-      <button onclick="checkKC(1, this, true, 'screen-module-2-1', 'Precies. Pad A — de browser en desktop — is meer dan voldoende voor dagelijks gebruik zoals schrijven, analyseren en samenvatten. Claude Code en MCP zijn pas relevant als je systemen wilt koppelen.')">Pad A — de web-app en desktop zijn genoeg</button>
-      <button onclick="checkKC(1, this, false, null, 'Nee. Pad B is bedoeld voor wie systemen wil koppelen of processen wil automatiseren. Iemand die tevreden is met dagelijkse taken via de browser heeft Pad B niet nodig.')">Pad B — je hebt Claude Code nodig</button>
-      <button onclick="checkKC(1, this, false, null, 'Nee. Beide paden zijn altijd beschikbaar, maar de vraag is welke het best aansluit. Hier past Pad A.')">Beide paden zijn van toepassing</button>
-      <button onclick="checkKC(1, this, false, null, 'Nee. Claude kan heel goed dagelijks worden gebruikt via de browser. Het pad is Pad A — dat is een volwaardige manier om Claude in te zetten.')">Geen van beide — Claude is dan niet nuttig genoeg</button>
-    </div>
-    <button class="kc-reset" onclick="resetKC(1)" style="display:none;">Opnieuw proberen</button>
-  </div>
-</div>
-
-<div id="screen-module-2-1" class="screen">
-  <div class="module-header">Wat houdt elk pad in?</div>
-
-  <div class="content-card">
-    <p><strong>Pad A: de browser en desktop zijn genoeg</strong></p>
-    <p>Je gebruikt Claude zoals je nu al doet. Je kunt het gebruik verdiepen door betere prompts te schrijven, Projects aan te maken per klant of onderwerp, en Cowork te gebruiken voor bestandstaken op je computer. De modules D en E zijn dan informatief — goed om te weten wat er bestaat, maar je hoeft het niet zelf in te richten.</p>
+<!-- MODULE 3 -->
+<div id="screen-module-3" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 3</div>
+    <h2>Wat volgt er in het traject?</h2>
   </div>
 
   <div class="content-card">
-    <p><strong>Pad B: Claude koppelen aan je systemen</strong></p>
-    <p>Je gaat verder met <strong>Claude Code</strong> (module D) en <strong>MCP, Connectors en Skills</strong> (module E). Claude Code is een versie van Claude die je via de terminal gebruikt en die meerdere stappen achter elkaar uitvoert op je computer. MCP en Connectors koppelen Claude aan externe systemen zoals Gmail, je agenda of een CRM.</p>
-    <p>Geen programmeerkennis vereist — maar wel drempelbereidheid. Je installeert iets, maakt een bestand aan, en voert stappen uit die je nog niet eerder hebt gedaan. Eenmalig investeren, structureel terugverdienen.</p>
+    <p>De rest van de cursus is opgebouwd rond de twee paden. Je kunt stoppen na deze module als Pad A bij jou past, of verdergaan als je Pad B wilt verkennen.</p>
   </div>
-
-  <div class="vergelijk-tabel">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Pad A</th>
-          <th>Pad B</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Setup nodig?</td>
-          <td>Nee</td>
-          <td>Ja (~1-2 uur)</td>
-        </tr>
-        <tr>
-          <td>Technische kennis?</td>
-          <td>Niet vereist</td>
-          <td>Drempelbereidheid</td>
-        </tr>
-        <tr>
-          <td>Systemen koppelen?</td>
-          <td>Nee</td>
-          <td>Ja</td>
-        </tr>
-        <tr>
-          <td>Processen automatiseren?</td>
-          <td>Beperkt</td>
-          <td>Volledig</td>
-        </tr>
-        <tr>
-          <td>Geschikt voor?</td>
-          <td>Dagelijks gebruik</td>
-          <td>Repetitief meerstapswerk</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div id="screen-module-2-kc" class="screen">
-  <div class="module-header">Kennischeck</div>
-  <div class="kennischeck" id="kc2">
-    <p class="kc-vraag">Een medewerker haalt wekelijks gegevens op uit drie systemen, verwerkt die in een rapport en stuurt dat naar zijn manager. Het kost elke keer anderhalf uur. Welk pad loont hier?</p>
-    <div class="kc-opties">
-      <button onclick="checkKC(2, this, false, null, 'Nee. Pad A is goed voor dagelijks gebruik via de interface, maar lost geen meerstaps automatisering op waarbij informatie uit meerdere systemen gecombineerd moet worden.')">Pad A — de browser is genoeg</button>
-      <button onclick="checkKC(2, this, true, 'screen-module-3-1', 'Precies. Wekelijks, meerdere stappen, meerdere systemen — dit is het klassieke geval waar Pad B loont. Met de juiste setup kan dit teruggebracht worden naar minuten.')">Pad B — systemen koppelen en automatiseren</button>
-      <button onclick="checkKC(2, this, false, null, 'Niet nodig. Organisatie-abonnementen lossen dit probleem niet op — het gaat om de manier waarop Claude wordt ingezet, niet om het abonnementsniveau.')">Teams-abonnement aanschaffen</button>
-      <button onclick="checkKC(2, this, false, null, 'Niet relevant hier. Handmatig prompts schrijven maakt de taak sneller maar lost de systeemkoppeling niet op. Dat vereist Pad B.')">Betere prompts schrijven</button>
-    </div>
-    <button class="kc-reset" onclick="resetKC(2)" style="display:none;">Opnieuw proberen</button>
-  </div>
-</div>
-
-<div id="screen-module-3-1" class="screen">
-  <div class="module-header">Wat volgt er in het traject?</div>
 
   <div class="content-card">
-    <p>De rest van de cursus is opgebouwd rond de twee paden. Je kunt stoppen na dit scherm als Pad A bij jou past, of verdergaan als je Pad B wilt verkennen.</p>
+    <p><strong>D2-D4 — Claude Code</strong></p>
+    <p>Installatie, je eerste opdracht, CLAUDE.md als projectgeheugen en Plan Mode voor complexe taken. Je leert Claude Code gebruiken zonder dat je kunt programmeren.</p>
   </div>
 
-  <div class="stappen-lijst">
-    <div class="stap-item">
-      <div class="stap-nummer">D</div>
-      <div class="stap-inhoud">
-        <strong>Claude Code — wat is het en hoe start je?</strong>
-        <p>Installatie, je eerste opdracht, CLAUDE.md als projectgeheugen en Plan Mode voor complexe taken. Je leert Claude Code gebruiken zonder dat je kunt programmeren.</p>
-      </div>
-    </div>
-    <div class="stap-item">
-      <div class="stap-nummer">E</div>
-      <div class="stap-inhoud">
-        <strong>MCP, Connectors, Skills en agentic workflows</strong>
-        <p>Claude verbinden met externe tools en diensten. Skills aanmaken die Claude instrueren hoe te werken. Workflows ontwerpen waarbij Claude zelfstandig meerdere stappen uitvoert.</p>
-      </div>
-    </div>
-    <div class="stap-item">
-      <div class="stap-nummer">I</div>
-      <div class="stap-inhoud">
-        <strong>Afsluiting — uitrol en certificaat</strong>
-        <p>Hoe je Claude uitrolt in een team of organisatie. Daarna de praktijktoets en het Umely Claude Bekwaamheidscertificaat als je alle modules hebt afgerond.</p>
-      </div>
-    </div>
+  <div class="content-card">
+    <p><strong>Module E — MCP, Connectors, Skills en agentic workflows</strong></p>
+    <p>Claude verbinden met externe tools en diensten. Skills aanmaken die Claude instrueren hoe te werken. Workflows ontwerpen waarbij Claude zelfstandig meerdere stappen uitvoert.</p>
+  </div>
+
+  <div class="content-card">
+    <p><strong>Module I — Uitrol en afsluiting</strong></p>
+    <p>Hoe je Claude uitrolt in een team of organisatie. Daarna de praktijktoets en het Umely Claude Bekwaamheidscertificaat als je alle modules hebt afgerond.</p>
   </div>
 
   <div class="tip-box">
-    Je hoeft nu geen definitieve keuze te maken. Volg de modules op je eigen tempo en stop of verdiep op het punt dat past bij waar jij staat.
+    Volg de modules op je eigen tempo en stop of verdiep op het punt dat past bij waar jij staat.
   </div>
 </div>
