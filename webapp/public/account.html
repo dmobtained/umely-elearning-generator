@@ -278,6 +278,20 @@
   .mobile-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
   .mobile-tab-admin { display: none; }
 
+  /* ── FEEDBACK KAARTEN ── */
+  .feedback-card { background: white; border-radius: 14px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 16px; overflow: hidden; border-left: 4px solid var(--amber); }
+  .feedback-card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #FAFAFA; border-bottom: 1px solid var(--gray-border); gap: 12px; flex-wrap: wrap; cursor: pointer; user-select: none; }
+  .feedback-card-name { font-weight: 700; font-size: 14px; color: var(--charcoal); }
+  .feedback-card-meta { font-size: 12px; color: #999; }
+  .feedback-card-toggle { font-size: 12px; color: var(--amber); font-weight: 700; white-space: nowrap; }
+  .feedback-card-body { padding: 16px 18px; display: none; }
+  .feedback-card-body.open { display: block; }
+  .feedback-vraag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; margin-bottom: 4px; margin-top: 14px; }
+  .feedback-vraag:first-child { margin-top: 0; }
+  .feedback-antwoord { font-size: 13.5px; color: var(--charcoal); line-height: 1.55; }
+  .feedback-ambas-badge { display: inline-block; background: rgba(255,133,20,0.1); color: var(--amber); font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-top: 4px; }
+  .feedback-empty { padding: 40px; text-align: center; color: #bbb; font-size: 14px; }
+
   @media (max-width: 767px) {
     .sidebar { display: none; }
     .content { margin-left: 0; padding: 20px 16px; }
@@ -338,6 +352,7 @@
   <div class="mobile-tab" data-section="instellingen" onclick="showSection('instellingen')">&#9881; Instellingen</div>
   <div class="mobile-tab mobile-tab-admin" data-section="gebruikers" onclick="showSection('gebruikers')">&#128101; Gebruikers</div>
   <div class="mobile-tab mobile-tab-admin" data-section="activiteit" onclick="showSection('activiteit')">&#128203; Activiteit</div>
+  <div class="mobile-tab mobile-tab-admin" data-section="feedback" onclick="showSection('feedback')">&#128172; Feedback</div>
 </nav>
 
 <div class="page-body">
@@ -368,6 +383,9 @@
       </div>
       <div class="nav-item" data-section="activiteit" onclick="showSection('activiteit')">
         <span>&#128203;</span> Activiteit
+      </div>
+      <div class="nav-item" data-section="feedback" onclick="showSection('feedback')">
+        <span>&#128172;</span> Feedback
       </div>
       <div class="nav-item" data-section="instellingen" onclick="showSection('instellingen')">
         <span>&#9881;</span> Instellingen
@@ -459,6 +477,19 @@
       </div>
     </div>
 
+    <!-- FEEDBACK (admin) -->
+    <div class="content-section" id="section-feedback">
+      <div id="adminFeedbackSection" style="display:none;">
+        <div class="section-card">
+          <div class="section-card-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <span>Deelnemers feedback <span style="font-size:12px;font-weight:500;color:#aaa;">— I2 Afsluiting &amp; Certificaat</span></span>
+            <button class="btn-sm btn-primary" onclick="exportFeedbackCSV()" id="btnExportFeedback" style="display:none;">&#11015; Exporteer CSV</button>
+          </div>
+          <div id="feedbackList"><div class="activity-empty">Laden...</div></div>
+        </div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -485,6 +516,7 @@ let _session = null;
 // ── SECTIE-SWITCHING ──
 let _activityLoaded = false;
 let _usersLoaded = false;
+let _feedbackLoaded = false;
 
 function showSection(name) {
   // Verberg alle content-secties
@@ -506,6 +538,7 @@ function showSection(name) {
   // Lazy load admin secties
   if (name === 'activiteit' && !_activityLoaded) { _activityLoaded = true; loadActivity(); }
   if (name === 'gebruikers' && !_usersLoaded) { _usersLoaded = true; loadUsers(); }
+  if (name === 'feedback' && !_feedbackLoaded) { _feedbackLoaded = true; loadFeedback(); }
 }
 
 async function initAuth() {
@@ -709,6 +742,7 @@ async function loadAccount() {
       // Toon admin content wrappers (zichtbaar via nav, niet automatisch)
       document.getElementById('adminSection').style.display = 'block';
       document.getElementById('adminActivitySection').style.display = 'block';
+      document.getElementById('adminFeedbackSection').style.display = 'block';
       document.getElementById('adminToolsSection').style.display = 'block';
     }
 
@@ -1036,6 +1070,75 @@ async function loadActivity() {
   } catch (e) {
     document.getElementById('activityWrap').innerHTML = '<div class="activity-empty">Kon activiteit niet laden.</div>';
   }
+}
+
+let _feedbackData = [];
+
+async function loadFeedback() {
+  const listEl = document.getElementById('feedbackList');
+  try {
+    const res = await fetch('/api/admin/i2-feedback', { headers: authHeader() });
+    if (!res.ok) throw new Error('Ophalen mislukt');
+    _feedbackData = await res.json();
+    if (!_feedbackData || _feedbackData.length === 0) {
+      listEl.innerHTML = '<div class="feedback-empty">Nog geen feedback ontvangen.</div>';
+      return;
+    }
+    const exportBtn = document.getElementById('btnExportFeedback');
+    if (exportBtn) exportBtn.style.display = '';
+    const ambasLabels = { demo: 'Demo aan collega', prompt: 'Prompt doorsturen', uitrol: 'Uitrol bespreken met leidinggevende' };
+    listEl.innerHTML = _feedbackData.map(function(f, idx) {
+      var datum = f.created_at ? new Date(f.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+      var ambasLabel = ambasLabels[f.ambas_keuze] || f.ambas_keuze || '—';
+      return '<div class="feedback-card">' +
+        '<div class="feedback-card-header" onclick="toggleFeedbackCard(' + idx + ')">' +
+          '<div>' +
+            '<div class="feedback-card-name">' + escapeHtml(f.user_name || f.user_email) + '</div>' +
+            '<div class="feedback-card-meta">' + escapeHtml(f.user_email) + ' &middot; ' + datum + '</div>' +
+          '</div>' +
+          '<div class="feedback-card-toggle" id="feedback-toggle-' + idx + '">Toon rapport ▾</div>' +
+        '</div>' +
+        '<div class="feedback-card-body" id="feedback-body-' + idx + '">' +
+          '<div class="feedback-vraag">Wat heeft je het meest verrast?</div>' +
+          '<div class="feedback-antwoord">' + escapeHtml(f.tb_verrast || '—') + '</div>' +
+          '<div class="feedback-vraag">Waar heb je al iets mee gedaan?</div>' +
+          '<div class="feedback-antwoord">' + escapeHtml(f.tb_toegepast || '—') + '</div>' +
+          '<div class="feedback-vraag">Wat ga je als eerste toepassen?</div>' +
+          '<div class="feedback-antwoord">' + escapeHtml(f.tb_eerst || '—') + '</div>' +
+          '<div class="feedback-vraag">Ambassadeursstap</div>' +
+          '<div><span class="feedback-ambas-badge">' + escapeHtml(ambasLabel) + '</span>' +
+          (f.ambas_wie ? '<div class="feedback-antwoord" style="margin-top:6px;">Wie: ' + escapeHtml(f.ambas_wie) + '</div>' : '') + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  } catch (e) {
+    listEl.innerHTML = '<div class="feedback-empty">Kon feedback niet laden.</div>';
+  }
+}
+
+function toggleFeedbackCard(idx) {
+  var body = document.getElementById('feedback-body-' + idx);
+  var toggle = document.getElementById('feedback-toggle-' + idx);
+  if (!body) return;
+  var open = body.classList.toggle('open');
+  if (toggle) toggle.textContent = open ? 'Verberg ▴' : 'Toon rapport ▾';
+}
+
+function exportFeedbackCSV() {
+  if (!_feedbackData || !_feedbackData.length) return;
+  var ambasLabels = { demo: 'Demo aan collega', prompt: 'Prompt doorsturen', uitrol: 'Uitrol bespreken met leidinggevende' };
+  var cols = ['Naam', 'E-mail', 'Datum', 'Meest verrast', 'Al toegepast', 'Eerst toepassen', 'Ambassadeursstap', 'Wie'];
+  var rows = _feedbackData.map(function(f) {
+    var datum = f.created_at ? new Date(f.created_at).toLocaleDateString('nl-NL') : '';
+    return [f.user_name, f.user_email, datum, f.tb_verrast, f.tb_toegepast, f.tb_eerst, ambasLabels[f.ambas_keuze] || f.ambas_keuze, f.ambas_wie]
+      .map(function(v) { return '"' + (v || '').replace(/"/g, '""') + '"'; }).join(',');
+  });
+  var csv = '\uFEFF' + cols.join(',') + '\n' + rows.join('\n');
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'umely-feedback-i2.csv'; a.click();
+  URL.revokeObjectURL(url);
 }
 
 // Initialiseer — toon standaard de profiel sectie alvast

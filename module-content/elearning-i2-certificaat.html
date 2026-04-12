@@ -189,7 +189,7 @@
   </div>
 
   <div class="btn-wrap">
-    <button class="i2-voortgang-btn" id="btn-ambas-door" onclick="goTo('screen-certificaat')" disabled>Dit ga ik doen →</button>
+    <button class="i2-voortgang-btn" id="btn-ambas-door" onclick="slaAmbasOp()" disabled>Dit ga ik doen →</button>
   </div>
 </div>
 
@@ -324,6 +324,33 @@ function toonTerugblikKaart() {
   var verder = document.getElementById('tb-verder-wrap');
   if (verder) verder.style.display = 'flex';
   kaart.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Sla terugblik op in sessionStorage zodat ambassadeurskeuze het kan meenemen
+  window._i2Terugblik = { tb_verrast: v1, tb_toegepast: v2, tb_eerst: v3 };
+}
+
+function slaAmbasOp() {
+  var selected = document.querySelector('input[name="ambas"]:checked');
+  var ambas_keuze = selected ? selected.value : '';
+  var ambas_wie = (document.getElementById('ambas-wie') || {}).value || '';
+  slaI2FeedbackOp(ambas_keuze, ambas_wie);
+  goTo('screen-certificaat');
+}
+
+function slaI2FeedbackOp(ambas_keuze, ambas_wie) {
+  if (!window.__AUTH_TOKEN__) return;
+  var tb = window._i2Terugblik || {};
+  fetch('/api/i2/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.__AUTH_TOKEN__ },
+    body: JSON.stringify({
+      user_name:    localStorage.getItem('umely_naam') || '',
+      tb_verrast:   tb.tb_verrast || '',
+      tb_toegepast: tb.tb_toegepast || '',
+      tb_eerst:     tb.tb_eerst || '',
+      ambas_keuze:  ambas_keuze,
+      ambas_wie:    ambas_wie || ''
+    })
+  }).catch(function() {});
 }
 
 function selecteerAmbas(rij) {

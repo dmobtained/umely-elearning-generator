@@ -434,6 +434,37 @@ app.post('/api/user/progress', requireAuth, async (req, res) => {
   res.json({ ok: true });
 });
 
+// ── I2 feedback opslaan ──
+app.post('/api/i2/feedback', requireAuth, async (req, res) => {
+  const { user_name, tb_verrast, tb_toegepast, tb_eerst, ambas_keuze, ambas_wie } = req.body;
+  if (!tb_verrast || !tb_toegepast || !tb_eerst || !ambas_keuze) {
+    return res.status(400).json({ error: 'Verplichte velden ontbreken.' });
+  }
+  const record = {
+    user_id:      req.user.id,
+    user_email:   req.user.email,
+    user_name:    (user_name || '').trim(),
+    tb_verrast:   tb_verrast.trim(),
+    tb_toegepast: tb_toegepast.trim(),
+    tb_eerst:     tb_eerst.trim(),
+    ambas_keuze:  ambas_keuze.trim(),
+    ambas_wie:    (ambas_wie || '').trim()
+  };
+  const { error } = await supabase.schema('elearning').from('i2_feedback').upsert(record, { onConflict: 'user_id' });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
+});
+
+// ── I2 feedback ophalen (admin) ──
+app.get('/api/admin/i2-feedback', requireAuth, requireAdmin, async (req, res) => {
+  const { data, error } = await supabase.schema('elearning')
+    .from('i2_feedback')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data || []);
+});
+
 // ── Voortgang ophalen (eigen gebruiker) ──
 app.get('/api/user/progress', requireAuth, async (req, res) => {
   const { data, error } = await supabase
