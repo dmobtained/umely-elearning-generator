@@ -448,18 +448,22 @@ const CATEGORIES = {
 const CAT_ICONS = { a:'🎓', b:'🔒', c:'💻', d:'⌨️', e:'🔌', i:'🏆' };
 
 // Uitzonderingen: slugs die in een andere categorie vallen dan hun letter doet vermoeden
-const CAT_OVERRIDE = {
-  'elearning-c7-organisatie': 'i'
-};
+const CAT_OVERRIDE = {};
 
 // Gewenste volgorde per categorie. Modules niet in deze lijst verschijnen achteraan.
 const MODULE_ORDER = {
   a: ['elearning-a1-wat-is-claude','elearning-a2-ecosysteem','elearning-a3-prompts'],
   b: ['elearning-b1-veiligheid','elearning-b2-niet-developers','elearning-b3-fouten'],
-  c: ['elearning-c1-webapp','elearning-c6-settings','elearning-c2-desktop','elearning-c3-chrome','elearning-c4-cowork','elearning-c5-excel-powerpoint'],
+  c: ['elearning-c1-webapp','elearning-c6-settings','elearning-c2-desktop','elearning-c3-chrome','elearning-c4-cowork','elearning-c5-excel-powerpoint','elearning-c7-organisatie'],
   d: ['elearning-d1-wanneer-meer','elearning-d2-claude-code','elearning-d3-claude-md','elearning-d4-plan-mode'],
   e: ['elearning-e3-plugins','elearning-e1-mcp','elearning-e2-connectors','elearning-e4-skills','elearning-e5-eerste-skill','elearning-e6-agentic-workflows','elearning-e7-portfolio-website'],
-  i: ['elearning-c7-organisatie','elearning-i1-praktijktoets','elearning-i2-certificaat']
+  i: ['elearning-i1-praktijktoets','elearning-i2-certificaat']
+};
+
+// Afwijkende tijdsduur per module (default: 20 min)
+const MODULE_DURATION = {
+  'elearning-i1-praktijktoets': '45 min',
+  'elearning-i2-certificaat': '30 min'
 };
 
 function sortModules(modules, cat) {
@@ -819,7 +823,7 @@ function renderModuleCard(m) {
   const barWidth = done ? (score ?? 100) : (wasOpened ? 10 : 0);
   const statusClass = done ? ' done' : (wasOpened ? ' started' : '');
   const statusText = done ? `✓ Afgerond${score !== null ? ' (' + score + '%)' : ''}` : (wasOpened ? '● Geopend' : 'Nog te starten');
-  const linkText = (done || wasOpened) ? 'Opnieuw starten' : 'Starten';
+  const linkText = done ? 'Opnieuw starten' : (wasOpened ? 'Verder gaan' : 'Starten');
   const cardClass = done ? ' opened done' : (wasOpened ? ' opened' : '');
   const isAdmin = userRole === 'admin';
   const adminActions = isAdmin ? `
@@ -834,7 +838,7 @@ function renderModuleCard(m) {
       <span class="mod-status${statusClass}">${statusText}</span>
     </div>
     <div class="module-title">${escHtml(m.title)}</div>
-    <div class="module-meta"><span>⏱ ca. 20 min</span><span>❓ 5 vragen</span></div>
+    <div class="module-meta"><span>⏱ ca. ${MODULE_DURATION[m.slug] || '20 min'}</span><span>❓ 5 vragen</span></div>
     <div class="prog-bar-wrap"><div class="prog-bar${done ? ' done' : ''}" style="width:${barWidth}%"></div></div>
     <div class="module-footer">
       <span class="module-link">${linkText} ›</span>
@@ -937,7 +941,7 @@ function trackOpen(slug, title, url, cat) {
     const bar = card.querySelector('.prog-bar');
     if (bar) bar.style.width = '10%';
     const link = card.querySelector('.module-link');
-    if (link) link.textContent = 'Opnieuw starten ›';
+    if (link) link.textContent = 'Verder gaan ›';
   }
 }
 
