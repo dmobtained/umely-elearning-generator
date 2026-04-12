@@ -1,54 +1,58 @@
-# Transcriptie: E3 — Claude Plugins
+# Transcriptie: E3 — Projects en Custom Instructions: vaste context voor Claude
 
 ## Wat leer je in deze module?
-Je leert wat Plugins zijn, hoe ze verschillen van Connectors en Skills, en welke kant-en-klare Plugins beschikbaar zijn. Na deze module weet je wanneer je een Plugin gebruikt en hoe je die inschakelt.
+Je leert hoe je Claude structureel voorziet van vaste context — via Projects en Custom Instructions. Na deze module werkt Claude voor jouw situatie zonder dat je bij elk gesprek opnieuw hoeft uit te leggen wie je bent, wat je doet en hoe je wilt dat hij schrijft.
 
-## Wat zijn Plugins?
+## Het probleem dat Projects oplost
 
-Plugins bundelen meerdere functies samen voor een specifieke afdeling of werksituatie. Waar een Connector één tool koppelt (bijv. Gmail), bundelt een Plugin meerdere Connectors, instructies en commando's voor een complete werkflow.
+Elk nieuw gesprek met Claude begint met een schone lei. Hij weet niet wie je bent, kent je klanten niet en heeft geen idee van de toon die jij hanteert. Dat betekent dat je bij elk gesprek opnieuw context moet geven — wie je bent, voor wie je schrijft, welke toon je wilt.
 
-Een HR-plugin bevat bijvoorbeeld een connector naar je HR-systeem, instructies voor het schrijven van vacatureteksten in de juiste tone of voice, en een slash command om direct een vacature te genereren. Alles voor HR-werk zit in één Plugin.
+Projects lost dit op. Je maakt een Project aan voor een klant, een afdeling of een terugkerend onderwerp. Daarin upload je de relevante bestanden en geef je vaste instructies. Claude heeft die context dan bij elk gesprek in dat Project — zonder dat jij het telkens hoeft te herhalen.
 
-## Hoe verschilt een Plugin van een Connector?
+## Hoe maak je een Project aan?
 
-Een Connector koppelt Claude aan één tool. Een Plugin combineert meerdere Connectors en voegt daar instructies en commando's aan toe voor een specifieke situatie. Een Plugin is een complete werkoplossing; een Connector is een bouwsteen.
+Ga naar claude.ai en klik op "Projects" in de zijbalk. Klik op "Nieuw project". Geef het een naam — bijvoorbeeld de naam van een klant, een afdeling of een werkproces.
 
-## Welke kant-en-klare Plugins biedt Anthropic?
+Voeg bestanden toe die altijd relevant zijn: een briefing, een tone-of-voice document, een overzicht van klantinformatie, een sjabloon dat je altijd gebruikt. Claude leest deze bestanden bij elk gesprek in het Project.
 
-Anthropic biedt templates voor de meest voorkomende bedrijfsfuncties:
+Voeg ook projectinstructies toe: "Schrijf altijd in het Nederlands", "Gebruik een professionele maar toegankelijke toon", "Noem de klant bij naam", "Sluit e-mails altijd af met de afzender Jansen & Zonen". Dit zijn instructies die Claude in elk gesprek in dit Project volgt.
 
-**HR:** Vacatureteksten schrijven, sollicitatiebrieven samenvatten, onboardingdocumenten genereren
+## Praktische voorbeelden
 
-**Finance:** Rapporten analyseren, facturen samenvatten, budgetvergelijkingen maken
+**Makelaarskantoor:** een Project per klant met de woningbeschrijving, klantprofiel en voorkeuren. Claude schrijft bezichtigingsbevestigingen en terugkoppelingen altijd in de context van die specifieke klant.
 
-**Legal:** Contracten samenvatten, clausules uitleggen, correspondentie opstellen
+**Advocatenkantoor:** een Project per zaak met de relevante documenten en partijen. Claude begrijpt de context bij elke nieuwe vraag zonder dat je de achtergrond opnieuw hoeft te beschrijven.
 
-**Marketing:** Campagneteksten genereren, social media content plannen, briefings verwerken
+**Marketingbureau:** een Project per klant met de briefing, tone-of-voice en eerdere content. Elke medewerker die aan die klant werkt heeft dezelfde context — consistent resultaat zonder herhaling.
 
-**Engineering/IT:** Code genereren en reviewen, documentatie schrijven, bug-rapporten analyseren
+**Accountant:** een Project voor standaardcommunicatie met vaste formuleringen, wettelijke disclaimers en de huisstijl van het kantoor ingeladen als instructie.
 
-## Hoe schakel je een Plugin in?
+## Custom Instructions: vaste regels voor alle gesprekken
 
-Ga naar Settings > Plugins in Claude.ai. Kies een kant-en-klare Plugin of bouw er zelf een via "Plugin Create". Bij het inschakelen van een kant-en-klare Plugin koppel je de relevante Connectors en stel je eventuele aanpassingen in.
+Naast Projects kun je ook instructies instellen die gelden voor álle gesprekken — niet alleen binnen een specifiek Project. Dit heet Custom Instructions.
 
-Na het inschakelen verschijnen Plugin-specifieke commando's in je invoerveld — je kunt ze gebruiken met een slash, bijv. `/vacature` voor de HR-Plugin.
+Ga naar Settings > Custom Instructions. Hier kun je twee dingen invullen:
 
-## Een eigen Plugin bouwen
+**Wat Claude over jou moet weten:** je rol, je sector, je organisatie, je doelgroep. Bijvoorbeeld: "Ik ben HR-manager bij een middelgroot productiebedrijf. Ik schrijf veel interne communicatie en sollicitatieprocedures."
 
-Via Plugin Create kun je zelf een Plugin bouwen. Claude stelt je vragen over wat je wilt — welke tools je gebruikt, welke taken je wilt automatiseren, welke instructies Claude altijd moet volgen — en genereert daarna de Plugin voor je.
+**Hoe Claude moet reageren:** toon, lengte, formaat. Bijvoorbeeld: "Reageer altijd in het Nederlands. Gebruik korte alinea's. Geef altijd een concreet voorbeeld bij een uitleg. Vermijd jargon."
 
-Je hoeft geen technische kennis te hebben om een eigen Plugin te bouwen. Wel moet je goed weten wat je wilt: welke werkflow wil je stroomlijnen, welke tools gebruik je daarvoor, en welke instructies zijn altijd van toepassing.
+Custom Instructions zijn de laag onder alles — ze gelden voor elk gesprek, tenzij een Project andere instructies heeft.
 
-## Wanneer gebruik je een Plugin vs. een Connector?
+## Het verschil tussen Projects en Custom Instructions
 
-Gebruik een Connector als je Claude wilt koppelen aan één specifieke tool voor losse taken.
+Custom Instructions zijn globaal: ze gelden voor alles wat je doet in Claude, ongeacht het onderwerp.
 
-Gebruik een Plugin als je een complete werkflow wilt stroomlijnen waarbij meerdere tools en vaste instructies samenkomen — en als die werkflow regelmatig terugkomt.
+Projects zijn specifiek: ze bevatten context, bestanden en instructies voor één klant, zaak of werkstroom. Ze overschrijven Custom Instructions waar nodig.
 
-## Beperking
+Gebruik Custom Instructions voor jouw algemene voorkeur en werkstijl. Gebruik Projects voor alles wat klant- of projectspecifiek is.
 
-Plugins zijn krachtig maar vereisen een goede setup. Een slecht geconfigureerde Plugin geeft inconsistente resultaten. Neem de tijd om de instructies en Connectors goed in te stellen, en test de Plugin uitgebreid voordat je hem breed uitrolt in je organisatie.
+## Wat Projects niet zijn
+
+Projects zijn geen automatische workflows. Claude voert geen acties uit tenzij jij hem dat vraagt. Hij verstuurt geen e-mails, maakt geen afspraken en werkt niet op de achtergrond. Projects geven context — geen autonomie.
+
+Projects zijn ook geen permanente opslag van gesprekken. Bestanden die je uploadt blijven beschikbaar, maar gesprekken verlopen na verloop van tijd.
 
 ## Samenvatting
 
-Plugins bundelen Connectors en instructies voor een complete werkflow — HR, Finance, Legal, Marketing of Engineering. Kant-en-klare templates zijn beschikbaar; je kunt ook zelf een Plugin bouwen via Plugin Create. Plugins zijn zinvol als een werkflow regelmatig terugkomt en meerdere tools en instructies combineert. Test een Plugin altijd grondig voordat je hem breed inzet.
+Projects geven Claude vaste context per klant, zaak of werkstroom — bestanden en instructies die hij bij elk gesprek gebruikt. Custom Instructions geven Claude algemene regels die voor al je gesprekken gelden. Samen zorgen ze ervoor dat Claude consistent werkt voor jouw situatie zonder dat je bij elk gesprek opnieuw hoeft uit te leggen wie je bent en wat je wilt. Projects zijn beschikbaar bij het Pro- en Teams-abonnement.

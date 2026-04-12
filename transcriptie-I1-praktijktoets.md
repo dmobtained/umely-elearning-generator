@@ -1,7 +1,7 @@
 # Transcriptie: I1 — Praktijktoets: bouw een volledig project van scratch
 
 ## Wat leer je in deze module?
-Dit is de praktijktoets van het traject. Je past alles toe wat je hebt geleerd — van prompting tot Skills, van Connectors tot agentic workflows — in een concreet project. Na deze module heb je bewezen dat je zelfstandig een AI-gedreven werkproces kunt opzetten voor een bedrijf.
+Dit is de praktijktoets van het traject. Je past alles toe wat je hebt geleerd — van prompting tot Skills, van Connectors tot agentic workflows — in een concreet project. Na deze module heb je laten zien dat je zelfstandig een AI-gedreven werkproces kunt opzetten voor je eigen situatie.
 
 ## Wat is de praktijktoets?
 
@@ -35,24 +35,22 @@ Je praktijktoets bestaat uit drie onderdelen:
 Beschrijf wat je hebt gebouwd: wat is het werkproces, welke stappen automatiseert Claude, welke tools zijn gekoppeld, en welke beslissingen blijven bij de mens.
 
 **2. Werkend resultaat**
-Laat zien dat het werkt. Voer de workflow uit met echte of gesimuleerde data en documenteer het resultaat.
+Voer de workflow uit met echte of gesimuleerde data en documenteer het resultaat — een screenshot, een output-bestand of een beschrijving van wat er is uitgevoed.
 
 **3. Reflectie**
 Wat werkte goed? Wat werkte niet? Wat zou je anders doen als je opnieuw begon? Wat zijn de beperkingen van de oplossing die je hebt gebouwd?
 
-## Beoordelingscriteria
+## Claude als klankbord
 
-De praktijktoets wordt beoordeeld op:
+Gebruik Claude zelf om je project te evalueren. Plak je documentatie en reflectie in een nieuw gesprek en vraag:
 
-- **Volledigheid:** Zijn alle stappen van het werkproces gedekt?
-- **Werkt het?:** Levert de workflow het verwachte resultaat op?
-- **Veiligheid:** Zijn er grenzen gesteld aan wat Claude automatisch doet?
-- **Eerlijkheid:** Zijn de beperkingen van de oplossing eerlijk beschreven?
-- **Zelfstandigheid:** Heb je de keuzes zelf gemaakt en verantwoord?
+"Dit is het werkproces dat ik heb gebouwd. Klopt de aanpak? Wat mis ik? Waar zitten de risico's? Wat zou je anders doen?"
+
+Claude geeft je concrete feedback op basis van wat je hebt beschreven. Dat is geen vervanging voor je eigen oordeel — maar het is een nuttige spiegel.
 
 ## Tips voor de praktijktoets
 
-Begin met een eenvoudiger werkproces dan je denkt nodig te hebben. Het is beter om één stap perfect te laten werken dan vijf stappen half.
+Begin met een eenvoudiger werkproces dan je denkt nodig te hebben. Het is beter om één stap goed te laten werken dan vijf stappen half.
 
 Documenteer terwijl je bouwt — niet achteraf. Schrijf op waarom je bepaalde keuzes maakt, zodat je het later kunt uitleggen.
 
@@ -62,4 +60,4 @@ Vraag hulp als je vastloopt — aan Claude, aan documentatie of aan een collega.
 
 ## Samenvatting
 
-De praktijktoets is een praktijkopdracht waarbij je een compleet werkproces opzet met Claude. Je kiest een herhalende, tijdrovende taak en automatiseert of versnelt die met alles wat je hebt geleerd. Je levert documentatie, een werkend resultaat en een eerlijke reflectie op. De toets meet zelfstandigheid, volledigheid en eerlijkheid — niet perfectie.
+De praktijktoets is een praktijkopdracht waarbij je een compleet werkproces opzet met Claude. Je kiest een herhalende, tijdrovende taak en automatiseert of versnelt die met alles wat je hebt geleerd. Je documenteert wat je hebt gebouwd, voert het uit en reflecteert eerlijk op het resultaat. Gebruik Claude zelf als klankbord om je aanpak te toetsen. Na deze module weet je wat je kunt — en waar je verder wilt groeien.

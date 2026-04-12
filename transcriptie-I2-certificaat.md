@@ -1,62 +1,49 @@
-# Transcriptie: I2 — Umely Certificaat: beoordeling & feedback door Sonny
+# Transcriptie: I2 — Het Umely Certificaat
 
 ## Wat leer je in deze module?
-Dit is de afsluiting van het traject. Je leert hoe de beoordeling werkt, wat er van je verwacht wordt in het gesprek met Sonny, en wat het Umely Certificaat inhoudt. Na deze module weet je wat je hebt bereikt en wat de volgende stap is.
+Dit is de afsluiting van het traject. Je leert wat het Umely Certificaat inhoudt, hoe je het ontvangt en wat de volgende stap is. Na deze module weet je wat je hebt bereikt en hoe je die kennis blijft ontwikkelen.
 
 ## Wat is het Umely Certificaat?
 
-Het Umely Certificaat is het bewijs dat je het volledige leertraject hebt doorlopen en de praktijktoets succesvol hebt afgerond. Het is geen automatisch certificaat op basis van een score — het wordt uitgereikt na een persoonlijk gesprek met Sonny de Leeuw, oprichter van Umely.
+Het Umely Certificaat is het bewijs dat je het volledige leertraject hebt doorlopen en de praktijktoets hebt afgerond. Je ontvangt het certificaat automatisch zodra je alle modules hebt voltooid en de praktijktoets hebt ingediend.
 
-Dat gesprek is geen examen. Het is een professioneel gesprek waarbij je laat zien wat je hebt gebouwd, hoe je het hebt aangepakt en wat je ervan hebt geleerd.
+Het certificaat is bedoeld als bewijs van vakbekwaamheid — voor jezelf, voor je werkgever of voor klanten die willen weten met wie ze werken.
 
-## Hoe werkt de beoordeling?
-
-Na het indienen van je praktijktoets (module I1) plan je een gesprek van 30-45 minuten met Sonny. In dat gesprek:
-
-**Presenteer je je project**
-Je laat zien wat je hebt gebouwd. Niet een PowerPoint — een live demonstratie van de workflow die je hebt opgebouwd. Claude voert de taken uit terwijl Sonny meekijkt.
-
-**Bespreek je je keuzes**
-Waarom heb je dit werkproces gekozen? Welke alternatieven heb je overwogen? Waarom heb je bepaalde beslissingen bij de mens gehouden en andere geautomatiseerd?
-
-**Benoem je de beperkingen**
-Wat werkt niet perfect? Wat zou je anders doen? Eerlijkheid hierover is een beoordelingscriterium — niet een zwakte.
-
-**Krijg je feedback**
-Sonny geeft feedback op wat goed is en wat beter kan. Die feedback is praktisch en direct — geen marketingpraat, geen complimenten zonder onderbouwing.
-
-## Wat zijn de beoordelingscriteria?
-
-**Begrip:** Begrijp je wat je hebt gebouwd en waarom het werkt?
-
-**Toepassing:** Heb je de juiste tools en technieken gekozen voor het probleem?
-
-**Eerlijkheid:** Ben je eerlijk over de beperkingen van je oplossing?
-
-**Zelfstandigheid:** Heb je de keuzes zelf gemaakt en kun je ze verantwoorden?
-
-**Praktische waarde:** Levert de oplossing daadwerkelijk tijdwinst of kwaliteitsverbetering op?
-
-## Wat als de beoordeling niet slaagt?
-
-Als de praktijktoets of het gesprek niet voldoende is, krijg je concrete feedback over wat er beter moet. Je kunt het project aanpassen en een tweede gesprek inplannen. Er is geen limiet aan het aantal pogingen — het doel is dat je het uiteindelijk echt kunt, niet dat je het in één keer goed doet.
-
-## Wat zit er in het certificaat?
+## Wat staat er in het certificaat?
 
 Het Umely Certificaat vermeldt:
 - Je naam
 - De datum van voltooiing
 - Het onderwerp van je praktijktoets
-- Een handtekening van Sonny de Leeuw
 
-Het certificaat is bedoeld als intern bewijs van vakbekwaamheid — voor jezelf, voor je werkgever of voor klanten die willen weten met wie ze werken.
+## Wat heb je bewezen?
 
-## Wat is de volgende stap na het certificaat?
+Het certificaat is niet het einddoel — het is een momentopname van wat je kunt. Door het traject te doorlopen heb je bewezen dat je:
 
-Het traject is afgerond maar het leren stopt niet. Claude en de tools eromheen ontwikkelen zich snel. Nieuwe functies, nieuwe Connectors, nieuwe mogelijkheden. Blijf experimenteren, blijf testen en blijf vragen stellen.
+- Begrijpt hoe Claude werkt en wat de beperkingen zijn
+- Effectieve prompts kunt schrijven voor je eigen vakgebied
+- Claude kunt koppelen aan de tools die je dagelijks gebruikt
+- Een werkend AI-gedreven werkproces kunt opzetten van nul
+- Eerlijk kunt reflecteren op wat werkt en wat niet
 
-Umely biedt voor gecertificeerde deelnemers updates aan als er significante veranderingen zijn in het ecosysteem. Zo blijf je up-to-date zonder het hele traject opnieuw te hoeven doorlopen.
+Dat is niet vanzelfsprekend. De meeste mensen die Claude gebruiken doen dat oppervlakkig. Jij hebt het fundament gelegd om het structureel en verantwoord in te zetten.
+
+## Zelfevaluatie
+
+Er is geen externe beoordeling van je praktijktoets. Jij bent degene die het beste weet of je het echt begrijpt.
+
+Een eerlijke manier om jezelf te evalueren: leg je project opnieuw aan Claude voor en vraag kritisch door. Vraag wat er mis kan gaan, wat je over het hoofd hebt gezien en hoe je het robuuster kunt maken. Als je die vragen kunt beantwoorden, weet je dat je het begrijpt.
+
+## Wat is de volgende stap?
+
+Het traject is afgerond maar het leren stopt niet. Claude en de tools eromheen ontwikkelen zich snel. Nieuwe functies, nieuwe Connectors, nieuwe mogelijkheden. Wat vandaag geavanceerd is, is over een jaar de norm.
+
+Wat je nu kunt doen:
+- Pas het werkproces uit je praktijktoets toe in je dagelijkse werk
+- Breid het stap voor stap uit met nieuwe stappen en tools
+- Blijf experimenteren — de meeste inzichten komen pas als je Claude echt inzet, niet in een cursusomgeving
+- Houd de Anthropic-documentatie bij voor nieuwe functies: docs.anthropic.com
 
 ## Samenvatting
 
-Het Umely Certificaat wordt uitgereikt na een persoonlijk gesprek met Sonny over je praktijktoets. Het gesprek is geen examen maar een professionele demonstratie van wat je hebt gebouwd. Beoordelingscriteria zijn begrip, toepassing, eerlijkheid, zelfstandigheid en praktische waarde. Bij onvoldoende resultaat krijg je feedback en een tweede kans. Het certificaat is het bewijs dat je Claude vakbekwaam kunt inzetten — niet perfect, maar zelfstandig en verantwoord.
+Het Umely Certificaat wordt automatisch uitgereikt na het afronden van alle modules en de praktijktoets. Er is geen externe beoordeling — jij beoordeelt zelf of je het echt begrijpt, bij voorkeur door je project kritisch voor te leggen aan Claude. Het certificaat is het bewijs dat je Claude vakbekwaam kunt inzetten. De volgende stap is toepassing in de praktijk.
