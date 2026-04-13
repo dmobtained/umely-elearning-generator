@@ -1,6 +1,6 @@
 <!-- TITLE: E5 - Je eerste Skill bouwen -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-module-5','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Kies de juiste taak','screen-module-2':'Schrijf de stappen op','screen-module-3':'De SKILL.md schrijven','screen-module-4':'Testen en verfijnen','screen-module-5':'Veelgemaakte fouten','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-4','screen-module-4-kc','screen-module-5','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Kies de juiste taak','screen-module-1-kc':'Kennischeck: juiste taak kiezen','screen-module-2':'Schrijf de stappen op','screen-module-3':'De SKILL.md schrijven','screen-module-4':'Testen en verfijnen','screen-module-4-kc':'Kennischeck: testen en verfijnen','screen-module-5':'Veelgemaakte fouten','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -33,19 +33,26 @@
     <table class="vergelijk-tabel">
       <thead><tr><th>Goed</th><th>Slecht</th></tr></thead>
       <tbody>
-        <tr><td>Wekelijks bezichtigingsrapporten samenvatten</td><td>Eenmalige taken die je nooit herhaalt</td></tr>
+        <tr><td>Wekelijks vergadernotities verwerken naar actiepunten</td><td>Eenmalige taken die je nooit herhaalt</td></tr>
         <tr><td>Maandelijks facturen verwerken</td><td>Taken die elke keer anders zijn</td></tr>
-        <tr><td>Dagelijks e-mails sorteren</td><td>Taken waar je de aanpak nog niet kent</td></tr>
+        <tr><td>Dagelijks klantenservicemails beantwoorden</td><td>Taken waar je de aanpak nog niet kent</td></tr>
         <tr><td>Standaardbrieven opstellen</td><td>Complexe taken met veel variabelen</td></tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 5</div>
+    <h2>Kennischeck: juiste taak kiezen</h2>
+  </div>
   <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Welke taak is het meest geschikt voor een eerste Skill?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Een eenmalige verhuizing is geen herhalende taak. Skills zijn bedoeld voor taken die je regelmatig doet.')">Een eenmalige kantoorverhuizing plannen</button>
-      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Dit is een herhalende taak met vaste stappen die altijd hetzelfde zijn. Perfect voor een Skill.')">Elke week klantrapporten samenvatten op dezelfde manier</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Dit is een herhalende taak met vaste stappen die altijd hetzelfde zijn. Perfect voor een Skill.')">Elke week vergadernotities verwerken naar actiepunten</button>
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Creatief brainstormen is elke keer anders. Skills werken het best bij taken met vaste stappen.')">Creatief brainstormen over nieuwe producten</button>
     </div>
     <div id="kc-feedback-1" class="kc-feedback"></div>
@@ -111,35 +118,35 @@
     </div>
   </div>
   <div class="visual-block">
-    <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+    <svg viewBox="0 0 580 325" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
       <defs>
-        <clipPath id="e5-clip"><rect width="680" height="380" rx="10"/></clipPath>
+        <clipPath id="e5-clip"><rect width="580" height="325" rx="10"/></clipPath>
       </defs>
       <g clip-path="url(#e5-clip)">
         <!-- Window header -->
-        <rect width="680" height="34" fill="#27292D"/>
-        <circle cx="20" cy="17" r="5" fill="#FF5F57"/>
-        <circle cx="36" cy="17" r="5" fill="#FFBD2E"/>
-        <circle cx="52" cy="17" r="5" fill="#28C840"/>
-        <text x="340" y="22" font-family="Arial, sans-serif" font-size="11" fill="#AAA" text-anchor="middle">SKILL.md — een volledig voorbeeld</text>
+        <rect width="580" height="34" fill="#27292D"/>
+        <circle cx="20" cy="17" r="5" fill="#FF4D00"/>
+        <circle cx="36" cy="17" r="5" fill="#FFD964"/>
+        <circle cx="52" cy="17" r="5" fill="#FF8514"/>
+        <text x="290" y="22" font-family="Arial, sans-serif" font-size="11" fill="#AAA" text-anchor="middle">SKILL.md — vergadernotities verwerker</text>
         <!-- Editor achtergrond -->
-        <rect x="0" y="34" width="680" height="346" fill="#1E2128"/>
+        <rect x="0" y="34" width="580" height="291" fill="#1E2128"/>
         <!-- File tab -->
-        <rect x="0" y="34" width="680" height="30" fill="#22252B"/>
+        <rect x="0" y="34" width="580" height="30" fill="#22252B"/>
         <rect x="10" y="38" width="98" height="22" rx="4" fill="#1E2128"/>
         <circle cx="22" cy="49" r="4" fill="#FF8514"/>
         <text x="30" y="54" font-family="Arial, sans-serif" font-size="10" fill="#CCC" font-weight="600">SKILL.md</text>
         <!-- Line number kolom -->
-        <rect x="0" y="64" width="34" height="316" fill="#1A1D22"/>
+        <rect x="0" y="64" width="34" height="261" fill="#1A1D22"/>
         <!-- Frontmatter (---) -->
         <text x="13" y="82" font-family="Arial, sans-serif" font-size="9" fill="#444">1</text>
         <text x="44" y="82" font-family="Arial, sans-serif" font-size="10" fill="#888">---</text>
         <text x="13" y="100" font-family="Arial, sans-serif" font-size="9" fill="#444">2</text>
         <text x="44" y="100" font-family="Arial, sans-serif" font-size="10" fill="#CCC">name: </text>
-        <text x="84" y="100" font-family="Arial, sans-serif" font-size="10" fill="#9CDCFE">bezichtigingsrapport</text>
+        <text x="84" y="100" font-family="Arial, sans-serif" font-size="10" fill="#9CDCFE">vergadernotities</text>
         <text x="13" y="118" font-family="Arial, sans-serif" font-size="9" fill="#444">3</text>
         <text x="44" y="118" font-family="Arial, sans-serif" font-size="10" fill="#CCC">description: </text>
-        <text x="117" y="118" font-family="Arial, sans-serif" font-size="10" fill="#CE9178">Gebruik deze Skill als je bezichtigingsverslagen wilt samenvatten.</text>
+        <text x="117" y="118" font-family="Arial, sans-serif" font-size="10" fill="#CE9178">Gebruik als je vergadernotities wilt verwerken naar actiepunten.</text>
         <text x="13" y="136" font-family="Arial, sans-serif" font-size="9" fill="#444">4</text>
         <text x="44" y="136" font-family="Arial, sans-serif" font-size="10" fill="#888">---</text>
         <!-- Empty line 5 -->
@@ -150,39 +157,33 @@
         <text x="13" y="190" font-family="Arial, sans-serif" font-size="9" fill="#444">7</text>
         <!-- Stap 1-5 -->
         <text x="13" y="208" font-family="Arial, sans-serif" font-size="9" fill="#444">8</text>
-        <text x="44" y="208" font-family="Arial, sans-serif" font-size="10" fill="#CCC">1. Lees het volledige PDF-bestand of tekstbestand.</text>
+        <text x="44" y="208" font-family="Arial, sans-serif" font-size="10" fill="#CCC">1. Lees de volledige notities door.</text>
         <text x="13" y="226" font-family="Arial, sans-serif" font-size="9" fill="#444">9</text>
-        <text x="44" y="226" font-family="Arial, sans-serif" font-size="10" fill="#CCC">2. Identificeer adres, datum en bijzonderheden van de bezichtiging.</text>
+        <text x="44" y="226" font-family="Arial, sans-serif" font-size="10" fill="#CCC">2. Identificeer datum, aanwezigen en onderwerpen.</text>
         <text x="13" y="244" font-family="Arial, sans-serif" font-size="9" fill="#444">10</text>
-        <text x="44" y="244" font-family="Arial, sans-serif" font-size="10" fill="#CCC">3. Schrijf een samenvatting van maximaal 200 woorden.</text>
+        <text x="44" y="244" font-family="Arial, sans-serif" font-size="10" fill="#CCC">3. Maak een lijst van actiepunten met eigenaar en deadline.</text>
         <text x="13" y="262" font-family="Arial, sans-serif" font-size="9" fill="#444">11</text>
-        <text x="44" y="262" font-family="Arial, sans-serif" font-size="10" fill="#CCC">4. Gebruik vijf bullet points als structuur.</text>
+        <text x="44" y="262" font-family="Arial, sans-serif" font-size="10" fill="#CCC">4. Sla op als [datum]-actiepunten.txt in /Vergaderingen/.</text>
+        <!-- Empty line 12 -->
         <text x="13" y="280" font-family="Arial, sans-serif" font-size="9" fill="#444">12</text>
-        <text x="44" y="280" font-family="Arial, sans-serif" font-size="10" fill="#CCC">5. Sla op als [adres]-samenvatting.txt in /Samenvattingen/.</text>
-        <!-- Empty line 13 -->
-        <text x="13" y="298" font-family="Arial, sans-serif" font-size="9" fill="#444">13</text>
         <!-- Regels header -->
-        <text x="13" y="316" font-family="Arial, sans-serif" font-size="9" fill="#444">14</text>
-        <text x="44" y="316" font-family="Arial, sans-serif" font-size="11" fill="#FF8514" font-weight="700">## Regels</text>
-        <text x="13" y="334" font-family="Arial, sans-serif" font-size="9" fill="#444">15</text>
-        <text x="44" y="334" font-family="Arial, sans-serif" font-size="10" fill="#CCC">- Schrijf altijd in het Nederlands.</text>
-        <text x="13" y="352" font-family="Arial, sans-serif" font-size="9" fill="#444">16</text>
-        <text x="44" y="352" font-family="Arial, sans-serif" font-size="10" fill="#CCC">- Vraag bevestiging voor het overschrijven van bestanden.</text>
+        <text x="13" y="298" font-family="Arial, sans-serif" font-size="9" fill="#444">13</text>
+        <text x="44" y="298" font-family="Arial, sans-serif" font-size="11" fill="#FF8514" font-weight="700">## Regels</text>
         <!-- Statusbalk -->
-        <rect x="0" y="362" width="680" height="18" fill="#1A1D22"/>
-        <circle cx="16" cy="371" r="4" fill="#FF8514"/>
-        <text x="26" y="375" font-family="Arial, sans-serif" font-size="8.5" fill="#666">SKILL.md — 16 regels — UTF-8</text>
-        <text x="580" y="375" font-family="Arial, sans-serif" font-size="8.5" fill="#555">Claude Code leest dit automatisch in</text>
+        <rect x="0" y="310" width="580" height="15" fill="#1A1D22"/>
+        <circle cx="16" cy="317" r="3" fill="#FF8514"/>
+        <text x="26" y="320" font-family="Arial, sans-serif" font-size="8" fill="#666">SKILL.md — 13 regels — UTF-8</text>
+        <text x="490" y="320" font-family="Arial, sans-serif" font-size="8" fill="#555">automatisch ingeladen</text>
       </g>
     </svg>
   </div>
   <div id="scenario-1" class="scenario-blok">
     <div class="scenario-label">Praktijksituatie</div>
-    <p class="scenario-tekst">Je wilt een Skill bouwen voor het verwerken van facturen. De Skill moet de factuur lezen, het bedrag en de leverancier eruit halen, en toevoegen aan een overzichtsbestand. Wat is de beste beschrijving?</p>
+    <p class="scenario-tekst">Je wilt een Skill bouwen voor het verwerken van wekelijkse vergadernotities. De Skill moet de notities lezen, actiepunten extraheren met eigenaar en deadline, en opslaan als tekstbestand. Wat is de beste beschrijving?</p>
     <div class="scenario-keuzes">
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Deze beschrijving is te vaag. Claude weet niet wanneer hij deze Skill moet laden.')">description: Facturen verwerken</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Deze beschrijving is specifiek over wanneer de Skill wordt gebruikt en wat hij doet. Claude kan nauwkeurig matchen.')">description: Gebruik deze Skill als je een inkoopfactuur wilt verwerken: bedrag en leverancier extraheren en toevoegen aan het overzichtsbestand</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Deze beschrijving is te breed. De Skill is specifiek voor factuurverwerking, niet voor alle bestandsverwerking.')">description: Een Skill voor bestanden</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Deze beschrijving is te vaag. Claude weet niet wanneer hij deze Skill moet laden.')">description: Notities verwerken</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Deze beschrijving is specifiek over wanneer de Skill wordt gebruikt en wat hij doet. Claude kan nauwkeurig matchen.')">description: Gebruik deze Skill als je vergadernotities wilt verwerken naar een actiepuntenlijst met eigenaar en deadline</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Deze beschrijving is te breed. De Skill is specifiek voor vergadernotities, niet voor alle documenten.')">description: Een Skill voor documenten</button>
     </div>
     <div id="scenario-feedback-1" class="scenario-feedback"></div>
     <div class="btn-wrap" style="margin-top:1rem;">
@@ -211,8 +212,15 @@
     <div class="tip-box-label tip">Tip</div>
     <p>Skills worden beter naarmate je ze vaker gebruikt en bijschaaft. De eerste versie hoeft niet perfect te zijn. Verfijn op basis van wat je ziet.</p>
   </div>
+</div>
+
+<div id="screen-module-4-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 4 van 5</div>
+    <h2>Kennischeck: testen en verfijnen</h2>
+  </div>
   <div id="kc-2" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Wat doe je als de Skill niet het gewenste resultaat geeft?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-5', 'Opgeven is niet nodig. Skills kun je aanpassen en verbeteren op basis van de resultaten.')">De Skill verwijderen en het handmatig doen</button>
@@ -253,6 +261,7 @@
     <p>Begin klein. Eén Skill voor je meest herhalende taak. Als die goed werkt, bouw je verder. Te veel Skills tegelijk bouwen leidt tot onduidelijkheid.</p>
   </div>
   <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz &#8594;</button>
   </div>
 </div>
 

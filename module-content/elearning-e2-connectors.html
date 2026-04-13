@@ -1,11 +1,11 @@
 <!-- TITLE: E2 - Claude Connectors -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat zijn Connectors?','screen-module-2':'Connectors inschakelen','screen-module-3':'Praktische voorbeelden','screen-module-4':'Grenzen en veiligheid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-3-kc','screen-module-4','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat zijn Connectors?','screen-module-1-kc':'Kennischeck','screen-module-2':'Connectors inschakelen','screen-module-3':'Praktische voorbeelden','screen-module-3-kc':'Kennischeck','screen-module-4':'Grenzen en veiligheid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>E3 - Claude Connectors</h1>
+    <h1>E2 - Claude Connectors</h1>
     <p>Leer hoe je Claude koppelt aan Gmail, agenda, Notion en andere tools via de gebruiksvriendelijke Connectors-interface.</p>
   </div>
   <div class="leerdoelen">
@@ -88,8 +88,18 @@
       </tbody>
     </table>
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-kc')">Kennischeck &rarr;</button>
+  </div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Wat is het verschil tussen MCP en Connectors?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'MCP en Connectors werken samen. Connectors zijn gebouwd bovenop MCP.')">Het zijn twee compleet verschillende systemen</button>
@@ -187,8 +197,18 @@
       </tbody>
     </table>
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-kc')">Kennischeck &rarr;</button>
+  </div>
+</div>
+
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-2" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Bij welke abonnementen zijn Connectors beschikbaar?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'De gratis versie heeft geen toegang tot Connectors. Je hebt minimaal een Pro-abonnement nodig.')">Bij alle abonnementen inclusief gratis</button>
@@ -234,7 +254,11 @@
     <div class="tip-box-label waarschuwing">Let op</div>
     <p>Begin met leestoegang voordat je Claude schrijfacties laat uitvoeren. Test of Claude de juiste informatie ophaalt voordat je hem laat schrijven naar je systemen.</p>
   </div>
+  <div class="content-card">
+    <p><strong>Terminologienoot:</strong> In sommige interfaces wordt "Cowork" gebruikt als naam voor een samenwerkingsfunctie. Deze naam kan veranderen bij interface-updates van Anthropic. Raadpleeg claude.ai voor de actuele benaming.</p>
+  </div>
   <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz &rarr;</button>
   </div>
 </div>
 

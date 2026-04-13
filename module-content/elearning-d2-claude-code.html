@@ -1,6 +1,6 @@
 <!-- TITLE: D2 - Claude Code: wat is het en hoe start je? -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-module-5','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat is Claude Code?','screen-module-2':'De terminal','screen-module-3':'Installatie','screen-module-4':'Je eerste opdracht','screen-module-5':'Mogelijkheden, beperkingen en veiligheid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-3-kc','screen-module-4','screen-module-5','screen-module-5-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat is Claude Code?','screen-module-1-kc':'Kennischeck: Claude Code vs web-app','screen-module-2':'Installatie via VS Code en terminal','screen-module-3':'Installatie stap voor stap','screen-module-3-kc':'Kennischeck: installatie','screen-module-4':'Je eerste opdracht','screen-module-5':'Mogelijkheden, beperkingen en veiligheid','screen-module-5-kc':'Kennischeck: veiligheid en aanbevolen route','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -39,9 +39,9 @@
       <rect x="0" y="0" width="284" height="240" rx="10" fill="#ebebeb"/>
       <rect x="0" y="0" width="284" height="34" rx="10" fill="#d9d9d9"/>
       <rect y="24" width="284" height="10" fill="#d9d9d9"/>
-      <circle cx="16" cy="17" r="5" fill="#ff5f57"/>
-      <circle cx="30" cy="17" r="5" fill="#febc2e"/>
-      <circle cx="44" cy="17" r="5" fill="#28c840"/>
+      <circle cx="16" cy="17" r="5" fill="#FF4D00"/>
+      <circle cx="30" cy="17" r="5" fill="#FFD964"/>
+      <circle cx="44" cy="17" r="5" fill="#FF8514"/>
       <rect x="72" y="8" width="140" height="18" rx="9" fill="white"/>
       <text x="142" y="21" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">claude.ai</text>
       <rect x="0" y="34" width="284" height="206" fill="#FFF8F2"/>
@@ -63,22 +63,22 @@
       <rect x="276" y="110" width="28" height="20" rx="4" fill="#EAE6E0"/>
       <text x="290" y="124" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#888">vs</text>
       <!-- Right: Claude Code (terminal) -->
-      <rect x="296" y="0" width="284" height="240" rx="10" fill="#1a1a1a"/>
-      <rect x="296" y="0" width="284" height="30" rx="10" fill="#2a2a2a"/>
-      <rect y="20" x="296" width="284" height="10" fill="#2a2a2a"/>
-      <circle cx="314" cy="15" r="5" fill="#ff5f57"/>
-      <circle cx="328" cy="15" r="5" fill="#febc2e"/>
-      <circle cx="342" cy="15" r="5" fill="#28c840"/>
+      <rect x="296" y="0" width="284" height="240" rx="10" fill="#27292D"/>
+      <rect x="296" y="0" width="284" height="30" rx="10" fill="#27292D"/>
+      <rect y="20" x="296" width="284" height="10" fill="#27292D"/>
+      <circle cx="314" cy="15" r="5" fill="#FF4D00"/>
+      <circle cx="328" cy="15" r="5" fill="#FFD964"/>
+      <circle cx="342" cy="15" r="5" fill="rgba(255,248,242,0.2)"/>
       <text x="438" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Terminal</text>
       <!-- Terminal text -->
-      <text x="310" y="52" font-family="monospace" font-size="10" fill="#28c840">$ claude</text>
+      <text x="310" y="52" font-family="monospace" font-size="10" fill="#FF8514">$ claude</text>
       <text x="310" y="70" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.7)">Wat wil je doen?</text>
       <text x="310" y="88" font-family="monospace" font-size="9.5" fill="#FF8514">&gt; Hernoem alle PDF-bestanden</text>
       <text x="310" y="100" font-family="monospace" font-size="9.5" fill="#FF8514">  in /documenten naar datum</text>
       <text x="310" y="120" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.6)">Ik ga de 14 PDF-bestanden</text>
       <text x="310" y="132" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.6)">hernoemen...</text>
-      <text x="310" y="148" font-family="monospace" font-size="9" fill="#28c840">✓ contract-2024-01-15.pdf</text>
-      <text x="310" y="160" font-family="monospace" font-size="9" fill="#28c840">✓ offerte-2024-02-03.pdf</text>
+      <text x="310" y="148" font-family="monospace" font-size="9" fill="#FF8514">✓ contract-2024-01-15.pdf</text>
+      <text x="310" y="160" font-family="monospace" font-size="9" fill="#FF8514">✓ offerte-2024-02-03.pdf</text>
       <text x="310" y="172" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.4)">✓ factuur-2024-03-...</text>
       <!-- Label -->
       <rect x="304" y="192" width="268" height="38" rx="7" fill="rgba(255,255,255,0.06)"/>
@@ -98,6 +98,14 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- MODULE 1 KENNISCHECK -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-1" class="kennischeck">
     <h3>Kennischeck</h3>
     <p class="kc-vraag">Wat is het belangrijkste verschil tussen de web-app en Claude Code?</p>
@@ -114,7 +122,7 @@
 <div id="screen-module-2" class="screen">
   <div class="module-header">
     <div class="module-num">Module 2 van 5</div>
-    <h2>De terminal</h2>
+    <h2>Installatie via VS Code en terminal</h2>
   </div>
   <div class="content-card">
     <h3>Aanbevolen route: de VS Code-extensie</h3>
@@ -280,6 +288,14 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- MODULE 3 KENNISCHECK -->
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-2" class="kennischeck">
     <h3>Kennischeck</h3>
     <p class="kc-vraag">Wat heb je nodig om Claude Code te installeren?</p>
@@ -364,15 +380,29 @@
     <div class="tip-box-label waarschuwing">Let op</div>
     <p>Claude Code vraagt altijd om bevestiging bij ingrijpende acties zoals het verwijderen of overschrijven van bestanden. Maak een back-up van belangrijke bestanden voordat je Claude Code op een grote map loslaat.</p>
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-5-kc')">Kennischeck →</button>
+  </div>
+</div>
+
+<!-- MODULE 5 KENNISCHECK -->
+<div id="screen-module-5-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 5 van 5</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-3" class="kennischeck">
     <h3>Kennischeck</h3>
     <p class="kc-vraag">Wat is de aanbevolen manier om Claude Code te installeren voor niet-developers?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(3, this, false, null, 'Node.js is de terminal-route. Voor niet-developers is de VS Code-extensie de eenvoudigere keuze — geen terminal, geen Node.js installatie nodig.')">Node.js installeren via nodejs.org</button>
-      <button class="kc-optie" onclick="checkKC(3, this, true, null, 'Correct. De VS Code-extensie is de toegankelijkste route. Je installeert VS Code, zoekt op "Claude Code" in de Extensions Marketplace en klikt op Installeren. Geen terminal of Node.js nodig.')">De Claude Code-extensie installeren via de VS Code Extensions Marketplace</button>
-      <button class="kc-optie" onclick="checkKC(3, this, false, null, 'Er is geen aparte installer. Gebruik de VS Code-extensie of de terminal-route via Node.js.')">Een apart installatieprogramma downloaden van claude.ai</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-quiz', 'Node.js is de terminal-route. Voor niet-developers is de VS Code-extensie de eenvoudigere keuze — geen terminal, geen Node.js installatie nodig.')">Node.js installeren via nodejs.org</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-quiz', 'Correct. De VS Code-extensie is de toegankelijkste route. Je installeert VS Code, zoekt op "Claude Code" in de Extensions Marketplace en klikt op Installeren. Geen terminal of Node.js nodig.')">De Claude Code-extensie installeren via de VS Code Extensions Marketplace</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-quiz', 'Er is geen aparte installer. Gebruik de VS Code-extensie of de terminal-route via Node.js.')">Een apart installatieprogramma downloaden van claude.ai</button>
     </div>
     <div id="kc-feedback-3" class="kc-feedback"></div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz →</button>
   </div>
 </div>
 

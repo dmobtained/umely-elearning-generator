@@ -1,6 +1,6 @@
 <!-- TITLE: B3 - Fouten, troubleshooting en grenzen van Claude -->
 <!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Waarom Claude hallucineert','screen-module-1-2':'Hoe hallucinations eruitzien','screen-module-1-3':'Feiten controleren in de praktijk','screen-module-1-kc':'Kennischeck: hallucinations','screen-module-2-1':'Wat weigert Claude en waarom','screen-module-2-2':'Verschil tussen een grens en een misverstand','screen-module-2-3':'Omgaan met weigeringen','screen-module-2-kc':'Kennischeck: weigeringen','screen-module-3-1':'Wat doe je als het antwoord niet goed is','screen-module-3-2':'Vijf veelvoorkomende problemen','screen-module-3-3':'Troubleshooting in de praktijk','screen-module-3-kc':'Kennischeck: troubleshooting','screen-module-4-1':'Technische problemen en limieten','screen-module-4-2':'Wanneer begin je een nieuw gesprek','screen-module-4-3':'Realistische verwachtingen','screen-module-4-kc':'Kennischeck: grenzen en verwachtingen','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'Welkom','screen-module-1-1':'Waarom Claude hallucineert','screen-module-1-2':'Hoe hallucinations eruitzien','screen-module-1-3':'Feiten controleren in de praktijk','screen-module-1-kc':'Kennischeck: hallucinations','screen-module-2-1':'Wat weigert Claude en waarom','screen-module-2-2':'Verschil tussen een grens en een misverstand','screen-module-2-3':'Omgaan met weigeringen','screen-module-2-kc':'Kennischeck: weigeringen','screen-module-3-1':'Wat doe je als het antwoord niet goed is','screen-module-3-2':'Vijf veelvoorkomende problemen','screen-module-3-3':'Troubleshooting in de praktijk','screen-module-3-kc':'Kennischeck: troubleshooting','screen-module-4-1':'Technische problemen en limieten','screen-module-4-2':'Wanneer begin je een nieuw gesprek','screen-module-4-3':'Realistische verwachtingen','screen-module-4-kc':'Kennischeck: grenzen en verwachtingen','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <!-- QUIZ_START -->
 [
@@ -137,7 +137,7 @@
   </div>
   <div class="visual-block">
     <svg viewBox="0 0 580 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
-      <rect width="580" height="170" rx="10" fill="#F7F4F0"/>
+      <rect width="580" height="170" rx="10" fill="#FFF8F2"/>
       <text x="290" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#888" font-weight="bold">Hoe groot is het risico per type vraag?</text>
       <!-- Category 1: Recente feiten -->
       <text x="14" y="50" font-family="Arial, sans-serif" font-size="10" fill="#27292D" font-weight="bold">Recente feiten</text>
@@ -529,7 +529,7 @@
       <div class="stap-nummer">1</div>
       <div class="stap-content">
         <h4>Claude reageert traag of laadt niet</h4>
-        <p>Dit komt meestal door drukte op de servers van Anthropic. Je kunt de statuspagina raadplegen via <strong>status.anthropic.com</strong> (URL kan wijzigen — zoek op "Anthropic status page" voor de meest actuele link). Wachten of later opnieuw proberen is de enige echte oplossing.</p>
+        <p>Dit komt meestal door drukte op de servers van Anthropic. Je kunt de statuspagina raadplegen via <strong>status.anthropic.com</strong> (URL kan wijzigen; zoek op "Anthropic status page" voor de meest actuele link). Wachten of later opnieuw proberen is de enige echte oplossing.</p>
       </div>
     </div>
     <div class="stap-item">
@@ -610,10 +610,10 @@
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Wat Claude niet is — en wat je dan wel doet</div>
     <ul>
-      <li><strong>Claude is geen zoekmachine met actuele informatie</strong> — gebruik hem om tekst te analyseren en te redeneren, maar controleer feiten en recente data via een zoekmachine of primaire bron.</li>
-      <li><strong>Claude is geen jurist</strong> — gebruik hem voor het begrijpen van wetgevingsteksten, maar verifieer conclusies altijd met een jurist.</li>
-      <li><strong>Claude is geen arts</strong> — gebruik hem voor het begrijpen van medische termen, maar bespreek symptomen en behandelingen altijd met een arts.</li>
-      <li><strong>Claude is geen financieel adviseur</strong> — gebruik hem voor het begrijpen van financiële concepten, maar laat financiële beslissingen controleren door je accountant of financieel adviseur.</li>
+      <li><strong>Claude is geen zoekmachine met actuele informatie.</strong> Gebruik hem om tekst te analyseren en te redeneren, maar controleer feiten en recente data via een zoekmachine of primaire bron.</li>
+      <li><strong>Claude is geen jurist.</strong> Gebruik hem voor het begrijpen van wetgevingsteksten, maar verifieer conclusies altijd met een jurist.</li>
+      <li><strong>Claude is geen arts.</strong> Gebruik hem voor het begrijpen van medische termen, maar bespreek symptomen en behandelingen altijd met een arts.</li>
+      <li><strong>Claude is geen financieel adviseur.</strong> Gebruik hem voor het begrijpen van financiële concepten, maar laat financiële beslissingen controleren door je accountant of financieel adviseur.</li>
     </ul>
   </div>
   <div class="tip-box">
@@ -631,9 +631,9 @@
     <h3>Kennischeck</h3>
     <p class="kc-vraag">Halverwege een gesprek begint Claude dingen te vergeten die je eerder al uitlegde. Wat is de meest waarschijnlijke oorzaak?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-4-3', 'Claude slaat gesprekken op in de geschiedenis, maar dat lost het probleem van het context window niet op. Het context window bepaalt hoeveel hij tegelijk kan verwerken, niet hoeveel hij opslaat.')">Je moet het gesprek handmatig opslaan, anders vergeet Claude alles</button>
-      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-module-4-3', 'Correct. Claude heeft een context window: hij kan maar een bepaalde hoeveelheid tekst tegelijk verwerken. Bij heel lange gesprekken valt vroeger uitgewisselde informatie buiten dat venster. Een nieuw gesprek met een korte samenvatting van de relevante context is dan de oplossing.')">Het gesprek is te lang geworden en eerdere informatie valt buiten het context window</button>
-      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-module-4-3', 'Claude verwijdert geen informatie om ruimte te besparen. Het gaat om een technische limiet in hoeveel tekst het model tegelijk kan verwerken.')">Claude verwijdert oude berichten automatisch om ruimte te besparen</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Claude slaat gesprekken op in de geschiedenis, maar dat lost het probleem van het context window niet op. Het context window bepaalt hoeveel hij tegelijk kan verwerken, niet hoeveel hij opslaat.')">Je moet het gesprek handmatig opslaan, anders vergeet Claude alles</button>
+      <button class="kc-optie" onclick="checkKC(4, this, true, 'screen-quiz', 'Correct. Claude heeft een context window: hij kan maar een bepaalde hoeveelheid tekst tegelijk verwerken. Bij heel lange gesprekken valt vroeger uitgewisselde informatie buiten dat venster. Een nieuw gesprek met een korte samenvatting van de relevante context is dan de oplossing.')">Het gesprek is te lang geworden en eerdere informatie valt buiten het context window</button>
+      <button class="kc-optie" onclick="checkKC(4, this, false, 'screen-quiz', 'Claude verwijdert geen informatie om ruimte te besparen. Het gaat om een technische limiet in hoeveel tekst het model tegelijk kan verwerken.')">Claude verwijdert oude berichten automatisch om ruimte te besparen</button>
     </div>
     <div id="kc-feedback-4" class="kc-feedback"></div>
   </div>

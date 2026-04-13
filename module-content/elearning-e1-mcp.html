@@ -5,7 +5,7 @@
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>E2 - MCP: Claude verbinden met externe tools</h1>
+    <h1>E1 - MCP: Claude verbinden met externe tools</h1>
     <p>Leer wat MCP is en hoe het Claude verbindt met je e-mail, agenda, CRM en andere systemen die je dagelijks gebruikt.</p>
   </div>
   <div class="leerdoelen">
@@ -307,7 +307,7 @@
         <div class="stap-nummer">1</div>
         <div class="stap-content">
           <h4>Connector inschakelen</h4>
-          <p>Via de Claude-instellingen of via de Claude desktop-app schakel je de gewenste connector in. Connectors zijn beschikbaar voor alle plannen — gratis gebruikers starten met 1 connector, betaalde plannen hebben volledige toegang.</p>
+          <p>Via de Claude-instellingen of via de Claude desktop-app schakel je de gewenste connector in. Connectors zijn beschikbaar voor Pro, Teams en Enterprise abonnementen — controleer claude.ai/pricing voor de actuele beschikbaarheid.</p>
         </div>
       </div>
       <div class="stap-item">
@@ -353,7 +353,7 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>Claude handelt niet zelfstandig. Hij doet alleen wat jij vraagt, op het moment dat jij vraagt. Hij stuurt geen e-mails of maakt geen afspraken zonder jouw opdracht.</p>
+    <p>In standaardmodus handelt Claude niet zelfstandig — hij doet alleen wat jij vraagt, op het moment dat jij vraagt. Bij agentic workflows (zie reeks E6) kan Claude meerdere stappen achter elkaar uitvoeren. Zonder agentic instellingen stuurt Claude geen e-mails of maakt geen afspraken zonder jouw opdracht.</p>
   </div>
   <div class="btn-wrap">
   </div>
@@ -483,7 +483,11 @@
     </div>
     <div id="scenario-feedback-3" class="scenario-feedback"></div>
     <div class="btn-wrap" style="margin-top:1rem;">
+      <button class="btn" onclick="goTo('screen-module-4-kc')">Naar de kennischeck &rarr;</button>
     </div>
+  </div>
+  <div class="btn-wrap" style="margin-top:1.5rem;">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz &rarr;</button>
   </div>
 </div>
 
@@ -511,7 +515,7 @@
   {"vraag":"Wat kan Claude NIET zonder MCP?","opties":["Teksten schrijven","E-mails in je inbox doorzoeken","Vragen beantwoorden","Samenvattingen maken van geplakte tekst"],"correct":1,"uitleg":"Zonder MCP werkt Claude alleen met de informatie die je zelf in het chatvenster plakt. E-mails in je inbox doorzoeken vereist een MCP-verbinding."},
   {"vraag":"Waarom is het verstandig om te beginnen met lees-toegang?","opties":["Omdat lees-toegang gratis is","Omdat bij schrijf-toegang fouten niet altijd ongedaan te maken zijn","Omdat lees-toegang sneller werkt","Omdat schrijf-toegang niet beschikbaar is voor beginners"],"correct":1,"uitleg":"Met schrijf-toegang kan Claude e-mails versturen of afspraken verwijderen. Die acties zijn definitief. Begin met lees-toegang en schakel schrijftoegang pas in nadat je Claude hebt getest."},
   {"vraag":"Wie stelt MCP-integraties in bij een kleine organisatie zonder IT-afdeling?","opties":["De eindgebruiker zelf via de Claude-chat","Een IT-beheerder of implementatiepartner","Anthropic automatisch","Niemand, het werkt vanzelf"],"correct":1,"uitleg":"Kleine organisaties zonder IT-afdeling hebben hulp nodig van een implementatiepartner om MCP correct in te richten."},
-  {"vraag":"Welke tool is GEEN voorbeeld van een beschikbare MCP-connector?","opties":["Gmail","Google Calendar","Microsoft Word (offline)","HubSpot"],"correct":2,"uitleg":"Gmail, Google Calendar en HubSpot hebben kant-en-klare MCP-connectoren. Microsoft Word als offline applicatie heeft geen MCP-connector, maar OneDrive en Outlook wel."},
+  {"vraag":"Welke tool is GEEN voorbeeld van een beschikbare MCP-connector?","opties":["Gmail","Google Calendar","Microsoft Word (offline)","HubSpot"],"correct":2,"uitleg":"Gmail, Google Calendar en HubSpot hebben kant-en-klare MCP-connectoren. Microsoft Word als offline applicatie heeft geen MCP-connector, maar OneDrive en Outlook wel. Het beschikbare aanbod kan per regio en abonnement verschillen — controleer claude.ai voor de actuele lijst."},
   {"vraag":"Wat is een realistisch gevolg van schrijftoegang aan Claude via MCP?","opties":["Claude kan zelfstandig beslissingen nemen zonder jouw opdracht","Claude kan een e-mail versturen die jij niet had gewild","Claude gaat andere gebruikers van jouw account uitnodigen","Claude begint automatisch alle e-mails te archiveren"],"correct":1,"uitleg":"Met schrijftoegang kan Claude acties uitvoeren in echte systemen. Als jouw opdracht niet precies klopt, kan hij een e-mail versturen die je niet bedoeld had. Dat is niet zomaar ongedaan te maken."}
 ]
 <!-- QUIZ_END -->

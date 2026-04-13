@@ -1,6 +1,6 @@
 <!-- TITLE: C3 - Claude in Chrome -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Installeren','screen-module-2':'Wat kun je ermee?','screen-module-3':'Beperkingen','screen-module-4':'Privacy bij de extensie','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-3-kc','screen-module-4','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'De Claude Chrome-extensie installeren','screen-module-1-kc':'Kennischeck: installeren','screen-module-2':'Wat kun je ermee?','screen-module-3':'Wat kun je niet met de extensie?','screen-module-3-kc':'Kennischeck: beperkingen','screen-module-4':'Privacy bij de extensie','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -17,7 +17,7 @@
       <li>De beperkingen en privacy-aspecten van de extensie benoemen</li>
     </ul>
   </div>
-  <div class="tijdsbadge">Geschatte tijd: 10 minuten</div>
+  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 10 minuten</div>
   <div class="btn-wrap">
     <button class="btn" onclick="goTo('screen-module-1')">Start de module</button>
   </div>
@@ -27,7 +27,7 @@
 <div id="screen-module-1" class="screen">
   <div class="module-header">
     <div class="module-num">Module 1 van 4</div>
-    <h2>Installeren</h2>
+    <h2>De Claude Chrome-extensie installeren</h2>
   </div>
   <div class="content-card">
     <h3>In 3 stappen klaar</h3>
@@ -57,21 +57,21 @@
   </div>
   <div class="visual-block">
     <svg viewBox="0 0 580 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
-      <rect width="580" height="290" rx="10" fill="#f0f0f0"/>
-      <rect width="580" height="38" rx="10" fill="#d9d9d9"/>
-      <rect y="28" width="580" height="10" fill="#d9d9d9"/>
-      <circle cx="18" cy="19" r="5" fill="#ff5f57"/>
-      <circle cx="34" cy="19" r="5" fill="#febc2e"/>
-      <circle cx="50" cy="19" r="5" fill="#28c840"/>
-      <rect x="88" y="9" width="310" height="20" rx="10" fill="white"/>
-      <text x="243" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#555">rechtbank.nl/uitspraak-huurrecht</text>
+      <rect width="580" height="290" rx="10" fill="#EDEBE8"/>
+      <rect width="580" height="38" rx="10" fill="#27292D"/>
+      <rect y="28" width="580" height="10" fill="#27292D"/>
+      <circle cx="18" cy="19" r="5" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="34" cy="19" r="5" fill="rgba(255,255,255,0.13)"/>
+      <circle cx="50" cy="19" r="5" fill="rgba(255,255,255,0.08)"/>
+      <rect x="88" y="9" width="310" height="20" rx="10" fill="rgba(255,255,255,0.12)"/>
+      <text x="243" y="23" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.7)">rechtbank.nl/uitspraak-huurrecht</text>
       <!-- Claude icon (top right, highlighted) -->
       <circle cx="552" cy="19" r="12" fill="#FF8514" stroke="white" stroke-width="2"/>
       <text x="552" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="white" font-weight="bold">C</text>
       <!-- Annotation arrow pointing to Claude icon -->
       <text x="490" y="14" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" font-weight="bold">← klik hier</text>
       <!-- Webpage (left) -->
-      <rect x="0" y="38" width="365" height="252" fill="white"/>
+      <rect x="0" y="38" width="365" height="252" fill="#FFF8F2"/>
       <rect x="16" y="52" width="180" height="13" rx="3" fill="#27292D"/>
       <rect x="16" y="72" width="333" height="7" rx="2" fill="#e0e0e0"/>
       <rect x="16" y="85" width="310" height="7" rx="2" fill="#e0e0e0"/>
@@ -106,6 +106,15 @@
       <circle cx="556" cy="274" r="8" fill="#FF8514"/>
       <text x="556" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">↑</text>
     </svg>
+  </div>
+  <div id="nav-screen-module-1"></div>
+</div>
+
+<!-- MODULE 1 KC -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 4</div>
+    <h2>Kennischeck</h2>
   </div>
   <div id="kc-1" class="kennischeck">
     <h3>Kennischeck</h3>
@@ -168,7 +177,7 @@
 <div id="screen-module-3" class="screen">
   <div class="module-header">
     <div class="module-num">Module 3 van 4</div>
-    <h2>Beperkingen</h2>
+    <h2>Wat kun je niet met de extensie?</h2>
   </div>
   <div class="content-card">
     <h3>Wat de extensie wel en niet kan</h3>
@@ -185,7 +194,16 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>De extensie leest standaard mee en geeft advies. In agentic modus kan Claude ook acties uitvoeren op websites — zoals formulieren invullen of op knoppen klikken — maar alleen als jij dat expliciet vraagt en bevestigt. Claude handelt nooit zelfstandig buiten jouw opdracht.</p>
+    <p>De extensie leest standaard mee en geeft advies. In agentic modus kan Claude ook acties uitvoeren op websites (zoals formulieren invullen of op knoppen klikken), maar alleen als jij dat expliciet vraagt en bevestigt. Claude handelt nooit zelfstandig buiten jouw opdracht.</p>
+  </div>
+  <div id="nav-screen-module-3"></div>
+</div>
+
+<!-- MODULE 3 KC -->
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 4</div>
+    <h2>Kennischeck</h2>
   </div>
   <div id="kc-2" class="kennischeck">
     <h3>Kennischeck</h3>
@@ -207,7 +225,7 @@
   </div>
   <div class="content-card">
     <p>De extensie heeft toegang tot de inhoud van de pagina's die je bekijkt. Dat is nodig om te kunnen helpen. Maar dat betekent ook dat je bewust moet zijn van welke pagina's je opent terwijl de extensie actief is.</p>
-    <p>De extensie leest pagina-inhoud alleen wanneer je hem actief gebruikt. Wees je hiervan bewust bij pagina's met vertrouwelijke informatie — schakel de extensie uit als je dat liever niet wilt.</p>
+    <p>De extensie leest pagina-inhoud alleen wanneer je hem actief gebruikt. Wees je hiervan bewust bij pagina's met vertrouwelijke informatie: schakel de extensie uit als je dat liever niet wilt.</p>
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>

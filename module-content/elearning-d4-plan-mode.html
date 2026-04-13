@@ -1,6 +1,6 @@
 <!-- TITLE: D4 - Plan Mode, commando's en hooks -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Plan Mode','screen-module-2':'Veelgebruikte commando's','screen-module-3':'Hooks: automatische acties','screen-module-4':'Combineren voor maximale controle','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-2-kc','screen-module-3','screen-module-3-kc','screen-module-4','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Plan Mode','screen-module-1-kc':'Kennischeck: Plan Mode','screen-module-2':'Veelgebruikte commando\'s','screen-module-2-kc':'Kennischeck: commando\'s','screen-module-3':'Hooks: automatische acties','screen-module-3-kc':'Kennischeck: hooks','screen-module-4':'Combineren voor maximale controle','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -31,27 +31,28 @@
   </div>
   <div class="content-card">
     <p>Standaard voert Claude Code direct uit wat je vraagt. Plan Mode verandert dat: Claude maakt eerst een gedetailleerd plan en wacht op jouw goedkeuring voordat hij begint.</p>
-    <p>Je schakelt Plan Mode in door op Shift+Tab te drukken in Claude Code. Je kunt ook woorden als "plan" of "think about" in je prompt gebruiken om Claude richting planning te sturen. In Plan Mode analyseert Claude de taak, maakt een plan en vraagt om goedkeuring voordat hij begint met uitvoeren.</p>
+    <p>Je schakelt Plan Mode in door op Shift+Tab te drukken in Claude Code. Je kunt ook het woord "plan" typen in je prompt om Claude naar een planningsaanpak te sturen. In Plan Mode analyseert Claude de taak, maakt een plan en vraagt om goedkeuring voordat hij begint met uitvoeren.</p>
+    <p class="tip-box" style="margin-top:0.75rem;"><strong>Keybinding-opmerking:</strong> Shift+Tab is de standaardmanier om Plan Mode in te schakelen, maar de exacte keybinding kan per versie variëren. Controleer de actuele snelkoppeling via <code>/help</code> in Claude Code.</p>
   </div>
   <div class="visual-block">
     <svg viewBox="0 0 580 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
-      <rect width="580" height="260" rx="10" fill="#1a1a1a"/>
-      <rect width="580" height="30" rx="10" fill="#2a2a2a"/>
-      <rect y="20" width="580" height="10" fill="#2a2a2a"/>
-      <circle cx="16" cy="15" r="5" fill="#ff5f57"/>
-      <circle cx="30" cy="15" r="5" fill="#febc2e"/>
-      <circle cx="44" cy="15" r="5" fill="#28c840"/>
+      <rect width="580" height="260" rx="10" fill="#27292D"/>
+      <rect width="580" height="30" rx="10" fill="#1E2128"/>
+      <rect y="20" width="580" height="10" fill="#1E2128"/>
+      <circle cx="16" cy="15" r="5" fill="#FF4D00"/>
+      <circle cx="30" cy="15" r="5" fill="#FFD964"/>
+      <circle cx="44" cy="15" r="5" fill="rgba(255,248,242,0.2)"/>
       <text x="290" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Claude Code — Plan Mode</text>
       <!-- Phase label: Normal mode -->
       <rect x="12" y="40" width="120" height="18" rx="4" fill="rgba(255,255,255,0.07)"/>
       <text x="72" y="53" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.4)">Normale modus</text>
       <text x="12" y="74" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.6)">$ claude</text>
       <text x="12" y="90" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.5)">&gt; Verplaats alle PDF-bestanden naar /archief</text>
-      <text x="12" y="106" font-family="monospace" font-size="9.5" fill="#28c840">✓ Verplaatst: 47 bestanden naar /archief</text>
+      <text x="12" y="106" font-family="monospace" font-size="9.5" fill="#22c55e">✓ Verplaatst: 47 bestanden naar /archief</text>
       <text x="12" y="120" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.3)">← direct uitgevoerd, zonder preview</text>
       <!-- Divider with Shift+Tab -->
       <line x1="12" y1="138" x2="568" y2="138" stroke="rgba(255,133,20,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
-      <rect x="230" y="130" width="120" height="16" rx="4" fill="#1a1a1a"/>
+      <rect x="230" y="130" width="120" height="16" rx="4" fill="#27292D"/>
       <text x="290" y="142" text-anchor="middle" font-family="monospace" font-size="9" fill="#FF8514" font-weight="bold">Shift+Tab → Plan Mode aan</text>
       <!-- Phase label: Plan Mode -->
       <rect x="12" y="152" width="100" height="18" rx="4" fill="rgba(255,133,20,0.15)" stroke="#FF8514" stroke-width="1"/>
@@ -79,6 +80,14 @@
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
     <p>Gebruik Plan Mode voor taken met veel stappen, taken op grote aantallen bestanden, of elke keer dat je niet zeker weet wat Claude gaat doen. Het kost iets meer tijd maar geeft je volledige controle.</p>
+  </div>
+</div>
+
+<!-- MODULE 1 KENNISCHECK -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 4</div>
+    <h2>Kennischeck</h2>
   </div>
   <div id="kc-1" class="kennischeck">
     <h3>Kennischeck</h3>
@@ -129,6 +138,24 @@
   </div>
 </div>
 
+<!-- MODULE 2 KENNISCHECK -->
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 2 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-2" class="kennischeck">
+    <h3>Kennischeck</h3>
+    <p class="kc-vraag">Wat doe je als Claude Code in de war lijkt door een lange sessie met veel eerdere instructies?</p>
+    <div class="kc-opties">
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Claude Code helemaal opnieuw installeren is niet nodig en lost het probleem niet op.')">Claude Code opnieuw installeren</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3', 'Correct. /clear wist het huidige gesprek en begint schoon. Je CLAUDE.md wordt opnieuw ingelezen zodat de basiscontext beschikbaar blijft.')">Typ /clear om het gesprek te wissen en schoon te beginnen</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Doortypen in een onoverzichtelijk gesprek maakt het probleem erger. Een schone start is effectiever.')">Gewoon doorgaan en hopen dat het beter wordt</button>
+    </div>
+    <div id="kc-feedback-2" class="kc-feedback"></div>
+  </div>
+</div>
+
 <!-- MODULE 3 -->
 <div id="screen-module-3" class="screen">
   <div class="module-header">
@@ -160,17 +187,28 @@
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Hooks zijn shell-commando's die op je systeem draaien. Test ze goed voordat je ze inschakelt. Een fout in een hook kan je workflow blokkeren. Begin eenvoudig en bouw uit naarmate je meer ervaring krijgt.</p>
+    <p>Hooks zijn shell-commando's die op je systeem draaien. Test ze goed voordat je ze inschakelt. Een fout in een hook kan je workflow blokkeren. Start met een eenvoudige echo-hook die een bericht toont, zodat je het principe leert zonder risico. Meer informatie: <strong>docs.anthropic.com/claude-code</strong></p>
   </div>
-  <div id="kc-2" class="kennischeck">
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-kc')">Kennischeck →</button>
+  </div>
+</div>
+
+<!-- MODULE 3 KENNISCHECK -->
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
+  <div id="kc-3" class="kennischeck">
     <h3>Kennischeck</h3>
     <p class="kc-vraag">Wat is een Hook in Claude Code?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Een Hook is niet hetzelfde als een commando. Een commando voer je handmatig uit, een Hook wordt automatisch getriggerd door het systeem.')">Een handmatig commando dat je elke keer typt</button>
-      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Hooks zijn shell-commando\'s geconfigureerd in settings.json die jouw systeem automatisch uitvoert op lifecycle-events zoals PreToolUse en PostToolUse.')">Een shell-commando dat jouw systeem automatisch uitvoert op een lifecycle-event</button>
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Een Hook is geen beveiligingsfunctie. Het is een shell-commando dat automatisch draait op specifieke momenten.')">Een beveiligingsfunctie die bestanden beschermt</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4', 'Een Hook is niet hetzelfde als een commando. Een commando voer je handmatig uit, een Hook wordt automatisch getriggerd door het systeem.')">Een handmatig commando dat je elke keer typt</button>
+      <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4', 'Correct. Hooks zijn shell-commando\'s geconfigureerd in settings.json die jouw systeem automatisch uitvoert op lifecycle-events zoals PreToolUse en PostToolUse.')">Een shell-commando dat jouw systeem automatisch uitvoert op een lifecycle-event</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4', 'Een Hook is geen beveiligingsfunctie. Het is een shell-commando dat automatisch draait op specifieke momenten.')">Een beveiligingsfunctie die bestanden beschermt</button>
     </div>
-    <div id="kc-feedback-2" class="kc-feedback"></div>
+    <div id="kc-feedback-3" class="kc-feedback"></div>
   </div>
 </div>
 
@@ -200,6 +238,7 @@
     <p>Begin met Plan Mode bij je eerste grote taken. Configureer hooks in settings.json als je merkt dat je steeds dezelfde controles handmatig uitvoert. Gebruik /cost om bewust te blijven van je API-gebruik.</p>
   </div>
   <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz →</button>
   </div>
 </div>
 

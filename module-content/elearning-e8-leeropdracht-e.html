@@ -4,9 +4,9 @@
 <!-- QUIZ_START -->
 [
   {"vraag":"Je hebt in fase 1 een Connector aangesloten voor je use case. Wat is het concrete voordeel ten opzichte van handmatig kopiëren?","opties":["Claude reageert sneller met een Connector","Claude kan direct bij de brondata — je hoeft niets meer te kopiëren en plakken","De Connector slaat jouw gesprekken op in de cloud","Je hebt geen abonnement meer nodig"],"correct":1,"uitleg":"Dat is het punt van een Connector: Claude krijgt toegang tot de bron zelf. In plaats van dat jij Gmail opent, tekst kopieert en in Claude plakt, haalt Claude de data zelf op. Dat scheelt tijd en voorkomt fouten bij het kopiëren."},
-  {"vraag":"In fase 2 heb je je Project verfijnd tot een Plugin. Wat maakt de Custom Instructions in een Plugin anders dan in een gewoon Project?","opties":["Ze worden automatisch vertaald naar andere talen","Ze zijn specifiek geschreven voor de data die de Connector levert — gericht op die bron, niet algemeen","Ze zijn alleen actief als de Connector verbonden is","Ze gelden voor alle Projecten tegelijk"],"correct":1,"uitleg":"Een gewoon Project heeft Custom Instructions voor jouw manier van werken. In een Plugin zijn ze specifiek afgestemd op de Connector: wat levert die bron op, hoe wil je dat Claude die data behandelt, welke acties zijn wel en niet toegestaan."},
+  {"vraag":"In fase 2 heb je je Project verfijnd tot een Plugin. Wat maakt de Custom Instructions in een Plugin anders dan in een gewoon Project?","opties":["Ze zijn specifiek geschreven voor de data die de Connector levert — gericht op die bron, niet algemeen","Ze worden automatisch vertaald naar andere talen","Ze zijn alleen actief als de Connector verbonden is","Ze gelden voor alle Projecten tegelijk"],"correct":0,"uitleg":"Een gewoon Project heeft Custom Instructions voor jouw manier van werken. In een Plugin zijn ze specifiek afgestemd op de Connector: wat levert die bron op, hoe wil je dat Claude die data behandelt, welke acties zijn wel en niet toegestaan."},
   {"vraag":"Je Skill uit fase 3 roep je aan met /[naam]. Hoe weet Claude welke stappen hij moet uitvoeren?","opties":["Claude zoekt het op in zijn trainingsdata","Claude leest de stappen uit je SKILL.md-bestand via het Project","Claude vraagt jou elke keer opnieuw om de stappen","Claude gebruikt de laatste Connector als bron voor de stappen"],"correct":1,"uitleg":"De stappen staan in je SKILL.md-bestand dat je aan het Project hebt toegevoegd. Zodra je /[naam] typt, leest Claude dat bestand en voert de stappen uit. Dat is waarom de Skill herhaalbaar is: de instructies liggen vast."},
-  {"vraag":"In fase 4 test je de volledige workflow. Connector, Custom Instructions en Skill zijn tegelijk actief. Wat controleer je als het resultaat niet klopt?","opties":["Of je internetverbinding stabiel genoeg is","Of de Custom Instructions en de Skill-stappen elkaar tegenspreken of overlappen","Of je het juiste abonnement hebt","Of de Connector de meest recente versie heeft"],"correct":1,"uitleg":"Custom Instructions en Skills zijn beide actief tegelijk. Als ze conflicteren — bijvoorbeeld de Custom Instructions zeggen 'altijd formeel' maar de Skill stelt geen format voor — kan Claude een vreemde mix produceren. Check of de twee op elkaar aansluiten."},
+  {"vraag":"In fase 4 test je de volledige workflow. Connector, Custom Instructions en Skill zijn tegelijk actief. Wat controleer je als het resultaat niet klopt?","opties":["Of je internetverbinding stabiel genoeg is","Of je het juiste abonnement hebt","Of de Custom Instructions en de Skill-stappen elkaar tegenspreken of overlappen","Of de Connector de meest recente versie heeft"],"correct":2,"uitleg":"Custom Instructions en Skills zijn beide actief tegelijk. Als ze conflicteren — bijvoorbeeld de Custom Instructions zeggen 'altijd formeel' maar de Skill stelt geen format voor — kan Claude een vreemde mix produceren. Check of de twee op elkaar aansluiten."},
   {"vraag":"Je hebt nu een werkplek met Connector, Plugin en Skill. Wanneer moet je de Custom Instructions updaten?","opties":["Nooit — eenmalig schrijven is voldoende","Als je use case, doelgroep of werkwijze verandert — zodat de context correct blijft","Elke week, want Claude leert van nieuwe gesprekken","Alleen als je een nieuwe Connector aansluit"],"correct":1,"uitleg":"Custom Instructions zijn actief bij elk gesprek — verouderde instructies betekent verouderde context. Als jouw use case verschuift, je doelgroep verandert of je een nieuwe stap aan je werkwijze toevoegt, pas je de Custom Instructions aan. Zo blijft de werkplek voor jou werken, niet voor wie je zes maanden geleden was."}
 ]
 <!-- QUIZ_END -->
@@ -75,12 +75,10 @@
 
   <div class="instructie-balk">
     <h3>Pak je notities erbij</h3>
-    <div class="i-rij"><div class="i-nr">1</div><div>Zoek je notities uit alle vorige leeropdrachten op — je Project uit C8 en je CLAUDE.md uit D5.</div></div>
+    <div class="i-rij"><div class="i-nr">1</div><div>Zoek je notities uit alle vorige leeropdrachten op — je Project uit C8 (<em>Jouw geconfigureerde Claude-werkplek</em>) en je CLAUDE.md uit D5 (<em>CLAUDE.md: projectgeheugen voor Claude Code</em>).</div></div>
     <div class="i-rij"><div class="i-nr">2</div><div>Open Claude.ai in een nieuw tabblad en zet het naast dit scherm.</div></div>
     <div class="i-rij"><div class="i-nr">3</div><div>Je bouwt vandaag de laatste laag van je Claude-werkplek.</div></div>
   </div>
-
-  <div class="tijdsbadge">Geschatte tijd: 35-50 minuten</div>
 
   <div class="leerdoelen">
     <h3>Na deze leeropdracht heb je:</h3>
@@ -91,6 +89,8 @@
       <li>De volledige workflow getest en het verschil met vroeger benoemd</li>
     </ul>
   </div>
+
+  <div class="tijdsbadge">Geschatte tijd: 35-50 minuten</div>
 
   <div class="btn-wrap">
     <button class="btn" onclick="startLeeropdracht()">Start de leeropdracht →</button>
@@ -332,6 +332,11 @@ description: [Wat doet deze Skill? Wanneer roep je hem aan?]
       <div class="stap-item"><div class="stap-nummer">1</div><div>Kopieer de template en vul hem in voor jouw use case.</div></div>
       <div class="stap-item"><div class="stap-nummer">2</div><div>Ga naar je Project in Claude.ai en klik op 'Add content' of 'Files'.</div></div>
       <div class="stap-item"><div class="stap-nummer">3</div><div>Maak een nieuw bestand aan met de naam [naam-van-je-skill].md en plak de ingevulde template.</div></div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-box-label tip">Twee manieren om een Skill op te slaan</div>
+      <p>Je kunt een Skill als kennisbestand toevoegen aan je Project in claude.ai via 'Add content' — Claude gebruikt hem dan als instructie in elk gesprek binnen dat Project. Dit is een andere manier dan de <code>.claude/skills/</code> map in Claude Code (zie D5). Beide zijn geldig: het Project-bestand werkt in de webapp, de skills-map werkt in Claude Code. Kies wat past bij jouw gebruik.</p>
     </div>
   </div>
 

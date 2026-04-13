@@ -4,9 +4,9 @@
 <!-- QUIZ_START -->
 [
   {"vraag":"In A4 heb je een prompttemplate gebouwd voor je use case. Wat maakt een template beter dan elke keer een nieuwe prompt schrijven?","opties":["Een template is altijd langer, dus Claude geeft betere antwoorden","Een template heeft een vaste structuur en {{variabelen}} — je vult alleen in wat wisselt, de context staat al vast","Een template slaat de output automatisch op","Een template werkt sneller omdat hij gecached is"],"correct":1,"uitleg":"Een template splitst wat altijd hetzelfde is (context, rol, format) van wat elke keer wisselt (het specifieke geval). Daarmee bouw je consistentie in — niet afhankelijk van hoe je je die dag voelt bij het schrijven van een prompt."},
-  {"vraag":"In B4 heb je je use case privacyveilig gemaakt. Wanneer moet je die aanpak opnieuw checken?","opties":["Nooit — eenmalig instellen is voldoende","Als je met nieuwe klantdata werkt, een collega de workflow gaat gebruiken, of je aanpak uitbreidt naar gevoeliger materiaal","Alleen als Claude een foutmelding geeft over privacy","Elke maand automatisch via een systeemreminder"],"correct":1,"uitleg":"Privacyveilig werken is geen eenmalige handeling — het is een gewoonte. Zodra de context verandert (nieuwe data, nieuwe gebruikers, nieuwe toepassingen), controleer je of je anonimiseringsstrategie nog past."},
+  {"vraag":"In B4 heb je je use case privacyveilig gemaakt. Wanneer moet je die aanpak opnieuw checken?","opties":["Als je met nieuwe klantdata werkt, een collega de workflow gaat gebruiken, of je aanpak uitbreidt naar gevoeliger materiaal","Nooit — eenmalig instellen is voldoende","Alleen als Claude een foutmelding geeft over privacy","Elke maand automatisch via een systeemreminder"],"correct":0,"uitleg":"Privacyveilig werken is geen eenmalige handeling — het is een gewoonte. Zodra de context verandert (nieuwe data, nieuwe gebruikers, nieuwe toepassingen), controleer je of je anonimiseringsstrategie nog past."},
   {"vraag":"In C8 heb je een Project aangemaakt met Custom Instructions voor je use case. Wat is het effect als die Custom Instructions te vaag zijn?","opties":["Claude weigert het Project te openen","Claude geeft generieke antwoorden — vage instructies geven vage output, ook met een Project","Claude vraagt bij elk gesprek om verduidelijking","Het Project werkt niet totdat je de instructies aanpast"],"correct":1,"uitleg":"Custom Instructions zijn niet magisch — ze geven Claude alleen de context die jij erin stopt. Vage instructies ('Help me met mijn werk') geven Claude nauwelijks houvast. Concrete instructies sturen het antwoord echt."},
-  {"vraag":"Je hebt de hele cursus je eigen use case gebruikt als rode draad. Wat was het voordeel van die aanpak?","opties":["Je use case was eenvoudiger dan die van andere deelnemers","Je kon elk concept direct toepassen op iets wat voor jou werkt — geen abstracte oefeningen maar direct bruikbare resultaten","Je hoefde minder te onthouden","Je kon modules overslaan die niet op jouw use case van toepassing waren"],"correct":1,"uitleg":"Abstracte kennis beklijft minder dan kennis die je meteen toepast. Door één use case door te trekken van A4 tot E8 heb je niet alleen geleerd hoe tools werken — je hebt een werkplek gebouwd die je direct kunt gebruiken."},
+  {"vraag":"Je hebt de hele cursus je eigen use case gebruikt als rode draad. Wat was het voordeel van die aanpak?","opties":["Je use case was eenvoudiger dan die van andere deelnemers","Je hoefde minder te onthouden","Je kon elk concept direct toepassen op iets wat voor jou werkt — geen abstracte oefeningen maar direct bruikbare resultaten","Je kon modules overslaan die niet op jouw use case van toepassing waren"],"correct":2,"uitleg":"Abstracte kennis beklijft minder dan kennis die je meteen toepast. Door één use case door te trekken van A4 tot E8 heb je niet alleen geleerd hoe tools werken — je hebt een werkplek gebouwd die je direct kunt gebruiken."},
   {"vraag":"Wat is het verschil tussen iemand die Claude als zoekmachine gebruikt en iemand die het als geconfigureerde werkplek inzet?","opties":["De geconfigureerde gebruiker betaalt meer per maand","De geconfigureerde gebruiker begint elk gesprek met context, tools en herbruikbare stappen klaar — de andere begint elke keer opnieuw","De geconfigureerde gebruiker krijgt betere antwoorden omdat Claude hen herkent","Er is geen verschil in resultaat, alleen in aanpak"],"correct":1,"uitleg":"Dat is precies wat je in deze cursus hebt gebouwd: een werkplek. Prompttemplate voor consistente input, privacyveilige aanpak, Project met Custom Instructions voor vaste context, en optioneel een Skill voor herhaaltaken. Die combinatie is het verschil tussen Claude kennen en Claude gebruiken."}
 ]
 <!-- QUIZ_END -->
@@ -90,8 +90,6 @@
     <div class="i-rij"><div class="i-nr">4</div><div>Optioneel: je CLAUDE.md uit leeropdracht D5, je Plugin-naam en Skill-naam uit leeropdracht E8</div></div>
   </div>
 
-  <div class="tijdsbadge">Geschatte tijd: 20-30 minuten</div>
-
   <div class="leerdoelen">
     <h3>Na deze opdracht heb je:</h3>
     <ul>
@@ -100,6 +98,8 @@
       <li>Laten zien dat je Claude begrijpt als gereedschap, niet als zoekmachine</li>
     </ul>
   </div>
+
+  <div class="tijdsbadge">Geschatte tijd: 20-30 minuten</div>
 
   <div class="btn-wrap">
     <button class="btn" onclick="startEindopdracht()">Start de eindopdracht →</button>
@@ -301,9 +301,9 @@
 
   <div class="content-card">
     <span class="prompt-label">Je prompttemplate als vertrekpunt</span>
-    <div class="prompt-box" id="fase2-template-prompt">[Jouw prompttemplate uit A4 — pas aan voor deze uitvoering]</div>
-    <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase2-template-prompt').innerText, this)">Kopieer template</button>
-    <p style="font-size:0.82rem;color:rgba(39,41,45,0.5);margin-top:-0.5rem;margin-bottom:0;">Vervang de placeholder door je eigen prompttemplate uit A4 voordat je hem verzendt.</p>
+    <p style="font-size:0.9rem;color:#27292D;margin-bottom:0.75rem;">Plak hieronder je eigen prompttemplate uit leeropdracht A4, pas hem aan voor deze specifieke uitvoering, en kopieer hem dan naar Claude.ai.</p>
+    <textarea id="fase2-template-prompt" class="fase-input" rows="6" placeholder="Plak hier je prompttemplate uit A4 en pas hem aan voor deze uitvoering..." style="margin-bottom:0.75rem;"></textarea>
+    <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase2-template-prompt').value, this)">Kopieer ingevulde template</button>
   </div>
 
   <div class="fase-input-wrap">
@@ -383,10 +383,6 @@
       <li class="optioneel">Claude Code met CLAUDE.md (optioneel)</li>
       <li class="optioneel">Een Connector, Plugin en Skill voor geautomatiseerde taken (optioneel)</li>
     </ul>
-  </div>
-
-  <div class="content-card">
-    <p>Je hebt niet alleen geleerd hoe Claude werkt — je hebt hem ingericht als een echte werkomgeving voor jouw situatie. Dat is het verschil tussen Claude kennen en Claude gebruiken.</p>
   </div>
 
   <div class="btn-wrap">

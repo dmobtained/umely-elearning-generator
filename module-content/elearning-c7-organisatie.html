@@ -1,6 +1,6 @@
 <!-- TITLE: C7 - Claude als organisatie -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Teams vs Enterprise','screen-module-2':'Claude uitrollen in een team','screen-module-3':'Gedeelde Projects','screen-module-4':'Adoptie en interne richtlijn','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-3-kc','screen-module-4','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Teams vs Enterprise','screen-module-1-kc':'Kennischeck: juist abonnement kiezen','screen-module-2':'Claude uitrollen in een team','screen-module-3':'Gedeelde Projects','screen-module-3-kc':'Kennischeck: voordelen gedeelde Projects','screen-module-4':'Adoptie en interne richtlijn','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -34,7 +34,7 @@
     <table class="vergelijk-tabel">
       <thead><tr><th>Eigenschap</th><th>Teams</th><th>Enterprise</th></tr></thead>
       <tbody>
-        <tr><td>Voor wie?</td><td>Organisaties met min. 5 seats</td><td>Grotere organisaties met compliance-eisen</td></tr>
+        <tr><td>Voor wie?</td><td>Organisaties met min. 5 seats (controleer actuele voorwaarden op claude.ai/pricing)</td><td>Grotere organisaties met compliance-eisen</td></tr>
         <tr><td>Gedeelde Projects</td><td>Ja</td><td>Ja</td></tr>
         <tr><td>Gesprekken voor training</td><td>Standaard niet</td><td>Standaard niet</td></tr>
         <tr><td>SSO / SAML</td><td>Nee</td><td>Ja</td></tr>
@@ -46,7 +46,17 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>Voor de meeste MKB-kantoren is Teams voldoende. Teams heeft een minimum van 5 seats en de DPA is automatisch inbegrepen in de Commercial Terms. Enterprise is nodig als je specifieke beveiligingseisen hebt zoals SSO, auditlogs en prioriteitssupport. Zie <strong>anthropic.com/legal/data-processing-addendum</strong> voor de actuele DPA-tekst. Controleer <strong>claude.com/pricing</strong> voor de actuele features per plan.</p>
+    <p>Voor de meeste MKB-kantoren is Teams voldoende. De DPA is automatisch inbegrepen in de Commercial Terms. Enterprise is nodig als je specifieke beveiligingseisen hebt zoals SSO, auditlogs en prioriteitssupport. Zie <strong>anthropic.com/legal/data-processing-addendum</strong> voor de actuele DPA-tekst. Controleer <strong>claude.ai/pricing</strong> voor de actuele features en minimumvereisten per plan.</p>
+  </div>
+  <div class="btn-wrap">
+  </div>
+</div>
+
+<!-- MODULE 1 KC -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 4</div>
+    <h2>Kennischeck</h2>
   </div>
   <div id="kc-1" class="kennischeck">
     <h3>Kennischeck</h3>
@@ -104,7 +114,7 @@
     <p class="scenario-tekst">Je bent office manager bij een marketingbureau met 15 medewerkers. De directeur wil dat iedereen morgen Claude gaat gebruiken. Wat adviseer je?</p>
     <div class="scenario-keuzes">
       <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Iedereen tegelijk laten beginnen zonder voorbereiding leidt tot frustratie. Begin klein en bouw op.')">Iedereen direct een account geven en zeggen dat ze het moeten gebruiken</button>
-      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Begin met een kleine groep en een concrete use case. Laat resultaten spreken. Stel een korte richtlijn op en breid dan pas uit.')">Begin met een kleine testgroep, kies een concrete use case en stel een korte richtlijn op</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Correct. Begin met een kleine testgroep en een concrete use case. Laat resultaten spreken. Stel een korte richtlijn op en breid dan pas uit.')">Begin met een kleine testgroep, kies een concrete use case en stel een korte richtlijn op</button>
       <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Wachten is onnodig. Je kunt direct beginnen met een kleine groep en een concreet doel.')">Wachten tot Anthropic een speciaal trainingsprogramma aanbiedt</button>
     </div>
     <div id="scenario-feedback-1" class="scenario-feedback"></div>
@@ -140,6 +150,16 @@
       </div>
     </div>
   </div>
+  <div class="btn-wrap">
+  </div>
+</div>
+
+<!-- MODULE 3 KC -->
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-2" class="kennischeck">
     <h3>Kennischeck</h3>
     <p class="kc-vraag">Wat is het voordeel van gedeelde Projects?</p>
@@ -163,7 +183,7 @@
   </div>
   <div class="tip-box waarschuwing">
     <div class="tip-box-label waarschuwing">Let op</div>
-    <p>Zorg voor duidelijkheid over verantwoordelijkheid: Claude geeft antwoorden maar mensen nemen beslissingen. Die grens moet helder zijn in de organisatie.</p>
+    <p>Zorg voor duidelijkheid over verantwoordelijkheid: Claude geeft antwoorden maar mensen nemen beslissingen. Leg dit vast in de interne richtlijn en benoem een aanspreekpunt voor vragen.</p>
   </div>
   <div class="content-card">
     <h3>Wat hoort er in een interne richtlijn?</h3>
@@ -182,6 +202,7 @@
     <p>Houd de richtlijn beknopt en praktisch. Belangrijker dan de lengte is dat iedereen weet waar de grens ligt en bij wie ze terecht kunnen met vragen.</p>
   </div>
   <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz →</button>
   </div>
 </div>
 

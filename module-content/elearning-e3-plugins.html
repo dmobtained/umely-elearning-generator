@@ -1,6 +1,6 @@
 <!-- TITLE: E3 - Projects, Custom Instructions en Plugins -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat zijn Projects?','screen-module-2':'Custom Instructions','screen-module-3':'Kennisbestanden','screen-module-4':'In de praktijk — en wat is een Plugin?','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-3-kc','screen-module-4','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Wat zijn Projects?','screen-module-1-kc':'Kennischeck','screen-module-2':'Custom Instructions schrijven','screen-module-3':'Kennisbestanden in Projects','screen-module-3-kc':'Kennischeck','screen-module-4':'In de praktijk — van Project naar Plugin','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -50,8 +50,18 @@
       </tbody>
     </table>
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-kc')">Kennischeck &rarr;</button>
+  </div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Wat lost een Project op in claude.ai?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Projects maken Claude niet slimmer. Ze zorgen ervoor dat je context niet steeds opnieuw hoeft te geven.')">Claude wordt slimmer door een Project aan te maken</button>
@@ -134,8 +144,18 @@
     <div class="tip-box-label waarschuwing">Let op</div>
     <p>Kennisbestanden hebben een maximale bestandsgrootte per Project. Controleer de actuele limiet in de instellingen van je Project. Zeer grote documenten of databases passen hier mogelijk niet in. Claude leest de bestanden bij elke chat, dus houd ze relevant en beknopt voor de beste resultaten.</p>
   </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-kc')">Kennischeck &rarr;</button>
+  </div>
+</div>
+
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 4</div>
+    <h2>Kennischeck</h2>
+  </div>
   <div id="kc-2" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Waarom upload je een huisstijlgids als kennisbestand in een Project?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Door de huisstijlgids als kennisbestand toe te voegen, verwijst Claude er automatisch naar in elke conversatie binnen dat Project.')">Zodat Claude automatisch je huisstijl volgt zonder dat je die elke keer beschrijft</button>
@@ -176,6 +196,10 @@
       </div>
     </div>
   </div>
+  <div class="tip-box">
+    <div class="tip-box-label tip">Noot: twee betekenissen van "Plugin"</div>
+    <p>In deze module gebruiken we "Plugin" als naam voor een volledig geconfigureerd Project in claude.ai. In module E3 (plugin bouwen) bouw je een technische plugin via MCP — dat is een andere betekenis van hetzelfde woord. Een geconfigureerd Project (deze module) en een MCP-server (E3 plugin bouwen) zijn twee verschillende dingen met dezelfde naam.</p>
+  </div>
   <div class="content-card">
     <h3>Van Project naar Plugin</h3>
     <p>Als je een Project volledig inricht voor één taak — scherpe Custom Instructions, een Connector voor live data en optioneel een kennisbestand — spreken we van een <strong>Plugin</strong>. Een Plugin is geen aparte feature in claude.ai, maar een naam voor een volledig geconfigureerde werkplek.</p>
@@ -205,6 +229,7 @@
     </table>
   </div>
   <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz &rarr;</button>
   </div>
 </div>
 

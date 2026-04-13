@@ -62,10 +62,11 @@
 <!-- QUIZ_END -->
 
 <div id="screen-welcome" class="screen start">
-  <div class="welcome-badge">E3 — Je eerste plugin bouwen</div>
-  <h1>Claude weet wat jij weet</h1>
-  <p>Kant-en-klare Connectors koppelen Claude aan systemen van anderen. Een plugin koppelt Claude aan wat jij hebt: je eigen klantenlijst, je interne procedures, je eigen kennis.</p>
-  <p>In deze module bouw je je eerste plugin - zonder code te schrijven.</p>
+  <div class="welcome-hero">
+    <div class="welcome-badge">Umely E-learning</div>
+    <h1>E3 - Je eerste plugin bouwen</h1>
+    <p>Kant-en-klare Connectors koppelen Claude aan systemen van anderen. Een plugin koppelt Claude aan wat jij hebt: je eigen klantenlijst, je interne procedures, je eigen kennis. In deze module bouw je je eerste plugin — zonder code te schrijven.</p>
+  </div>
   <div class="leerdoelen">
     <h3>Na deze module kun je:</h3>
     <ul>
@@ -77,12 +78,14 @@
     </ul>
   </div>
   <div class="tijdsbadge">± 20 minuten</div>
-  <div class="nav-buttons" id="nav-screen-welcome"></div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
+  </div>
 </div>
 
 <div id="screen-module-1-1" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 1</div>
+    <div class="module-num">Onderdeel 1 van 3</div>
     <h2>Connector vs. plugin: wat is het verschil?</h2>
   </div>
   <div class="content-card">
@@ -169,7 +172,7 @@
 
 <div id="screen-module-1-kc" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 1</div>
+    <div class="module-num">Onderdeel 1 van 3</div>
     <h2>Kennischeck</h2>
   </div>
   <div id="kc-1" class="kennischeck">
@@ -187,7 +190,7 @@
 
 <div id="screen-module-2-1" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 2</div>
+    <div class="module-num">Onderdeel 2 van 3</div>
     <h2>Wat gaat jouw plugin weten?</h2>
   </div>
   <div class="content-card">
@@ -224,7 +227,7 @@
 
 <div id="screen-module-2-2" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 2</div>
+    <div class="module-num">Onderdeel 2 van 3</div>
     <h2>Claude Code schrijft alles</h2>
   </div>
   <div class="content-card">
@@ -277,7 +280,7 @@ Gebruik de officiële MCP Python SDK. Als Python niet beschikbaar is, gebruik da
 
 <div id="screen-module-2-kc" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 2</div>
+    <div class="module-num">Onderdeel 2 van 3</div>
     <h2>Kennischeck</h2>
   </div>
   <div id="kc-2" class="kennischeck">
@@ -295,7 +298,7 @@ Gebruik de officiële MCP Python SDK. Als Python niet beschikbaar is, gebruik da
 
 <div id="screen-module-3-1" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 3</div>
+    <div class="module-num">Onderdeel 3 van 3</div>
     <h2>De plugin koppelen aan Claude</h2>
   </div>
   <div class="content-card">
@@ -347,7 +350,7 @@ Gebruik de officiële MCP Python SDK. Als Python niet beschikbaar is, gebruik da
 
 <div id="screen-module-3-2" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 3</div>
+    <div class="module-num">Onderdeel 3 van 3</div>
     <h2>Plugin starten en verifiëren</h2>
   </div>
   <div class="stappen-lijst">
@@ -377,19 +380,14 @@ Gebruik de officiële MCP Python SDK. Als Python niet beschikbaar is, gebruik da
     </div>
     <div id="scenario-feedback-1" class="scenario-feedback"></div>
   </div>
-  <div class="tip-box">
-    <div class="tip-box-label tip">Klaar voor de quiz?</div>
-    <p>Je hebt alle stappen doorlopen: van het verschil tussen Connector en plugin tot het starten en verifiëren van je eigen plugin. Test je kennis in de afsluitquiz.</p>
-    <div style="margin-top:1rem;">
-      <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz</button>
-    </div>
+  <div class="content-card">
+    <p>Je hebt alle stappen doorlopen: van het verschil tussen Connector en plugin tot het starten en verifiëren van je eigen plugin. Ga door naar de kennischeck, daarna test je je kennis in de afsluitquiz.</p>
   </div>
-  <div class="nav-buttons" id="nav-screen-module-3-2"></div>
 </div>
 
 <div id="screen-module-3-kc" class="screen">
   <div class="module-header">
-    <div class="module-naam">Module 3</div>
+    <div class="module-num">Onderdeel 3 van 3</div>
     <h2>Kennischeck</h2>
   </div>
   <div id="kc-3" class="kennischeck">

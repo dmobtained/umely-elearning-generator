@@ -1,6 +1,6 @@
 <!-- TITLE: D1 - Wanneer heb je meer nodig dan de browser? -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'De twee paden','screen-module-2':'Wat houdt elk pad in?','screen-module-3':'Wat volgt er in het traject?','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-2-kc','screen-module-3','screen-module-3-kc','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'De twee paden','screen-module-1-kc':'Kennischeck: de twee paden','screen-module-2':'Wat houdt elk pad in?','screen-module-2-kc':'Kennischeck: Pad A en Pad B','screen-module-3':'Wat volgt er in het traject?','screen-module-3-kc':'Kennischeck: Claude Code en het traject','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 <!-- QUIZ_START -->
 [
   {
@@ -73,12 +73,12 @@
     <svg viewBox="0 0 580 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
       <defs>
         <linearGradient id="d1-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1E2128"/><stop offset="100%" stop-color="#16181D"/></linearGradient>
-        <linearGradient id="d1-blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#6366F1"/></linearGradient>
+        <linearGradient id="d1-blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FF8514"/><stop offset="100%" stop-color="#FF4D00"/></linearGradient>
         <marker id="d1-arr-l" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
           <path d="M6,0 L0,3 L6,6" fill="none" stroke="rgba(255,133,20,0.6)" stroke-width="1.2"/>
         </marker>
         <marker id="d1-arr-r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6" fill="none" stroke="rgba(99,102,241,0.6)" stroke-width="1.2"/>
+          <path d="M0,0 L6,3 L0,6" fill="none" stroke="rgba(255,133,20,0.6)" stroke-width="1.2"/>
         </marker>
       </defs>
 
@@ -120,26 +120,15 @@
       <text x="375" y="176" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Tools en websites bouwen</text>
       <circle cx="365" cy="194" r="3" fill="url(#d1-blue)"/>
       <text x="375" y="198" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Meerdere stappen automatisch</text>
-      <rect x="357" y="222" width="80" height="22" rx="11" fill="rgba(59,130,246,0.15)" stroke="rgba(99,102,241,0.4)" stroke-width="1"/>
-      <text x="397" y="237" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="#6366F1" text-anchor="middle">~1-2u setup</text>
+      <rect x="357" y="222" width="80" height="22" rx="11" fill="rgba(255,133,20,0.15)" stroke="rgba(255,133,20,0.4)" stroke-width="1"/>
+      <text x="397" y="237" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="#FF8514" text-anchor="middle">~1-2u setup</text>
 
       <!-- Arrows -->
       <line x1="256" y1="145" x2="235" y2="145" stroke="rgba(255,133,20,0.6)" stroke-width="1.5" marker-end="url(#d1-arr-l)"/>
-      <line x1="324" y1="145" x2="345" y2="145" stroke="rgba(99,102,241,0.6)" stroke-width="1.5" marker-end="url(#d1-arr-r)"/>
+      <line x1="324" y1="145" x2="345" y2="145" stroke="rgba(255,133,20,0.6)" stroke-width="1.5" marker-end="url(#d1-arr-r)"/>
 
       <text x="290" y="275" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)" text-anchor="middle">Beide paden zijn goede keuzes — afhankelijk van jouw situatie</text>
     </svg>
-  </div>
-
-  <div class="kennischeck" id="kc-3">
-    <p class="kc-vraag">Een HR-manager gebruikt Claude dagelijks om vacatureteksten te schrijven en cv-feedback te geven via de web-app. Welk pad past hier?</p>
-    <div class="kc-opties">
-      <div class="kc-optie" onclick="checkKC(3, this, false, null, 'Nee. Pad B is voor wie systemen wil koppelen of processen automatiseren — niet voor dagelijks tekstwerk via de interface.')">Pad B — Claude koppelen aan het HR-systeem</div>
-      <div class="kc-optie" onclick="checkKC(3, this, true, null, 'Precies. Schrijven, analyseren en vragen stellen via de browser is klassiek Pad A-gebruik. De setup die Pad B vraagt, is hier niet nodig.')">Pad A — de browser en desktop zijn genoeg</div>
-      <div class="kc-optie" onclick="checkKC(3, this, false, null, 'Niet van toepassing. Claude Code voegt niets toe aan schrijf- en beoordelingstaken — die lopen prima via de web-app.')">Claude Code installeren voor snellere verwerking</div>
-      <div class="kc-optie" onclick="checkKC(3, this, false, null, 'De informatie is er al: dagelijks tekstwerk via de interface past bij Pad A. Meer context is hier niet nodig.')">Er is meer informatie nodig om dit te bepalen</div>
-    </div>
-    <div class="kc-feedback" id="kc-feedback-3"></div>
   </div>
 
   <div class="content-card">
@@ -153,13 +142,22 @@
     <strong>Let op:</strong> Pad B vereist drempelbereidheid — geen programmeerkennis, maar wel de bereidheid om een terminal te openen en stappen te volgen die je nog niet kent. Als die bereidheid er niet is, is Pad A de eerlijkste keuze.
   </div>
 
+</div>
+
+<!-- MODULE 1 KENNISCHECK -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 3</div>
+    <h2>Kennischeck</h2>
+  </div>
+
   <div class="kennischeck" id="kc-1">
     <p class="kc-vraag">Een makelaar gebruikt Claude dagelijks om bezichtigingsrapporten te schrijven en e-mails samen te vatten. Welk pad past hier het best?</p>
     <div class="kc-opties">
-      <div class="kc-optie" onclick="checkKC(1, this, false, null, 'Nee. Pad B is voor wie systemen wil koppelen of processen wil automatiseren — niet voor dagelijks gebruik via de interface.')">Pad B — Claude koppelen aan systemen</div>
-      <div class="kc-optie" onclick="checkKC(1, this, true, null, 'Precies. Schrijven, samenvatten en analyseren via de interface is klassiek Pad A-gebruik. De browser en desktop zijn hier meer dan genoeg.')">Pad A — de browser en desktop zijn genoeg</div>
-      <div class="kc-optie" onclick="checkKC(1, this, false, null, 'Niet van toepassing. Claude Code is bedoeld voor wie meerdere stappen automatisch wil laten uitvoeren — dat is hier niet nodig.')">Claude Code installeren</div>
-      <div class="kc-optie" onclick="checkKC(1, this, false, null, 'Beide paden zijn beschikbaar, maar de vraag is welk pad het best past. Voor dagelijkse schrijftaken is dat duidelijk Pad A.')">Beide paden zijn gelijkwaardig</div>
+      <div class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Nee. Pad B is voor wie systemen wil koppelen of processen wil automatiseren — niet voor dagelijks gebruik via de interface.')">Pad B — Claude koppelen aan systemen</div>
+      <div class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Precies. Schrijven, samenvatten en analyseren via de interface is klassiek Pad A-gebruik. De browser en desktop zijn hier meer dan genoeg.')">Pad A — de browser en desktop zijn genoeg</div>
+      <div class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Niet van toepassing. Claude Code is bedoeld voor wie meerdere stappen automatisch wil laten uitvoeren — dat is hier niet nodig.')">Claude Code installeren</div>
+      <div class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Beide paden zijn beschikbaar, maar de vraag is welk pad het best past. Voor dagelijkse schrijftaken is dat duidelijk Pad A.')">Beide paden zijn gelijkwaardig</div>
     </div>
     <div class="kc-feedback" id="kc-feedback-1"></div>
   </div>
@@ -177,32 +175,10 @@
     <p>Je gebruikt Claude zoals je nu al doet. Je kunt het gebruik verdiepen door betere prompts te schrijven, Projects aan te maken per klant of onderwerp, en Cowork te gebruiken voor bestandstaken. De modules D en E zijn dan informatief — goed om te weten wat er bestaat, maar je hoeft het niet zelf in te richten.</p>
   </div>
 
-  <div class="kennischeck" id="kc-4">
-    <p class="kc-vraag">Hoe verdiep je Pad A-gebruik zonder extra technische setup?</p>
-    <div class="kc-opties">
-      <div class="kc-optie" onclick="checkKC(4, this, false, null, 'Claude Code vereist juist wél een setup — dat is Pad B. Pad A verdiep je binnen de interface zelf.')">Claude Code installeren voor snellere verwerking</div>
-      <div class="kc-optie" onclick="checkKC(4, this, false, null, 'MCP-koppelingen horen bij Pad B — die vereisen een setup buiten de browser.')">MCP-koppelingen toevoegen aan je browser</div>
-      <div class="kc-optie" onclick="checkKC(4, this, true, null, 'Precies. Betere prompts, Projects per klant of onderwerp, en Cowork voor bestandstaken — dat zijn de Pad A-verdiepingen die je zonder extra setup direct kunt toepassen.')">Betere prompts schrijven en Projects aanmaken per klant of onderwerp</div>
-      <div class="kc-optie" onclick="checkKC(4, this, false, null, 'Een ander abonnement is geen vereiste voor verdieping. Betere prompts en Projects werken op elk abonnementsniveau.')">Een Enterprise-abonnement nemen</div>
-    </div>
-    <div class="kc-feedback" id="kc-feedback-4"></div>
-  </div>
-
   <div class="content-card">
     <p><strong>Pad B: Claude koppelen aan je systemen</strong></p>
     <p>Je gaat verder met <strong>Claude Code</strong> (modules D2-D4) en <strong>MCP, Connectors en Skills</strong> (module E). Claude Code draait via de terminal en voert meerdere stappen achter elkaar uit. MCP en Connectors koppelen Claude aan externe systemen zoals Gmail, je agenda of een CRM.</p>
     <p>Geen programmeerkennis vereist — maar wel drempelbereidheid. Eenmalig investeren, structureel terugverdienen.</p>
-  </div>
-
-  <div class="kennischeck" id="kc-5">
-    <p class="kc-vraag">Wat onderscheidt Pad B van Pad A?</p>
-    <div class="kc-opties">
-      <div class="kc-optie" onclick="checkKC(5, this, false, null, 'Pad B vereist geen duurder abonnement — het gaat om het gebruik van Claude Code en MCP, niet om een prijsniveau.')">Pad B heeft een duurder abonnement nodig</div>
-      <div class="kc-optie" onclick="checkKC(5, this, false, null, 'Geen programmeerkennis vereist — alleen drempelbereidheid om een terminal te openen en stappen te volgen.')">Pad B is alleen voor IT-professionals met programmeerkennis</div>
-      <div class="kc-optie" onclick="checkKC(5, this, false, null, 'Niet juist. Drempelbereidheid is vereist, maar dat is heel wat anders dan actief kunnen programmeren.')">Pad B vereist dat je zelf kunt programmeren</div>
-      <div class="kc-optie" onclick="checkKC(5, this, true, null, 'Precies. Pad B koppelt Claude via Claude Code en MCP aan externe systemen en laat meerdere stappen automatisch uitvoeren — dat kan Pad A niet.')">Pad B koppelt Claude aan externe systemen en voert meerdere stappen automatisch uit</div>
-    </div>
-    <div class="kc-feedback" id="kc-feedback-5"></div>
   </div>
 
   <div class="visual-block">
@@ -224,10 +200,10 @@
       <text x="145" y="128" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Nee</text>
       <text x="145" y="156" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Dagelijks gebruik</text>
       <!-- Pad B values -->
-      <text x="435" y="72" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Ja (~1-2 uur)</text>
-      <text x="435" y="100" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Drempelbereidheid</text>
-      <text x="435" y="128" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Ja</text>
-      <text x="435" y="156" font-family="Arial, sans-serif" font-size="9" fill="#6366F1" text-anchor="middle">Repetitief meerstapswerk</text>
+      <text x="435" y="72" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Ja (~1-2 uur)</text>
+      <text x="435" y="100" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Drempelbereidheid</text>
+      <text x="435" y="128" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Ja</text>
+      <text x="435" y="156" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" text-anchor="middle">Repetitief meerstapswerk</text>
       <!-- Divider -->
       <line x1="280" y1="55" x2="280" y2="170" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
     </svg>
@@ -237,13 +213,22 @@
     <strong>Je hoeft nu geen definitieve keuze te maken.</strong> Volg de modules en stop of verdiep op het punt dat past bij waar jij staat. Pad A en Pad B sluiten elkaar niet uit.
   </div>
 
+</div>
+
+<!-- MODULE 2 KENNISCHECK -->
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 2 van 3</div>
+    <h2>Kennischeck</h2>
+  </div>
+
   <div class="kennischeck" id="kc-2">
     <p class="kc-vraag">Wat is het belangrijkste signaal dat Pad B de moeite waard is?</p>
     <div class="kc-opties">
-      <div class="kc-optie" onclick="checkKC(2, this, false, null, 'Niet beslissend. Hoe lang je Claude al gebruikt zegt niets over of automatisering zinvol is.')">Je gebruikt Claude al meer dan drie maanden</div>
-      <div class="kc-optie" onclick="checkKC(2, this, false, null, 'Niet relevant. Het abonnementsniveau bepaalt niet of Pad B loont — dat gaat over wat je ermee wilt doen.')">Je hebt een Pro-abonnement</div>
-      <div class="kc-optie" onclick="checkKC(2, this, false, null, 'Niet per se. Collega\'s kunnen Pad A gebruiken terwijl jij baat hebt bij Pad B, of andersom.')">Je collega\'s gebruiken Claude ook</div>
-      <div class="kc-optie" onclick="checkKC(2, this, true, null, 'Precies. Een wekelijkse taak die meerdere stappen heeft en informatie uit verschillende systemen combineert — dat is het klassieke geval waar Pad B structureel tijd bespaart.')">Je doet minstens wekelijks een meerstapstaak waarbij je informatie uit verschillende systemen combineert</div>
+      <div class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Niet beslissend. Hoe lang je Claude al gebruikt zegt niets over of automatisering zinvol is.')">Je gebruikt Claude al meer dan drie maanden</div>
+      <div class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Niet relevant. Het abonnementsniveau bepaalt niet of Pad B loont — dat gaat over wat je ermee wilt doen.')">Je hebt een Pro-abonnement</div>
+      <div class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3', 'Niet per se. Collega\'s kunnen Pad A gebruiken terwijl jij baat hebt bij Pad B, of andersom.')">Je collega\'s gebruiken Claude ook</div>
+      <div class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3', 'Precies. Een wekelijkse taak die meerdere stappen heeft en informatie uit verschillende systemen combineert — dat is het klassieke geval waar Pad B structureel tijd bespaart.')">Je doet minstens wekelijks een meerstapstaak waarbij je informatie uit verschillende systemen combineert</div>
     </div>
     <div class="kc-feedback" id="kc-feedback-2"></div>
   </div>
@@ -265,17 +250,6 @@
     <p>Installatie, je eerste opdracht, CLAUDE.md als projectgeheugen en Plan Mode voor complexe taken. Je leert Claude Code gebruiken zonder dat je kunt programmeren.</p>
   </div>
 
-  <div class="kennischeck" id="kc-6">
-    <p class="kc-vraag">Wat kan Claude Code dat de reguliere web-app niet kan?</p>
-    <div class="kc-opties">
-      <div class="kc-optie" onclick="checkKC(6, this, false, null, 'De kwaliteit van antwoorden verschilt niet per interface — Claude Code voegt geen intelligentie toe, maar wel de mogelijkheid om acties uit te voeren.')">Betere antwoorden geven op tekstuele vragen</div>
-      <div class="kc-optie" onclick="checkKC(6, this, true, null, 'Precies. Claude Code draait via de terminal en kan zelfstandig bestanden lezen, bewerken en opdrachten uitvoeren — stap voor stap, zonder dat je elke actie handmatig triggert.')">Meerdere stappen automatisch uitvoeren en bestanden op je computer bewerken</div>
-      <div class="kc-optie" onclick="checkKC(6, this, false, null, 'Claude Code werkt juist via de terminal met internetverbinding — het vervangt de browser, maar heeft geen offline-modus.')">Modules genereren zonder internetverbinding</div>
-      <div class="kc-optie" onclick="checkKC(6, this, false, null, 'Claude Code is geen sleutel tot extra Pro-functies — het is een aparte manier om Claude te gebruiken, naast je bestaande abonnement.')">Claude Pro-functies activeren via de terminal</div>
-    </div>
-    <div class="kc-feedback" id="kc-feedback-6"></div>
-  </div>
-
   <div class="content-card">
     <p><strong>Module E — MCP, Connectors, Skills en agentic workflows</strong></p>
     <p>Claude verbinden met externe tools en diensten. Skills aanmaken die Claude instrueren hoe te werken. Workflows ontwerpen waarbij Claude zelfstandig meerdere stappen uitvoert.</p>
@@ -288,5 +262,30 @@
 
   <div class="tip-box">
     Volg de modules op je eigen tempo en stop of verdiep op het punt dat past bij waar jij staat.
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-3-kc')">Kennischeck →</button>
+  </div>
+</div>
+
+<!-- MODULE 3 KENNISCHECK -->
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 3</div>
+    <h2>Kennischeck</h2>
+  </div>
+
+  <div class="kennischeck" id="kc-6">
+    <p class="kc-vraag">Wat kan Claude Code dat de reguliere web-app niet kan?</p>
+    <div class="kc-opties">
+      <div class="kc-optie" onclick="checkKC(6, this, false, 'screen-quiz', 'De kwaliteit van antwoorden verschilt niet per interface — Claude Code voegt geen intelligentie toe, maar wel de mogelijkheid om acties uit te voeren.')">Betere antwoorden geven op tekstuele vragen</div>
+      <div class="kc-optie" onclick="checkKC(6, this, true, 'screen-quiz', 'Precies. Claude Code draait via de terminal en kan zelfstandig bestanden lezen, bewerken en opdrachten uitvoeren — stap voor stap, zonder dat je elke actie handmatig triggert.')">Meerdere stappen automatisch uitvoeren en bestanden op je computer bewerken</div>
+      <div class="kc-optie" onclick="checkKC(6, this, false, 'screen-quiz', 'Claude Code werkt juist via de terminal met internetverbinding — het vervangt de browser, maar heeft geen offline-modus.')">Modules genereren zonder internetverbinding</div>
+      <div class="kc-optie" onclick="checkKC(6, this, false, 'screen-quiz', 'Claude Code is geen sleutel tot extra Pro-functies — het is een aparte manier om Claude te gebruiken, naast je bestaande abonnement.')">Claude Pro-functies activeren via de terminal</div>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-6"></div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz →</button>
   </div>
 </div>

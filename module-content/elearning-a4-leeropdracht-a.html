@@ -60,7 +60,7 @@
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>Leeropdracht A — kies je use case en bouw je eerste prompttemplate</h1>
+    <h1>Leeropdracht A: kies je use case en bouw je eerste prompttemplate</h1>
     <p>Dit is de eerste leeropdracht van de cursus. Je kiest hier een echte werktaak als use case. Die taak bouw je door alle volgende leeropdrachten heen uit.</p>
   </div>
 
@@ -68,7 +68,7 @@
     <label for="naam-input" class="fase-input-label">Jouw naam</label>
     <input type="text" id="naam-input" class="fase-input" style="min-height:unset;resize:none;" placeholder="Vul je naam in" autocomplete="name">
     <div id="naam-error" class="naam-error">Vul je naam in om verder te gaan.</div>
-    <label for="usecase-input" style="display:block;font-family:var(--font-h);font-size:0.85rem;font-weight:700;color:#27292D;margin:1rem 0 0.4rem;">Jouw use case (schrijf dit op — je hebt het nodig in elke volgende leeropdracht)</label>
+    <label for="usecase-input" style="display:block;font-family:var(--font-h);font-size:0.85rem;font-weight:700;color:#27292D;margin:1rem 0 0.4rem;">Jouw use case (schrijf dit op; je hebt het nodig in elke volgende leeropdracht)</label>
     <input type="text" id="usecase-input" class="fase-input" style="min-height:unset;resize:none;" placeholder="Bijv: weekelijkse statusrapporten schrijven, klantmails opstellen, notulen samenvatten...">
     <div class="usecase-voorbeelden">
       <span style="font-size:0.78rem;color:#999;width:100%;display:block;margin-bottom:0.15rem">Of kies een voorbeeld:</span>
@@ -84,7 +84,7 @@
 
   <div class="tip-box">
     <div class="tip-box-label tip">Wat is een goede use case?</div>
-    <p>Je use case is een terugkerende werktaak die je wekelijks of dagelijks doet. Kies iets concreets — geen grote vage ambitie, maar een specifieke klus. Die use case bouw je door de hele cursus heen uit.</p>
+    <p>Je use case is een terugkerende werktaak die je wekelijks of dagelijks doet. Kies iets concreets, geen grote vage ambitie, maar een specifieke klus. Die use case bouw je door de hele cursus heen uit.</p>
   </div>
 
   <div class="instructie-balk">
@@ -161,7 +161,7 @@
   </div>
 
   <div class="content-card">
-    <p>Dit is je nulmeting. Je stuurt bewust een vage, onduidelijke prompt voor je use case — zonder uitleg over wie je bent, wat je precies wilt of hoe het resultaat eruit moet zien.</p>
+    <p>Dit is je nulmeting. Je stuurt bewust een vage, onduidelijke prompt voor je use case. Geen uitleg over wie je bent, wat je precies wilt of hoe het resultaat eruit moet zien.</p>
     <p>Claude zal iets terugsturen, maar het antwoord zal waarschijnlijk generiek zijn. Dat is het punt: je ziet straks precies wat context doet.</p>
   </div>
 
@@ -255,8 +255,8 @@
   <div class="content-card">
     <span class="prompt-label">Kopieer en vul in voor jouw use case</span>
     <div class="prompt-box" id="fase2-template">Context: [wie ben je, bij welk bedrijf of team, voor wie schrijf je]
-Opdracht: [wat moet Claude precies doen voor je use case — gebruik een werkwoord]
-Formaat: [lengte, toon, taal — bijv. "3 alinea's, zakelijk-vriendelijk, Nederlands"]</div>
+Opdracht: [wat moet Claude precies doen voor je use case, gebruik een werkwoord]
+Formaat: [lengte, toon, taal, bijv. "3 alinea's, zakelijk-vriendelijk, Nederlands"]</div>
     <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase2-template').innerText,this)">Kopieer template</button>
 
     <div class="instructie-stap"><div class="instructie-nr">1</div><div>Kopieer de template hierboven.</div></div>
@@ -339,7 +339,7 @@ Formaat: [lengte, toon, taal — bijv. "3 alinea's, zakelijk-vriendelijk, Nederl
 
   <div class="content-card">
     <p>Een goede prompt hoef je maar één keer goed te schrijven. In deze fase zet je de verbeterde prompt uit fase 2 om naar een template met {{variabelen}}. Die variabelen zijn de plekken die per situatie veranderen.</p>
-    <p>Volgende keer hoef je de structuur niet te herschrijven — je vult alleen de variabelen in.</p>
+    <p>Volgende keer hoef je de structuur niet te herschrijven: je vult alleen de variabelen in.</p>
   </div>
 
   <div class="content-card">
@@ -385,7 +385,7 @@ Geef de volledige template terug, zodat ik hem direct kan kopiëren en bewaren.<
     <div class="welcome-badge" style="margin-bottom:1rem;">Leeropdracht voltooid</div>
     <h2>Goed gedaan, <span class="deelnemer-naam">...</span>.</h2>
     <p>Je hebt een herbruikbare prompttemplate voor je use case gebouwd. Dit is het fundament dat je door de rest van de cursus gebruikt.</p>
-    <p style="color:rgba(255,248,242,0.6);font-size:0.9rem;margin-top:0.75rem;">Noteer je use case en je template — je pakt ze erbij in elke volgende leeropdracht.</p>
+    <p style="color:rgba(255,248,242,0.6);font-size:0.9rem;margin-top:0.75rem;">Noteer je use case en je template. Je pakt ze erbij in elke volgende leeropdracht.</p>
   </div>
 
   <div class="content-card">

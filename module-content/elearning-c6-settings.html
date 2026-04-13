@@ -1,6 +1,6 @@
 <!-- TITLE: C6 - Claude Settings instellen -->
 <!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Topic 1 - Profiel en context','screen-module-1-2':'Topic 1 - Verdieping','screen-module-1-3':'Topic 1 - Praktijk','screen-module-1-kc':'Topic 1 - Kennischeck','screen-module-2-1':'Topic 2 - Memory','screen-module-2-2':'Topic 2 - Verdieping','screen-module-2-3':'Topic 2 - Praktijk','screen-module-2-kc':'Topic 2 - Kennischeck','screen-module-3-1':'Topic 3 - Privacy','screen-module-3-2':'Topic 3 - Verdieping','screen-module-3-3':'Topic 3 - Praktijk','screen-module-3-kc':'Topic 3 - Kennischeck','screen-module-4-1':'Topic 4 - Overige instellingen','screen-module-4-2':'Topic 4 - Verdieping','screen-module-4-3':'Topic 4 - Praktijk','screen-module-4-kc':'Topic 4 - Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Jouw profiel en automatische context instellen','screen-module-1-2':'De vijf instellingencategorieën begrijpen','screen-module-1-3':'Profiel in de praktijk: de juiste keuze maken','screen-module-1-kc':'Kennischeck: profielbeschrijving','screen-module-2-1':'Memory inschakelen en beheren','screen-module-2-2':'Wanneer zet je Memory aan of uit?','screen-module-2-3':'Memory in de praktijk: de juiste situatie herkennen','screen-module-2-kc':'Kennischeck: hoe werkt Memory?','screen-module-3-1':'Privacy en modeltraining begrijpen','screen-module-3-2':'Overzicht modeltraining per abonnement','screen-module-3-3':'Privacy in de praktijk: eerste stap bij professioneel gebruik','screen-module-3-kc':'Kennischeck: opt-in voor modeltraining','screen-module-4-1':'Billing, Appearance en taalinstelling','screen-module-4-2':'Handige sneltoetsen in Claude.ai','screen-module-4-3':'Sneltoetsen in de praktijk: Enter vs Shift+Enter','screen-module-4-kc':'Kennischeck: taal en sneltoetsen','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -36,9 +36,9 @@
   </div>
   <div class="visual-block">
     <svg viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
-      <rect width="580" height="280" rx="10" fill="#ebebeb"/>
-      <rect width="580" height="36" rx="10" fill="#d9d9d9"/>
-      <rect y="26" width="580" height="10" fill="#d9d9d9"/>
+      <rect width="580" height="280" rx="10" fill="#EAE6E0"/>
+      <rect width="580" height="36" rx="10" fill="#EDEBE8"/>
+      <rect y="26" width="580" height="10" fill="#EDEBE8"/>
       <circle cx="16" cy="18" r="5" fill="#ff5f57"/>
       <circle cx="30" cy="18" r="5" fill="#febc2e"/>
       <circle cx="44" cy="18" r="5" fill="#28c840"/>
@@ -269,7 +269,7 @@
     </table>
   </div>
   <div class="content-card">
-    <p>Je beheert de opt-in via <strong>claude.ai/settings/data-privacy-controls</strong>. De instelling staat niet automatisch aan — jij kiest zelf of je gesprekken gebruikt mogen worden voor modelverbetering. Je kunt de keuze op elk moment wijzigen.</p>
+    <p>Je beheert de opt-in via <strong>claude.ai/settings/data-privacy-controls</strong>. De instelling staat niet automatisch aan: jij kiest zelf of je gesprekken gebruikt mogen worden voor modelverbetering. Je kunt de keuze op elk moment wijzigen.</p>
   </div>
   <div class="btn-wrap">
   </div>
@@ -286,7 +286,7 @@
     <div class="scenario-keuzes">
       <button class="scenario-keuze" onclick="checkScenario(3, this, false, 'Het thema aanpassen is puur cosmetisch. De privacy-instelling is veel dringender bij professioneel gebruik.')">Het donkere thema instellen zodat het er professioneel uitziet</button>
       <button class="scenario-keuze" onclick="checkScenario(3, this, false, 'Memory heeft geen invloed op de privacy-instelling voor modeltraining. Dat zijn twee aparte instellingen.')">Memory inschakelen zodat Claude meer context heeft</button>
-      <button class="scenario-keuze" onclick="checkScenario(3, this, true, 'Correct. Controleer de privacy-instelling via claude.ai/settings/data-privacy-controls. Modeltraining is opt-in — de instelling staat standaard uit, maar bij professioneel gebruik is het verstandig dit te controleren én te overwegen over te stappen op een zakelijk abonnement met DPA.')">De privacy-instellingen controleren via Settings &gt; Privacy</button>
+      <button class="scenario-keuze" onclick="checkScenario(3, this, true, 'Correct. Controleer de privacy-instelling via claude.ai/settings/data-privacy-controls. Modeltraining is opt-in: de instelling staat standaard uit, maar bij professioneel gebruik is het verstandig dit te controleren én te overwegen over te stappen op een zakelijk abonnement met DPA.')">De privacy-instellingen controleren via Settings &gt; Privacy</button>
     </div>
     <div id="scenario-feedback-3" class="scenario-feedback"></div>
     <div class="btn-wrap" style="margin-top:1rem;">
@@ -303,7 +303,7 @@
     <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Hoe werkt de modeltraining-instelling voor Free, Pro en Max accounts?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Onjuist. Modeltraining staat niet automatisch aan — jij kiest actief of je meedoet.')">Training staat standaard aan, je moet het zelf uitschakelen</button>
+      <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Onjuist. Modeltraining staat niet automatisch aan: jij kiest actief of je meedoet.')">Training staat standaard aan, je moet het zelf uitschakelen</button>
       <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. Modeltraining is een opt-in keuze voor alle consumentenplannen. Je gesprekken worden alleen voor training gebruikt als jij dit actief aanzet via claude.ai/settings/data-privacy-controls.')">Training is opt-in: je zet het zelf aan als je wilt meedoen</button>
       <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Onjuist. Je kunt de instelling zelf beheren via de privacy-instellingen.')">Je kunt de instelling niet zelf beheren</button>
     </div>

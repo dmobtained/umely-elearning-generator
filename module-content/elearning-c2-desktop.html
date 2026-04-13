@@ -1,6 +1,6 @@
 <!-- TITLE: C2 - Desktop-app: Chat, Cowork en Code -->
 <!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Wat is de desktop-app?','screen-module-1-2':'Desktop-app vs web-app: de verschillen','screen-module-1-3':'Desktop-app in de praktijk','screen-module-1-kc':'Kennischeck','screen-module-2-1':'Chat en de voordelen','screen-module-2-2':'Wanneer kies je web-app of desktop-app?','screen-module-2-3':'Chat in de praktijk','screen-module-2-kc':'Kennischeck','screen-module-3-1':'Cowork: taken uitvoeren op je computer','screen-module-3-2':'Wat kan Cowork wel en niet?','screen-module-3-3':'Cowork in de praktijk','screen-module-3-kc':'Kennischeck','screen-module-4-1':'Code en wanneer welk product?','screen-module-4-2':'Wanneer kies je welk product?','screen-module-4-3':'Code en productkeuze in de praktijk','screen-module-4-kc':'Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Wat is de desktop-app?','screen-module-1-2':'Desktop-app vs web-app: de verschillen','screen-module-1-3':'Desktop-app in de praktijk','screen-module-1-kc':'Kennischeck: de desktop-app','screen-module-2-1':'Chat en de voordelen','screen-module-2-2':'Wanneer kies je web-app of desktop-app?','screen-module-2-3':'Chat in de praktijk','screen-module-2-kc':'Kennischeck: Chat','screen-module-3-1':'Cowork: taken uitvoeren op je computer','screen-module-3-2':'Wat kan Cowork wel en niet?','screen-module-3-3':'Cowork in de praktijk','screen-module-3-kc':'Kennischeck: Cowork','screen-module-4-1':'Code en wanneer welk product?','screen-module-4-2':'Wanneer kies je welk product?','screen-module-4-3':'Code en productkeuze in de praktijk','screen-module-4-kc':'Kennischeck: productkeuze','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -18,7 +18,7 @@
       <li>Kiezen tussen desktop-app en web-app op basis van je situatie</li>
     </ul>
   </div>
-  <div class="tijdsbadge">Geschatte tijd: 15 minuten</div>
+  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 15 minuten</div>
   <div class="btn-wrap">
     <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
   </div>
@@ -187,6 +187,16 @@
       </div>
     </div>
   </div>
+  <div id="scenario-5" class="scenario-blok">
+    <div class="scenario-label">Praktijksituatie</div>
+    <p class="scenario-tekst">Je hebt de desktop-app geinstalleerd. Je wil Claude toegang geven tot je sjablonenmap zodat je niet meer elke keer bestanden hoeft te uploaden. Wat doe je als eerste?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'Uploaden in de web-app is een aparte actie. Voor directe bestandstoegang via de desktop-app geef je toestemming via de instellingen van de app zelf.')">De bestanden uploaden in de web-app zodat ze beschikbaar zijn</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, true, 'Correct. In de desktop-app geef je eenmalig toestemming voor een specifieke map. Daarna kan Claude de bestanden in die map direct lezen zonder uploaden.')">In de desktop-app de map selecteren en eenmalig toestemming verlenen</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'Slepen werkt voor losse bestanden uploaden, maar geeft geen permanente toegang tot een map. Dat regel je via de maptoestemming in de app.')">De bestanden naar het chatvenster slepen elke keer dat je ze nodig hebt</button>
+    </div>
+    <div id="scenario-feedback-5" class="scenario-feedback"></div>
+  </div>
   <div class="btn-wrap">
   </div>
 </div>
@@ -283,85 +293,86 @@
     </div>
   </div>
   <div class="visual-block">
-    <svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+    <svg viewBox="0 0 580 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
       <defs>
         <linearGradient id="cw-grad" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#FF8514"/>
           <stop offset="100%" stop-color="#FF4D00"/>
         </linearGradient>
         <clipPath id="cw-clip">
-          <rect width="680" height="400" rx="10"/>
+          <rect width="580" height="340" rx="10"/>
         </clipPath>
       </defs>
       <g clip-path="url(#cw-clip)">
         <!-- Achtergrond -->
-        <rect width="680" height="400" fill="#1A1D22"/>
+        <rect width="580" height="340" fill="#27292D"/>
         <!-- App header -->
-        <rect width="680" height="38" fill="#27292D"/>
-        <circle cx="20" cy="19" r="5" fill="#FF5F57"/>
-        <circle cx="36" cy="19" r="5" fill="#FFBD2E"/>
-        <circle cx="52" cy="19" r="5" fill="#28C840"/>
+        <rect width="580" height="38" fill="#27292D"/>
+        <rect x="0" y="37" width="580" height="1" fill="rgba(255,255,255,0.08)"/>
+        <circle cx="20" cy="19" r="5" fill="rgba(255,255,255,0.18)"/>
+        <circle cx="36" cy="19" r="5" fill="rgba(255,255,255,0.12)"/>
+        <circle cx="52" cy="19" r="5" fill="rgba(255,255,255,0.08)"/>
         <!-- Mode tabs -->
-        <rect x="200" y="8" width="58" height="22" rx="11" fill="#3A3C42"/>
-        <text x="229" y="23" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">Chat</text>
-        <rect x="266" y="8" width="72" height="22" rx="11" fill="#FF8514" opacity="0.18"/>
-        <text x="302" y="23" font-family="Arial, sans-serif" font-size="10" fill="#FF8514" text-anchor="middle" font-weight="700">Cowork ●</text>
-        <rect x="346" y="8" width="56" height="22" rx="11" fill="#3A3C42"/>
-        <text x="374" y="23" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">Code</text>
+        <rect x="170" y="8" width="50" height="22" rx="11" fill="rgba(255,255,255,0.07)"/>
+        <text x="195" y="23" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.45)" text-anchor="middle">Chat</text>
+        <rect x="228" y="8" width="62" height="22" rx="11" fill="rgba(255,133,20,0.22)"/>
+        <text x="259" y="23" font-family="Arial, sans-serif" font-size="10" fill="#FF8514" text-anchor="middle" font-weight="700">Cowork ●</text>
+        <rect x="298" y="8" width="48" height="22" rx="11" fill="rgba(255,255,255,0.07)"/>
+        <text x="322" y="23" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.45)" text-anchor="middle">Code</text>
         <!-- Sidebar -->
-        <rect x="0" y="38" width="196" height="362" fill="#22252B"/>
-        <text x="16" y="64" font-family="Arial, sans-serif" font-size="9" fill="#777" font-weight="700">HUIDIGE TAAK</text>
-        <rect x="10" y="70" width="176" height="1" fill="#333"/>
-        <text x="16" y="89" font-family="Arial, sans-serif" font-size="10" fill="#CCC" font-weight="600">PDF-bestanden samenvatten</text>
-        <text x="16" y="106" font-family="Arial, sans-serif" font-size="9.5" fill="#777">12 bestanden gevonden</text>
-        <text x="16" y="122" font-family="Arial, sans-serif" font-size="9.5" fill="#777">Map: /Bezichtigingen/</text>
-        <text x="16" y="138" font-family="Arial, sans-serif" font-size="9.5" fill="#777">Uitvoer: /Samenvattingen/</text>
-        <rect x="10" y="150" width="176" height="5" rx="2.5" fill="#333"/>
-        <rect x="10" y="150" width="88" height="5" rx="2.5" fill="#FF8514"/>
-        <text x="16" y="168" font-family="Arial, sans-serif" font-size="9" fill="#777">Voortgang: 5 van 12 bestanden</text>
-        <text x="16" y="198" font-family="Arial, sans-serif" font-size="9" fill="#555" font-weight="700">EERDER GEBRUIKT</text>
-        <rect x="10" y="204" width="176" height="1" fill="#2E3138"/>
-        <text x="16" y="222" font-family="Arial, sans-serif" font-size="9.5" fill="#555">Mappen sorteren op datum</text>
-        <text x="16" y="240" font-family="Arial, sans-serif" font-size="9.5" fill="#555">Rapporten hernoemen</text>
-        <text x="16" y="258" font-family="Arial, sans-serif" font-size="9.5" fill="#555">Notulen exporteren</text>
+        <rect x="0" y="38" width="168" height="302" fill="rgba(0,0,0,0.3)"/>
+        <text x="14" y="62" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" font-weight="700">HUIDIGE TAAK</text>
+        <rect x="8" y="68" width="152" height="1" fill="rgba(255,255,255,0.07)"/>
+        <text x="14" y="87" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.85)" font-weight="600">PDF-bestanden samenvatten</text>
+        <text x="14" y="104" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.4)">12 bestanden gevonden</text>
+        <text x="14" y="120" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.4)">Map: /Bezichtigingen/</text>
+        <text x="14" y="136" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.4)">Uitvoer: /Samenvattingen/</text>
+        <rect x="8" y="148" width="152" height="5" rx="2.5" fill="rgba(255,255,255,0.1)"/>
+        <rect x="8" y="148" width="76" height="5" rx="2.5" fill="#FF8514"/>
+        <text x="14" y="166" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)">Voortgang: 5 van 12 bestanden</text>
+        <text x="14" y="196" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.2)" font-weight="700">EERDER GEBRUIKT</text>
+        <rect x="8" y="202" width="152" height="1" fill="rgba(255,255,255,0.05)"/>
+        <text x="14" y="220" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.28)">Mappen sorteren op datum</text>
+        <text x="14" y="238" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.28)">Rapporten hernoemen</text>
+        <text x="14" y="256" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.28)">Notulen exporteren</text>
         <!-- Main area -->
-        <rect x="196" y="38" width="484" height="362" fill="#1E2128"/>
+        <rect x="168" y="38" width="412" height="302" fill="#27292D"/>
         <!-- Opdracht card -->
-        <rect x="212" y="50" width="452" height="62" rx="10" fill="#27292D"/>
-        <text x="228" y="68" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" font-weight="700">JE OPDRACHT</text>
-        <text x="228" y="85" font-family="Arial, sans-serif" font-size="10" fill="#DDD">Lees alle PDF-bestanden in /Bezichtigingen/ en maak een</text>
-        <text x="228" y="101" font-family="Arial, sans-serif" font-size="10" fill="#DDD">samenvatting per bestand. Sla op als .txt in /Samenvattingen/</text>
+        <rect x="180" y="48" width="388" height="56" rx="10" fill="rgba(255,255,255,0.06)"/>
+        <text x="196" y="66" font-family="Arial, sans-serif" font-size="9" fill="#FF8514" font-weight="700">JE OPDRACHT</text>
+        <text x="196" y="83" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">Lees alle PDF-bestanden in /Bezichtigingen/ en maak een</text>
+        <text x="196" y="97" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">samenvatting per bestand. Sla op als .txt in /Samenvattingen/</text>
         <!-- Plan header -->
-        <text x="212" y="132" font-family="Arial, sans-serif" font-size="11" fill="#CCC" font-weight="700">Plan van aanpak</text>
-        <text x="212" y="148" font-family="Arial, sans-serif" font-size="9.5" fill="#555">Claude laat je elk stap zien voor uitvoering</text>
+        <text x="180" y="126" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.7)" font-weight="700">Plan van aanpak</text>
+        <text x="180" y="142" font-family="Arial, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.3)">Claude laat je elke stap zien voor uitvoering</text>
         <!-- Stap 1: KLAAR -->
-        <rect x="212" y="155" width="452" height="56" rx="8" fill="#1A3326"/>
-        <circle cx="232" cy="183" r="12" fill="#4CAF50"/>
-        <text x="232" y="188" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">✓</text>
-        <text x="252" y="174" font-family="Arial, sans-serif" font-size="10" fill="#4CAF50" font-weight="700">Stap 1 — Voltooid</text>
-        <text x="252" y="191" font-family="Arial, sans-serif" font-size="10" fill="#999">Mappen gescand: 12 PDF-bestanden gevonden in /Bezichtigingen/</text>
-        <text x="252" y="205" font-family="Arial, sans-serif" font-size="9" fill="#555">Klaar in 0.4 seconden</text>
+        <rect x="180" y="149" width="388" height="48" rx="8" fill="rgba(34,195,84,0.1)"/>
+        <circle cx="200" cy="173" r="12" fill="#22c55e"/>
+        <text x="200" y="178" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">✓</text>
+        <text x="220" y="166" font-family="Arial, sans-serif" font-size="10" fill="#22c55e" font-weight="700">Stap 1 — Voltooid</text>
+        <text x="220" y="183" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.5)">Mappen gescand: 12 PDF-bestanden gevonden</text>
+        <text x="220" y="194" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.25)">Klaar in 0.4 seconden</text>
         <!-- Stap 2: BEZIG -->
-        <rect x="212" y="217" width="452" height="68" rx="8" fill="#271E10"/>
-        <rect x="212" y="217" width="4" height="68" rx="2" fill="#FF8514"/>
-        <circle cx="232" cy="247" r="12" fill="none" stroke="#FF8514" stroke-width="2.5" stroke-dasharray="22 14"/>
-        <text x="252" y="237" font-family="Arial, sans-serif" font-size="10" fill="#FF8514" font-weight="700">Stap 2 — Bezig...</text>
-        <text x="252" y="254" font-family="Arial, sans-serif" font-size="10" fill="#999">PDF 5/12: Bezichtiging_Keizersgracht88.pdf wordt gelezen</text>
-        <rect x="252" y="262" width="396" height="6" rx="3" fill="#333"/>
-        <rect x="252" y="262" width="165" height="6" rx="3" fill="#FF8514"/>
-        <text x="252" y="279" font-family="Arial, sans-serif" font-size="9" fill="#666">5 van 12 bestanden verwerkt (42%)</text>
+        <rect x="180" y="203" width="388" height="58" rx="8" fill="rgba(255,133,20,0.08)"/>
+        <rect x="180" y="203" width="4" height="58" rx="2" fill="#FF8514"/>
+        <circle cx="200" cy="230" r="12" fill="none" stroke="#FF8514" stroke-width="2.5" stroke-dasharray="22 14"/>
+        <text x="220" y="222" font-family="Arial, sans-serif" font-size="10" fill="#FF8514" font-weight="700">Stap 2 — Bezig...</text>
+        <text x="220" y="239" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.5)">PDF 5/12: Bezichtiging_Keizersgracht88.pdf</text>
+        <rect x="220" y="247" width="340" height="5" rx="3" fill="rgba(255,255,255,0.1)"/>
+        <rect x="220" y="247" width="142" height="5" rx="3" fill="#FF8514"/>
+        <text x="220" y="262" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">5 van 12 bestanden verwerkt (42%)</text>
         <!-- Stap 3: WACHT -->
-        <rect x="212" y="291" width="452" height="52" rx="8" fill="#22252B"/>
-        <circle cx="232" cy="317" r="12" fill="none" stroke="#444" stroke-width="1.5"/>
-        <text x="232" y="322" font-family="Arial, sans-serif" font-size="11" fill="#555" text-anchor="middle" font-weight="700">3</text>
-        <text x="252" y="309" font-family="Arial, sans-serif" font-size="10" fill="#666" font-weight="700">Stap 3 — Wacht op stap 2</text>
-        <text x="252" y="326" font-family="Arial, sans-serif" font-size="10" fill="#555">Samenvattingen wegschrijven naar /Samenvattingen/</text>
-        <text x="252" y="341" font-family="Arial, sans-serif" font-size="9" fill="#444">Jouw bevestiging vereist voor uitvoering</text>
+        <rect x="180" y="267" width="388" height="44" rx="8" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="200" cy="289" r="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <text x="200" y="294" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.2)" text-anchor="middle" font-weight="700">3</text>
+        <text x="220" y="283" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.3)" font-weight="700">Stap 3 — Wacht op stap 2</text>
+        <text x="220" y="300" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.2)">Samenvattingen wegschrijven naar /Samenvattingen/</text>
+        <text x="220" y="310" font-family="Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.15)">Jouw bevestiging vereist voor uitvoering</text>
         <!-- Knoppen -->
-        <rect x="212" y="356" width="196" height="32" rx="16" fill="none" stroke="#444" stroke-width="1.5"/>
-        <text x="310" y="376" font-family="Arial, sans-serif" font-size="11" fill="#777" text-anchor="middle">Stoppen</text>
-        <rect x="418" y="356" width="246" height="32" rx="16" fill="url(#cw-grad)"/>
-        <text x="541" y="376" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="600">Stap 2 bevestigen &#9658;</text>
+        <rect x="180" y="318" width="166" height="28" rx="14" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <text x="263" y="336" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.45)" text-anchor="middle">Stoppen</text>
+        <rect x="358" y="318" width="210" height="28" rx="14" fill="url(#cw-grad)"/>
+        <text x="463" y="336" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="600">Stap 2 bevestigen &#9658;</text>
       </g>
     </svg>
   </div>

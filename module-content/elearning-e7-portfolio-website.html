@@ -1,6 +1,6 @@
 <!-- TITLE: E7 - Portfolio website bouwen met Claude -->
-<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-2','screen-module-3','screen-module-4','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Waarom en wat heb je nodig?','screen-module-2':'Het bouwproces','screen-module-3':'Online zetten','screen-module-4':'Beperkingen en onderhoud','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1','screen-module-1-kc','screen-module-2','screen-module-3','screen-module-3-kc','screen-module-4','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1':'Waarom en wat heb je nodig?','screen-module-1-kc':'Kennischeck: waarvoor is Claude Code geschikt','screen-module-2':'Het bouwproces','screen-module-3':'Online zetten','screen-module-3-kc':'Kennischeck: online zetten via Netlify','screen-module-4':'Beperkingen en onderhoud','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -29,7 +29,7 @@
     <h2>Waarom en wat heb je nodig?</h2>
   </div>
   <div class="content-card">
-    <p>Een eenvoudige website bouwen kostte vroeger duizenden euro's en een developer. Met Claude Code kun je een nette, functionele website maken in een middag, ook als je nog nooit een regel code hebt geschreven.</p>
+    <p>Met Claude Code kun je een nette, functionele website maken in een middag, ook als je nog nooit een regel code hebt geschreven. Je beschrijft in gewone taal wat je wilt, Claude schrijft de code.</p>
     <p>Dit is niet bedoeld voor complexe webapplicaties of webshops met betalingen. Het is bedoeld voor een eenvoudige aanwezigheid online: wie ben je, wat doe je, hoe kun je contact opnemen.</p>
   </div>
   <div class="content-card">
@@ -58,11 +58,18 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 1 van 4</div>
+    <h2>Kennischeck: waarvoor is Claude Code geschikt</h2>
+  </div>
   <div id="kc-1" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Waarvoor is website-generatie met Claude Code bedoeld?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Complexe webshops vereisen betalingssystemen en databases. Dat gaat verder dan wat Claude Code kan bieden.')">Complexe webshops met betalingen</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Complexe webshops vereisen betalingssystemen en databases. Dat gaat verder dan wat Claude Code eenvoudig kan bieden zonder extra technische kennis.')">Complexe webshops met betalingen</button>
       <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2', 'Correct. Claude Code is ideaal voor eenvoudige informatieve websites: wie je bent, wat je doet, hoe je te bereiken bent.')">Eenvoudige informatieve websites en portfolio\'s</button>
       <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2', 'Social media platforms zijn complexe applicaties. Claude Code is bedoeld voor eenvoudige websites.')">Social media platforms bouwen</button>
     </div>
@@ -88,82 +95,71 @@
     </div>
   </div>
   <div class="visual-block">
-    <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+    <svg viewBox="0 0 580 325" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
       <defs>
         <linearGradient id="e7-hero" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#FFF4EB"/>
-          <stop offset="100%" stop-color="#FFF8F2"/>
+          <stop offset="0%" stop-color="#FFF8F2"/>
+          <stop offset="100%" stop-color="#FFD7AD"/>
         </linearGradient>
         <linearGradient id="e7-btn" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#FF8514"/>
           <stop offset="100%" stop-color="#FF4D00"/>
         </linearGradient>
-        <clipPath id="e7-clip"><rect width="680" height="380" rx="10"/></clipPath>
+        <clipPath id="e7-clip"><rect width="580" height="325" rx="10"/></clipPath>
       </defs>
       <g clip-path="url(#e7-clip)">
         <!-- Browser chrome -->
-        <rect width="680" height="34" fill="#27292D"/>
-        <circle cx="20" cy="17" r="5" fill="#FF5F57"/>
-        <circle cx="36" cy="17" r="5" fill="#FFBD2E"/>
-        <circle cx="52" cy="17" r="5" fill="#28C840"/>
-        <rect x="84" y="10" width="360" height="18" rx="9" fill="#3A3C42"/>
-        <text x="264" y="23" font-family="Arial, sans-serif" font-size="11" fill="#AAA" text-anchor="middle">mv-makelaars.nl</text>
+        <rect width="580" height="34" fill="#27292D"/>
+        <circle cx="20" cy="17" r="5" fill="#FF4D00"/>
+        <circle cx="36" cy="17" r="5" fill="#FFD964"/>
+        <circle cx="52" cy="17" r="5" fill="#FF8514"/>
+        <rect x="84" y="10" width="300" height="18" rx="9" fill="#3d3f45"/>
+        <text x="234" y="23" font-family="Arial, sans-serif" font-size="11" fill="#AAA" text-anchor="middle">mv-makelaars.nl</text>
         <!-- NAVIGATIE -->
-        <rect x="0" y="34" width="680" height="36" fill="#27292D"/>
-        <text x="24" y="57" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="700">MV Makelaars</text>
-        <circle cx="146" cy="52" r="4" fill="#FF8514"/>
-        <text x="440" y="57" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.65)">Home</text>
-        <text x="492" y="57" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.65)">Diensten</text>
-        <text x="556" y="57" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.65)">Over ons</text>
-        <text x="617" y="57" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.65)">Contact</text>
+        <rect x="0" y="34" width="580" height="36" fill="#27292D"/>
+        <text x="24" y="57" font-family="Arial, sans-serif" font-size="13" fill="white" font-weight="700">MV Makelaars</text>
+        <circle cx="136" cy="52" r="4" fill="#FF8514"/>
+        <text x="370" y="57" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.65)">Home</text>
+        <text x="415" y="57" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.65)">Diensten</text>
+        <text x="470" y="57" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.65)">Over ons</text>
+        <text x="524" y="57" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.65)">Contact</text>
         <!-- HERO SECTIE -->
-        <rect x="0" y="70" width="680" height="108" fill="url(#e7-hero)"/>
+        <rect x="0" y="70" width="580" height="92" fill="url(#e7-hero)"/>
         <!-- Huisje rechts in hero (decoratief) -->
-        <polygon points="500,128 540,92 580,128" fill="#FF8514" opacity="0.12"/>
-        <rect x="508" y="128" width="64" height="40" fill="#FF8514" opacity="0.08"/>
-        <rect x="522" y="140" width="18" height="28" rx="2" fill="#FF8514" opacity="0.15"/>
-        <rect x="548" y="132" width="16" height="14" rx="2" fill="#FF8514" opacity="0.12"/>
+        <polygon points="428,118 460,86 492,118" fill="#FF8514" opacity="0.12"/>
+        <rect x="434" y="118" width="52" height="34" fill="#FF8514" opacity="0.08"/>
+        <rect x="445" y="128" width="14" height="24" rx="2" fill="#FF8514" opacity="0.15"/>
         <!-- Hero tekst -->
-        <text x="50" y="104" font-family="Arial, sans-serif" font-size="20" fill="#27292D" font-weight="700">Uw makelaar in Leiden en omgeving</text>
-        <text x="50" y="126" font-family="Arial, sans-serif" font-size="12" fill="#555">Professioneel, persoonlijk en betrouwbaar</text>
+        <text x="42" y="100" font-family="Arial, sans-serif" font-size="17" fill="#27292D" font-weight="700">Uw makelaar in Leiden</text>
+        <text x="42" y="120" font-family="Arial, sans-serif" font-size="11" fill="#27292D">Professioneel, persoonlijk en betrouwbaar</text>
         <!-- CTA knop -->
-        <rect x="50" y="138" width="136" height="28" rx="14" fill="url(#e7-btn)"/>
-        <text x="118" y="156" font-family="Arial, sans-serif" font-size="10.5" fill="white" text-anchor="middle" font-weight="600">Neem contact op</text>
+        <rect x="42" y="130" width="122" height="24" rx="12" fill="url(#e7-btn)"/>
+        <text x="103" y="146" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle" font-weight="600">Neem contact op</text>
         <!-- DIENSTEN SECTIE -->
-        <rect x="0" y="178" width="680" height="114" fill="white"/>
-        <text x="340" y="198" font-family="Arial, sans-serif" font-size="12" fill="#27292D" text-anchor="middle" font-weight="700">Onze diensten</text>
+        <rect x="0" y="162" width="580" height="98" fill="#FFF8F2"/>
+        <text x="290" y="182" font-family="Arial, sans-serif" font-size="12" fill="#27292D" text-anchor="middle" font-weight="700">Onze diensten</text>
         <!-- Card 1: Aankoop -->
-        <rect x="16" y="206" width="204" height="76" rx="8" fill="#FFF8F2"/>
-        <rect x="16" y="206" width="204" height="4" rx="2" fill="url(#e7-btn)"/>
-        <circle cx="46" cy="232" r="16" fill="#FFF0E0"/>
-        <text x="46" y="237" font-family="Arial, sans-serif" font-size="13" fill="#FF8514" text-anchor="middle">&#8962;</text>
-        <text x="72" y="227" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="700">Aankoop</text>
-        <text x="72" y="242" font-family="Arial, sans-serif" font-size="9.5" fill="#777">Van zoeken tot sleuteloverdracht</text>
-        <text x="72" y="257" font-family="Arial, sans-serif" font-size="9.5" fill="#777">— wij begeleiden u volledig.</text>
+        <rect x="14" y="190" width="170" height="60" rx="7" fill="#EDEBE8"/>
+        <rect x="14" y="190" width="170" height="4" rx="2" fill="url(#e7-btn)"/>
+        <text x="36" y="214" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="700">Aankoop</text>
+        <text x="36" y="230" font-family="Arial, sans-serif" font-size="9" fill="#27292D">Van zoeken tot sleuteloverdracht.</text>
         <!-- Card 2: Verkoop -->
-        <rect x="238" y="206" width="204" height="76" rx="8" fill="#FFF8F2"/>
-        <rect x="238" y="206" width="204" height="4" rx="2" fill="url(#e7-btn)"/>
-        <circle cx="268" cy="232" r="16" fill="#FFF0E0"/>
-        <text x="268" y="237" font-family="Arial, sans-serif" font-size="12" fill="#FF8514" text-anchor="middle">&#9650;</text>
-        <text x="294" y="227" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="700">Verkoop</text>
-        <text x="294" y="242" font-family="Arial, sans-serif" font-size="9.5" fill="#777">De hoogste prijs voor uw woning</text>
-        <text x="294" y="257" font-family="Arial, sans-serif" font-size="9.5" fill="#777">— met een bewezen aanpak.</text>
+        <rect x="204" y="190" width="170" height="60" rx="7" fill="#EDEBE8"/>
+        <rect x="204" y="190" width="170" height="4" rx="2" fill="url(#e7-btn)"/>
+        <text x="226" y="214" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="700">Verkoop</text>
+        <text x="226" y="230" font-family="Arial, sans-serif" font-size="9" fill="#27292D">De beste prijs voor uw woning.</text>
         <!-- Card 3: Verhuur -->
-        <rect x="460" y="206" width="204" height="76" rx="8" fill="#FFF8F2"/>
-        <rect x="460" y="206" width="204" height="4" rx="2" fill="url(#e7-btn)"/>
-        <circle cx="490" cy="232" r="16" fill="#FFF0E0"/>
-        <text x="490" y="237" font-family="Arial, sans-serif" font-size="12" fill="#FF8514" text-anchor="middle">&#9632;</text>
-        <text x="516" y="227" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="700">Verhuur</text>
-        <text x="516" y="242" font-family="Arial, sans-serif" font-size="9.5" fill="#777">Betrouwbare huurders vinden</text>
-        <text x="516" y="257" font-family="Arial, sans-serif" font-size="9.5" fill="#777">— snel en zonder zorgen.</text>
+        <rect x="394" y="190" width="170" height="60" rx="7" fill="#EDEBE8"/>
+        <rect x="394" y="190" width="170" height="4" rx="2" fill="url(#e7-btn)"/>
+        <text x="416" y="214" font-family="Arial, sans-serif" font-size="11" fill="#27292D" font-weight="700">Verhuur</text>
+        <text x="416" y="230" font-family="Arial, sans-serif" font-size="9" fill="#27292D">Betrouwbare huurders vinden.</text>
         <!-- CONTACT SECTIE -->
-        <rect x="0" y="292" width="680" height="88" fill="#F5F3EF"/>
-        <text x="340" y="316" font-family="Arial, sans-serif" font-size="13" fill="#27292D" text-anchor="middle" font-weight="700">Bereikbaar</text>
-        <text x="340" y="336" font-family="Arial, sans-serif" font-size="10.5" fill="#555" text-anchor="middle">Bel ons: 071-234 5678 &#160;&#160;|&#160;&#160; info@mv-makelaars.nl</text>
-        <text x="340" y="354" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">Prins Hendriklaan 12, 2311 PK Leiden</text>
+        <rect x="0" y="260" width="580" height="52" fill="#EAE6E0"/>
+        <text x="290" y="280" font-family="Arial, sans-serif" font-size="12" fill="#27292D" text-anchor="middle" font-weight="700">Bereikbaar</text>
+        <text x="290" y="298" font-family="Arial, sans-serif" font-size="10" fill="#27292D" text-anchor="middle">071-234 5678 &#160;|&#160; info@mv-makelaars.nl &#160;|&#160; Leiden</text>
         <!-- Claude Code badge onderaan -->
-        <rect x="0" y="366" width="680" height="14" fill="#EAE6E0"/>
-        <text x="340" y="376" font-family="Arial, sans-serif" font-size="8.5" fill="#AAA" text-anchor="middle">Gebouwd met Claude Code in 1 middag &#8212; zonder programmeerkennis</text>
+        <rect x="0" y="312" width="580" height="13" fill="#27292D"/>
+        <text x="290" y="322" font-family="Arial, sans-serif" font-size="8" fill="#AAA" text-anchor="middle">Gebouwd met Claude Code &#8212; zonder programmeerkennis</text>
       </g>
     </svg>
   </div>
@@ -193,7 +189,7 @@
         <div class="stap-nummer">1</div>
         <div class="stap-content">
           <h4>Maak een Netlify-account</h4>
-          <p>Ga naar netlify.com en maak een gratis account aan (gratis tier beschikbaar op moment van schrijven — controleer netlify.com voor de actuele voorwaarden).</p>
+          <p>Ga naar netlify.com en maak een account aan. Controleer netlify.com voor de actuele voorwaarden en beschikbare opties.</p>
         </div>
       </div>
       <div class="stap-item">
@@ -216,13 +212,20 @@
     <div class="tip-box-label tip">Tip</div>
     <p>Voor een eigen domeinnaam (www.jouwbedrijf.nl) koop je een domein bij een registrar zoals TransIP of Antagonist. De kosten zijn laag — check de actuele tarieven op de website van de registrar.</p>
   </div>
+</div>
+
+<div id="screen-module-3-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Module 3 van 4</div>
+    <h2>Kennischeck: online zetten via Netlify</h2>
+  </div>
   <div id="kc-2" class="kennischeck">
-    <h3>Kennischeck</h3>
+    <h3>Controleer je kennis</h3>
     <p class="kc-vraag">Wat kost het om een website online te zetten via Netlify?</p>
     <div class="kc-opties">
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Netlify biedt een gratis optie. Je betaalt alleen als je een eigen domeinnaam wilt.')">Een vast maandbedrag</button>
-      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Netlify heeft een gratis optie. Een eigen domeinnaam kost apart een klein jaarlijks bedrag bij een registrar.')">Niets, Netlify heeft een gratis optie</button>
-      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'De hosting via Netlify is gratis. Alleen een eigen domeinnaam kost een klein bedrag per jaar bij een registrar.')">Een eenmalig aanschafbedrag</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'Netlify biedt een gratis optie. Controleer netlify.com voor actuele voorwaarden en eventuele kosten.')">Een vast maandbedrag</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-4', 'Correct. Netlify heeft een gratis optie. Een eigen domeinnaam kost apart een klein jaarlijks bedrag bij een registrar. Controleer netlify.com voor actuele voorwaarden.')">Niets voor basishosting, Netlify heeft een gratis optie</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-4', 'De basishosting via Netlify is gratis. Controleer netlify.com voor de actuele voorwaarden.')">Een eenmalig aanschafbedrag</button>
     </div>
     <div id="kc-feedback-2" class="kc-feedback"></div>
   </div>
@@ -252,9 +255,10 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>Als je website complex wordt, overweeg dan een CMS zoals WordPress. Maar voor een eenvoudige bedrijfswebsite is een door Claude gebouwd HTML-bestand meer dan voldoende.</p>
+    <p>Als je website complex wordt, overweeg dan een CMS als WordPress of Webflow, of werk samen met een developer. Voor een eenvoudige bedrijfswebsite is een door Claude gebouwd HTML-bestand meer dan voldoende.</p>
   </div>
   <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz &#8594;</button>
   </div>
 </div>
 
