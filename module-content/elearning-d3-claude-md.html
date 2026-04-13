@@ -5,7 +5,7 @@
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>D2 - CLAUDE.md: projectgeheugen voor Claude Code</h1>
+    <h1>D3 - CLAUDE.md: projectgeheugen voor Claude Code</h1>
     <p>Elke sessie met Claude Code begint blanco. CLAUDE.md verandert dat: een bestand in je projectmap dat Claude Code automatisch inleest en zo altijd de juiste context heeft.</p>
   </div>
   <div class="leerdoelen">
@@ -288,7 +288,7 @@
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
         <div class="fc-term">Technische context</div>
-        <div class="fc-uitleg">"Werkmap: /Documenten/Klanten/2026. Rapporten staan als PDF in /Rapporten/. Samenvattingen sla je op als .txt in /Samenvattingen/ met naamformaat JJJJ-MM-DD-klantnaam.txt."</div>
+        <div class="fc-uitleg">"Werkmap: /Documenten/Klanten/Lopend. Rapporten staan als PDF in /Rapporten/. Samenvattingen sla je op als .txt in /Samenvattingen/ met naamformaat JJJJ-MM-DD-klantnaam.txt."</div>
         <div class="fc-hint">Klik voor voorbeeld</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
@@ -427,7 +427,7 @@
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
         <div class="fc-term">Sessiespecifieke instructies</div>
-        <div class="fc-uitleg">Instructies die alleen voor een specifieke taak gelden, niet voor alle sessies. Voorbeeld: "Verwerk vandaag de facturen van maart 2026." Dit hoort in de prompt van die sessie, niet in CLAUDE.md.</div>
+        <div class="fc-uitleg">Instructies die alleen voor een specifieke taak gelden, niet voor alle sessies. Voorbeeld: "Verwerk vandaag de facturen van klant Jansen." Dit hoort in de prompt van die sessie, niet in CLAUDE.md.</div>
         <div class="fc-hint">Klik voor uitleg</div>
       </div>
       <div class="flashcard" onclick="toggleFlashcard(this)">
@@ -447,7 +447,7 @@
   </div>
   <div id="kc-3" class="kennischeck">
     <h3>Kennischeck</h3>
-    <p class="kc-vraag">Je CLAUDE.md bevat de instructie: "Sla rapporten op in de map /Rapporten/2024/". Het is nu 2026 en je werkt al lang in een andere mappenstructuur. Claude Code slaat bestanden steeds op de verkeerde plek op. Wat is de oorzaak?</p>
+    <p class="kc-vraag">Je CLAUDE.md bevat de instructie: "Sla rapporten op in de map /Rapporten/oud/". Inmiddels werk je al lang in een andere mappenstructuur. Claude Code slaat bestanden steeds op de verkeerde plek op. Wat is de oorzaak?</p>
     <div class="kc-opties">
       <button class="kc-optie" onclick="checkKC(3, this, false, 'screen-module-4-1', 'Claude Code heeft geen eigen geheugen tussen sessies en kan zijn instructies niet zelf bijwerken. Hij volgt wat in CLAUDE.md staat.')">Claude Code heeft zijn instructies zelf bijgewerkt en vergeet nu de juiste map</button>
       <button class="kc-optie" onclick="checkKC(3, this, true, 'screen-module-4-1', 'Correct. CLAUDE.md is niet bijgewerkt. Claude Code volgt de instructies letterlijk, ook als ze verouderd zijn. Behandel CLAUDE.md als levend document: pas het aan zodra je werkwijze verandert.')">De CLAUDE.md is nooit bijgewerkt en bevat nog de oude mapnaam</button>
@@ -560,7 +560,7 @@
 [
   {"vraag":"Je CLAUDE.md bevat de regel 'schrijf altijd in het Engels', maar Claude Code schrijft toch in het Nederlands. Wat is de meest waarschijnlijke oorzaak?","opties":["CLAUDE.md werkt alleen bij de eerste sessie","Het CLAUDE.md-bestand staat in een submap in plaats van de projectroot","Claude Code negeert CLAUDE.md als de prompt in het Nederlands is","Je moet CLAUDE.md handmatig activeren via een commando"],"correct":1,"uitleg":"CLAUDE.md moet in de root van de projectmap staan, de map waar je Claude Code start. Een CLAUDE.md in een submap wordt niet automatisch ingelezen. Controleer altijd de locatie als instructies niet worden gevolgd."},
   {"vraag":"Je werkt voor drie klanten met totaal verschillende werkwijzen. Elk klantproject staat in een eigen map. Hoe gebruik je CLAUDE.md het meest effectief?","opties":["Een enkel CLAUDE.md in je thuismap met alle klantinfo gecombineerd","Een apart CLAUDE.md per klantmap, met alleen de instructies voor die klant","CLAUDE.md werkt niet voor meerdere klanten tegelijk","Een CLAUDE.md met if-else condities per klant"],"correct":1,"uitleg":"Elke klantmap krijgt zijn eigen CLAUDE.md op maat. Zo laadt Claude Code altijd de juiste context. Gecombineerde bestanden voor meerdere klanten worden onoverzichtelijk en vergroot de kans op fouten."},
-  {"vraag":"Welke instructie hoort NIET in CLAUDE.md?","opties":["'Schrijf altijd in het Nederlands'","'Sla bestanden op in /Klanten/2026/'","'Vraag bevestiging voor je iets verwijdert'","'Verwerk vandaag de facturen van klant Jansen'"],"correct":3,"uitleg":"Sessiespecifieke instructies horen in de prompt van die sessie, niet in CLAUDE.md. CLAUDE.md is voor structurele, altijdgeldende instructies. Een eenmalige taakopdracht voor vandaag maakt CLAUDE.md vervuild met tijdelijke informatie."},
+  {"vraag":"Welke instructie hoort NIET in CLAUDE.md?","opties":["'Schrijf altijd in het Nederlands'","'Sla bestanden op in /Klanten/Lopend/'","'Vraag bevestiging voor je iets verwijdert'","'Verwerk vandaag de facturen van klant Jansen'"],"correct":3,"uitleg":"Sessiespecifieke instructies horen in de prompt van die sessie, niet in CLAUDE.md. CLAUDE.md is voor structurele, altijdgeldende instructies. Een eenmalige taakopdracht voor vandaag maakt CLAUDE.md vervuild met tijdelijke informatie."},
   {"vraag":"Je wilt dat bepaalde Claude Code-instructies gelden voor alle projecten in je organisatie, maar andere instructies alleen voor een specifiek project. Hoe los je dit op?","opties":["Alles in een enkel CLAUDE.md in de projectmap","CLAUDE.md ondersteunt geen onderscheid tussen project- en organisatieniveau","Organisatiebrede regels in het CLAUDE.md van de bovenliggende map, projectregels in de projectmap","CLAUDE.md kopieer je handmatig naar elk project"],"correct":2,"uitleg":"De hierarchie van CLAUDE.md-bestanden is hier precies voor ontworpen. Plaats organisatiebrede regels in het CLAUDE.md van de bovenliggende map. Claude Code leest beide bestanden in en combineert de instructies. Dichter bij de werkmap heeft voorrang bij conflicten."},
   {"vraag":"Een collega klaagt dat Claude Code zijn bestandsnaamconventie niet volgt, ondanks dat die in CLAUDE.md staat. Na inspectie blijkt CLAUDE.md 350 regels lang te zijn met veel tegenstrijdige en verouderde instructies. Wat is de kern van het probleem?","opties":["CLAUDE.md heeft een maximale bestandsgrootte van 200 regels","Te lange en inconsistente CLAUDE.md-bestanden leiden tot onbetrouwbaar gedrag doordat instructies elkaar tegenspreken","Claude Code leest alleen de eerste 100 regels van CLAUDE.md","CLAUDE.md moet wekelijks opnieuw worden aangemaakt"],"correct":1,"uitleg":"Een te lange CLAUDE.md met tegenstrijdige instructies geeft Claude Code conflicterende signalen. Het resultaat is inconsistent gedrag. Houd CLAUDE.md beknopt, specifiek en up-to-date. Verwijder instructies die niet meer kloppen."},
   {"vraag":"Je team wil CLAUDE.md in Git opnemen. Een teamlid wil zijn persoonlijke schrijfstijlvoorkeuren niet delen. Wat is de juiste aanpak?","opties":["CLAUDE.md niet in Git opnemen zodat iedereen zijn eigen versie houdt","Persoonlijke voorkeuren in .claude/CLAUDE.md zetten en .claude/ toevoegen aan .gitignore","Twee aparte Git-repositories gebruiken","Alle persoonlijke voorkeuren verwijderen uit CLAUDE.md"],"correct":1,"uitleg":"Dit is precies waarvoor .claude/CLAUDE.md bestaat. Gedeelde teamregels staan in het gecommitte CLAUDE.md. Persoonlijke voorkeuren gaan in .claude/CLAUDE.md, dat je via .gitignore uitsluit van commits. Zo heeft iedereen de teamregels plus hun eigen aanpassingen."},
