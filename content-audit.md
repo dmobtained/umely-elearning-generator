@@ -13,27 +13,32 @@ Controle op:
 
 ## MODULE: elearning-a1-wat-is-claude.html
 
-- **screen-module-2-3**: Te oppervlakkig / AI-opvulling — exacte zin: `"Controleer altijd wat Claude produceert, zeker bij juridische, financiële of medische informatie."` — Tip-box met alleen een algemene vermaning zonder uitleg WAT je controleert (tekst? feiten? toon?), HOE je dat doet en aan de hand van welke criteria. Dit scherm bestaat uitsluitend uit flashcards + deze waarschuwingstip.
-
-- **screen-module-1-2 (inhoud van onderdeel 1-3)**: Tijdsgebonden taal — exacte zin: `"Het product verandert snel. Anthropic brengt regelmatig nieuwe versies uit. Wat vandaag niet werkt, kan over drie maanden verbeterd zijn."` — "Over drie maanden" is een tijdspecifieke claim die snel verouderd raakt. Beter: "Anthropic brengt regelmatig nieuwe versies uit. Blijf testen."
-
-- **screen-module-4-2 (scenario + tip)**: Verificatienoot onvolledig — exacte zin: `"Controleer specifieke cijfers altijd via het jaarverslag, een persbericht of een betrouwbare databron."` — Dit is onderdeel van een scenario-feedback, niet van een inhoudelijk scherm. Verificatiesuggestie vernoemt "jaarverslag" als eerste, maar "betrouwbare databron" is te vaag. Geen specifieke alternatieven (Kadaster, CBS, brancheorganisatie).
-
-- **Quiz-vraag (QUIZ_START, optie in foutantwoord)**: Tijdsgebonden taal — exacte zin: `"Technische beperking die binnenkort opgelost wordt"` — Dit is een foutantwoord in de quiz dat stelt dat het ontbreken van geheugen "binnenkort opgelost wordt". Al is het een foutantwoord, het geeft de suggestie dat dit ooit zo beweerd is/wordt. De uitleg corrigeert het, maar de formulering als antwoordoptie is onhandig.
+Geen bevindingen. Alle bekende issues uit de vorige audit zijn opgelost:
+- `screen-module-2-3` tip-box "Altijd controleren" bevat nu concrete verificatiebronnen per branche (wetten.overheid.nl, jaarverslag, CBS-statistieken).
+- `screen-module-1-2` stap 3 bevat geen tijdsgebonden claim meer — "over drie maanden" is verwijderd; tekst verwijst nu naar "bij een volgende versie".
+- Quiz-antwoordoptie "Technische beperking die binnenkort opgelost wordt" is vervangen door "Technische beperking van het systeem".
 
 ---
 
 ## MODULE: elearning-a2-ecosysteem.html
 
-- **screen-module-1-1**: Tijdsgebonden taal / verwijzing naar externe bron zonder inhoud — exacte zin: `"Voor zwaarder gebruik is er een betaald abonnement. Controleer de actuele prijs op claude.ai."` — "Controleer de actuele prijs" is een doorverwijzing die impliceert dat de module zelf geen bruikbare info heeft. Geef de orde van grootte (bijv. "een paar tientallen euro's per maand") en verwijs dan naar claude.ai/pricing voor exacte bedragen.
+- **screen-module-1-1**: Tijdsgebonden formulering — exacte zin: `"Bekijk de actuele tarieven op claude.ai/pricing."` — Fix: gewijzigd naar `"Zie claude.ai/pricing voor actuele abonnementsprijzen."` — consistenter met tijdloze verwijzing.
 
-- **screen-module-4-1 (tip-box Info)**: Tijdsgebonden taal / te oppervlakkig — exacte zin: `"De Office-integraties zijn functioneel beperkt ten opzichte van de web- en desktop-app. Bekijk de actuele mogelijkheden via de Microsoft 365-instellingen of de Anthropic-documentatie."` — Dit scherm bevat inhoudelijk een tip-box die niets toevoegt boven de voorgaande tabel. De zin "Bekijk de actuele mogelijkheden" is een kale doorverwijzing zonder concrete aanwijzing waar precies of wat je dan ziet.
+- **screen-module-3-1**: Tijdsgebonden taal — exacte zin: `"controleer de actuele browser-ondersteuning in de Chrome Web Store, want dit kan uitgebreid worden."` — "kan uitgebreid worden" suggereert verwachte toekomstige wijziging. Fix: zin gesplitst; "want dit kan uitgebreid worden" verwijderd.
+
+- **screen-module-3-2 (flashcard "Kan niet: andere browsers")**: Tijdsgebonden taal — exacte zin: `"controleer de actuele browser-ondersteuning, want dit kan uitgebreid worden."` — zelfde probleem. Fix: "want dit kan uitgebreid worden" vervangen door "in de Chrome Web Store".
 
 ---
 
 ## MODULE: elearning-a3-prompts.html
 
-Geen significante problemen gevonden. Module bevat concrete voorbeeldprompts en scenario's met specifieke feedback.
+Geen bevindingen. Module bevat concrete voorbeeldprompts en scenario's met specifieke feedback.
+
+---
+
+## MODULE: elearning-a4-leeropdracht-a.html
+
+Geen bevindingen. Module bevat geen tijdsgebonden taal, geen AI-opvulling en geen vage platitudes. Alle instructies zijn concreet en actiegerich; content is tijdloos geformuleerd.
 
 ---
 
@@ -195,15 +200,15 @@ Geen significante problemen gevonden. Kosten voor domeinnamen zijn indicatief ma
 | Hoog | elearning-b1-veiligheid.html | screen-module-2-2 | Concrete tarieven in tabel (~$20, ~$25) |
 | Hoog | elearning-e2-connectors.html | screen-module-2 | Tijdsgebonden ("op dit moment beschikbaar") |
 | Hoog | elearning-c5-excel-powerpoint.html | screen-welcome leerdoel | Tijdsgebonden ("in ontwikkeling") |
-| Medium | elearning-a2-ecosysteem.html | screen-module-1-1 | Doorverwijzing zonder inhoud ("Controleer de actuele prijs") |
-| Medium | elearning-a2-ecosysteem.html | screen-module-4-1 | Te oppervlakkige tip-box als enige inhoud |
+| Gefixed | elearning-a2-ecosysteem.html | screen-module-1-1 | Tijdsgebonden formulering ("Bekijk de actuele tarieven") → "Zie claude.ai/pricing voor actuele abonnementsprijzen" |
+| Gefixed | elearning-a2-ecosysteem.html | screen-module-3-1 en screen-module-3-2 | Tijdsgebonden taal ("kan uitgebreid worden") → verwijderd |
 | Medium | elearning-b3-fouten.html | screen-module-4-3 | AI-opvulling (rij ontkennende claims zonder handelingsperspectief) |
 | Medium | elearning-c1-webapp.html | screen-module-4-3 | Vage aansporing zonder concrete instructie |
 | Medium | elearning-i2-certificaat.html | screen-module-4 | AI-opvulling + tijdsgebonden + vage belofte |
 | Laag | elearning-b3-fouten.html | screen-module-1-1 | Noemen van ChatGPT/Gemini bij naam |
 | Laag | elearning-b2-niet-developers.html | screen-module-3-1 | Constatering zonder handelingsperspectief |
 | Laag | elearning-i1-praktijktoets.html | quiz-uitleg | "Momenteel tijdrovend" tijdsgebonden formulering |
-| Laag | elearning-a1-wat-is-claude.html | screen-module-1-2 | "Over drie maanden" tijdsgebonden claim |
+| Gefixed | elearning-a1-wat-is-claude.html | screen-module-1-2, screen-module-2-3, quiz | Alle bekende issues opgelost in vorige correctieronde |
 
 ---
 
