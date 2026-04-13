@@ -1,6 +1,6 @@
 <!-- TITLE: I0 - Eindopdracht: jouw Claude-werkplek -->
 <!-- SCHERMEN: 'screen-welcome','screen-fase-1','screen-fase-2','screen-fase-3','screen-afsluiting','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-fase-1':'Fase 1 — Jouw werkplek in kaart','screen-fase-2':'Fase 2 — Voer je use case end-to-end uit','screen-fase-3':'Fase 3 — Reflectie op wat je hebt gebouwd','screen-afsluiting':'Eindopdracht voltooid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-fase-1':'Fase 1 — Jouw werkplek in kaart','screen-fase-2':'Fase 2 — Voer je use case end-to-end uit','screen-fase-3':'Fase 3 — Leg je werkplek vast','screen-afsluiting':'Eindopdracht voltooid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 <!-- QUIZ_START -->
 [
   {"vraag":"Waarom zijn Custom Instructions in een Project waardevoller dan een losse prompt?","opties":["Omdat ze automatisch worden vertaald naar andere talen","Omdat ze actief blijven voor elk gesprek in dat Project — je hoeft je context niet steeds opnieuw uit te leggen","Omdat ze de antwoorden van Claude sneller maken","Omdat ze voorkomen dat Claude fouten maakt"],"correct":1,"uitleg":"Custom Instructions zijn persistent: ze gelden voor elk nieuw gesprek binnen het Project. Daarmee bouw je een werkplek die jouw context onthoudt, in plaats van een chatvenster waar je elke keer opnieuw moet uitleggen wie je bent."},
@@ -87,7 +87,7 @@
     <div class="i-rij"><div class="i-nr">1</div><div>Je prompttemplate uit leeropdracht A4</div></div>
     <div class="i-rij"><div class="i-nr">2</div><div>Je veilige werkopdracht (geanonimiseerde data) uit leeropdracht B4</div></div>
     <div class="i-rij"><div class="i-nr">3</div><div>De naam van je Project uit leeropdracht C8</div></div>
-    <div class="i-rij"><div class="i-nr">4</div><div>Optioneel: je CLAUDE.md uit leeropdracht D5 en je Skill-naam uit leeropdracht E8</div></div>
+    <div class="i-rij"><div class="i-nr">4</div><div>Optioneel: je CLAUDE.md uit leeropdracht D5, je Plugin-naam en Skill-naam uit leeropdracht E8</div></div>
   </div>
 
   <div class="tijdsbadge">Geschatte tijd: 20-30 minuten</div>
@@ -158,8 +158,8 @@
   <div class="checklist-kaart">
     <div class="checklist-badge optioneel">E8</div>
     <div class="checklist-content">
-      <h4>Connector + Skill <span class="checklist-optioneel-tag">Optioneel</span></h4>
-      <p>Een aangesloten databron via een Connector, en een Skill die je aanroept met /[naam].</p>
+      <h4>Connector + Plugin + Skill <span class="checklist-optioneel-tag">Optioneel</span></h4>
+      <p>Een Connector voor externe data, een Plugin met scherpe Custom Instructions, en een Skill die je aanroept met /[naam].</p>
     </div>
   </div>
 
@@ -204,9 +204,9 @@
 
   <div class="content-card">
     <span class="prompt-label">Verifieer je instellingen — kopieer naar Claude.ai</span>
-    <div class="prompt-box" id="fase1-verificatie-prompt">Wat zijn je huidige Custom Instructions? En welke Connectors zijn aangesloten op dit Project?</div>
+    <div class="prompt-box" id="fase1-verificatie-prompt">Beschrijf in twee zinnen hoe jij mij kunt helpen in dit Project en waar je op let bij elk antwoord.</div>
     <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase1-verificatie-prompt').innerText, this)">Kopieer prompt</button>
-    <div class="instructie-stap"><div class="instructie-nr">1</div><div>Open je Project uit C8 in claude.ai.</div></div>
+    <div class="instructie-stap"><div class="instructie-nr">1</div><div>Open je Plugin (E8) of Project (C8) in claude.ai.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">2</div><div>Kopieer de prompt hierboven en stuur hem op.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">3</div><div>Controleer of Claude de juiste instructies teruggeeft.</div></div>
   </div>
@@ -247,8 +247,8 @@
     <div class="stap-item">
       <div class="stap-nummer">1</div>
       <div class="stap-content">
-        <h4>Open je Project in claude.ai</h4>
-        <p>Ga naar claude.ai en open het Project dat je in C8 hebt aangemaakt. Je Custom Instructions zijn actief zodra je een nieuw gesprek start vanuit dat Project.</p>
+        <h4>Open je Plugin of Project in claude.ai</h4>
+        <p>Ga naar claude.ai en open de Plugin die je in E8 hebt gebouwd, of het Project uit C8. Je Custom Instructions zijn actief zodra je een nieuw gesprek start vanuit dat Project.</p>
       </div>
     </div>
     <div class="stap-item">
@@ -321,7 +321,7 @@
 <div id="screen-fase-3" class="screen">
   <div class="module-header">
     <div class="module-num">Fase 3 van 3</div>
-    <h2>Reflectie</h2>
+    <h2>Leg je werkplek vast</h2>
   </div>
 
   <div class="fase-indicator">
@@ -335,7 +335,7 @@
   </div>
 
   <div class="content-card">
-    <p>Je hebt je werkplek gebouwd en je use case uitgevoerd. Nu leg je vast wat je hebt geleerd. Niet voor een ander — maar als referentiepunt voor jezelf.</p>
+    <p>Je hebt je werkplek gebouwd en je use case uitgevoerd. Nu leg je vast wat je hebt gebouwd en wat het je heeft opgeleverd. Niet voor een ander — maar als referentiepunt voor jezelf.</p>
   </div>
 
   <div class="fase-input-wrap">
@@ -381,7 +381,7 @@
       <li>Een privacyveilige aanpak voor het werken met gevoelige data</li>
       <li>Een volledig geconfigureerde Claude-werkplek met Project en Custom Instructions</li>
       <li class="optioneel">Claude Code met CLAUDE.md (optioneel)</li>
-      <li class="optioneel">Een Connector en Skill voor geautomatiseerde taken (optioneel)</li>
+      <li class="optioneel">Een Connector, Plugin en Skill voor geautomatiseerde taken (optioneel)</li>
     </ul>
   </div>
 

@@ -1,10 +1,10 @@
 <!-- TITLE: E8 - Leeropdracht: Breid je werkplek uit -->
 <!-- SCHERMEN: 'screen-welcome','screen-fase-1','screen-fase-2','screen-fase-3','screen-fase-4','screen-afsluiting','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-fase-1':'Fase 1 — Sluit een Connector aan','screen-fase-2':'Fase 2 — Verfijn je Project','screen-fase-3':'Fase 3 — Schrijf een Skill','screen-fase-4':'Fase 4 — Test je complete workflow','screen-afsluiting':'Leeropdracht voltooid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-fase-1':'Fase 1 — Sluit een Connector aan','screen-fase-2':'Fase 2 — Bouw je Plugin','screen-fase-3':'Fase 3 — Schrijf een Skill','screen-fase-4':'Fase 4 — Test je complete workflow','screen-afsluiting':'Leeropdracht voltooid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 <!-- QUIZ_START -->
 [
   {"vraag":"Wat doet een Connector in Claude?","opties":["Hij versnelt de reactiesnelheid van Claude","Hij geeft Claude toegang tot externe data zoals Google Drive of Gmail","Hij slaat je gesprekken op in de cloud","Hij configureert de taalinstellingen van Claude"],"correct":1,"uitleg":"Een Connector koppelt Claude aan een externe service. Zo kan Claude bestanden lezen, e-mails ophalen of andere data gebruiken uit tools die je dagelijks inzet — zonder dat je documenten hoeft te kopiëren."},
-  {"vraag":"Waarom verfijn je de Custom Instructions van je Project nadat je een Connector hebt aangesloten?","opties":["Omdat Claude anders de Connector negeert","Omdat je sindsdien meer weet over wat werkt voor jouw use case","Omdat Custom Instructions verlopen na een week","Omdat Connectors de taal van Claude veranderen"],"correct":1,"uitleg":"Custom Instructions zijn een levend document. Elke leeropdracht leert je iets nieuws over hoe Claude jou het beste kan assisteren. Door ze bij te werken met wat je ondertussen hebt geleerd, sluit het Project steeds beter aan op je echte werk."},
+  {"vraag":"Wat maakt een Plugin in Claude meer dan een gewoon Project?","opties":["Een Plugin heeft een apart betaalplan","Een Plugin combineert Custom Instructions, een Connector en optioneel een kennisbestand tot één geconfigureerde werkplek","Een Plugin genereert automatisch Skills","Een Plugin werkt alleen op desktop"],"correct":1,"uitleg":"Een gewoon Project heeft alleen Custom Instructions. Een Plugin gaat verder: je sluit een Connector aan zodat Claude bij externe data kan, voegt scherpe Custom Instructions toe die specifiek zijn voor die databron, en optioneel een kennisbestand als vaste referentie. Die combinatie maakt het een zelfstandige werkplek voor één taak."},
   {"vraag":"Wat is het verschil tussen een Skill en een losse prompt?","opties":["Een Skill is altijd langer dan een losse prompt","Een Skill is eenmalig geschreven en telkens opnieuw aanroepbaar met /naam","Een Skill werkt alleen in Projecten met een Connector","Een Skill slaat de output automatisch op in Google Drive"],"correct":1,"uitleg":"Een losse prompt schrijf je elke keer opnieuw. Een Skill sla je eenmalig op in een SKILL.md-bestand en roep je aan met /naam. Claude voert dan altijd dezelfde stappen uit — consistent en zonder opnieuw te typen."},
   {"vraag":"Je roept een Skill aan en Claude combineert die met je Custom Instructions. Wat betekent dit?","opties":["Er treedt een conflict op en Claude kiest één van de twee","Claude past zowel de Skill-instructies als de Project-context toe in het antwoord","Claude negeert de Custom Instructions zodra een Skill actief is","Dit is alleen mogelijk als je een Connector hebt aangesloten"],"correct":1,"uitleg":"Dat is precies het punt. Claude combineert de Skill-instructies voor de specifieke taak met de brede context uit je Custom Instructions. Je hoeft die context niet steeds opnieuw te herhalen — het Project doet dat automatisch."},
   {"vraag":"Wat is het meest zinvolle moment om een Skill te schrijven?","opties":["Zodra je voor het eerst Claude gebruikt","Als je een taak hebt die regelmatig terugkomt en altijd dezelfde stappen volgt","Alleen als je een Connector hebt op die service","Als je output altijd te lang is"],"correct":1,"uitleg":"Skills zijn er voor terugkerende taken. Als je een taak maar één keer doet, is een losse prompt sneller. Maar zodra iets regelmatig terugkomt en je steeds hetzelfde van Claude wilt, is een Skill de juiste keuze."}
@@ -183,7 +183,7 @@
 <div id="screen-fase-2" class="screen">
   <div class="module-header">
     <div class="module-num">Fase 2 van 4</div>
-    <h2>Verfijn je Project uit C8</h2>
+    <h2>Bouw je Plugin voor je use case</h2>
   </div>
 
   <div class="fase-indicator">
@@ -196,22 +196,21 @@
   <div class="usecase-balk"><span class="usecase-label">Jouw use case: </span><span class="usecase-display"></span></div>
 
   <div class="content-card">
-    <p>In C8 heb je een Project aangemaakt met Custom Instructions. Sindsdien heb je Claude intensief gebruikt en weet je beter wat werkt. Nu verfijn je die instructies: specifieker, concreter, beter afgestemd op je use case.</p>
-    <p>Open het Project dat je in C8 hebt aangemaakt en verbeter de Custom Instructions op basis van wat je sindsdien hebt geleerd.</p>
+    <p>Een Plugin in Claude is een Project dat je volledig hebt geconfigureerd voor één taak: scherpe Custom Instructions, een Connector die de juiste data binnenhaalt, en optioneel een kennisbestand als vaste referentie. In fase 1 heb je de Connector aangesloten. Nu bouw je het geheel.</p>
   </div>
 
   <div class="content-card">
-    <h3>Wat maakt betere Custom Instructions?</h3>
+    <h3>Bouw je Plugin in 5 stappen</h3>
     <div class="stappen-lijst">
-      <div class="stap-item"><div class="stap-nummer">1</div><div>Open je Project via claude.ai &gt; Projects en klik op je Project uit C8.</div></div>
-      <div class="stap-item"><div class="stap-nummer">2</div><div>Klik op 'Edit instructions' en bekijk wat je destijds hebt geschreven.</div></div>
-      <div class="stap-item"><div class="stap-nummer">3</div><div>Gebruik de verbeterde template hieronder als basis voor je nieuwe versie.</div></div>
-      <div class="stap-item"><div class="stap-nummer">4</div><div>Voeg de Connector toe aan het Project als dat mogelijk is in jouw account.</div></div>
-      <div class="stap-item"><div class="stap-nummer">5</div><div>Sla op en test met een vraag uit je use case.</div></div>
+      <div class="stap-item"><div class="stap-nummer">1</div><div>Open je Project uit C8 via claude.ai &gt; Projects, of maak een nieuw Project aan speciaal voor deze Plugin.</div></div>
+      <div class="stap-item"><div class="stap-nummer">2</div><div>Klik op 'Edit instructions' en schrijf scherpe Custom Instructions met de template hieronder.</div></div>
+      <div class="stap-item"><div class="stap-nummer">3</div><div>Controleer of de Connector uit fase 1 aan dit Project is gekoppeld. Zo niet, voeg hem toe via de Project-instellingen.</div></div>
+      <div class="stap-item"><div class="stap-nummer">4</div><div>Upload optioneel een kennisbestand (.pdf, .txt of .md) als vaste referentie voor je Plugin.</div></div>
+      <div class="stap-item"><div class="stap-nummer">5</div><div>Sla op en geef je Plugin een herkenbare naam die aansluit op je use case.</div></div>
     </div>
 
-    <span class="prompt-label">Verbeterde template voor Custom Instructions</span>
-    <div class="prompt-box" id="fase2-instructions">Je assisteert [naam] bij [use case — zo specifiek mogelijk].
+    <span class="prompt-label">Template voor Plugin Custom Instructions</span>
+    <div class="prompt-box" id="fase2-instructions">Je bent een gespecialiseerde assistent voor [naam] bij [use case — zo specifiek mogelijk].
 
 Mijn functie: [functietitel] bij [type organisatie]
 Mijn werkgebied in dit Project: [beschrijf het specifieke deelgebied]
@@ -220,21 +219,27 @@ Schrijf altijd [toon] Nederlands.
 Gebruik [documentformaat — bijv. koppen, bulletpunten, alinea's] tenzij ik anders vraag.
 [Voeg 1-2 vaste regels toe die specifiek zijn voor jouw werkgebied]
 
-Wanneer ik een document aanlevert: samenvatten tenzij ik anders vraag.</div>
+Wanneer ik een document aanlevert: samenvatten tenzij ik anders vraag.
+Wanneer ik data uit een verbonden bron opvraag: geef altijd de bron aan.</div>
     <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase2-instructions').innerText,this)">Kopieer template</button>
   </div>
 
   <div class="content-card">
-    <p>Test de verfijnde instructies door dit in je Project te sturen:</p>
+    <p>Test je Plugin door dit in het Project te sturen:</p>
     <span class="prompt-label">Testprompt</span>
-    <div class="prompt-box" id="fase2-testprompt">Beschrijf in twee zinnen hoe jij mij assisteert binnen dit Project en wat mijn use case is.</div>
+    <div class="prompt-box" id="fase2-testprompt">Beschrijf in twee zinnen hoe jij mij kunt helpen in dit Project en waar je op let bij elk antwoord.</div>
     <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase2-testprompt').innerText,this)">Kopieer testprompt</button>
   </div>
 
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Een goede Plugin-naam beschrijft wat de Plugin doet, niet hoe hij heet. Bijv. "Offerte-assistent" of "Vergadering-samenvatting" zijn duidelijker dan "Mijn Project".</p>
+  </div>
+
   <div class="fase-input-wrap">
-    <label class="fase-input-label" for="fase2-verificatie">Plak de eerste zin van Claude's antwoord vanuit het verfijnde Project:</label>
-    <input type="text" id="fase2-verificatie" class="fase-input" style="min-height:unset;resize:none;" placeholder="Eerste zin van Claude's antwoord..." oninput="checkFase2Input()">
-    <div class="fase-input-hint">Minimaal 20 tekens.</div>
+    <label class="fase-input-label" for="fase2-verificatie">Geef een naam aan je Plugin:</label>
+    <input type="text" id="fase2-verificatie" class="fase-input" style="min-height:unset;resize:none;" placeholder="Bijv: Offerte-assistent of Vergadering-samenvatting" oninput="checkFase2Input()">
+    <div class="fase-input-hint">Minimaal 5 tekens.</div>
   </div>
 
   <div class="btn-wrap">
@@ -408,13 +413,13 @@ Pas de instructies in mijn Skill aan zodat dit beter gaat.</div>
   <div class="afsluiting-hero">
     <div class="welcome-badge" style="margin-bottom:1rem;">Leeropdracht voltooid</div>
     <h2>Goed gedaan, <span class="deelnemer-naam">...</span>.</h2>
-    <p>Je Claude-werkplek is compleet. Je hebt een Connector aangesloten, je Project verfijnd, een Skill geschreven en alles samen getest. Dit is de werkplek die je elke dag kunt gebruiken.</p>
+    <p>Je Claude-werkplek is compleet. Je hebt een Connector aangesloten, een Plugin gebouwd, een Skill geschreven en alles samen getest. Dit is de werkplek die je elke dag kunt gebruiken.</p>
   </div>
 
   <div class="content-card">
     <ul style="list-style:none;padding:0;margin:0;">
       <li style="padding:0.6rem 0 0.6rem 1.75rem;position:relative;border-bottom:1px solid #F7E6C2;font-size:0.95rem;"><span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:12px;height:12px;background:linear-gradient(135deg,#FF8514,#FF4D00);border-radius:50%;display:inline-block;"></span><strong>Fase 1:</strong> Connector aangesloten die past bij jouw use case.</li>
-      <li style="padding:0.6rem 0 0.6rem 1.75rem;position:relative;border-bottom:1px solid #F7E6C2;font-size:0.95rem;"><span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:12px;height:12px;background:linear-gradient(135deg,#FF8514,#FF4D00);border-radius:50%;display:inline-block;"></span><strong>Fase 2:</strong> Custom Instructions verfijnd op basis van wat je hebt geleerd.</li>
+      <li style="padding:0.6rem 0 0.6rem 1.75rem;position:relative;border-bottom:1px solid #F7E6C2;font-size:0.95rem;"><span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:12px;height:12px;background:linear-gradient(135deg,#FF8514,#FF4D00);border-radius:50%;display:inline-block;"></span><strong>Fase 2:</strong> Plugin gebouwd met Custom Instructions, Connector en optioneel kennisbestand.</li>
       <li style="padding:0.6rem 0 0.6rem 1.75rem;position:relative;border-bottom:1px solid #F7E6C2;font-size:0.95rem;"><span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:12px;height:12px;background:linear-gradient(135deg,#FF8514,#FF4D00);border-radius:50%;display:inline-block;"></span><strong>Fase 3:</strong> Skill geschreven met naam, beschrijving, taak en formaat.</li>
       <li style="padding:0.6rem 0 0.6rem 1.75rem;position:relative;font-size:0.95rem;"><span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:12px;height:12px;background:linear-gradient(135deg,#FF8514,#FF4D00);border-radius:50%;display:inline-block;"></span><strong>Fase 4:</strong> Complete workflow getest en het verschil benoemd.</li>
     </ul>
@@ -492,7 +497,7 @@ function checkFase1Input() {
 function checkFase2Input() {
   var val = document.getElementById('fase2-verificatie').value.trim();
   var btn = document.getElementById('btn-fase2-door');
-  if (btn) btn.disabled = val.length < 20;
+  if (btn) btn.disabled = val.length < 5;
 }
 
 function checkFase3Input() {
