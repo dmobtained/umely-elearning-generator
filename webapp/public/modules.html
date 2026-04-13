@@ -460,6 +460,9 @@ const MODULE_ORDER = {
   i: ['elearning-i0-eindopdracht','elearning-i1-praktijktoets','elearning-i2-certificaat']
 };
 
+// Optionele modules: tellen niet mee voor certificaat, krijgen een badge
+const OPTIONAL_SLUGS = new Set(['elearning-i1-praktijktoets']);
+
 // Afwijkende tijdsduur per module (default: 20 min)
 const MODULE_DURATION = {
   'elearning-a4-leeropdracht-a': '30 min',
@@ -768,8 +771,10 @@ function updateStats() {
   document.getElementById('statOpened').textContent = completedCount;
   document.getElementById('statCats').textContent = activeCats;
 
-  // Certificaat banner tonen als alle modules afgerond zijn
-  if (allModules.length > 0 && completedCount === allModules.length) {
+  // Certificaat banner tonen als alle verplichte modules afgerond zijn
+  const requiredModules = allModules.filter(m => !OPTIONAL_SLUGS.has(normalizeSlug(m.slug)));
+  const requiredCompleted = requiredModules.filter(m => isCompleted(m.slug)).length;
+  if (requiredModules.length > 0 && requiredCompleted === requiredModules.length) {
     document.getElementById('certificaatSection').style.display = 'block';
   } else {
     document.getElementById('certificaatSection').style.display = 'none';
@@ -831,6 +836,8 @@ function renderModuleCard(m) {
   const statusText = done ? `✓ Afgerond${score !== null ? ' (' + score + '%)' : ''}` : (wasOpened ? '● Geopend' : 'Nog te starten');
   const linkText = done ? 'Opnieuw starten' : (wasOpened ? 'Verder gaan' : 'Starten');
   const cardClass = done ? ' opened done' : (wasOpened ? ' opened' : '');
+  const isOptional = OPTIONAL_SLUGS.has(normalizeSlug(m.slug));
+  const optionalBadge = isOptional ? `<span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:2px 8px;border-radius:50px;background:#F3EDE7;color:#A0887A;flex-shrink:0;">Optioneel</span>` : '';
   const isAdmin = userRole === 'admin';
   const adminActions = isAdmin ? `
     <div class="card-actions">
@@ -844,7 +851,7 @@ function renderModuleCard(m) {
       <span class="mod-status${statusClass}">${statusText}</span>
     </div>
     <div class="module-title">${escHtml(m.title)}</div>
-    <div class="module-meta"><span>⏱ ca. ${MODULE_DURATION[m.slug] || '20 min'}</span><span>❓ 5 vragen</span></div>
+    <div class="module-meta"><span>⏱ ca. ${MODULE_DURATION[m.slug] || '20 min'}</span>${optionalBadge}<span>❓ 5 vragen</span></div>
     <div class="prog-bar-wrap"><div class="prog-bar${done ? ' done' : ''}" style="width:${barWidth}%"></div></div>
     <div class="module-footer">
       <span class="module-link">${linkText} ›</span>
