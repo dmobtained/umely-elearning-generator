@@ -1,6 +1,6 @@
 <!-- TITLE: E1 - MCP: Claude verbinden met externe tools -->
 <!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-3','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-3','screen-module-2-kc','screen-module-3-1','screen-module-3-2','screen-module-3-3','screen-module-3-kc','screen-module-4-1','screen-module-4-2','screen-module-4-3','screen-module-4-kc','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Wat is MCP?','screen-module-1-2':'MCP in het grotere plaatje','screen-module-1-3':'MCP herkennen in de praktijk','screen-module-1-kc':'Kennischeck','screen-module-2-1':'Welke tools kun je verbinden?','screen-module-2-2':'Wat kun je per categorie doen?','screen-module-2-3':'Kies de juiste connector','screen-module-2-kc':'Kennischeck','screen-module-3-1':'Hoe werkt MCP in de praktijk?','screen-module-3-2':'Wat ziet Claude en wat niet?','screen-module-3-3':'MCP per beroep: concrete voorbeelden','screen-module-3-kc':'Kennischeck','screen-module-4-1':'Risico&#39;s en wanneer hulp vragen?','screen-module-4-2':'Wie stelt MCP in?','screen-module-4-3':'Risico&#39;s herkennen in de praktijk','screen-module-4-kc':'Kennischeck','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Wat is MCP?','screen-module-1-2':'MCP in het grotere plaatje','screen-module-1-3':'MCP herkennen in de praktijk','screen-module-1-kc':'Betekenis van MCP','screen-module-2-1':'Welke tools kun je verbinden?','screen-module-2-2':'Wat kun je per categorie doen?','screen-module-2-3':'Kies de juiste connector','screen-module-2-kc':'Beschikbare MCP-connectoren','screen-module-3-1':'Hoe werkt MCP in de praktijk?','screen-module-3-2':'Wat ziet Claude en wat niet?','screen-module-3-3':'MCP per beroep: concrete voorbeelden','screen-module-3-kc':'MCP-opdrachten geven','screen-module-4-1':'Risico&#39;s en wanneer hulp vragen?','screen-module-4-2':'Wie stelt MCP in?','screen-module-4-3':'Risico&#39;s herkennen in de praktijk','screen-module-4-kc':'Lees- vs schrijftoegang MCP','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
@@ -36,7 +36,7 @@
   </div>
   <div class="visual-block">
     <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;">
-      <rect width="580" height="200" rx="10" fill="#F7F4F0"/>
+      <rect width="580" height="200" rx="10" fill="#FFF8F2"/>
       <!-- Person -->
       <circle cx="62" cy="72" r="22" fill="#27292D"/>
       <text x="62" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="white">👤</text>
@@ -307,7 +307,7 @@
         <div class="stap-nummer">1</div>
         <div class="stap-content">
           <h4>Connector inschakelen</h4>
-          <p>Via de Claude-instellingen of via de Claude desktop-app schakel je de gewenste connector in. Connectors zijn beschikbaar voor Pro, Teams en Enterprise abonnementen — controleer claude.ai/pricing voor de actuele beschikbaarheid.</p>
+          <p>Via de Claude-instellingen of via de Claude desktop-app schakel je de gewenste connector in. Connectors zijn beschikbaar voor Pro, Teams en Enterprise abonnementen: controleer claude.ai/pricing voor de actuele beschikbaarheid.</p>
         </div>
       </div>
       <div class="stap-item">
@@ -353,7 +353,7 @@
   </div>
   <div class="tip-box">
     <div class="tip-box-label tip">Tip</div>
-    <p>In standaardmodus handelt Claude niet zelfstandig — hij doet alleen wat jij vraagt, op het moment dat jij vraagt. Bij agentic workflows (zie reeks E6) kan Claude meerdere stappen achter elkaar uitvoeren. Zonder agentic instellingen stuurt Claude geen e-mails of maakt geen afspraken zonder jouw opdracht.</p>
+    <p>In standaardmodus handelt Claude niet zelfstandig: hij doet alleen wat jij vraagt, op het moment dat jij vraagt. Bij agentic workflows (zie reeks E6) kan Claude meerdere stappen achter elkaar uitvoeren. Zonder agentic instellingen stuurt Claude geen e-mails of maakt geen afspraken zonder jouw opdracht.</p>
   </div>
   <div class="btn-wrap">
   </div>
@@ -515,7 +515,7 @@
   {"vraag":"Wat kan Claude NIET zonder MCP?","opties":["Teksten schrijven","E-mails in je inbox doorzoeken","Vragen beantwoorden","Samenvattingen maken van geplakte tekst"],"correct":1,"uitleg":"Zonder MCP werkt Claude alleen met de informatie die je zelf in het chatvenster plakt. E-mails in je inbox doorzoeken vereist een MCP-verbinding."},
   {"vraag":"Waarom is het verstandig om te beginnen met lees-toegang?","opties":["Omdat lees-toegang gratis is","Omdat bij schrijf-toegang fouten niet altijd ongedaan te maken zijn","Omdat lees-toegang sneller werkt","Omdat schrijf-toegang niet beschikbaar is voor beginners"],"correct":1,"uitleg":"Met schrijf-toegang kan Claude e-mails versturen of afspraken verwijderen. Die acties zijn definitief. Begin met lees-toegang en schakel schrijftoegang pas in nadat je Claude hebt getest."},
   {"vraag":"Wie stelt MCP-integraties in bij een kleine organisatie zonder IT-afdeling?","opties":["De eindgebruiker zelf via de Claude-chat","Een IT-beheerder of implementatiepartner","Anthropic automatisch","Niemand, het werkt vanzelf"],"correct":1,"uitleg":"Kleine organisaties zonder IT-afdeling hebben hulp nodig van een implementatiepartner om MCP correct in te richten."},
-  {"vraag":"Welke tool is GEEN voorbeeld van een beschikbare MCP-connector?","opties":["Gmail","Google Calendar","Microsoft Word (offline)","HubSpot"],"correct":2,"uitleg":"Gmail, Google Calendar en HubSpot hebben kant-en-klare MCP-connectoren. Microsoft Word als offline applicatie heeft geen MCP-connector, maar OneDrive en Outlook wel. Het beschikbare aanbod kan per regio en abonnement verschillen — controleer claude.ai voor de actuele lijst."},
+  {"vraag":"Welke tool is GEEN voorbeeld van een beschikbare MCP-connector?","opties":["Gmail","Google Calendar","Microsoft Word (offline)","HubSpot"],"correct":2,"uitleg":"Gmail, Google Calendar en HubSpot hebben kant-en-klare MCP-connectoren. Microsoft Word als offline applicatie heeft geen MCP-connector, maar OneDrive en Outlook wel. Het beschikbare aanbod kan per regio en abonnement verschillen: controleer claude.ai voor de actuele lijst."},
   {"vraag":"Wat is een realistisch gevolg van schrijftoegang aan Claude via MCP?","opties":["Claude kan zelfstandig beslissingen nemen zonder jouw opdracht","Claude kan een e-mail versturen die jij niet had gewild","Claude gaat andere gebruikers van jouw account uitnodigen","Claude begint automatisch alle e-mails te archiveren"],"correct":1,"uitleg":"Met schrijftoegang kan Claude acties uitvoeren in echte systemen. Als jouw opdracht niet precies klopt, kan hij een e-mail versturen die je niet bedoeld had. Dat is niet zomaar ongedaan te maken."}
 ]
 <!-- QUIZ_END -->

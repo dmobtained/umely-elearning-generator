@@ -3,11 +3,11 @@
 <!-- MODULE_TITELS: 'screen-welcome':'Welkom','screen-fase-1':'Fase 1 — Maak je use case privacyveilig','screen-fase-2':'Fase 2 — Schrijf een complete werkopdracht','screen-fase-3':'Fase 3 — Herken en corrigeer een fout','screen-afsluiting':'Leeropdracht voltooid','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 <!-- QUIZ_START -->
 [
-  {"vraag":"Waarom vervang je persoonsgegevens door placeholders voordat je een tekst naar Claude stuurt?","opties":["Zodat de tekst korter wordt","Claude werkt beter zonder namen","Claude.ai verwerkt gegevens op servers buiten de EU en persoonsgegevens horen daar niet in te staan","Claude kan geen namen lezen"],"correct":2,"uitleg":"Claude.ai verwerkt gesprekken op servers in de VS. Persoonsgegevens als namen, adressen en e-mails stuur je niet mee — vervang ze door neutrale placeholders zoals [naam klant] of [adres]."},
+  {"vraag":"Waarom vervang je persoonsgegevens door placeholders voordat je een tekst naar Claude stuurt?","opties":["Zodat de tekst korter wordt","Claude werkt beter zonder namen","Claude.ai verwerkt gegevens op servers buiten de EU en persoonsgegevens horen daar niet in te staan","Claude kan geen namen lezen"],"correct":2,"uitleg":"Claude.ai verwerkt gesprekken op servers in de VS. Persoonsgegevens als namen, adressen en e-mails stuur je niet mee: vervang ze door neutrale placeholders zoals [naam klant] of [adres]."},
   {"vraag":"Welke vier onderdelen heeft een complete werkopdracht?","opties":["Datum, onderwerp, bijlage en conclusie","Context, taak, materiaal en formaat","Aanhef, kern, bijlage en ondertekening","Functie, afdeling, doel en deadline"],"correct":1,"uitleg":"Een goede werkopdracht voor Claude bestaat altijd uit vier blokken: context (wie ben jij), taak (wat moet Claude doen), materiaal (de anonieme tekst of gegevens) en formaat (hoe moet het resultaat eruitzien)."},
   {"vraag":"Wat doe je als Claude iets beweert wat feitelijk onjuist is?","opties":["Je negeert het en gebruikt het antwoord toch","Je sluit het gesprek en begint opnieuw","Je corrigeert Claude expliciet: beschrijf wat er niet klopt en geef de juiste informatie","Je meldt het bij Anthropic"],"correct":2,"uitleg":"Claude maakt fouten. De juiste aanpak is: beschrijf concreet wat er niet klopt en geef de correcte informatie. Claude past zijn antwoord dan aan op basis van jouw correctie."},
   {"vraag":"Je collega wil een klantenbrief door Claude laten verbeteren. Wat adviseer je als eerste stap?","opties":["De brief direct kopiëren en plakken in Claude.ai","De klantnaam, het adres en andere persoonsgegevens vervangen door placeholders","Eerst vragen of Claude het bestand kan lezen","De brief exporteren naar PDF"],"correct":1,"uitleg":"Voordat je een document naar Claude stuurt, verwijder je alle persoonsgegevens. Vervang ze door neutrale aanduidingen als [naam klant] of [adres]. Dan pas stuur je de geanonimiseerde versie op."},
-  {"vraag":"Wanneer moet je Claude corrigeren in plaats van een nieuw gesprek beginnen?","opties":["Altijd — elk fout antwoord rechtvaardigt een nieuw gesprek","Nooit — Claude corrigeert zichzelf vanzelf","Als Claude een fout maakt terwijl de rest van het gesprek nog bruikbaar is","Alleen als Claude een vraag niet begrijpt"],"correct":2,"uitleg":"Als Claude één ding fout heeft maar de rest van het gesprek nog klopt, corrigeer je hem in hetzelfde gesprek. Zo behoud je de context die je al hebt opgebouwd en hoef je niet opnieuw te beginnen."}
+  {"vraag":"Wanneer moet je Claude corrigeren in plaats van een nieuw gesprek beginnen?","opties":["Altijd: elk fout antwoord rechtvaardigt een nieuw gesprek","Nooit: Claude corrigeert zichzelf vanzelf","Als Claude een fout maakt terwijl de rest van het gesprek nog bruikbaar is","Alleen als Claude een vraag niet begrijpt"],"correct":2,"uitleg":"Als Claude één ding fout heeft maar de rest van het gesprek nog klopt, corrigeer je hem in hetzelfde gesprek. Zo behoud je de context die je al hebt opgebouwd en hoef je niet opnieuw te beginnen."}
 ]
 <!-- QUIZ_END -->
 
@@ -57,7 +57,7 @@
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>Leeropdracht B — jouw use case privacyveilig inzetten</h1>
+    <h1>Leeropdracht B: jouw use case privacyveilig inzetten</h1>
     <p>In Leeropdracht A heb je een use case gekozen en een prompttemplate gemaakt. Nu maak je die use case privacyveilig en leer je hoe je Claude correct inzet voor je echte werksituatie.</p>
   </div>
 
@@ -197,7 +197,7 @@
   </div>
 
   <div class="btn-wrap">
-    <button class="fase-btn" id="btn-fase1-door" disabled onclick="goTo('screen-fase-2')">Fase 1 voltooid — verder naar fase 2 →</button>
+    <button class="fase-btn" id="btn-fase1-door" disabled onclick="goTo('screen-fase-2')">Fase 1 voltooid. Verder naar fase 2 →</button>
   </div>
 </div>
 
@@ -272,7 +272,7 @@
   </div>
 
   <div class="content-card">
-    <span class="prompt-label">Voorbeeld — pas aan voor jouw use case</span>
+    <span class="prompt-label">Voorbeeld: pas aan voor jouw use case</span>
     <div class="prompt-box" id="fase2-prompt">Context: ik ben [jouw functie] bij [type organisatie]. Ik gebruik Claude voor [jouw use case].
 
 Taak: [beschrijf concreet wat Claude moet doen met de tekst hieronder]
@@ -301,7 +301,7 @@ Formaat: [beschrijf hoe je het resultaat wilt — bijv. "bulletpunten per actiep
   </div>
 
   <div class="btn-wrap">
-    <button class="fase-btn" id="btn-fase2-door" disabled onclick="goTo('screen-fase-3')">Fase 2 voltooid — verder naar fase 3 →</button>
+    <button class="fase-btn" id="btn-fase2-door" disabled onclick="goTo('screen-fase-3')">Fase 2 voltooid. Verder naar fase 3 →</button>
   </div>
 </div>
 
@@ -336,7 +336,7 @@ Formaat: [beschrijf hoe je het resultaat wilt — bijv. "bulletpunten per actiep
     <div class="instructie-stap"><div class="instructie-nr">1</div><div>Ga terug naar Claude.ai, naar het gesprek uit fase 2.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">2</div><div>Vraag Claude iets te bevestigen wat hij niet kan weten: een intern getal, een specifieke naam, een eigen beslissing.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">3</div><div>Lees hoe Claude reageert: geeft hij toe dat hij het niet weet, of doet hij een aanname?</div></div>
-    <div class="instructie-stap"><div class="instructie-nr">4</div><div>Corrigeer hem: stuur "Dat klopt niet — de juiste informatie is: [vul in]. Pas je antwoord hierop aan."</div></div>
+    <div class="instructie-stap"><div class="instructie-nr">4</div><div>Corrigeer hem: stuur "Dat klopt niet. De juiste informatie is: [vul in]. Pas je antwoord hierop aan."</div></div>
   </div>
 
   <div class="tip-box">

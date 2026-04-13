@@ -3,10 +3,10 @@
 <!-- MODULE_TITELS: 'screen-welcome':'','screen-terugblik':'Terugblik op de cursus','screen-ambassadeur':'De ambassadeursopdracht','screen-certificaat':'Jouw certificaat','screen-wat-nu':'Wat nu?','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 <!-- QUIZ_START -->
 [
-  {"vraag":"Wat is het kernverschil tussen Claude.ai en Claude Code?","opties":["Claude Code is duurder dan Claude.ai","Claude Code draait via de terminal en kan meerdere stappen achter elkaar uitvoeren op je computer","Claude.ai werkt niet op mobiel","Claude Code vereist een apart Anthropic-account"],"correct":1,"uitleg":"Claude.ai gebruik je via de browser. Claude Code is een CLI die via de terminal draait en zelfstandig bestanden kan lezen, bewerken en opdrachten uitvoeren — zonder dat jij elke stap aanstuurt."},
-  {"vraag":"Wat is het voordeel van een Skill in Claude.ai ten opzichte van elke keer dezelfde instructies intypen?","opties":["Een Skill geeft Claude meer rekenkracht","Je schrijft de instructies eenmalig vast in een bestand en roept ze aan met /naam — zo zijn ze altijd consistent en hoef je ze niet opnieuw te typen","Een Skill slaat je gesprekken automatisch op","Een Skill is alleen beschikbaar in Claude Code"],"correct":1,"uitleg":"Een Skill is een herbruikbare instructieset die je eenmalig schrijft. Zodra je /naam typt, voert Claude altijd dezelfde stappen uit — je hoeft ze niet meer opnieuw in te typen en ze zijn consistent bij elk gebruik."},
+  {"vraag":"Wat is het kernverschil tussen Claude.ai en Claude Code?","opties":["Claude Code is duurder dan Claude.ai","Claude Code draait via de terminal en kan meerdere stappen achter elkaar uitvoeren op je computer","Claude.ai werkt niet op mobiel","Claude Code vereist een apart Anthropic-account"],"correct":1,"uitleg":"Claude.ai gebruik je via de browser. Claude Code is een CLI die via de terminal draait en zelfstandig bestanden kan lezen, bewerken en opdrachten uitvoeren, zonder dat jij elke stap aanstuurt."},
+  {"vraag":"Wat is het voordeel van een Skill in Claude.ai ten opzichte van elke keer dezelfde instructies intypen?","opties":["Een Skill geeft Claude meer rekenkracht","Je schrijft de instructies eenmalig vast in een bestand en roept ze aan met /naam: zo zijn ze altijd consistent en hoef je ze niet opnieuw te typen","Een Skill slaat je gesprekken automatisch op","Een Skill is alleen beschikbaar in Claude Code"],"correct":1,"uitleg":"Een Skill is een herbruikbare instructieset die je eenmalig schrijft. Zodra je /naam typt, voert Claude altijd dezelfde stappen uit: je hoeft ze niet meer opnieuw in te typen en ze zijn consistent bij elk gebruik."},
   {"vraag":"Waarvoor gebruik je MCP?","opties":["Om Claude sneller te maken","Om Claude te verbinden met externe tools en systemen zoals Gmail, agenda of CRM","Om de interface van Claude.ai aan te passen","Om Claude lokaal te draaien zonder internet"],"correct":1,"uitleg":"MCP (Model Context Protocol) stelt Claude in staat om externe tools en diensten te gebruiken. Zo kun je Claude automatisch data laten ophalen uit andere systemen."},
-  {"vraag":"Wat is een Project in Claude.ai?","opties":["Een archief van afgeronde gesprekken","Een aparte Claude-instantie met eigen abonnement","Een afgebakende omgeving met eigen context, documenten en systeemprompt die persistent zijn","Een exporteerbaar chatverslag"],"correct":2,"uitleg":"Met Projects maak je een afgebakende omgeving per klant, onderwerp of werkproces. De context, documenten en systeemprompt zijn persistent — Claude onthoudt ze in elk gesprek binnen dat Project."},
+  {"vraag":"Wat is een Project in Claude.ai?","opties":["Een archief van afgeronde gesprekken","Een aparte Claude-instantie met eigen abonnement","Een afgebakende omgeving met eigen context, documenten en systeemprompt die persistent zijn","Een exporteerbaar chatverslag"],"correct":2,"uitleg":"Met Projects maak je een afgebakende omgeving per klant, onderwerp of werkproces. De context, documenten en systeemprompt zijn persistent: Claude onthoudt ze in elk gesprek binnen dat Project."},
   {"vraag":"Wat is de sleutelvraag om te bepalen of Pad B bij jou past?","opties":["Hoe lang gebruik ik Claude al?","Welk abonnement heb ik?","Doe ik minstens wekelijks een taak met meerdere stappen waarbij ik informatie uit verschillende systemen combineer?","Hoeveel collega's in mijn bedrijf gebruiken Claude?"],"correct":2,"uitleg":"De kernvraag is of je herhalend, meerstaps werk hebt dat systemen combineert. Als dat zo is, loont de investering in Claude Code of MCP vrijwel altijd."}
 ]
 <!-- QUIZ_END -->
@@ -108,7 +108,7 @@
   </div>
 
   <div class="content-card">
-    <p>Je hebt 32 modules doorlopen over prompting, Claude-tools, Claude Code, MCP, connectors, skills en agentic workflows. Neem even de tijd om terug te kijken. Niet om een rapportcijfer te geven — maar om te benoemen wat er werkelijk is blijven hangen.</p>
+    <p>Je hebt 32 modules doorlopen over prompting, Claude-tools, Claude Code, MCP, connectors, skills en agentic workflows. Neem even de tijd om terug te kijken. Niet om een rapportcijfer te geven, maar om te benoemen wat er werkelijk is blijven hangen.</p>
   </div>
 
   <div id="tb-formulier">
@@ -162,7 +162,7 @@
   </div>
 
   <div class="content-card">
-    <p>Je hebt een stevige basis opgebouwd om Claude effectief in te zetten. De meest waardevolle stap die je nu kunt zetten is niet nog meer leren — maar één collega laten zien wat jij al kunt.</p>
+    <p>Je hebt een stevige basis opgebouwd om Claude effectief in te zetten. De meest waardevolle stap die je nu kunt zetten is niet nog meer leren, maar één collega laten zien wat jij al kunt.</p>
     <p>Kies hieronder één concrete stap die je deze week zet.</p>
   </div>
 
@@ -170,15 +170,15 @@
     <div class="ambas-opties" id="ambas-opties">
       <div class="ambas-optie" onclick="selecteerAmbas(this)">
         <input type="radio" name="ambas" id="ambas-1" value="demo">
-        <label for="ambas-1">Ik geef een korte demo aan een collega — ik laat zien hoe ik Claude gebruik voor een concrete taak.</label>
+        <label for="ambas-1">Ik geef een korte demo aan een collega: ik laat zien hoe ik Claude gebruik voor een concrete taak.</label>
       </div>
       <div class="ambas-optie" onclick="selecteerAmbas(this)">
         <input type="radio" name="ambas" id="ambas-2" value="prompt">
-        <label for="ambas-2">Ik stuur een prompt door die ik nuttig vond — met een korte toelichting waarom.</label>
+        <label for="ambas-2">Ik stuur een prompt door die ik nuttig vond, met een korte toelichting waarom.</label>
       </div>
       <div class="ambas-optie" onclick="selecteerAmbas(this)">
         <input type="radio" name="ambas" id="ambas-3" value="uitrol">
-        <label for="ambas-3">Ik stel voor om dit breder uit te rollen in mijn team — en plan een gesprek met mijn leidinggevende.</label>
+        <label for="ambas-3">Ik stel voor om dit breder uit te rollen in mijn team en plan een gesprek met mijn leidinggevende.</label>
       </div>
     </div>
 
@@ -249,7 +249,12 @@
   </div>
 
   <div class="content-card">
-    <p>Het certificaat is het eindpunt van de cursus — niet van het leren. Claude krijgt regelmatig nieuwe functies. Experimenteer actief met nieuwe mogelijkheden zodra ze beschikbaar komen, en pas het op je eigen werk toe.</p>
+    <p>Het certificaat is het eindpunt van de cursus, niet van het leren. Claude krijgt regelmatig nieuwe functies. Experimenteer actief met nieuwe mogelijkheden zodra ze beschikbaar komen, en pas het op je eigen werk toe.</p>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-label tip">Tip</div>
+    <p>Ga terug naar modules die je interessant vond als Claude nieuwe functies uitbrengt. Veel concepten uit deze cursus blijven relevant. Alleen de toepassingen worden breder.</p>
   </div>
 
   <div class="wat-nu-grid">
@@ -273,9 +278,9 @@
   </div>
 
   <div class="afsluiting-tekst">
-    Bedankt dat je deze cursus hebt gevolgd.<br>Veel succes — en veel plezier met Claude.
+    Bedankt dat je deze cursus hebt gevolgd.<br>Veel succes, en veel plezier met Claude.
   </div>
-  <div class="afsluiting-copyright">© Umely AI Academy — umely.ai</div>
+  <div class="afsluiting-copyright">© Umely AI Academy · umely.ai</div>
 </div>
 
 <script>

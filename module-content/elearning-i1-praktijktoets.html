@@ -57,13 +57,13 @@
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
     <div class="welcome-badge">Umely E-learning</div>
-    <h1>Praktijktoets — bouw je eigen werkassistent</h1>
+    <h1>Praktijktoets: bouw je eigen werkassistent</h1>
     <p>Je past alles toe wat je hebt geleerd. Aan het einde heb je een werkende prompttemplate die je morgen direct kunt gebruiken.</p>
   </div>
 
   <div class="tip-box waarschuwing" style="margin-bottom:1.5rem;">
     <div class="tip-box-label">Optionele module</div>
-    <p>Deze praktijktoets is extra — je hoeft hem niet te doen om je certificaat te halen. Hij is bedoeld voor wie de cursus heeft gevolgd zonder de leeropdrachten te doen, of voor wie nog een keer van nul af aan wil oefenen met een eigen document.</p>
+    <p>Deze praktijktoets is extra: je hoeft hem niet te doen om je certificaat te halen. Hij is bedoeld voor wie de cursus heeft gevolgd zonder de leeropdrachten te doen, of voor wie nog een keer van nul af aan wil oefenen met een eigen document.</p>
   </div>
 
   <div class="naam-input-blok">
@@ -77,6 +77,29 @@
     <div class="i-rij"><div class="i-nr">1</div><div>Klik hieronder op "Open Claude.ai in nieuw tabblad" en zet dat venster naast dit scherm.</div></div>
     <div class="i-rij"><div class="i-nr">2</div><div>Volg de vijf fasen in deze module. Elke fase geeft je een kopieerbare prompt.</div></div>
     <div class="i-rij"><div class="i-nr">3</div><div>Plak de prompt in Claude.ai, voer de opdracht uit en kom terug voor de volgende fase.</div></div>
+  </div>
+
+  <div class="stappen-lijst">
+    <div class="stap-item">
+      <div class="stap-nr">1</div>
+      <div class="stap-inhoud"><strong>Schrijf je werkcontext</strong><p>Beschrijf je functie, taken en gewenste toon als herbruikbare systeemprompt.</p></div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nr">2</div>
+      <div class="stap-inhoud"><strong>Analyseer je eigen werk</strong><p>Laat Claude een document van jou analyseren op structuur, helderheid en zwakke plekken.</p></div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nr">3</div>
+      <div class="stap-inhoud"><strong>Benoem het patroon</strong><p>Kies het terugkerende zwakke punt dat je wilt aanpakken. Dit wordt de kern van je template.</p></div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nr">4</div>
+      <div class="stap-inhoud"><strong>Bouw de template</strong><p>Combineer je werkcontext en het gevonden patroon in een gerichte prompttemplate.</p></div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-nr">5</div>
+      <div class="stap-inhoud"><strong>Valideer en reflecteer</strong><p>Test je template op een tweede document en beoordeel of de instructies robuust zijn.</p></div>
+    </div>
   </div>
 
   <div class="btn-wrap" style="margin-bottom:0.5rem;">
@@ -116,7 +139,7 @@
   </div>
 
   <div class="content-card">
-    <p>Een systeemprompt vertelt Claude wie je bent en hoe je werkt. Je hoeft dit maar één keer te schrijven — daarna gebruik je hem elke keer als je een nieuw gesprek start. Dit is het fundament van jouw persoonlijke werkassistent.</p>
+    <p>Een systeemprompt vertelt Claude wie je bent en hoe je werkt. Je hoeft dit maar één keer te schrijven: daarna gebruik je hem elke keer als je een nieuw gesprek start. Dit is het fundament van jouw persoonlijke werkassistent.</p>
     <p>Kopieer de prompt hieronder, ga naar Claude.ai, vul de drie onderdelen in met jouw eigen gegevens en stuur hem op.</p>
   </div>
 
@@ -150,7 +173,7 @@ Reageer voortaan altijd vanuit dit profiel. Bevestig dat je het hebt begrepen do
   </div>
 
   <div class="btn-wrap">
-    <button class="fase-btn" id="btn-fase1-door" onclick="goTo('screen-fase-2')" disabled>Fase 1 voltooid — verder naar fase 2 →</button>
+    <button class="fase-btn" id="btn-fase1-door" onclick="goTo('screen-fase-2')" disabled>Fase 1 voltooid. Verder naar fase 2 →</button>
   </div>
 </div>
 
@@ -170,11 +193,11 @@ Reageer voortaan altijd vanuit dit profiel. Bevestig dat je het hebt begrepen do
   </div>
 
   <div class="content-card">
-    <p>Claude kan patronen herkennen in hoe jij schrijft. Daarvoor heeft hij een echt document van jou nodig. Gebruik het voorbeelddocument hieronder als je nu geen eigen document bij de hand hebt — dat werkt prima voor deze oefening.</p>
+    <p>Claude kan patronen herkennen in hoe jij schrijft. Daarvoor heeft hij een echt document van jou nodig. Gebruik het voorbeelddocument hieronder als je nu geen eigen document bij de hand hebt, dat werkt prima voor deze oefening.</p>
   </div>
 
   <div class="content-card">
-    <span class="prompt-label">Stap 1 — Kopieer het voorbeelddocument</span>
+    <span class="prompt-label">Stap 1: Kopieer het voorbeelddocument</span>
     <div class="prompt-box" id="fase2-doc">Onderwerp: Terugkoppeling bijeenkomst 14 november
 
 Beste collega's,
@@ -190,9 +213,9 @@ De volgende bijeenkomst staat gepland voor december. Datum volgt nog.
 Met vriendelijke groet,
 [naam]</div>
     <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase2-doc').innerText,this)">Kopieer voorbeelddocument</button>
-    <p style="font-size:0.82rem;color:rgba(39,41,45,0.5);margin-top:-0.5rem;margin-bottom:1.5rem;">Wil je liever je eigen document gebruiken? Dat kan ook — upload of plak het rechtstreeks in Claude.ai.</p>
+    <p style="font-size:0.82rem;color:rgba(39,41,45,0.5);margin-top:-0.5rem;margin-bottom:1.5rem;">Wil je liever je eigen document gebruiken? Dat kan ook: upload of plak het rechtstreeks in Claude.ai.</p>
 
-    <span class="prompt-label">Stap 2 — Kopieer de analyseprompt</span>
+    <span class="prompt-label">Stap 2: Kopieer de analyseprompt</span>
     <div class="prompt-box" id="fase2-prompt">Analyseer het document dat ik hieronder plak op drie punten:
 1. Structuur — is er een duidelijke opbouw?
 2. Helderheid — zijn de zinnen direct en begrijpelijk?
@@ -217,7 +240,7 @@ Wees eerlijk en concreet. Geef maximaal drie verbeterpunten en geef elk punt een
   </div>
 
   <div class="btn-wrap">
-    <button class="fase-btn" id="btn-fase2-door" onclick="goTo('screen-fase-3')" disabled>Fase 2 voltooid — verder naar fase 3 →</button>
+    <button class="fase-btn" id="btn-fase2-door" onclick="goTo('screen-fase-3')" disabled>Fase 2 voltooid. Verder naar fase 3 →</button>
   </div>
 </div>
 
@@ -237,7 +260,7 @@ Wees eerlijk en concreet. Geef maximaal drie verbeterpunten en geef elk punt een
   </div>
 
   <div class="content-card">
-    <p>Claude noemde meerdere verbeterpunten. Kies er nu één uit — het punt dat het meest herkenbaar voor je is, of dat terugkomt in meer dan één type document dat je schrijft. Dat is het patroon waar je een oplossing voor gaat bouwen.</p>
+    <p>Claude noemde meerdere verbeterpunten. Kies er nu één uit, het punt dat het meest herkenbaar voor je is of dat terugkomt in meer dan één type document dat je schrijft. Dat is het patroon waar je een oplossing voor gaat bouwen.</p>
   </div>
 
   <div class="content-card">
@@ -246,7 +269,7 @@ Wees eerlijk en concreet. Geef maximaal drie verbeterpunten en geef elk punt een
     <button class="kopieer-btn" onclick="kopieerElement(document.getElementById('fase3-prompt').innerText,this)">Kopieer prompt</button>
 
     <div class="instructie-stap"><div class="instructie-nr">1</div><div>Kopieer de prompt en stuur hem op in Claude.ai.</div></div>
-    <div class="instructie-stap"><div class="instructie-nr">2</div><div>Lees het antwoord — Claude benoemt jouw patroon in maximaal vier woorden.</div></div>
+    <div class="instructie-stap"><div class="instructie-nr">2</div><div>Lees het antwoord: Claude benoemt jouw patroon in maximaal vier woorden.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">3</div><div>Schrijf dat patroon hieronder in het veld. Gebruik de exacte woorden van Claude.</div></div>
   </div>
 
@@ -257,7 +280,7 @@ Wees eerlijk en concreet. Geef maximaal drie verbeterpunten en geef elk punt een
   </div>
 
   <div class="btn-wrap">
-    <button class="fase-btn" id="btn-fase3-door" onclick="voltooiFase3()" disabled>Fase 3 voltooid — verder naar fase 4 →</button>
+    <button class="fase-btn" id="btn-fase3-door" onclick="voltooiFase3()" disabled>Fase 3 voltooid. Verder naar fase 4 →</button>
   </div>
 </div>
 
@@ -278,7 +301,7 @@ Wees eerlijk en concreet. Geef maximaal drie verbeterpunten en geef elk punt een
 
   <div class="content-card">
     <p>Nu bouw je iets wat je morgen direct kunt gebruiken. De template combineert jouw werkcontext met een specifieke instructie die inspeelt op jouw patroon. Elke keer dat je een vergelijkbaar document schrijft of laat nakijken, gebruik je hem als startpunt.</p>
-    <p>Klik op de kopieerknop hieronder — je patroon uit fase 3 wordt automatisch ingevuld op de juiste plek.</p>
+    <p>Klik op de kopieerknop hieronder: je patroon uit fase 3 wordt automatisch ingevuld op de juiste plek.</p>
   </div>
 
   <div class="content-card">
@@ -294,9 +317,9 @@ Zet de volledige template tussen de tags [START TEMPLATE] en [EINDE TEMPLATE], z
     <button class="kopieer-btn" onclick="kopieerFase4(this)">Kopieer prompt (patroon wordt automatisch ingevuld)</button>
     <p style="font-size:0.8rem;color:rgba(39,41,45,0.45);margin-top:-0.75rem;margin-bottom:1.25rem;">Het patroon dat je in fase 3 hebt ingevuld, vervangt [PATROON] automatisch bij het kopiëren.</p>
 
-    <div class="instructie-stap"><div class="instructie-nr">1</div><div>Kopieer de prompt — je patroon wordt automatisch ingevuld.</div></div>
+    <div class="instructie-stap"><div class="instructie-nr">1</div><div>Kopieer de prompt: je patroon wordt automatisch ingevuld.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">2</div><div>Ga naar Claude.ai en stuur de prompt op.</div></div>
-    <div class="instructie-stap"><div class="instructie-nr">3</div><div>Lees de template die Claude geeft — alles tussen [START TEMPLATE] en [EINDE TEMPLATE].</div></div>
+    <div class="instructie-stap"><div class="instructie-nr">3</div><div>Lees de template die Claude geeft: alles tussen [START TEMPLATE] en [EINDE TEMPLATE].</div></div>
     <div class="instructie-stap"><div class="instructie-nr">4</div><div>Kopieer de volledige template en plak hem in het veld hieronder.</div></div>
   </div>
 
@@ -307,7 +330,7 @@ Zet de volledige template tussen de tags [START TEMPLATE] en [EINDE TEMPLATE], z
   </div>
 
   <div class="btn-wrap">
-    <button class="fase-btn" id="btn-fase4-door" onclick="voltooiFase4()" disabled>Fase 4 voltooid — verder naar fase 5 →</button>
+    <button class="fase-btn" id="btn-fase4-door" onclick="voltooiFase4()" disabled>Fase 4 voltooid. Verder naar fase 5 →</button>
   </div>
 </div>
 
@@ -337,7 +360,7 @@ Zet de volledige template tussen de tags [START TEMPLATE] en [EINDE TEMPLATE], z
     <button class="kopieer-btn" onclick="kopieerFase5(this)">Kopieer testprompt (template wordt automatisch toegevoegd)</button>
     <p style="font-size:0.8rem;color:rgba(39,41,45,0.45);margin-top:-0.75rem;margin-bottom:1.25rem;">Je template uit fase 4 wordt automatisch bovenaan geplaatst. Vervang de placeholder door een echt document van jezelf.</p>
 
-    <div class="instructie-stap"><div class="instructie-nr">1</div><div>Kopieer de testprompt — je template wordt automatisch bovenaan toegevoegd.</div></div>
+    <div class="instructie-stap"><div class="instructie-nr">1</div><div>Kopieer de testprompt: je template wordt automatisch bovenaan toegevoegd.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">2</div><div>Vervang de placeholder door een echt document dat je hebt geschreven.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">3</div><div>Stuur op in Claude.ai en vergelijk het resultaat met de analyse uit fase 2.</div></div>
     <div class="instructie-stap"><div class="instructie-nr">4</div><div>Kom terug en beschrijf hieronder wat je hebt gemaakt en wat je ervan vindt.</div></div>
@@ -365,8 +388,8 @@ Zet de volledige template tussen de tags [START TEMPLATE] en [EINDE TEMPLATE], z
   <div class="afsluiting-hero">
     <div class="welcome-badge" style="margin-bottom:1rem;">Toets voltooid</div>
     <h2>Goed gedaan, <span class="deelnemer-naam">...</span>.</h2>
-    <p>Je hebt een werkende prompttemplate gebouwd die aansluit op jouw manier van werken. Niet als oefening — maar als iets wat je morgen direct kunt gebruiken.</p>
-    <p style="color:rgba(255,248,242,0.6);font-size:0.9rem;margin-top:0.75rem;">Bewaar je template — je kunt hem direct gebruiken in je dagelijkse werk.</p>
+    <p>Je hebt een werkende prompttemplate gebouwd die aansluit op jouw manier van werken. Niet als oefening, maar als iets wat je morgen direct kunt gebruiken.</p>
+    <p style="color:rgba(255,248,242,0.6);font-size:0.9rem;margin-top:0.75rem;">Bewaar je template: je kunt hem direct gebruiken in je dagelijkse werk.</p>
   </div>
   <div class="btn-wrap">
     <button class="btn" onclick="goTo('screen-quiz')">Naar de afsluitquiz →</button>

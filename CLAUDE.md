@@ -256,47 +256,62 @@ Admins krijgen geen `protection.js` — zij kunnen de module normaal bekijken vo
 
 ## Kwaliteitsregels (VERPLICHT)
 
-### Welkomscherm
-- `class="screen start"` (niet alleen `class="screen"`)
-- Verplichte classes: `welcome-badge`, `leerdoelen` (als `<ul>`), `tijdsbadge`
-- Leerdoelen zijn specifiek — niet "Je begrijpt Claude beter"
+**Werkwijze:** schrijf eerst, controleer daarna. Vóór je een module als klaar beschouwt, loop je de zelfscheck hieronder af. Elke fout fix je direct — geen uitzonderingen.
 
-### MODULE_TITELS
-- Altijd beschrijvende namen — nooit "Module 1", "Onderdeel 1"
-- Goed: `'screen-module-1-1':'Wat is een prompt?'`
+### Regels
 
-### Navigatie
-- Geen inline navigatieknoppen in contentschermen
-- Navigatie loopt via `renderNavButtons` — die injecteert automatisch de knoppen
-- Uitzondering: "Naar de afsluitquiz" op het laatste contentscherm is toegestaan
+**Welkomscherm:** `class="screen start"` (niet `class="screen"`), `welcome-badge`, leerdoelen als `<ul>` VOOR `tijdsbadge`. Leerdoelen zijn meetbaar: "je beschrijft / past toe / kiest" — nooit "je begrijpt".
 
-### Quiz
-- 5-7 vragen, elk met een inhoudelijk `uitleg`-veld
-- JSON altijd tussen `<!-- QUIZ_START -->` en `<!-- QUIZ_END -->`
+**MODULE_TITELS:** altijd beschrijvend. Nooit "Module 1", "Onderdeel 1", "Kennischeck" alleen. KC-schermen: "Kennischeck: wat de vraag test".
 
-### Schrijven
-- Geen m-dashes in tekst
-- Geen placeholder-tekst
-- Geen marketingclaims over Umely
-- Geen specifieke prijsbedragen — vervang door "zie claude.ai/pricing"
-- Geen tijdsgebonden taal ("op dit moment", "binnenkort", specifieke jaren)
-- Geen AI-opvulling ("gebruik Claude verstandig", "mogelijkheden zijn eindeloos")
-- Elke waarschuwing heeft een concrete vervolgstap — niet alleen "controleer altijd"
-- Elk contentscherm heeft minimaal één concrete handeling, voorbeeld of oefening
-- Minimaal 5 verschillende componenttypen per module
-- Flashcards altijd met `onclick="toggleFlashcard(this)"`
-- `ANTHROPIC_API_KEY` is alleen voor `server.js` — nooit gebruiken in lokale scripts of build-scripts
+**Navigatie:** build-modules.js maakt nav-divs automatisch. Geen inline navigatieknoppen in contentschermen. Uitzondering: "Naar de afsluitquiz" op het laatste contentscherm.
 
-### Upload-checklist
-- [ ] `class="screen start"` op welkomscherm
-- [ ] `welcome-badge`, `leerdoelen`, `tijdsbadge` aanwezig
-- [ ] MODULE_TITELS beschrijvend
+**Kennischecks:** ALTIJD op eigen `-kc` scherm. Nooit embedded in een contentscherm.
+
+**Quiz:** 5-7 vragen, elk met inhoudelijk `uitleg`-veld. JSON tussen `<!-- QUIZ_START -->` en `<!-- QUIZ_END -->`. `correct`-index valt binnen 0..opties.length-1.
+
+**SVG:** `viewBox="0 0 580 [hoogte]"` altijd. `font-family="Arial, sans-serif"` op alle tekst. Inline in `<div class="visual-block">`.
+
+**Verboden SVG-kleuren:** `#F7F4F0` → `#FFF8F2` | `#4CAF50` / `#28c840` → `#22c55e` | `#3B82F6` / `#6366F1` → `#FF8514` | macOS-kleuren (`#ff5f57`, `#febc2e`, `#28c840`) → Umely-palet of transparant
+
+**Schrijven — verboden:**
+- M-dashes (`—`) in HTML-tekst → gebruik `:` `.` `,` of `(` ... `)`
+- Tijdsgebonden: "op dit moment", "momenteel", "in 2024/2025/2026", "nieuwste versie"
+- Prijsbedragen: `€XX` / `$XX` → "zie claude.ai/pricing"
+- AI-opvulling: "gebruik Claude verstandig", "mogelijkheden zijn eindeloos"
+- Waarschuwing zonder concrete vervolgstap
+- Lege `<div class="btn-wrap">`
+
+**`ANTHROPIC_API_KEY`** is alleen voor `server.js` — nooit in scripts of build-bestanden.
+
+### Zelfscheck — loop dit af voor je klaar bent
+
+**Technisch**
+- [ ] Elk `goTo('X')` → `<div id="X">` bestaat (of wordt door build toegevoegd)
+- [ ] `checkKC(N,...)` → `id="kc-N"` en `id="kc-feedback-N"` aanwezig
+- [ ] `checkScenario(N,...)` → `id="scenario-N"` en `id="scenario-feedback-N"` aanwezig
+- [ ] SCHERMEN-array compleet inclusief screen-quiz en screen-result
+- [ ] Quiz JSON geldig, 5-7 vragen, elk `uitleg`-veld gevuld, correct-index klopt
+- [ ] Geen externe CDN-URLs
+
+**Structuur & design**
+- [ ] `class="screen start"` op welkomscherm, welcome-badge, leerdoelen voor tijdsbadge
 - [ ] Kennischecks op eigen `-kc` schermen
-- [ ] Geen inline navigatieknoppen
-- [ ] Quiz 5-7 vragen met uitleg
-- [ ] Geen prijsbedragen of tijdsgebonden claims
-- [ ] Minimaal 5 componenttypen
-- [ ] Flashcards hebben onclick-handler
+- [ ] Laatste contentscherm heeft quiz-knop
+- [ ] Alle MODULE_TITELS beschrijvend (inclusief KC-schermen)
+- [ ] Min. 5 componenttypen (3 voor leeropdracht/certificaat-modules)
+- [ ] Alle SVG viewBox breedtes zijn 580
+- [ ] Geen verboden kleuren, alle flashcards hebben `onclick="toggleFlashcard(this)"`
+
+**Schrijfkwaliteit**
+- [ ] Grep je eigen output op `—` — zo ja: fix eerst
+- [ ] Geen tijdsgebonden taal, geen prijsbedragen, geen lege btn-wraps
+
+**Daarna:**
+```bash
+node build-modules.js && node validate-modules.js
+```
+Exit code 0 vereist. Zo niet: fix en herhaal.
 
 ## Referentiebronnen
 
