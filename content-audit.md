@@ -44,23 +44,36 @@ Geen bevindingen. Module bevat geen tijdsgebonden taal, geen AI-opvulling en gee
 
 ## MODULE: elearning-b1-veiligheid.html
 
-- **screen-module-2-2 (vergelijkingstabel)**: Tijdsgebonden / concrete tarieven — exacte zin: `"Gratis of ~$20/mnd"` en `"Teams ~$25/gebruiker/mnd"` — Specifieke prijzen in een tabel verouderen snel. Verwijder de bedragen of voeg een expliciete noot toe dat dit indicatieve prijzen zijn die kunnen veranderen.
+Geen bevindingen. Alle bekende issues uit de vorige audit zijn opgelost:
+- `screen-module-2-2` vergelijkingstabel: concrete tarieven (`~$20/mnd`, `~$25/gebruiker/mnd`) verwijderd. Kostenrij bevat nu "Gratis of betaald abonnement" / "Betaald abonnement (zie actuele pricing op claude.ai)" plus footnote die verwijst naar claude.ai.
+- Volledige scan op alle vier criteria (AI-opvulling, vage platitudes, tijdsgebonden taal, inconsistent taalgebruik) leverde geen nieuwe bevindingen op.
 
 ---
 
 ## MODULE: elearning-b2-niet-developers.html
 
-- **screen-module-1-1**: Leeg scherm-onderdeel — Dit scherm bevat een lege `<div class="content-card"></div>` (regels 44-45) tussen twee tip-boxes. Er staat geen inhoud in die content-card. Het scherm is daardoor opgebouwd uit enkel twee tip-boxes zonder een inhoudelijk blok. Geen specifieke zin maar een structureel probleem.
-
-- **screen-module-3-1 (tip-box Beperkingen)**: AI-opvulling / onvoldoende nuance — exacte zin: `"Zijn kennis heeft ook een einddatum: recente gebeurtenissen of nieuwe wetgeving kent hij mogelijk niet."` — Dit is de enige keer dat de kennisgrens van Claude benoemd wordt in dit scherm. Er ontbreekt enige concrete actie: wat doe je als je vermoedt dat de info verouderd is? (bijv. vraag Claude naar zijn trainingsdatum, zoek de wetgeving op via officiële bronnen). Nu is het een blote constatering zonder handelingsperspectief.
+Geen bevindingen. Alle bekende issues uit de vorige audit zijn opgelost:
+- `screen-module-1-1`: lege `<div class="content-card"></div>` is verwijderd. Scherm bevat nu twee inhoudelijke content-cards plus twee tip-boxes.
+- `screen-module-3-1`: de beperkingen-tip-box ("Zijn kennis heeft ook een einddatum") wordt direct gevolgd door een derde tip-box "Wat doe je als je twijfelt aan de actualiteit?" met concrete handelingen: vraag Claude naar de bron/tijdstip, controleer wetgeving via overheid.nl of relevante toezichthouder, gebruik een zoekmachine voor recente ontwikkelingen.
+- Volledige scan op alle vier criteria leverde geen nieuwe bevindingen op.
 
 ---
 
 ## MODULE: elearning-b3-fouten.html
 
-- **screen-module-1-1 (waarschuwing-tip)**: Vergelijking met andere tools — exacte zin: `"Hallucineren is geen bug die snel wordt opgelost. Het is een fundamentele eigenschap van hoe grote taalmodellen werken. Dit geldt voor Claude, ChatGPT, Gemini en alle andere vergelijkbare modellen."` — Noemen van ChatGPT en Gemini bij naam in een vergelijkingscontext is conform de designregel "geen tool-vergelijkingen". De namen zijn hier echter niet vergelijkend maar feitelijk (hallucinatie is universeel). Dit is een randgeval maar verdient herbeoordeling.
+Geen openstaande bevindingen. Alle bekende issues zijn opgelost of gefixed in deze audit:
+- `screen-module-1-1`: Verwijzing naar ChatGPT en Gemini bij naam vervangen door "alle grote taalmodellen, waaronder Claude" — al opgelost voor deze audit.
+- `screen-module-4-3`: rij ontkennende claims zonder handelingsperspectief. Fix in deze audit: formuleringen aangescherpt naar de specifiek vereiste beroepscontexten:
+  - `"Claude is geen jurist"` → `"gebruik hem voor het begrijpen van wetgevingsteksten, maar verifieer conclusies altijd met een gecertificeerde jurist"`
+  - `"Claude is geen arts"` → `"gebruik hem voor het begrijpen van medische termen, maar bespreek symptomen en behandelingen altijd met een arts"`
+  - `"Claude is geen accountant"` → hernoemd naar `"Claude is geen financieel adviseur"` + `"gebruik hem voor het begrijpen van financiële concepten, maar laat belastingaangiften en beleggingsbeslissingen controleren door een gecertificeerde adviseur"`
+- Volledige scan op alle vier criteria leverde geen nieuwe bevindingen op.
 
-- **screen-module-4-3 (tip-box "Wat Claude niet is")**: AI-opvulling / platitude — exacte zin: `"Claude is geen zoekmachine met actuele informatie. Hij is geen jurist, arts of accountant die verantwoordelijkheid draagt. Hij is geen vervanging voor een expert bij beslissingen met grote gevolgen. Gebruik hem als een capabele assistent, niet als eindoordeel."` — Dit scherm ("Realistische verwachtingen") bevat twee tip-boxes maar nauwelijks inhoudelijke uitleg van WAT dan de juiste aanpak is voor elk van die beroepscontexten. De eerste tip ("Wat Claude niet is") is een rij ontkennende claims zonder concrete alternatieven. Een jurist die dit leest weet nog steeds niet wat hij dan wél met Claude doet bij juridisch werk.
+---
+
+## MODULE: elearning-b4-leeropdracht-b.html
+
+Geen bevindingen. Volledige scan op alle vier criteria (AI-opvulling, vage platitudes, tijdsgebonden taal, inconsistent taalgebruik) leverde geen issues op. Module is praktisch en concreet opgebouwd: drie actieve fases met kopieerbare prompts en verificatiestappen. Geen prijzen, geen tijdsgebonden claims, geen vage instructies.
 
 ---
 
@@ -194,19 +207,19 @@ Geen significante problemen gevonden. Kosten voor domeinnamen zijn indicatief ma
 
 | Prioriteit | Module | Scherm | Type |
 |------------|--------|--------|------|
-| Hoog | elearning-b2-niet-developers.html | screen-module-1-1 | Leeg content-card (geen inhoud) |
+| Gefixed | elearning-b1-veiligheid.html | screen-module-2-2 | Concrete tarieven in tabel (~$20, ~$25) → verwijderd, verwijst nu naar claude.ai |
+| Gefixed | elearning-b2-niet-developers.html | screen-module-1-1 | Leeg content-card → verwijderd |
+| Gefixed | elearning-b2-niet-developers.html | screen-module-3-1 | Constatering zonder handelingsperspectief → derde tip-box toegevoegd met concrete acties |
+| Gefixed | elearning-b3-fouten.html | screen-module-1-1 | Noemen van ChatGPT/Gemini bij naam → vervangen door "alle grote taalmodellen" |
+| Gefixed | elearning-b3-fouten.html | screen-module-4-3 | Rij ontkennende claims zonder handelingsperspectief → concrete beroepscontextformuleringen toegevoegd |
 | Hoog | elearning-e3-plugins.html | tip-box bestandsgrootte | Tijdsgebonden getal ("momenteel 30 MB") |
 | Hoog | elearning-e3-plugins.html | beperkingstabel | Tijdsgebonden getal ("30 MB") |
-| Hoog | elearning-b1-veiligheid.html | screen-module-2-2 | Concrete tarieven in tabel (~$20, ~$25) |
 | Hoog | elearning-e2-connectors.html | screen-module-2 | Tijdsgebonden ("op dit moment beschikbaar") |
 | Hoog | elearning-c5-excel-powerpoint.html | screen-welcome leerdoel | Tijdsgebonden ("in ontwikkeling") |
 | Gefixed | elearning-a2-ecosysteem.html | screen-module-1-1 | Tijdsgebonden formulering ("Bekijk de actuele tarieven") → "Zie claude.ai/pricing voor actuele abonnementsprijzen" |
 | Gefixed | elearning-a2-ecosysteem.html | screen-module-3-1 en screen-module-3-2 | Tijdsgebonden taal ("kan uitgebreid worden") → verwijderd |
-| Medium | elearning-b3-fouten.html | screen-module-4-3 | AI-opvulling (rij ontkennende claims zonder handelingsperspectief) |
 | Medium | elearning-c1-webapp.html | screen-module-4-3 | Vage aansporing zonder concrete instructie |
 | Medium | elearning-i2-certificaat.html | screen-module-4 | AI-opvulling + tijdsgebonden + vage belofte |
-| Laag | elearning-b3-fouten.html | screen-module-1-1 | Noemen van ChatGPT/Gemini bij naam |
-| Laag | elearning-b2-niet-developers.html | screen-module-3-1 | Constatering zonder handelingsperspectief |
 | Laag | elearning-i1-praktijktoets.html | quiz-uitleg | "Momenteel tijdrovend" tijdsgebonden formulering |
 | Gefixed | elearning-a1-wat-is-claude.html | screen-module-1-2, screen-module-2-3, quiz | Alle bekende issues opgelost in vorige correctieronde |
 
