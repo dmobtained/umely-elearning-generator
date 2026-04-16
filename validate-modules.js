@@ -239,6 +239,16 @@ for (const file of files) {
     }
   }
 
+  // ── 23. "begrijpen" in TITLE of leerdoelen ──────────────────────────────────
+  const titleMatch = html.match(/<!-- TITLE:[^>]*-->/);
+  if (titleMatch && /begrijpen/i.test(titleMatch[0])) {
+    fouten.push(`TITLE bevat 'begrijpen' — gebruik een concreet werkwoord`);
+  }
+  const leerdoelenMatch = html.match(/<ul>[\s\S]*?<\/ul>/);
+  if (leerdoelenMatch && /begrijpen/i.test(leerdoelenMatch[0])) {
+    fouten.push(`Leerdoel bevat 'begrijpen' — gebruik een meetbaar werkwoord (uitleggen, beschrijven, toepassen, kiezen)`);
+  }
+
   check(file, fouten, waarschuwingen);
 }
 
