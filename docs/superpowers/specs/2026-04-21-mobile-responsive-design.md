@@ -181,44 +181,22 @@ Alle drie stats blijven zichtbaar. Waarde-font daalt van 30px naar 24px, padding
 
 #### B6 — Modulelijst met sectiekoppen
 
-Op mobiel worden modules gerenderd als verticale lijst gegroepeerd per reeks. De bestaande JavaScript die modules weergeeft, krijgt een extra renderpad voor mobiel dat sectiekoppen injecteert:
+**Aanpak: CSS-only — geen JS renderpad.**
 
-```
-if (window.innerWidth <= 768) {
-  // render als lijst met sectiekoppen per reeks
-} else {
-  // bestaande grid-render (ongewijzigd)
-}
-```
-
-Sectiekop-opmaak (nieuwe CSS-klasse):
+De bestaande `renderGrid()` JavaScript genereert al `.cat-group` blokken met een kop per reeks en een body met modules. Op desktop zijn deze klapbaar. Op mobiel worden ze geforceerd open gehouden via CSS en omgezet naar een verticale lijst — zonder enige JS-wijziging.
 
 ```css
 @media (max-width: 768px) {
-  .mobile-series-header {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #FF8514;
-    padding: 16px 0 6px;
-  }
-
-  .module-list-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #fff;
-    border: 1px solid #EAE6E0;
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 6px;
-    min-height: 44px;
-    text-decoration: none;
-    color: #27292D;
-  }
+  .cat-group-body { display: block !important; }
+  .cat-group-header { cursor: default !important; }
+  .cat-group-chevron { display: none !important; }
+  .cat-inner-grid { display: flex; flex-direction: column; gap: 6px; }
+  .module-card { min-height: 44px; }
+  .module-card:hover { transform: none; }
 }
 ```
+
+De `.cat-group-title` fungeert automatisch als sectiekop per reeks. Geen nieuwe klassen nodig.
 
 ---
 

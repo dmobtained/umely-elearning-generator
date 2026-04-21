@@ -95,14 +95,24 @@ Het bestaande mobiele blok eindigt op regel 180:
 }
 ```
 
-- [ ] **Stap 1: Voeg globale iOS input-fix toe**
+- [ ] **Stap 1: Controleer bestaande input-stijlen op conflicten**
 
-Direct ná het bestaande `@media(max-width:600px){...}` blok toevoegen — dit is géén media query, geldt altijd:
+```bash
+grep -n "input\|textarea\|select" module-content/_shared-css.html | grep "font-size"
+```
+
+Verwacht: alleen `.invul-input{...font-size:1rem...}` — dat is al 16px, geen conflict. Als er een klasse-selector op `font-size` staat kleiner dan 16px: noteer die, je hebt hem nodig in stap 2.
+
+- [ ] **Stap 2: Voeg globale iOS input-fix toe**
+
+Direct ná het bestaande `@media(max-width:600px){...}` blok toevoegen — dit is géén media query, geldt altijd. Zet het uiterst onderaan zodat het op bron-volgorde wint van eventuele eerdere element-selectors:
 
 ```css
 /* ── iOS INPUT ZOOM FIX (global) ── */
 input,textarea,select{font-size:16px}
 ```
+
+Noot: class-selectors (zoals `.invul-input`) hebben hogere specificiteit dan dit element-selector blok. Die hoef je niet aan te passen — `.invul-input` staat al op `1rem` (16px). Alleen bare `<input>`-elementen zonder klasse krijgen de fix.
 
 - [ ] **Stap 2: Voeg mobiele CSS toe**
 
@@ -141,6 +151,8 @@ node build-modules.js && node validate-modules.js
 
 Verwacht: `Exit code 0`, geen rode meldingen. Als validatie faalt: lees de foutmelding, herstel de CSS, herhaal.
 
+**Noot:** `upload-modules.js` wordt hier nog NIET gedraaid — dat volgt in Task 3 samen met de terugknop-fix, zodat er één upload is voor beide wijzigingen.
+
 - [ ] **Stap 4: Commit**
 
 ```bash
@@ -167,6 +179,8 @@ naar:
 ```js
       <a href="/modules.html" class="header-back" style="color:rgba(255,248,242,0.7);font-size:0.8rem;text-decoration:none;font-weight:600;padding:6px 14px;border:1.5px solid rgba(255,248,242,0.25);border-radius:50px;white-space:nowrap;transition:all 0.15s;">&#8592; Overzicht</a>
 ```
+
+**Noot inline styles:** de bestaande inline `style="..."` wint op specificiteit van `.header-back` CSS-regels voor alle gedeelde properties (color, font-size, padding, border, etc.). De mobiele fix in C1 voegt `min-height`, `display:flex` en `align-items` toe — die staan niet inline, dus werken ze gewoon. Wil je in de toekomst `.header-back` visueel aanpassen via CSS: verwijder de inline stijlen en migreer ze naar de klasse.
 
 - [ ] **Stap 2: Bouw, valideer en upload**
 
@@ -225,6 +239,9 @@ In `webapp/public/modules.html`, zoek naar `</style>` in de `<head>`. Voeg het v
   .stat-value { font-size: 24px; }
 
   /* B6 — Cat-groepen altijd open, als lijst weergeven */
+  /* CSS-only aanpak: bestaande cat-group structuur hergebruikt, geen JS renderpad nodig.
+     De spec beschreef .mobile-series-header/.module-list-item — dat is hier bewust vervangen
+     door CSS-overrides op bestaande klassen. Spec is dienovereenkomstig bijgewerkt. */
   .cat-group-body { display: block !important; }
   .cat-group-header { cursor: default !important; }
   .cat-group-chevron { display: none !important; }
@@ -233,6 +250,9 @@ In `webapp/public/modules.html`, zoek naar `</style>` in de `<head>`. Voeg het v
   /* Module cards als lijstitems */
   .module-card { min-height: 44px; }
   .module-card:hover { transform: none; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+
+  /* Resize-noot: breakpoint-check is niet reactief op resize. iPhone en Samsung
+     zijn in zowel portrait als landscape <768px breed — werkt correct. */
 
   /* Zoekbalk full-width */
   .search-input-wrap { width: 100%; }
@@ -335,7 +355,7 @@ En buiten het `@media` blok (zodat de nav op desktop verborgen blijft):
 .mobile-bottom-nav { display: none; }
 ```
 
-Let op: deze regel moet **buiten** het `@media` blok staan, zodat de nav standaard verborgen is en alleen op mobiel verschijnt.
+**Kritiek:** deze regel moet **vóór** het `@media (max-width: 768px)` blok staan in de bronvolgorde. Media queries verhogen specificiteit niet — als `display: none` ná het media query blok staat, wint hij altijd (latere volgorde, gelijke specificiteit). Zet hem direct boven het `@media` blok.
 
 - [ ] **Stap 3: Verifieer in browser**
 
@@ -368,11 +388,13 @@ git commit -m "feat(mobile): bottom navigation HTML + CSS op bibliotheekpagina"
 grep -n "class=\"main\|class=\"content\|class=\"container\|<main" webapp/public/account.html | head -10
 ```
 
-Kijk welke klasse of tag de hoofd-content omsluit. Gebruik die klasse in de `padding-bottom` regel van stap 2 (vervang `main, .main, .content, .container` door de exacte match als die afwijkt).
+Noteer de exacte klasse of tag. Gebruik die in stap 2 — schrijf de selector zo specifiek mogelijk en laat `!important` weg tenzij er een conflicterende inline `style="padding-bottom:..."` op het element staat.
 
 - [ ] **Stap 2: Voeg mobiele CSS toe aan account.html**
 
-Zoek het einde van het `<style>` blok in `webapp/public/account.html` en voeg toe direct vóór `</style>`:
+Zoek het einde van het `<style>` blok in `webapp/public/account.html` en voeg toe direct vóór `</style>`.
+
+**Kritiek: zet `.mobile-bottom-nav { display: none; }` vóór het `@media` blok** — niet erna, anders wint de `none`-regel altijd door latere bronvolgorde:
 
 ```css
 /* ── MOBILE ── */
@@ -382,9 +404,9 @@ Zoek het einde van het `<style>` blok in `webapp/public/account.html` en voeg to
   /* Header safe area */
   header { padding-top: env(safe-area-inset-top); }
 
-  /* Content padding voor bottom nav */
-  main, .main, .content, .container { 
-    padding-bottom: calc(49px + env(safe-area-inset-bottom) + 16px) !important; 
+  /* Content padding voor bottom nav — vervang .JOUWKLASSE door de klasse uit stap 1 */
+  .JOUWKLASSE { 
+    padding-bottom: calc(49px + env(safe-area-inset-bottom) + 16px); 
   }
 
   /* Tabel horizontaal scrollbaar */
@@ -499,7 +521,22 @@ Verwacht: 6 commits zichtbaar van deze feature.
 
 ## Testnoot
 
-Na lokale verificatie: handmatig testen op een echt iOS-apparaat in Safari én Chrome. Specifiek controleren:
+Na lokale verificatie: handmatig testen op de volgende apparaten en browsers:
+
+| Platform | Browser | Prioriteit |
+|---|---|---|
+| iPhone (met Dynamic Island) | Safari | Primair |
+| iPhone | Chrome | Secundair |
+| Samsung Galaxy | Samsung Internet | Secundair |
+| Android | Chrome | Secundair |
+
+Specifiek controleren:
 - Safe-area op iPhone met Dynamic Island (padding-top header, padding-bottom content)
 - Bottom nav zichtbaarheid bij openen toetsenbord
 - Scroll-bounce op tabellen (`overscroll-behavior-x: contain`)
+
+**Samsung Internet specifiek:**
+- Bottom toolbar gedrag tijdens scrollen (kan over bottom nav schuiven)
+- Geforceerde donkere modus: controleer of Umely-kleuren nog leesbaar zijn (amber op wit, charcoal achtergrond)
+
+Samsung Internet gebruikt dezelfde Chromium-engine — geen afwijkende CSS nodig, alleen visuele verificatie.
