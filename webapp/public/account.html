@@ -23,6 +23,7 @@
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', system-ui, sans-serif; background: #F5F5F7; color: var(--charcoal); min-height: 100vh; }
+  html, body { overflow-x: hidden; }
 
   /* ── AUTH OVERLAY ── */
   #authOverlay { display: none; position: fixed; inset: 0; background: rgba(39,41,45,0.88); backdrop-filter: blur(6px); z-index: 1000; align-items: center; justify-content: center; }
@@ -32,7 +33,7 @@
   .auth-card .auth-logo p { font-size: 14px; color: var(--gray-text); }
   .auth-field { margin-bottom: 14px; }
   .auth-field label { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
-  .auth-field input { width: 100%; padding: 12px 16px; border: 2px solid var(--gray-border); border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--charcoal); outline: none; transition: border-color 0.15s; }
+  .auth-field input { width: 100%; padding: 12px 16px; border: 2px solid var(--gray-border); border-radius: 10px; font-family: 'Inter', system-ui, sans-serif; font-size: 16px; color: var(--charcoal); outline: none; transition: border-color 0.15s; }
   .auth-field input:focus { border-color: var(--amber); }
   #authError { display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px; color: #991B1B; }
   #loginBtn { width: 100%; padding: 14px; background: var(--gradient); color: white; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; margin-top: 6px; }
