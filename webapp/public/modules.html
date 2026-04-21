@@ -539,12 +539,6 @@ async function initAuth() {
     if (session) { _session = session; showApp(session); loadModules(); checkNewsletterPopup(session); }
     else showLogin();
 
-    // Toon community-link alleen als community aan staat
-    fetch('/api/community/status').then(r => r.json()).then(({ enabled }) => {
-      const link = document.getElementById('nav-community');
-      if (link) link.style.display = enabled ? '' : 'none';
-    }).catch(() => {});
-
 
     if (sessionStorage.getItem('emailJustConfirmed')) {
       sessionStorage.removeItem('emailJustConfirmed');
