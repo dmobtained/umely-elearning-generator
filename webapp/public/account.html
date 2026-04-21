@@ -304,6 +304,58 @@
     .stats-grid { grid-template-columns: 1fr; }
     .section-card { padding: 20px 16px; }
   }
+
+/* ── MOBILE ── */
+.mobile-bottom-nav { display: none; }
+
+@media (max-width: 768px) {
+  /* Header safe area */
+  header { padding-top: env(safe-area-inset-top); }
+
+  /* Content padding voor bottom nav */
+  .content { padding: 20px 16px calc(49px + env(safe-area-inset-bottom) + 16px); }
+
+  /* Bibliotheek-knop verbergen — duplicaat van Modules-tab in bottom nav */
+  .btn-sm.btn-ghost { display: none; }
+
+  /* Tabel horizontaal scrollbaar */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; width: 100%; }
+
+  /* Formuliervelden full-width */
+  input, select, textarea { width: 100%; box-sizing: border-box; font-size: 16px; }
+
+  /* Bottom nav */
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #EAE6E0;
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 200;
+  }
+  .mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 49px;
+    min-width: 44px;
+    padding: 8px 0;
+    text-decoration: none;
+    color: #AAA;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .mobile-nav-item.active { color: #FF8514; }
+  .mobile-nav-icon { font-size: 20px; margin-bottom: 2px; }
+
+  /* Footer boven home indicator houden */
+  footer { padding-bottom: calc(49px + env(safe-area-inset-bottom) + 16px); }
+}
 </style>
 </head>
 <body>
@@ -1145,5 +1197,16 @@ function exportFeedbackCSV() {
 showSection('profiel');
 initAuth();
 </script>
+<!-- ── MOBILE BOTTOM NAV ── -->
+<nav class="mobile-bottom-nav" aria-label="Hoofdnavigatie">
+  <a href="/modules.html" class="mobile-nav-item" id="mobileNavModules">
+    <span class="mobile-nav-icon">📚</span>
+    <span class="mobile-nav-label">Modules</span>
+  </a>
+  <a href="/account.html" class="mobile-nav-item active" id="mobileNavAccount">
+    <span class="mobile-nav-icon">👤</span>
+    <span class="mobile-nav-label">Account</span>
+  </a>
+</nav>
 </body>
 </html>
