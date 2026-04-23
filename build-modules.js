@@ -165,7 +165,7 @@ ${content
       <h3 style="font-family:'Arimo',sans-serif;font-size:1.6rem;color:#2A221A;margin:0">De volledige Umely e-learning</h3>
     </div>
     <div style="background:#2A221A;border-radius:16px;padding:1.75rem;margin-bottom:1.25rem;">
-      <p style="color:#FFF8F2;font-size:1rem;line-height:1.7;margin-bottom:1.25rem">Je hebt nu de basis. Maar er is nog veel meer: 25 interactieve modules over Claude, automatisering, slimme tools en veel meer. Stap voor stap, op jouw tempo.</p>
+      <p style="color:#FFF8F2;font-size:1rem;line-height:1.7;margin-bottom:1.25rem">Je hebt nu de basis. Maar er is nog veel meer: 33 interactieve modules over Claude, automatisering, slimme tools en veel meer. Stap voor stap, op jouw tempo.</p>
       <div style="display:grid;gap:0.75rem;">
         <div style="display:flex;align-items:flex-start;gap:0.75rem;">
           <span style="color:#FF8514;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem">&#10003;</span>
