@@ -75,8 +75,14 @@ function renderNavButtons(screenId) {
 }
 
 function checkKC(nr, el, isCorrect, volgendeScherm, uitleg) {
-  document.querySelectorAll('#kc-' + nr + ' .kc-optie').forEach(o => o.style.pointerEvents = 'none');
+  const buttons = document.querySelectorAll('#kc-' + nr + ' .kc-optie');
+  buttons.forEach(o => o.style.pointerEvents = 'none');
   el.classList.add(isCorrect ? 'correct' : 'fout');
+  if (!isCorrect) {
+    buttons.forEach(o => {
+      if (o !== el && (o.getAttribute('onclick') || '').includes(', true,')) o.classList.add('correct');
+    });
+  }
   const fb = document.getElementById('kc-feedback-' + nr);
   const btnStijl = 'background:#27292D;color:white;border:none;border-radius:50px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.9rem;';
   if (isCorrect) {
@@ -102,8 +108,14 @@ function toggleLeesMeer(btn, contentId) {
 }
 
 function checkScenario(nr, el, isCorrect, uitleg) {
-  document.querySelectorAll('#scenario-' + nr + ' .scenario-keuze').forEach(o => o.style.pointerEvents = 'none');
+  const buttons = document.querySelectorAll('#scenario-' + nr + ' .scenario-keuze');
+  buttons.forEach(o => o.style.pointerEvents = 'none');
   el.classList.add(isCorrect ? 'correct' : 'fout');
+  if (!isCorrect) {
+    buttons.forEach(o => {
+      if (o !== el && (o.getAttribute('onclick') || '').includes(', true,')) o.classList.add('correct');
+    });
+  }
   const fb = document.getElementById('scenario-feedback-' + nr);
   fb.className = 'scenario-feedback ' + (isCorrect ? 'correct' : 'fout');
   fb.innerHTML = (isCorrect ? '<strong>Goede keuze!</strong> ' : '<strong>Niet de beste keuze.</strong> ') + uitleg;

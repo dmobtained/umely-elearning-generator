@@ -158,6 +158,50 @@ ${content
     <button class="btn btn-outline" onclick="herstart()">Opnieuw beginnen</button>
     ${nextModuleBtn}
   </div>
+  ${baseSlug === 'elearning-lezing-handout' ? `
+  <div style="margin-top:2.5rem;">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <p style="font-size:1rem;color:rgba(42,34,26,0.6);letter-spacing:0.05em;text-transform:uppercase;font-weight:700;margin-bottom:0.4rem">Wat komt hierna?</p>
+      <h3 style="font-family:'Arimo',sans-serif;font-size:1.6rem;color:#2A221A;margin:0">De volledige Umely e-learning</h3>
+    </div>
+    <div style="background:#2A221A;border-radius:16px;padding:1.75rem;margin-bottom:1.25rem;">
+      <p style="color:#FFF8F2;font-size:1rem;line-height:1.7;margin-bottom:1.25rem">Je hebt nu de basis. Maar er is nog veel meer: 25 interactieve modules over Claude, automatisering, slimme tools en veel meer. Stap voor stap, op jouw tempo.</p>
+      <div style="display:grid;gap:0.75rem;">
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <span style="color:#FF8514;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem">&#10003;</span>
+          <span style="color:#FFF8F2;font-size:0.95rem">Claude instellen als jouw persoonlijke assistent die jouw stijl en context kent</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <span style="color:#FF8514;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem">&#10003;</span>
+          <span style="color:#FFF8F2;font-size:0.95rem">Automatiseringen bouwen die voor je werken terwijl jij iets anders doet</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <span style="color:#FF8514;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem">&#10003;</span>
+          <span style="color:#FFF8F2;font-size:0.95rem">Werkprocessen versnellen: e-mails, verslagen, presentaties in een fractie van de tijd</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <span style="color:#FF8514;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem">&#10003;</span>
+          <span style="color:#FFF8F2;font-size:0.95rem">Praktisch en direct toepasbaar — elke module eindigt met iets wat je die dag nog kunt gebruiken</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <span style="color:#FF8514;font-size:1.1rem;flex-shrink:0;margin-top:0.1rem">&#10003;</span>
+          <span style="color:#FFF8F2;font-size:0.95rem">Certificaat bij afsluiting + toegang tot alle nieuwe modules</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(255,133,20,0.07);border:1.5px solid rgba(255,133,20,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:2rem;flex-shrink:0">&#128172;</span>
+      <div>
+        <p style="font-weight:700;color:#2A221A;margin:0 0 0.2rem">Liever eerst een gesprek?</p>
+        <p style="color:rgba(42,34,26,0.7);font-size:0.9rem;margin:0">Sonny en het team helpen je bepalen wat AI voor jou of jouw organisatie kan betekenen. Gratis en vrijblijvend.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+      <a href="/pricing" style="display:block;width:100%;max-width:400px;background:var(--gradient);color:white;text-decoration:none;padding:16px 32px;border-radius:50px;font-weight:800;font-size:1.05rem;text-align:center;box-shadow:0 4px 20px rgba(255,133,20,0.35);">Bekijk de volledige e-learning &#8594;</a>
+      <a href="https://umely.ai" target="_blank" rel="noopener" style="display:block;width:100%;max-width:400px;background:transparent;color:#FF8514;text-decoration:none;padding:14px 32px;border-radius:50px;font-weight:700;font-size:0.95rem;text-align:center;border:1.5px solid #FF8514;">Plan een gratis gesprek</a>
+    </div>
+  </div>
+  ` : ''}
 </div>
 
 <footer>
