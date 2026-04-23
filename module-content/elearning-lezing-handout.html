@@ -1,0 +1,588 @@
+<!-- TITLE: Lezing Handout - AI-tools in de praktijk -->
+<!-- SCHERMEN: 'screen-welcome','screen-module-1-1','screen-module-1-2','screen-module-1-kc','screen-module-2-1','screen-module-2-2','screen-module-2-kc','screen-module-3-1','screen-module-4-1','screen-module-4-2','screen-module-5-1','screen-quiz','screen-result','screen-module-5-2' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-module-1-1':'Het prompt-model: 6 onderdelen','screen-module-1-2':'Typen of inspreken: wanneer kies je wat?','screen-module-1-kc':'Kennischeck: het prompt-model toepassen','screen-module-2-1':'Claude: jouw AI-assistent voor kantoorwerk','screen-module-2-2':'Claude in actie: wat kun je ermee?','screen-module-2-kc':'Kennischeck: Claude slim inzetten','screen-module-3-1':'Typeless: dicteren als superkracht','screen-module-4-1':'Vier extra tools: overzicht','screen-module-4-2':'Wanneer gebruik je welke tool?','screen-module-5-1':'Maatwerk AI: n8n en Claude Code','screen-module-5-2':'Jouw volgende stap','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+
+<!-- QUIZ_START -->
+[
+  {
+    "vraag": "Je geeft Claude de volgende opdracht: 'Schrijf een samenvatting van dit rapport.' Je krijgt een tekst van 900 woorden terug die te technisch is voor je directeur. Welke twee onderdelen van het prompt-model ontbraken het meest?",
+    "opties": [
+      "Rol en Referentie",
+      "Vorm en Doelgroep",
+      "Doel en Output",
+      "Referentie en Doel"
+    ],
+    "correct": 1,
+    "uitleg": "Zonder Vorm wist Claude niet hoe lang de samenvatting moest zijn, vandaar 900 woorden. Zonder Doelgroep wist Claude niet dat een directeur beknopte, niet-technische taal verwacht. Beide laten de output teleurstellen op precies de punten die je noemt."
+  },
+  {
+    "vraag": "Een collega wil Claude een empathische maar zakelijke reactie laten schrijven op een boze klant. Er speelt veel: een lang conflict, eerder gemaakte afspraken die niet nagekomen zijn, en de klant staat op het punt weg te lopen. Wat is de meest effectieve aanpak?",
+    "opties": [
+      "Typ de kernpunten kort in Claude en vraag om een reactie",
+      "Zoek in Perplexity hoe je omgaat met moeilijke klanten en gebruik dat als basis",
+      "Spreek via Typeless de volledige situatie in, inclusief toon, gewenste uitkomst en klanthistorie, en gebruik het prompt-model",
+      "Upload eerdere klant-e-mails in NotebookLM en vraag om een reactie"
+    ],
+    "correct": 2,
+    "uitleg": "Dit is precies de situatie waar Typeless en het prompt-model samen excelleren. Door in te spreken geef je Claude de volledige context: de klantgeschiedenis, de gevoeligheid, de gewenste toon. Alleen typen werkt, maar je geeft structureel minder mee. NotebookLM is voor documentanalyse, niet voor schrijftaken met live context."
+  },
+  {
+    "vraag": "Je wilt voor een klant een marktanalyse maken over AI-toepassingen in de logistieke sector. Je hebt geen eigen bronnen. Wat is de meest effectieve werkvolgorde?",
+    "opties": [
+      "Claude: vraag hem direct om de marktanalyse te schrijven",
+      "NotebookLM: upload wat je weet en laat het een analyse genereren",
+      "Perplexity Deep Research voor actuele marktdata en bronnen, daarna Claude om de data te structureren en te schrijven",
+      "Gamma.app: genereer een presentatie over het onderwerp"
+    ],
+    "correct": 2,
+    "uitleg": "Claude heeft geen toegang tot actuele marktdata en kan plausibel klinkende cijfers verzinnen. Perplexity haalt live data op met bronvermelding. Vervolgens gebruik je Claude om die data te structureren tot een leesbaar rapport. De combinatie van Perplexity voor research en Claude voor schrijven is hier sterker dan elk van beide apart."
+  },
+  {
+    "vraag": "Je directeur vraagt je om snel te achterhalen welke drie AI-startups de afgelopen maanden het meest gefinancierd zijn in Nederland. Je hebt 10 minuten. Wat doe je?",
+    "opties": [
+      "Claude vragen: hij heeft veel kennis over het AI-ecosysteem",
+      "Perplexity openen en de vraag direct invoeren",
+      "NotebookLM aanmaken en relevante artikelen uploaden",
+      "Gamma.app gebruiken om een overzicht te genereren"
+    ],
+    "correct": 1,
+    "uitleg": "Perplexity is een AI-zoekmachine die live het internet doorzoekt en directe bronvermelding geeft. Claude heeft geen toegang tot actueel nieuws en geeft mogelijk verouderde of verzonnen informatie. NotebookLM werkt alleen met documenten die je zelf aanlevert, en Gamma.app maakt presentaties."
+  },
+  {
+    "vraag": "Een makelaarskantoor wil dat nieuwe koopaanvragen automatisch worden ontvangen, samengevat door AI en als gestructureerd overzicht in hun CRM geplaatst, zonder handmatig werk. Welke combinatie heb je hiervoor nodig?",
+    "opties": [
+      "Claude en Gamma.app",
+      "Perplexity en NotebookLM",
+      "Typeless en Claude",
+      "n8n en Claude via de API"
+    ],
+    "correct": 3,
+    "uitleg": "n8n regelt de automatische workflow: het ontvangt de aanvraag, stuurt die naar Claude via de API voor de samenvatting en plaatst het resultaat in het CRM. Claude (via de API) is de AI-motor die analyseert en structureert. Samen bouwen ze een volledig geautomatiseerd proces zonder handmatig ingrijpen."
+  }
+]
+<!-- QUIZ_END -->
+
+<!-- WELKOMSTSCHERM -->
+<div id="screen-welcome" class="screen start">
+  <div class="welcome-hero">
+    <div class="welcome-badge">Umely Lezing Handout</div>
+    <h1>AI-tools in de praktijk</h1>
+    <p>Alles uit de lezing, nu interactief. Leer de tools kennen, snap het prompt-model en ontdek hoe je vandaag nog aan de slag gaat.</p>
+  </div>
+  <div class="leerdoelen">
+    <h3>Na deze module kun je:</h3>
+    <ul>
+      <li>Een effectief prompt schrijven met het 6-onderdelen model en herkennen wat er in een zwakke prompt ontbreekt</li>
+      <li>Claude inzetten voor schrijven, analyseren en samenvatten en weten wanneer je zijn output moet verifiëren</li>
+      <li>Typeless gebruiken om sneller en rijker te prompten via je stem</li>
+      <li>Per situatie kiezen welke tool het beste past: Claude, Gemini, Perplexity, Gamma of NotebookLM</li>
+      <li>Uitleggen wanneer maatwerk AI-tooling de volgende stap is en wat je daarvoor nodig hebt</li>
+    </ul>
+  </div>
+  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 30 minuten</div>
+  <div class="btn-wrap">
+    <button class="btn" onclick="goTo('screen-module-1-1')">Start de module</button>
+  </div>
+</div>
+
+<!-- MODULE 1-1: Het prompt-model -->
+<div id="screen-module-1-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1</div>
+    <h2>Het prompt-model: 6 onderdelen</h2>
+  </div>
+  <div class="content-card">
+    <p>Een prompt is de opdracht die je aan een AI geeft. Hoe specifieker die opdracht, hoe beter het resultaat. Dit model werkt voor elke AI-tool die je gebruikt. Klik de kaartjes om elk onderdeel te leren. Draai ze om voor een concreet voorbeeld.</p>
+  </div>
+
+  <div class="flashcard-set">
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">1 · Rol</div>
+      <div class="fc-hint">Welke identiteit geef je aan Claude?. Klik om te leren.</div>
+      <div class="fc-uitleg">
+        <p><strong>Sterk:</strong> "Je bent een senior HR-consultant met 15 jaar ervaring in reorganisaties."</p>
+        <p style="margin-top:0.6rem"><strong>Zwak:</strong> "Jij bent een expert." (te vaag, geeft Claude niets om mee te werken)</p>
+        <p style="margin-top:0.6rem;opacity:0.75">Hoe specifieker de rol, hoe meer Claude zijn toon, jargon en aanpak aanpast. De rol bepaalt het perspectief, niet de schrijfstijl richting de lezer.</p>
+      </div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">2 · Output</div>
+      <div class="fc-hint">Wat wil je precies ontvangen?. Klik om te leren.</div>
+      <div class="fc-uitleg">
+        <p><strong>Sterk:</strong> "Schrijf een e-mail van maximaal 150 woorden met een openingszin, één concreet voordeel en een call-to-action."</p>
+        <p style="margin-top:0.6rem"><strong>Zwak:</strong> "Schrijf iets over onze dienst." (Claude kiest zelf format, lengte en invalshoek)</p>
+        <p style="margin-top:0.6rem;opacity:0.75">Output en Vorm overlappen deels. Het verschil: Output = wat, Vorm = hoe lang en in welk format.</p>
+      </div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">3 · Doel</div>
+      <div class="fc-hint">Waarom maak je dit?. Klik om te leren.</div>
+      <div class="fc-uitleg">
+        <p><strong>Sterk:</strong> "Doel: de klant overtuigen om een kennismakingsgesprek te plannen, niet om direct te kopen."</p>
+        <p style="margin-top:0.6rem"><strong>Zwak:</strong> Geen doel opgeven. Claude kiest dan zelf een toon, die soms te hard verkoopt of juist te informatief is.</p>
+        <p style="margin-top:0.6rem;opacity:0.75">Het doel stuurt de toon drastisch. Overtuigen klinkt anders dan informeren, informeren anders dan geruststellen.</p>
+      </div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">4 · Vorm</div>
+      <div class="fc-hint">Hoe lang en in welk format?. Klik om te leren.</div>
+      <div class="fc-uitleg">
+        <p><strong>Sterk:</strong> "In een tabel met drie kolommen: probleem, oorzaak en oplossing. Maximaal 6 rijen."</p>
+        <p style="margin-top:0.6rem"><strong>Zwak:</strong> Geen vorm opgeven. Claude schrijft dan een lange lopende tekst terwijl jij bullets wilde.</p>
+        <p style="margin-top:0.6rem;opacity:0.75">Dit onderdeel wordt het vaakst overgeslagen. Zonder Vorm kiest Claude zelf, en dat is zelden wat jij in gedachten had.</p>
+      </div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">5 · Doelgroep</div>
+      <div class="fc-hint">Voor wie schrijf je en in welke stijl?. Klik om te leren.</div>
+      <div class="fc-uitleg">
+        <p><strong>Sterk:</strong> "Voor een directeur van een mkb-bedrijf, zonder technische achtergrond. Zakelijk maar toegankelijk, geen jargon."</p>
+        <p style="margin-top:0.6rem"><strong>Zwak:</strong> "Voor klanten." (welke klanten? wat weten ze al? wat verwachten ze?)</p>
+        <p style="margin-top:0.6rem;opacity:0.75">Dezelfde boodschap klinkt totaal anders voor een jurist dan voor een medewerker op de werkvloer.</p>
+      </div>
+    </div>
+    <div class="flashcard" onclick="toggleFlashcard(this)">
+      <div class="fc-term">6 · Referentie</div>
+      <div class="fc-hint">Waarop moet Claude zich baseren?. Klik om te leren.</div>
+      <div class="fc-uitleg">
+        <p><strong>Sterk:</strong> "Gebruik uitsluitend de informatie in dit document: [plak tekst]. Verzin niets wat er niet in staat."</p>
+        <p style="margin-top:0.6rem"><strong>Zwak:</strong> Geen referentie opgeven bij een feitelijke taak. Claude vult dan aan met wat hij denkt dat klopt, en dat kan fout zijn.</p>
+        <p style="margin-top:0.6rem;opacity:0.75">Referentie is cruciaal zodra accuraatheid telt. Zonder referentie is Claude creatief, niet accuraat.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>Sneltemplate:</strong> "Je bent een [rol]. Maak [output] over [onderwerp], met als doel [doel]. Schrijf in [vorm] voor [doelgroep]. Baseer je uitsluitend op: [referentie]."
+  </div>
+
+  <div class="scenario-blok" id="scenario-0">
+    <p class="scenario-vraag">Een collega geeft Claude de volgende prompt: "Je bent een accountant. Schrijf een e-mail over ons nieuwe abonnement." Hij is teleurgesteld: de mail is 400 woorden lang en volledig algemeen. Welk onderdeel ontbrak dat dit direct had voorkomen?</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(0, this, false, 'Rol heeft hij al opgegeven: accountant. Dat onderdeel was aanwezig, al had het specifieker gemogen.')">Rol: hij had een specifiekere identiteit moeten geven</button>
+      <button class="scenario-keuze" onclick="checkScenario(0, this, false, 'Doel helpt zeker, maar lost het lengteprobleem niet direct op. Je kunt een goed doel hebben en toch een te lange tekst krijgen.')">Doel: hij had moeten zeggen waarvoor de e-mail dient</button>
+      <button class="scenario-keuze" onclick="checkScenario(0, this, true, 'Precies. Zonder Vorm weet Claude niet hoe lang de mail moet zijn en kiest hij zelf, wat vrijwel altijd te lang uitvalt. "Maximaal 120 woorden, in 3 korte alineas" had dit direct opgelost.')">Vorm: hij had lengte en format moeten opgeven</button>
+      <button class="scenario-keuze" onclick="checkScenario(0, this, false, 'Referentie helpt voor feitelijke inhoud, maar lost het probleem van lengte en algemeenheid niet op. Zonder Vorm blijft Claude te lang schrijven.')">Referentie: hij had bronmateriaal moeten aanleveren</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-0"></div>
+  </div>
+</div>
+
+<!-- MODULE 1-2: Prompt-modi -->
+<div id="screen-module-1-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 1</div>
+    <h2>Typen of inspreken: wanneer kies je wat?</h2>
+  </div>
+  <div class="content-card">
+    <p>Je kunt Claude een opdracht geven door te typen of door in te spreken via Typeless. Beide werken, maar ze hebben verschillende sterktes. Het verschil zit niet in de tool, maar in hoeveel context je meegeeft. Bepaal per situatie wat slimmer is.</p>
+  </div>
+
+  <div class="scenario-blok" id="scenario-1">
+    <p class="scenario-vraag">Je wilt een offerte herschrijven voor een klant die je goed kent. Je weet precies wat erin moet staan: dienst, prijs, planning en een afsluiting. De offerte is zo'n tien zinnen.</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(1, this, true, 'Goed. Alles is al helder in je hoofd en de taak is beknopt. Typen is hier sneller en preciezer dan inspreken. Typeless voegt hier geen meerwaarde toe: je geeft niet meer context dan je al weet te typen.')">Typen</button>
+      <button class="scenario-keuze" onclick="checkScenario(1, this, false, 'Typeless is krachtig, maar blinkt uit bij complexe situaties met veel context. Hier weet je al precies wat je wilt en is de opdracht eenvoudig. Typen is hier efficiënter.')">Inspreken via Typeless</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-1"></div>
+  </div>
+
+  <div class="scenario-blok" id="scenario-2">
+    <p class="scenario-vraag">Je wilt een ontslaggesprek voorbereiden. De medewerker heeft eerder een verbetertraject gehad, zit privé in een moeilijke periode en je wilt het gesprek empathisch maar ook duidelijk laten verlopen. Er moet ook een juridisch veilige afronding in zitten.</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(2, this, false, 'Typen werkt, maar in de praktijk geef je bij typen structureel minder context mee. De nuance van deze situatie, de toon, de juridische laag en de persoonlijke omstandigheden, verdwijnt snel als je typt in plaats van spreekt.')">Typen</button>
+      <button class="scenario-keuze" onclick="checkScenario(2, this, true, 'Precies. Dit is waar inspreken zijn meerwaarde bewijst. Je beschrijft de situatie volledig, alle context, alle gevoeligheid en alle eisen. Claude krijgt daardoor een rijker beeld en levert een veel betere voorbereiding dan wanneer je diezelfde situatie probeert samen te vatten in tekst.')">Inspreken via Typeless</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-2"></div>
+  </div>
+
+  <div class="scenario-blok" id="scenario-3">
+    <p class="scenario-vraag">Je zit in een open kantoor. Een collega naast je is aan het bellen. Je wilt Claude snel vragen hoe je een bepaald Excel-formule werkt.</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(3, this, true, 'Goed. De omgeving maakt inspreken onpraktisch, de vraag is kort en de context is minimaal. Typen is hier de enige logische keuze.')">Typen</button>
+      <button class="scenario-keuze" onclick="checkScenario(3, this, false, 'Inspreken in een drukke omgeving is onhandig voor jou en verstorend voor collega\'s. Bovendien is de vraag zo kort dat voice geen extra context oplevert. Typen is hier logischer.')">Inspreken via Typeless</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-3"></div>
+  </div>
+
+  <div class="tip-box">
+    <strong>Vuistregel:</strong> kies inspreken als je situatie meer context heeft dan je comfortabel kunt typen. Kies typen als de opdracht beknopt, helder of omgevingsgebonden is. De winst van Typeless zit in de rijkdom van je input, niet in de snelheid van het typen.
+  </div>
+</div>
+
+<!-- MODULE 1-KC -->
+<div id="screen-module-1-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Kennischeck</div>
+    <h2>Het prompt-model toepassen</h2>
+  </div>
+  <div class="kennischeck">
+    <h3>Vraag 1 van 1</h3>
+    <p class="kc-vraag">Een salesmanager vraagt Claude: "Schrijf een overtuigende tekst over ons nieuwe product." Hij krijgt een generieke, te lange tekst terug in een formele stijl. Hij is teleurgesteld, maar weet niet waarom het misging. Welke twee onderdelen van het prompt-model ontbraken het meest?</p>
+    <div class="kc-opties" id="kc-1">
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Rol en Referentie waren inderdaad afwezig, maar Rol lost het stijlprobleem niet op en Referentie is hier niet de kern van het probleem. De tekst was te lang en verkeerd van toon.')">Rol en Referentie</button>
+      <button class="kc-optie" onclick="checkKC(1, this, true, 'screen-module-2-1', 'Goed. Zonder Doelgroep kiest Claude een formele standaardstijl, terwijl &quot;overtuigend&quot; voor een salesmanager waarschijnlijk toegankelijk en direct bedoelt. Zonder Vorm kiest Claude zelf een lengte, en dat is vrijwel altijd te lang. Samen zorgen deze twee voor precies de teleurstelling die hij beschrijft.')">Doelgroep en Vorm</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Doel (&quot;overtuigend&quot;) heeft hij al min of meer opgegeven. Output (&quot;tekst&quot;) ook. De problemen zitten in de stijl (te formeel = Doelgroep ontbreekt) en de lengte (te lang = Vorm ontbreekt).')">Doel en Output</button>
+      <button class="kc-optie" onclick="checkKC(1, this, false, 'screen-module-2-1', 'Referentie helpt voor feitelijke inhoud, maar is niet de oorzaak van de formele stijl of de lengte. Doel was al impliciet aanwezig (&quot;overtuigend&quot;). De kernoorzaken liggen bij Doelgroep en Vorm.')">Referentie en Doel</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-1"></div>
+    <div class="kc-knoppen">
+      <button class="btn btn-outline" onclick="resetKC(1)">Opnieuw</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 2-1: Claude intro -->
+<div id="screen-module-2-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2</div>
+    <h2>Claude: jouw AI-assistent voor kantoorwerk</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude is de AI-assistent van Anthropic, een Amerikaans AI-veiligheidsbedrijf. Claude is getraind om eerlijk, behulpzaam en veilig te zijn, met bijzondere aandacht voor privacygevoelige situaties.</p>
+    <p>Je gebruikt Claude via de browser, de desktop-app of de mobiele app. Alle drie zijn gratis beschikbaar. Voor hogere gebruikslimieten en geavanceerde functies zijn betaalde plannen beschikbaar (zie claude.ai/pricing).</p>
+  </div>
+
+  <div class="visual-block">
+    <svg viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <rect width="580" height="280" fill="#27292D" rx="10"/>
+      <circle cx="290" cy="140" r="52" fill="#FF8514" opacity="0.18"/>
+      <circle cx="290" cy="140" r="36" fill="#FF8514"/>
+      <text x="290" y="136" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FFF8F2" text-anchor="middle">Claude</text>
+      <text x="290" y="151" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.8">by Anthropic</text>
+      <line x1="255" y1="118" x2="155" y2="75" stroke="#FF8514" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="140" cy="68" r="28" fill="#FFF8F2" opacity="0.08"/>
+      <text x="140" y="64" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FF8514" text-anchor="middle">Schrijven</text>
+      <text x="140" y="78" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.7">e-mails, rapporten</text>
+      <line x1="254" y1="140" x2="140" y2="140" stroke="#FF8514" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="105" cy="140" r="28" fill="#FFF8F2" opacity="0.08"/>
+      <text x="105" y="136" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FF8514" text-anchor="middle">Analyseren</text>
+      <text x="105" y="150" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.7">data, documenten</text>
+      <line x1="255" y1="162" x2="155" y2="205" stroke="#FF8514" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="140" cy="212" r="28" fill="#FFF8F2" opacity="0.08"/>
+      <text x="140" y="208" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FF8514" text-anchor="middle">Samenvatten</text>
+      <text x="140" y="222" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.7">lange teksten</text>
+      <line x1="325" y1="118" x2="425" y2="75" stroke="#FF8514" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="440" cy="68" r="28" fill="#FFF8F2" opacity="0.08"/>
+      <text x="440" y="64" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FF8514" text-anchor="middle">Vertalen</text>
+      <text x="440" y="78" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.7">elke taal, elke toon</text>
+      <line x1="326" y1="140" x2="440" y2="140" stroke="#FF8514" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="475" cy="140" r="28" fill="#FFF8F2" opacity="0.08"/>
+      <text x="475" y="136" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FF8514" text-anchor="middle">Structureren</text>
+      <text x="475" y="150" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.7">plannen, agenda's</text>
+      <line x1="325" y1="162" x2="425" y2="205" stroke="#FF8514" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="440" cy="212" r="28" fill="#FFF8F2" opacity="0.08"/>
+      <text x="440" y="208" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FF8514" text-anchor="middle">Brainstormen</text>
+      <text x="440" y="222" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" text-anchor="middle" opacity="0.7">ideeën, strategieën</text>
+    </svg>
+  </div>
+
+  <div class="tip-box">
+    <strong>Account aanmaken:</strong> ga naar claude.ai, klik op "Get started" en registreer via Google of e-mailadres. De gratis versie is voor kantoorgebruik al krachtig genoeg om mee te starten.
+  </div>
+</div>
+
+<!-- MODULE 2-2: Claude in actie -->
+<div id="screen-module-2-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 2</div>
+    <h2>Claude in actie: wat kun je ermee?</h2>
+  </div>
+  <div class="content-card">
+    <p>Claude werkt het beste als je hem behandelt als een slimme collega: geef context, vertel wat je wilt en wees specifiek. Hier zijn concrete manieren om direct te starten.</p>
+  </div>
+
+  <div class="stappen-lijst">
+    <div class="stap-item">
+      <div class="stap-num">1</div>
+      <div class="stap-content">
+        <strong>Bestaande tekst verbeteren</strong>
+        <p>Plak een e-mail, rapport of voorstel in Claude en geef een specifieke opdracht: "maak dit 30% korter zonder inhoud te verliezen" of "herschrijf dit in een toegankelijkere toon voor niet-financiële lezers". Vaag verzoeken als "maak het beter" leveren vage resultaten.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-num">2</div>
+      <div class="stap-content">
+        <strong>Documenten samenvatten op maat</strong>
+        <p>Upload een PDF of plak een lange tekst en geef Claude de context: "dit is voor een directiebriefing van 5 minuten, geef me de drie beslispunten met voor- en nadelen per punt". Hoe specifieker de vraag, hoe bruikbaarder de samenvatting.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-num">3</div>
+      <div class="stap-content">
+        <strong>Chaos omzetten naar structuur</strong>
+        <p>Dump ruwe aantekeningen of gesproken notities in Claude en vraag om een gestructureerd actieplan met eigenaar, deadline en prioriteit per actie. Claude is uitstekend in het vinden van structuur in rommelige input.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-num">4</div>
+      <div class="stap-content">
+        <strong>Projects: geheugen over gesprekken heen</strong>
+        <p>Via Projects onthoudt Claude jouw context bij terugkerende taken. Upload jouw schrijfstijl, klantinformatie of standaardprocedures eenmalig als instructie. Elk nieuw gesprek binnen dat project start dan al met die context.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box waarschuwing">
+    <strong>Cruciaal om te weten:</strong> Claude verzint soms informatie die plausibel klinkt maar niet klopt. Dit heet "hallucination". Gebruik Claude's output als schrijfhulp en structuurdenker, maar verifieer altijd feiten, cijfers, namen en juridische details via een betrouwbare bron voordat je ze gebruikt.
+  </div>
+</div>
+
+<!-- MODULE 2-KC -->
+<div id="screen-module-2-kc" class="screen">
+  <div class="module-header">
+    <div class="module-num">Kennischeck</div>
+    <h2>Claude slim inzetten</h2>
+  </div>
+  <div class="kennischeck">
+    <h3>Vraag 1 van 1</h3>
+    <p class="kc-vraag">Je vraagt Claude om de drie meest relevante uitspraken van de Hoge Raad over arbeidsrecht van het afgelopen jaar. Claude geeft je een uitgebreid antwoord met drie casussen, met namen, data en uitkomsten. Hoe ga je hier het beste mee om?</p>
+    <div class="kc-opties" id="kc-2">
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Claude\'s antwoorden over specifieke juridische uitspraken zijn niet betrouwbaar zonder verificatie. Hij heeft geen toegang tot actuele rechtspraak en kan namen, data en uitkomsten verzinnen die plausibel klinken maar niet bestaan.')">Direct overnemen: Claude is getraind op juridische data en doorgaans nauwkeurig</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Claude nogmaals vragen levert hetzelfde probleem op: als hij informatie verzint, verzint hij die bij herhaling opnieuw. Dit lost het verificatieprobleem niet op.')">Claude nogmaals vragen om zekerheid te krijgen</button>
+      <button class="kc-optie" onclick="checkKC(2, this, true, 'screen-module-3-1', 'Precies. Claude\'s antwoord kan een goede structuur bieden, maar specifieke juridische uitspraken met naam, datum en uitkomst moeten worden geverifieerd via officiële bronnen zoals rechtspraak.nl of een juridische databank. Gebruik Claude als structuurdenker, niet als juridisch archief.')">De structuur van het antwoord gebruiken maar elk feit verifiëren via officiële bronnen</button>
+      <button class="kc-optie" onclick="checkKC(2, this, false, 'screen-module-3-1', 'Perplexity is inderdaad beter voor actuele bronnen, maar het probleem is niet dat je Perplexity niet gebruikt. Het probleem is dat je Claude\'s juridische output zonder verificatie niet kunt vertrouwen. Leer wanneer je Claude\'s output moet controleren, ongeacht welke andere tool je erbij gebruikt.')">Perplexity vragen of Claude's antwoord klopt</button>
+    </div>
+    <div class="kc-feedback" id="kc-feedback-2"></div>
+    <div class="kc-knoppen">
+      <button class="btn btn-outline" onclick="resetKC(2)">Opnieuw</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 3-1: Typeless -->
+<div id="screen-module-3-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 3</div>
+    <h2>Typeless: dicteren als superkracht</h2>
+  </div>
+  <div class="content-card">
+    <p>Typeless is een spraak-naar-tekst tool die overal op je computer werkt. Je drukt op een sneltoets, spreekt in, en je woorden verschijnen direct als tekst in elke app of tekstbox, inclusief Claude.</p>
+    <p>Waarom dit zo krachtig is: als je spreekt, geef je in de praktijk veel meer context mee dan wanneer je typt. Dat levert rijkere, preciezere output op.</p>
+  </div>
+
+  <div class="stappen-lijst">
+    <div class="stap-item">
+      <div class="stap-num">1</div>
+      <div class="stap-content">
+        <strong>Installeren</strong>
+        <p>Ga naar typeless.ai, maak een gratis account aan en download de app voor je besturingssysteem.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-num">2</div>
+      <div class="stap-content">
+        <strong>Sneltoets instellen</strong>
+        <p>Typeless werkt via een instelbare sneltoets. Klik erop om te starten met opnemen, spreek je prompt in, klik opnieuw om te stoppen. De tekst verschijnt automatisch op de plek van je cursor.</p>
+      </div>
+    </div>
+    <div class="stap-item">
+      <div class="stap-num">3</div>
+      <div class="stap-content">
+        <strong>Claude-prompt inspreken</strong>
+        <p>Klik in het Claude-tekstbox, druk op je Typeless-sneltoets en spreek je volledige prompt in, inclusief rol, doel, vorm en context. Typeless plaatst de tekst automatisch. Druk daarna gewoon op Enter.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>Tip van Sonny:</strong> gebruik Typeless specifiek voor situaties met veel context. Als je een klantcase wilt uitleggen aan Claude, spreek alles in: wie de klant is, wat er speelt, wat de gewenste toon is en welke output je wilt. Je geeft in dezelfde tijd drie keer zoveel input als bij typen, en Claude's output wordt daardoor aanzienlijk rijker.
+  </div>
+
+  <div class="visual-block">
+    <svg viewBox="0 0 580 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
+      <rect width="580" height="140" fill="#27292D" rx="10"/>
+      <circle cx="100" cy="70" r="32" fill="#FF8514" opacity="0.2"/>
+      <text x="100" y="62" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#FF8514">&#127908;</text>
+      <text x="100" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#FFF8F2" text-anchor="middle">Spreek in</text>
+      <text x="100" y="99" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" opacity="0.6" text-anchor="middle">Typeless sneltoets</text>
+      <path d="M140 70 L185 70" stroke="#FF8514" stroke-width="2" marker-end="url(#arrowT)"/>
+      <defs><marker id="arrowT" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#FF8514"/></marker></defs>
+      <circle cx="220" cy="70" r="32" fill="#FF8514" opacity="0.2"/>
+      <text x="220" y="62" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#FF8514">&#128196;</text>
+      <text x="220" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#FFF8F2" text-anchor="middle">Tekst verschijnt</text>
+      <text x="220" y="99" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" opacity="0.6" text-anchor="middle">in elk tekstvak</text>
+      <path d="M260 70 L305 70" stroke="#FF8514" stroke-width="2" marker-end="url(#arrowT)"/>
+      <circle cx="340" cy="70" r="32" fill="#FF8514" opacity="0.2"/>
+      <text x="340" y="62" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#FF8514">&#9654;</text>
+      <text x="340" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#FFF8F2" text-anchor="middle">Stuur naar Claude</text>
+      <text x="340" y="99" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" opacity="0.6" text-anchor="middle">druk Enter</text>
+      <path d="M380 70 L425 70" stroke="#FF8514" stroke-width="2" marker-end="url(#arrowT)"/>
+      <circle cx="460" cy="70" r="32" fill="#FF8514" opacity="0.2"/>
+      <text x="460" y="62" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#FF8514">&#10024;</text>
+      <text x="460" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#FFF8F2" text-anchor="middle">Rijkere output</text>
+      <text x="460" y="99" font-family="Arial, sans-serif" font-size="9" fill="#FFF8F2" opacity="0.6" text-anchor="middle">meer context = beter resultaat</text>
+    </svg>
+  </div>
+</div>
+
+<!-- MODULE 4-1: Vier tools overzicht -->
+<div id="screen-module-4-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4</div>
+    <h2>Vier extra tools: overzicht</h2>
+  </div>
+  <div class="content-card">
+    <p>Naast Claude zijn er vier tools die elk een specifieke taak beter doen. Claude is je algemene assistent. Deze vier zijn de specialisten voor situaties waar Claude tekortschiet of een omweg kost.</p>
+  </div>
+
+  <table class="vergelijk-tabel">
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Gebruik je dit als...</th>
+        <th>Sterkste functie</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Gemini</strong> (Google)</td>
+        <td>Je visuele content wil genereren</td>
+        <td>Foto's genereren (Imagen) en korte video's maken (Veo) via tekstprompts</td>
+      </tr>
+      <tr>
+        <td><strong>Perplexity</strong></td>
+        <td>Je actuele informatie nodig hebt met bronnen</td>
+        <td>Live zoeken met directe bronvermelding en Deep Research voor uitgebreide analyses</td>
+      </tr>
+      <tr>
+        <td><strong>Gamma.app</strong></td>
+        <td>Je een presentatie of document wil genereren</td>
+        <td>Volledige, opgemaakte presentatie vanuit een prompt of bestaande tekst in minuten</td>
+      </tr>
+      <tr>
+        <td><strong>NotebookLM</strong> (Google)</td>
+        <td>Je vragen wil stellen over je eigen documenten</td>
+        <td>Antwoorden gebaseerd op jouw uploads, met bronverwijzing. Audio-overviews en quizzes genereren</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <strong>Accounts aanmaken:</strong> Gemini via gemini.google.com, Perplexity via perplexity.ai, Gamma via gamma.app, NotebookLM via notebooklm.google.com. Alle vier werken met een Google-account of e-mailadres.
+  </div>
+</div>
+
+<!-- MODULE 4-2: Wanneer welke tool -->
+<div id="screen-module-4-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 4</div>
+    <h2>Wanneer gebruik je welke tool?</h2>
+  </div>
+  <div class="content-card">
+    <p>In de praktijk liggen de keuzes niet altijd voor de hand. Bij elke situatie hieronder spelen meerdere tools een plausibele rol. Klik op je keuze om te zien of het klopt, en waarom.</p>
+  </div>
+
+  <div class="scenario-blok" id="scenario-4">
+    <p class="scenario-vraag">Je wilt voor een klant een presentatie maken over de voordelen van AI voor hun logistieke bedrijf. Je hebt al een stuk tekst geschreven met de kern van de boodschap. Je wilt morgen kunnen presenteren.</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Claude kan helpen met de tekst, maar maakt geen slides. Je zou de verbeterde tekst daarna nog steeds handmatig in een presentatietool moeten zetten. Dat kost je de avond.')">Claude: laat hem de tekst verbeteren en structureren</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, true, 'Goed. Gamma neemt jouw tekst als input en genereert een complete, opgemaakte presentatie. Je kunt daarna nog aanpassen, maar de basis staat in een paar minuten. Dit is precies waarvoor Gamma gebouwd is.')">Gamma.app: geef de tekst mee en laat Gamma de presentatie genereren</button>
+      <button class="scenario-keuze" onclick="checkScenario(4, this, false, 'Gemini is sterk in beeldgeneratie, niet in het bouwen van volledige presentaties. Je kunt Gemini later gebruiken voor de afbeeldingen in de slides, maar Gamma is de juiste tool voor de presentatie zelf.')">Gemini: die kan ook presentaties maken</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-4"></div>
+  </div>
+
+  <div class="scenario-blok" id="scenario-5">
+    <p class="scenario-vraag">Je directeur vraagt je om te achterhalen welke drie AI-startups het afgelopen kwartaal de meeste investeringen hebben opgehaald in Europa. Hij wil de informatie morgenochtend.</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'Claude heeft geen toegang tot actuele investeringsdata en weet niet wat het afgelopen kwartaal is gebeurd. Hij kan plausibel klinkende namen noemen, maar die kunnen verzonnen of verouderd zijn. Dit is een hoog-risicogebruik van Claude.')">Claude: hij weet veel van het AI-ecosysteem</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, true, 'Precies. Perplexity zoekt live het internet af en geeft je directe bronvermelding zodat je kunt verifiëren. Deep Research-modus kan een uitgebreide analyse maken met meerdere bronnen. Dit is exact de taak waarvoor Perplexity bestaat.')">Perplexity met Deep Research: actuele data met bronvermelding</button>
+      <button class="scenario-keuze" onclick="checkScenario(5, this, false, 'NotebookLM werkt alleen met documenten die jij uploadt. Je hebt nu actuele externe informatie nodig die je nog niet hebt. NotebookLM kan die niet zelf ophalen.')">NotebookLM: upload relevante artikelen en stel vragen</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-5"></div>
+  </div>
+
+  <div class="scenario-blok" id="scenario-6">
+    <p class="scenario-vraag">Je hebt een boze e-mail ontvangen van een klant die al twee jaar klant is. Hij is teleurgesteld over een gemiste deadline. Je wilt een professionele, empathische reactie sturen die het probleem erkent maar ook de relatie bewaart.</p>
+    <div class="scenario-keuzes">
+      <button class="scenario-keuze" onclick="checkScenario(6, this, true, 'Precies. Dit is Claude\'s sterkste domein: schrijftaken met specifieke context, toon en doel. Gebruik het prompt-model: geef de klant-e-mail als referentie, beschrijf de situatie, de gewenste toon en het doel (relatie bewaren). Claude levert dan een genuanceerde, bruikbare reactie.')">Claude: geef de situatie en e-mail mee via het prompt-model</button>
+      <button class="scenario-keuze" onclick="checkScenario(6, this, false, 'Perplexity zoekt informatie op het internet. Je hebt hier geen research nodig, je hebt een schrijftaak met specifieke context. Perplexity heeft die context niet en kan die ook niet ophalen.')">Perplexity: zoek voorbeeldreacties op boze klanten</button>
+      <button class="scenario-keuze" onclick="checkScenario(6, this, false, 'NotebookLM is krachtig als je vragen wil stellen over je eigen documenten, maar is niet bedoeld voor het schrijven van reacties op specifieke situaties. Claude is hier duidelijk de juiste keuze.')">NotebookLM: upload eerdere klantmails als basis</button>
+    </div>
+    <div class="scenario-feedback" id="scenario-feedback-6"></div>
+  </div>
+</div>
+
+<!-- MODULE 5-1: Maatwerk AI -->
+<div id="screen-module-5-1" class="screen">
+  <div class="module-header">
+    <div class="module-num">Onderdeel 5</div>
+    <h2>Maatwerk AI: n8n en Claude Code</h2>
+  </div>
+  <div class="content-card">
+    <p>De tools tot nu toe werken op verzoek. Je stelt een vraag, je krijgt een antwoord. Maatwerk AI gaat een stap verder: je bouwt systemen die automatisch werken, zonder dat je er steeds bij hoeft te zijn.</p>
+    <p>Dit is de wereld van n8n en Claude Code, de twee bouwblokken voor serieuze AI-automatisering.</p>
+  </div>
+
+  <div class="processtroom" style="flex-direction:column;align-items:center;">
+    <div class="proces-blok" style="width:100%;max-width:520px;">
+      <div class="proces-icon">&#128221;</div>
+      <strong>Claude Code</strong>
+      <p>Bouwt de interface: website, webapp, formulier of dashboard dat de gebruiker ziet.</p>
+    </div>
+    <div class="proces-pijl" style="transform:rotate(90deg);">&#8594;</div>
+    <div class="proces-blok" style="width:100%;max-width:520px;">
+      <div class="proces-icon">&#9881;</div>
+      <strong>n8n</strong>
+      <p>Het brein achter de schermen: voert stappen uit, haalt data op en stuurt berichten.</p>
+    </div>
+    <div class="proces-pijl" style="transform:rotate(90deg);">&#8594;</div>
+    <div class="proces-blok" style="width:100%;max-width:520px;">
+      <div class="proces-icon">&#129302;</div>
+      <strong>Claude API</strong>
+      <p>De AI-motor die beslissingen neemt, teksten genereert en analyseert binnen de workflow.</p>
+    </div>
+    <div class="proces-pijl" style="transform:rotate(90deg);">&#8594;</div>
+    <div class="proces-blok" style="width:100%;max-width:520px;">
+      <div class="proces-icon">&#10004;</div>
+      <strong>Resultaat</strong>
+      <p>Automatisch gegenereerde output: notulen, e-mails, rapporten, antwoorden.</p>
+    </div>
+  </div>
+
+  <div class="content-card" style="margin-top:1.5rem">
+    <p><strong>Voorbeelden van wat je kunt bouwen:</strong></p>
+    <ul style="padding-left:1.25rem;margin-top:0.5rem;line-height:2">
+      <li>Volledig geautomatiseerde notulen-workflow na elke vergadering</li>
+      <li>AI-agent op WhatsApp die klantvragen beantwoordt</li>
+      <li>Automatisch gegenereerde offertes of contracten op basis van een formulier</li>
+      <li>Koppelingen tussen je CRM, e-mail en AI-verwerking zonder handmatig werk</li>
+    </ul>
+  </div>
+
+  <div class="tip-box waarschuwing">
+    <strong>Eerlijk gezegd:</strong> dit is een vak apart. Maatwerk AI bouwen kost tijd en technische kennis. Je kunt zelf leren via YouTube (zoek op "n8n tutorial" of "Nate Herk"), maar voor professionele implementatie met echte impact is samenwerken met een specialist de kortste route.
+  </div>
+</div>
+
+<!-- MODULE 5-2: Upsell -->
+<div id="screen-module-5-2" class="screen">
+  <div class="module-header">
+    <div class="module-num">Jouw volgende stap</div>
+    <h2>Wat kun je nu doen?</h2>
+  </div>
+  <div class="content-card">
+    <p>Je hebt de volledige handout doorlopen en de quiz afgerond. Je kent nu het prompt-model, Claude als dagelijkse assistent, Typeless voor rijkere input, vier gespecialiseerde tools en de basis van maatwerk automatisering.</p>
+    <p>Dit was de gratis handout bij de lezing van Sonny. Maar er is veel meer.</p>
+  </div>
+
+  <div class="content-card" style="border:2px solid #FF8514;background:rgba(255,133,20,0.05)">
+    <p style="font-size:1.1rem;font-weight:700;color:#FF8514;margin-bottom:0.75rem">De volledige Umely e-learning</p>
+    <p>25+ interactieve modules over Claude, Claude Code, MCP, automatisering, agents en meer. Alles wat je nodig hebt om AI structureel en professioneel in te zetten.</p>
+    <ul style="padding-left:1.25rem;margin:1rem 0;line-height:2">
+      <li>Stap voor stap, in je eigen tempo</li>
+      <li>Praktijkgericht: elke module eindigt met een concrete opdracht</li>
+      <li>Altijd actueel, regelmatig nieuwe modules</li>
+      <li>Certificaat na afronding</li>
+    </ul>
+    <div class="btn-wrap" style="margin-top:1rem">
+      <a class="btn" href="/pricing.html">Bekijk de volledige e-learning</a>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>Wil je verder praten?</strong> Plan een gratis kennismakingsgesprek via umely.ai. Sonny en het team helpen je bepalen waar AI de meeste impact maakt in jouw organisatie.
+  </div>
+
+</div>

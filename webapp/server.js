@@ -937,6 +937,37 @@ app.post('/api/user/usecase', requireAuth, async (req, res) => {
 
 require('./community-routes')(app, supabase, requireAuth);
 
+// ── Handout route: publiek toegankelijk via directe URL, geen login vereist ──
+app.get('/handout', async (req, res) => {
+  const fs = require('fs');
+  const path = require('path');
+
+  // Probeer eerst Supabase (productie)
+  const { data, error } = await supabase
+    .from('modules')
+    .select('html')
+    .eq('slug', 'elearning-lezing-handout')
+    .single();
+
+  if (!error && data?.html) {
+    res.setHeader('Content-Type', 'text/html');
+    return res.send(data.html);
+  }
+
+  // Fallback: lees lokaal gebouwde output (ontwikkeling)
+  const outputDir = path.join(__dirname, '..', 'output');
+  try {
+    const files = fs.readdirSync(outputDir).filter(f => f.startsWith('elearning-lezing-handout'));
+    if (files.length === 0) return res.status(404).send('Handout nog niet gebouwd');
+    files.sort().reverse();
+    const html = fs.readFileSync(path.join(outputDir, files[0]), 'utf-8');
+    res.setHeader('Content-Type', 'text/html');
+    return res.send(html);
+  } catch (e) {
+    return res.status(404).send('Handout niet gevonden');
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`Umely E-learning Generator draait op http://localhost:${PORT}`);
