@@ -118,6 +118,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { db: { schema: 'elearning' } });
+// Aparte client met anon key voor signUp — service role key negeert emailRedirectTo
+const supabaseAuth = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
 // ── Auth middleware ──
 async function requireAuth(req, res, next) {
@@ -715,9 +717,8 @@ app.post('/api/auth/signup', rateLimit({
       return res.status(400).json({ error: 'Wachtwoord moet minimaal 1 cijfer bevatten.' });
     }
 
-    // Standaard signUp: werkt met anon én service role key, verstuurt verificatiemail via Resend
-    const siteUrl = process.env.SITE_URL || 'https://umely-elearning-generator-dev.up.railway.app';
-    const { data, error } = await supabase.auth.signUp({
+    const siteUrl = (process.env.SITE_URL || 'https://umely-elearning-generator-dev.up.railway.app').replace(/\/$/, '');
+    const { data, error } = await supabaseAuth.auth.signUp({
       email: email,
       password: password,
       options: {
