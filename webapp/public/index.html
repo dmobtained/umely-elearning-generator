@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Umely E-learning Generator</title>
+<script>
+  // Supabase stuurt verificatielinks terug naar de root als /auth-callback.html niet whitelisted is.
+  // Dit script pakt de code/token op en stuurt door naar de juiste callback-pagina.
+  (function() {
+    var p = window.location.search;
+    var h = window.location.hash;
+    if (p.indexOf('code=') !== -1 || p.indexOf('error=') !== -1 ||
+        (h.indexOf('access_token=') !== -1 && h.indexOf('type=signup') !== -1)) {
+      window.location.replace('/auth-callback.html' + p + h);
+    }
+  })();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://instant.page/5.2.0" type="module"></script>
