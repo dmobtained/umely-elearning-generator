@@ -947,7 +947,7 @@ app.post('/api/user/usecase', requireAuth, async (req, res) => {
   if (!use_case || !use_case.trim()) return res.status(400).json({ error: 'use_case is verplicht.' });
   const { error } = await supabase
     .from('profiles')
-    .update({ use_case: use_case.trim() })
+    .upsert({ id: req.user.id, email: req.user.email, use_case: use_case.trim() }, { onConflict: 'id' })
     .eq('id', req.user.id);
   if (error) return res.status(500).json({ error: error.message });
   res.json({ ok: true });
