@@ -309,11 +309,24 @@ app.get('/modules/:slug', (req, res) => {
 
 // ── Subscription middleware ──
 async function requireSubscription(req, res, next) {
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('profiles')
     .select('role, subscription_status')
     .eq('id', req.user.id)
     .single();
+
+  // Profiel bestaat nog niet — aanmaken met defaults
+  if (error && error.code === 'PGRST116') {
+    const { data: newProfile, error: insertErr } = await supabase
+      .from('profiles')
+      .insert({ id: req.user.id, email: req.user.email, role: 'user' })
+      .select('role, subscription_status')
+      .single();
+    if (insertErr) return res.status(500).json({ error: 'Profiel aanmaken mislukt' });
+    data = newProfile;
+    error = null;
+  }
+
   if (error) return res.status(500).json({ error: 'Profiel ophalen mislukt' });
   if (data?.role === 'admin' || data?.subscription_status === 'active') return next();
   return res.status(402).json({ error: 'Actief abonnement vereist', redirect: '/pricing.html' });
@@ -737,10 +750,13 @@ app.post('/api/auth/signup', rateLimit({
 
     // Profiel aanmaken
     if (data.user) {
-      await supabase
+      const { error: profileErr } = await supabase
         .from('profiles')
         .insert({ id: data.user.id, email: email, role: 'user' })
         .select();
+      if (profileErr && profileErr.code !== '23505') {
+        console.error('Profiel aanmaken mislukt bij signup:', profileErr.message);
+      }
     }
 
     res.json({
