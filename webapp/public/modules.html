@@ -720,7 +720,11 @@ async function login() {
   errEl.style.display = 'none';
   btn.disabled = true; btn.textContent = 'Inloggen...';
   const { error } = await _supabase.auth.signInWithPassword({ email, password });
-  if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Inloggen'; }
+  if (error) {
+    var code = error.code || ''; var raw = (error.message || '').toLowerCase();
+    var msg = (code === 'invalid_credentials' || raw.includes('invalid') || raw.includes('credentials')) ? 'Onjuist e-mailadres of wachtwoord.' : (code === 'email_not_confirmed' || raw.includes('not confirmed')) ? 'Je e-mail is nog niet geverifieerd. Controleer je inbox.' : 'Inloggen mislukt. Probeer het opnieuw.';
+    errEl.textContent = msg; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Inloggen';
+  }
   else { btn.disabled = false; btn.textContent = 'Inloggen'; }
 }
 
