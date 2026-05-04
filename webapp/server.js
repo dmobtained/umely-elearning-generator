@@ -709,6 +709,31 @@ app.get('/api/admin/activity', requireAuth, requireAdmin, async (req, res) => {
   }
 });
 
+// ── Wachtwoord instellen via server (omzeilt client-side clock skew / sessie-issues) ──
+app.post('/api/auth/update-password', rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Te veel pogingen. Probeer het over 15 minuten opnieuw.' }
+}), async (req, res) => {
+  const { access_token, password } = req.body;
+  if (!access_token || !password) {
+    return res.status(400).json({ error: 'access_token en password zijn verplicht.' });
+  }
+  if (password.length < 8)    return res.status(400).json({ error: 'Wachtwoord moet minimaal 8 tekens bevatten.' });
+  if (!/[A-Z]/.test(password)) return res.status(400).json({ error: 'Wachtwoord moet minimaal 1 hoofdletter bevatten.' });
+  if (!/[0-9]/.test(password)) return res.status(400).json({ error: 'Wachtwoord moet minimaal 1 cijfer bevatten.' });
+
+  const { data: { user }, error: authErr } = await supabase.auth.getUser(access_token);
+  if (authErr || !user) return res.status(401).json({ error: 'Ongeldige of verlopen sessie.' });
+
+  const { error: updateErr } = await supabase.auth.admin.updateUserById(user.id, { password });
+  if (updateErr) return res.status(500).json({ error: updateErr.message });
+
+  res.json({ ok: true });
+});
+
 // ── Task 6: POST /api/auth/signup ──
 app.post('/api/auth/signup', rateLimit({
   windowMs: 60 * 60 * 1000,
