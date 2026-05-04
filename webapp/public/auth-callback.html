@@ -159,6 +159,21 @@ const _cookieStorage = {
   }
 };
 
+// Compenseert tijdelijk voor device clock skew t.o.v. de server.
+async function withClockSync(fn) {
+  try {
+    const { ts: serverTs } = await fetch('/api/server-time').then(r => r.json());
+    const clientTs = Math.floor(Date.now() / 1000);
+    const skew = serverTs - clientTs;
+    if (Math.abs(skew) <= 30) return fn();
+    const orig = Date.now;
+    Date.now = () => orig() + skew * 1000;
+    try { return await fn(); } finally { Date.now = orig; }
+  } catch (e) {
+    return fn();
+  }
+}
+
 async function init() {
   try {
     const config = await fetch('/api/config').then(r => r.json());
@@ -179,9 +194,9 @@ async function init() {
       return;
     }
 
-    // PKCE flow: wissel ?code= in voor sessie
+    // PKCE flow: wissel ?code= in voor sessie (met clock skew compensatie)
     if (code) {
-      const { error } = await _supabase.auth.exchangeCodeForSession(code);
+      const { error } = await withClockSync(() => _supabase.auth.exchangeCodeForSession(code));
       if (error) {
         const isExpired = error.message.toLowerCase().includes('expired') ||
                           error.message.toLowerCase().includes('otp');

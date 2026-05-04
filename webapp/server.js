@@ -91,7 +91,7 @@ app.use((req, res, next) => {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https:",
-    "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net",
     "frame-ancestors 'none'"
   ].join('; '));
   const origin = process.env.ALLOWED_ORIGIN || '*';
@@ -135,6 +135,11 @@ async function requireAuth(req, res, next) {
   req.user = user;
   next();
 }
+
+// ── Server-tijd voor client clock-skew compensatie ──
+app.get('/api/server-time', (req, res) => {
+  res.json({ ts: Math.floor(Date.now() / 1000) });
+});
 
 // ── Config voor frontend ──
 app.get('/api/config', (req, res) => {
