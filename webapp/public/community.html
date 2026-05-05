@@ -225,28 +225,28 @@ header { background: var(--charcoal); height: 64px; padding: 0 24px; display: fl
       <button class="room-btn" data-level="1" id="room1">
         <span class="room-icon" id="icon1"></span>
         <span class="room-text">
-          <span class="room-name">Level 1 — Starter</span>
+          <span class="room-name">Level 1: Starter</span>
           <span class="room-desc" id="desc1">A en B afgerond</span>
         </span>
       </button>
       <button class="room-btn locked" data-level="2" id="room2">
         <span class="room-icon" id="icon2"></span>
         <span class="room-text">
-          <span class="room-name">Level 2 — Gevorderd</span>
+          <span class="room-name">Level 2: Gevorderd</span>
           <span class="room-desc" id="desc2">Nog 4 modules</span>
         </span>
       </button>
       <button class="room-btn locked" data-level="3" id="room3">
         <span class="room-icon" id="icon3"></span>
         <span class="room-text">
-          <span class="room-name">Level 3 — Expert</span>
+          <span class="room-name">Level 3: Expert</span>
           <span class="room-desc" id="desc3">Nog 12 modules</span>
         </span>
       </button>
       <button class="room-btn locked" data-level="4" id="room4">
         <span class="room-icon" id="icon4"></span>
         <span class="room-text">
-          <span class="room-name">Level 4 — Master</span>
+          <span class="room-name">Level 4: Master</span>
           <span class="room-desc" id="desc4">Nog 25 modules</span>
         </span>
       </button>
@@ -297,10 +297,10 @@ function getAvatarColor(name) {
 }
 
 const ROOM_NAMES = {
-  1: { name: 'Level 1 — Starter', desc: 'A en B afgerond' },
-  2: { name: 'Level 2 — Gevorderd', desc: 'Meer dan de helft afgerond' },
-  3: { name: 'Level 3 — Expert', desc: 'Alle modules afgerond' },
-  4: { name: 'Level 4 — Master', desc: 'Alles met 100% score' },
+  1: { name: 'Level 1: Starter', desc: 'A en B afgerond' },
+  2: { name: 'Level 2: Gevorderd', desc: 'Meer dan de helft afgerond' },
+  3: { name: 'Level 3: Expert', desc: 'Alle modules afgerond' },
+  4: { name: 'Level 4: Master', desc: 'Alles met 100% score' },
 };
 const ROOM_LOCKED_HINTS = { 1: 'A en B afgerond', 2: 'Nog 4 modules', 3: 'Nog 12 modules', 4: 'Nog 25 modules' };
 
@@ -660,7 +660,7 @@ async function openProfileModal(userId) {
     <div class="modal-stat"><div class="modal-stat-num">${module_stats.completed}/${module_stats.total}</div><div class="modal-stat-label">Modules</div></div>
   `;
 
-  // Body — check privacy
+  // Body: check privacy
   const isPrivateForViewer = !profile.is_public && !is_own;
   const bodyEl = document.getElementById('modalBody');
 

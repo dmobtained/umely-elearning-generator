@@ -308,7 +308,7 @@
   /* Content padding voor bottom nav */
   .content { padding: 20px 16px calc(49px + env(safe-area-inset-bottom) + 16px); }
 
-  /* Bibliotheek-knop verbergen — duplicaat van Modules-tab in bottom nav */
+  /* Bibliotheek-knop verbergen: duplicaat van Modules-tab in bottom nav */
   .btn-sm.btn-ghost { display: none; }
 
   /* Tabel horizontaal scrollbaar */
@@ -491,7 +491,7 @@
           <div class="section-card-title">Beheerhulpmiddelen</div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
             <a href="/admin/review" target="_blank" class="btn-sm btn-primary" style="display:inline-flex;">Module review openen</a>
-            <p style="font-size:13px;color:var(--gray-text);margin:0;">Toont alle modules als broncode — gebruik met de Chrome-extensie voor kwaliteitsbeoordeling.</p>
+            <p style="font-size:13px;color:var(--gray-text);margin:0;">Toont alle modules als broncode, gebruik met de Chrome-extensie voor kwaliteitsbeoordeling.</p>
           </div>
         </div>
       </div>
@@ -516,7 +516,7 @@
     <div class="content-section" id="section-activiteit">
       <div id="adminActivitySection" style="display:none;">
         <div class="section-card">
-          <div class="section-card-title">Recente activiteit <span style="font-size:12px;font-weight:500;color:#aaa;">— afgelopen 7 dagen</span></div>
+          <div class="section-card-title">Recente activiteit <span style="font-size:12px;font-weight:500;color:#aaa;">(afgelopen 7 dagen)</span></div>
           <div class="activity-wrap" id="activityWrap"><div class="activity-empty">Laden...</div></div>
         </div>
       </div>
@@ -527,7 +527,7 @@
       <div id="adminFeedbackSection" style="display:none;">
         <div class="section-card">
           <div class="section-card-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-            <span>Deelnemers feedback <span style="font-size:12px;font-weight:500;color:#aaa;">— I2 Afsluiting &amp; Certificaat</span></span>
+            <span>Deelnemers feedback <span style="font-size:12px;font-weight:500;color:#aaa;">(I2 Afsluiting &amp; Certificaat)</span></span>
             <button class="btn-sm btn-primary" onclick="exportFeedbackCSV()" id="btnExportFeedback" style="display:none;">&#11015; Exporteer CSV</button>
           </div>
           <div id="feedbackList"><div class="activity-empty">Laden...</div></div>
@@ -920,7 +920,7 @@ function renderSubscriptionSection(profile) {
   const isActive = status === 'active';
   const lidSinds = profile.created_at
     ? new Date(profile.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
-    : '—';
+    : '-';
   const endDate = profile.subscription_end ? new Date(profile.subscription_end) : null;
   const verlooptOp = endDate
     ? endDate.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -1103,10 +1103,10 @@ function renderActivityTable() {
   const labels = { registered: 'Registratie', started: 'Gestart', completed: 'Afgerond' };
 
   const rows = visible.map(e => {
-    const time = e.ts ? new Date(e.ts).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
-    const email = escapeHtml(e.email || '—');
+    const time = e.ts ? new Date(e.ts).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '-';
+    const email = escapeHtml(e.email || '-');
     const badge = `<span class="activity-badge ${e.type}">${labels[e.type] || e.type}</span>`;
-    let detail = '—';
+    let detail = '-';
     if (e.type === 'registered') detail = 'Nieuw account aangemaakt';
     if (e.type === 'started') detail = escapeHtml((e.module || '').charAt(0).toUpperCase() + (e.module || '').slice(1));
     if (e.type === 'completed') detail = escapeHtml((e.module || '').charAt(0).toUpperCase() + (e.module || '').slice(1)) + (e.score != null ? `<span class="activity-score">${e.score}%</span>` : '');
@@ -1164,7 +1164,7 @@ async function loadFeedback() {
     const ambasLabels = { demo: 'Demo aan collega', prompt: 'Prompt doorsturen', uitrol: 'Uitrol bespreken met leidinggevende' };
     listEl.innerHTML = _feedbackData.map(function(f, idx) {
       var datum = f.created_at ? new Date(f.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-      var ambasLabel = ambasLabels[f.ambas_keuze] || f.ambas_keuze || '—';
+      var ambasLabel = ambasLabels[f.ambas_keuze] || f.ambas_keuze || '-';
       return '<div class="feedback-card">' +
         '<div class="feedback-card-header" onclick="toggleFeedbackCard(' + idx + ')">' +
           '<div>' +
@@ -1175,11 +1175,11 @@ async function loadFeedback() {
         '</div>' +
         '<div class="feedback-card-body" id="feedback-body-' + idx + '">' +
           '<div class="feedback-vraag">Wat heeft je het meest verrast?</div>' +
-          '<div class="feedback-antwoord">' + escapeHtml(f.tb_verrast || '—') + '</div>' +
+          '<div class="feedback-antwoord">' + escapeHtml(f.tb_verrast || '-') + '</div>' +
           '<div class="feedback-vraag">Waar heb je al iets mee gedaan?</div>' +
-          '<div class="feedback-antwoord">' + escapeHtml(f.tb_toegepast || '—') + '</div>' +
+          '<div class="feedback-antwoord">' + escapeHtml(f.tb_toegepast || '-') + '</div>' +
           '<div class="feedback-vraag">Wat ga je als eerste toepassen?</div>' +
-          '<div class="feedback-antwoord">' + escapeHtml(f.tb_eerst || '—') + '</div>' +
+          '<div class="feedback-antwoord">' + escapeHtml(f.tb_eerst || '-') + '</div>' +
           '<div class="feedback-vraag">Ambassadeursstap</div>' +
           '<div><span class="feedback-ambas-badge">' + escapeHtml(ambasLabel) + '</span>' +
           (f.ambas_wie ? '<div class="feedback-antwoord" style="margin-top:6px;">Wie: ' + escapeHtml(f.ambas_wie) + '</div>' : '') + '</div>' +
@@ -1216,7 +1216,7 @@ function exportFeedbackCSV() {
   URL.revokeObjectURL(url);
 }
 
-// Initialiseer — toon standaard de profiel sectie alvast
+// Initialiseer: toon standaard de profiel sectie alvast
 showSection('profiel');
 initAuth();
 </script>

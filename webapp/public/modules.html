@@ -225,22 +225,22 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
 
 @media (max-width: 768px) {
 
-  /* B1 — Header safe area */
+  /* B1: Header safe area */
   header { padding-top: env(safe-area-inset-top); }
 
-  /* B2 — Zijbalk verbergen + layout verticaal */
+  /* B2: Zijbalk verbergen + layout verticaal */
   .sidebar { display: none; }
   .layout { flex-direction: column; }
 
-  /* B4 — Content-container: ruimte voor bottom nav + home indicator */
+  /* B4: Content-container: ruimte voor bottom nav + home indicator */
   .main { padding: 16px 16px calc(49px + env(safe-area-inset-bottom) + 16px); }
 
-  /* B5 — Stats-rij compacter (3 kolommen; overschrijft bestaande 560px-regel die 1fr zet) */
+  /* B5: Stats-rij compacter (3 kolommen; overschrijft bestaande 560px-regel die 1fr zet) */
   .stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .stat-card { padding: 12px 10px; }
   .stat-value { font-size: 24px; }
 
-  /* B6 — Cat-groepen altijd open, als lijst weergeven */
+  /* B6: Cat-groepen altijd open, als lijst weergeven */
   .cat-group-body { display: block !important; }
   .cat-group-header { cursor: default !important; }
   .cat-group-chevron { display: none !important; }
@@ -260,11 +260,11 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
   .continue-title { font-size: 14px; }
   .btn-continue { padding: 9px 16px; font-size: 12px; }
 
-  /* Header-knoppen verbergen — dubbel met bottom nav */
+  /* Header-knoppen verbergen: dubbel met bottom nav */
   .btn-header-ghost { display: none; }
   #logoutBtn { display: none !important; }
 
-  /* B3 — Bottom navigation */
+  /* B3: Bottom navigation */
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
@@ -387,27 +387,27 @@ footer a { color: white; font-weight: 700; text-decoration: none; }
 
     <div class="sidebar-label" style="margin-top:6px;">Categorieën</div>
     <a class="nav-item" id="nav-a" href="#" onclick="setFilter('a',this);return false;">
-      <span class="nav-icon">🎓</span> A — Introductie
+      <span class="nav-icon">🎓</span> A: Introductie
       <span class="nav-badge" id="nb-a">0</span>
     </a>
     <a class="nav-item" id="nav-b" href="#" onclick="setFilter('b',this);return false;">
-      <span class="nav-icon">🔒</span> B — Veiligheid
+      <span class="nav-icon">🔒</span> B: Veiligheid
       <span class="nav-badge" id="nb-b">0</span>
     </a>
     <a class="nav-item" id="nav-c" href="#" onclick="setFilter('c',this);return false;">
-      <span class="nav-icon">💻</span> C — Gebruik
+      <span class="nav-icon">💻</span> C: Gebruik
       <span class="nav-badge" id="nb-c">0</span>
     </a>
     <a class="nav-item" id="nav-d" href="#" onclick="setFilter('d',this);return false;">
-      <span class="nav-icon">⌨️</span> D — Claude Code
+      <span class="nav-icon">⌨️</span> D: Claude Code
       <span class="nav-badge" id="nb-d">0</span>
     </a>
     <a class="nav-item" id="nav-e" href="#" onclick="setFilter('e',this);return false;">
-      <span class="nav-icon">🔌</span> E — MCP & Skills
+      <span class="nav-icon">🔌</span> E: MCP & Skills
       <span class="nav-badge" id="nb-e">0</span>
     </a>
     <a class="nav-item" id="nav-i" href="#" onclick="setFilter('i',this);return false;">
-      <span class="nav-icon">🏆</span> I — Afsluiting
+      <span class="nav-icon">🏆</span> I: Afsluiting
       <span class="nav-badge" id="nb-i">0</span>
     </a>
 
@@ -540,12 +540,12 @@ function safeUrl(url) {
 
 // ── CONFIG ──
 const CATEGORIES = {
-  a: { title: 'A — Introductie tot Claude', icon: '🎓' },
-  b: { title: 'B — Veiligheid & beperkingen', icon: '🔒' },
-  c: { title: 'C — Claude gebruiken', icon: '💻' },
-  d: { title: 'D — Claude Code', icon: '⌨️' },
-  e: { title: 'E — MCP & Skills', icon: '🔌' },
-  i: { title: 'I — Uitrol & Afsluiting', icon: '🏆' }
+  a: { title: 'A: Introductie tot Claude', icon: '🎓' },
+  b: { title: 'B: Veiligheid & beperkingen', icon: '🔒' },
+  c: { title: 'C: Claude gebruiken', icon: '💻' },
+  d: { title: 'D: Claude Code', icon: '⌨️' },
+  e: { title: 'E: MCP & Skills', icon: '🔌' },
+  i: { title: 'I: Uitrol & Afsluiting', icon: '🏆' }
 };
 const CAT_ICONS = { a:'🎓', b:'🔒', c:'💻', d:'⌨️', e:'🔌', i:'🏆' };
 
@@ -849,7 +849,7 @@ async function loadModules() {
     const subRes = await fetch('/api/user/subscription', { headers: authHeader() });
     if (subRes.ok) {
       const sub = await subRes.json();
-      // Admins hebben altijd toegang — check rol eerst via modules endpoint wordt later gedaan,
+      // Admins hebben altijd toegang. Check rol eerst via modules endpoint wordt later gedaan,
       // maar we weten de rol pas na het laden. Geef users zonder actief abonnement geen toegang.
       if (sub.subscription_status !== 'active') {
         // Check of de gebruiker admin is via het profiel
@@ -962,7 +962,7 @@ function showContinue() {
   const label = getCatLabel(last.slug);
   document.getElementById('continueIcon').textContent = icon;
   const catInfo = CATEGORIES[cat];
-  document.getElementById('continueTag').textContent = label + (catInfo ? ' — ' + (catInfo.title.split(' — ')[1] || catInfo.title) : '');
+  document.getElementById('continueTag').textContent = label + (catInfo ? ': ' + (catInfo.title.split(': ')[1] || catInfo.title) : '');
   document.getElementById('continueTitle').textContent = last.title;
   document.getElementById('continueBtn').href = last.url;
   document.getElementById('continueSection').style.display = 'block';
@@ -977,7 +977,7 @@ function setFilter(cat, sidebarEl) {
   const sNav = document.getElementById('nav-' + (cat === 'all' ? 'all' : cat));
   if (sNav) sNav.classList.add('active');
 
-  // Update section title — hide when single category (category header already shows it)
+  // Update section title: hide when single category (category header already shows it)
   const titleEl = document.getElementById('sectionTitle');
   if (cat === 'all') {
     titleEl.textContent = 'Alle modules';
