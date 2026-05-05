@@ -1,6 +1,6 @@
 <!-- TITLE: AI-tools in de praktijk: Digitale Handout -->
-<!-- SCHERMEN: 'screen-welcome','screen-prompt','screen-typeless','screen-gemini','screen-perplexity','screen-gamma','screen-notebooklm','screen-automatisering','screen-claude','screen-quiz','screen-result' -->
-<!-- MODULE_TITELS: 'screen-welcome':'','screen-prompt':'Prompt Engineering','screen-typeless':'Typeless','screen-gemini':'Gemini','screen-perplexity':'Perplexity & Comet','screen-gamma':'Gamma.app','screen-notebooklm':'NotebookLM','screen-automatisering':'Automatisering op maat','screen-claude':'Claude','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
+<!-- SCHERMEN: 'screen-welcome','screen-prompt','screen-typeless','screen-chatgptimage','screen-perplexity','screen-notebooklm','screen-claude','screen-quiz','screen-result' -->
+<!-- MODULE_TITELS: 'screen-welcome':'','screen-prompt':'Prompt Engineering','screen-typeless':'Typeless','screen-chatgptimage':'ChatGPT Image 2.0','screen-perplexity':'Perplexity en Comet','screen-notebooklm':'NotebookLM','screen-claude':'Claude','screen-quiz':'Afsluitquiz','screen-result':'Resultaat' -->
 
 <!-- QUIZ_START -->
 [
@@ -21,7 +21,7 @@
       "Claude, want die weet veel",
       "Perplexity, want die zoekt live op het internet met bronvermelding",
       "NotebookLM, want die analyseert documenten goed",
-      "Gamma, want die maakt een mooi overzicht"
+      "ChatGPT Image 2.0, want die visualiseert het aanbod mooi"
     ],
     "correct": 1,
     "uitleg": "Claude heeft geen toegang tot actuele informatie; hij is getraind op data van maanden geleden en kan dingen verzinnen die niet meer kloppen. Perplexity zoekt live op het internet en toont altijd de bronnen. Voor actuele koopbeslissingen is Perplexity de juiste keuze."
@@ -32,7 +32,7 @@
       "Snel de kern typen in Claude",
       "Alles inspreken via Typeless, zodat Claude een volledig beeld krijgt",
       "Eerst Perplexity raadplegen over hoe je omgaat met boze klanten",
-      "Gamma gebruiken voor een gestructureerde reactie"
+      "ChatGPT Image 2.0 vragen om een visuele weergave van de situatie te maken"
     ],
     "correct": 1,
     "uitleg": "Door alles in te spreken via Typeless geef je in dezelfde tijd drie keer zoveel context mee als bij typen. Je vertelt de situatie, de achtergrond, de gewenste toon, en Claude schrijft een reactie die echt bij jouw situatie past."
@@ -42,7 +42,7 @@
     "opties": [
       "Claude, want die kan documenten analyseren",
       "Perplexity Deep Research",
-      "Gamma, want die maakt interactieve documenten",
+      "ChatGPT Image 2.0, want die verwerkt documenten naar visuele output",
       "NotebookLM, want die werkt met jouw eigen documenten en kan er een podcast van maken"
     ],
     "correct": 3,
@@ -57,7 +57,7 @@
       "AI nogmaals vragen om het te controleren"
     ],
     "correct": 2,
-    "uitleg": "Dit is de 80/20-regel: AI levert de basis (80%), maar jij bent eindverantwoordelijk voor de kwaliteit (20%). Lees het contract zelf na, controleer de feiten en pas aan waar nodig. AI kan dingen verzinnen die plausibel klinken maar juridisch niet kloppen."
+    "uitleg": "Dit is de 10/80/10-regel: jij levert een goede input (10%), AI doet het werk (80%), maar jij bent eindverantwoordelijk voor de kwaliteit (10%). Lees het contract zelf na, controleer de feiten en pas aan waar nodig. AI kan dingen verzinnen die plausibel klinken maar juridisch niet kloppen."
   }
 ]
 <!-- QUIZ_END -->
@@ -65,34 +65,32 @@
 <!-- WELKOMSTSCHERM -->
 <div id="screen-welcome" class="screen start">
   <div class="welcome-hero">
-    <div class="welcome-badge">Umely E-learning</div>
+    <div class="welcome-badge">Umely Workshop Handout</div>
     <h1>AI-tools in de praktijk</h1>
-    <p>Dit is jouw digitale naslagwerk na de lezing. Alle tools, tips en technieken, overzichtelijk op één plek. Klik direct naar het onderdeel dat je zoekt, of doorloop alles van voren af aan.</p>
+    <p>Dit is jouw digitale naslagwerk na de workshop. Alle tools, tips en technieken die je hebt gezien, overzichtelijk op één plek. Klik direct naar het onderdeel dat je zoekt, of doorloop alles van voren af aan.</p>
   </div>
 
   <div class="leerdoelen">
     <h3>Na deze module kun je:</h3>
     <ul>
-      <li>Betere opdrachten geven aan AI met het prompt-model</li>
-      <li>De 80/20-regel toepassen: AI doet het zware werk, jij checkt en stuurt bij</li>
+      <li>Betere opdrachten geven aan AI met het prompt-model en de promptformule</li>
+      <li>De 10/80/10-regel toepassen: goede input leveren, AI het werk laten doen, en de output zelf kritisch beoordelen</li>
       <li>De juiste tool kiezen voor elke situatie</li>
-      <li>Claude, Typeless, Gemini, Perplexity, Gamma en NotebookLM zelfstandig gebruiken</li>
-      <li>Herkennen wanneer automatisering voor jou werkt</li>
+      <li>Claude, Typeless, ChatGPT Image 2.0, Perplexity en NotebookLM zelfstandig gebruiken</li>
+      <li>AI verantwoord en veilig inzetten in een zakelijke context</li>
     </ul>
   </div>
 
-  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 30 minuten</div>
+  <div class="tijdsbadge">&#x23F1; Geschatte tijd: 25 minuten</div>
 
   <div style="margin:1.5rem 0 0.75rem;">
     <p style="font-weight:700;color:#2A221A;margin-bottom:0.75rem;font-size:0.95rem;letter-spacing:0.03em;text-transform:uppercase;">Spring direct naar een onderdeel</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.6rem;">
       <button onclick="goTo('screen-prompt')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#9998; Prompt Engineering</button>
       <button onclick="goTo('screen-typeless')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#127908; Typeless</button>
-      <button onclick="goTo('screen-gemini')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#127755; Gemini</button>
+      <button onclick="goTo('screen-chatgptimage')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#127748; ChatGPT Image</button>
       <button onclick="goTo('screen-perplexity')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#128269; Perplexity</button>
-      <button onclick="goTo('screen-gamma')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#128202; Gamma.app</button>
       <button onclick="goTo('screen-notebooklm')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#128218; NotebookLM</button>
-      <button onclick="goTo('screen-automatisering')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#9881; Automatisering</button>
       <button onclick="goTo('screen-claude')" style="background:rgba(255,133,20,0.08);border:1.5px solid rgba(255,133,20,0.3);border-radius:10px;padding:0.75rem 1rem;text-align:left;cursor:pointer;font-family:Montserrat,sans-serif;font-size:0.85rem;font-weight:700;color:#2A221A;transition:all 0.15s;">&#129302; Claude</button>
     </div>
   </div>
@@ -110,9 +108,25 @@
   </div>
 
   <div class="content-card">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.2rem;margin-bottom:0.75rem;">De 80/20-regel: dit is de basis van alles</h3>
-    <p>AI kan verrassend veel voor je doen, maar alleen als jij het goed aanstuurt. Denk eraan als een nieuwe, razend slimme collega die alles wil helpen, maar geen context heeft. Geef je weinig, dan krijg je weinig terug.</p>
-    <p style="margin-top:0.75rem;">De 80/20-regel: <strong>AI levert 80% van het werk</strong>. Jij investeert de laatste <strong>20%</strong>: nakijken, bijsturen, controleren op fouten. Die 20% is niet optioneel. AI kan dingen verzinnen die plausibel klinken maar niet kloppen. Jij bent eindverantwoordelijk voor wat je uitstuurt.</p>
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.2rem;margin-bottom:0.75rem;">De 10/80/10-regel: zo werkt AI</h3>
+    <p>AI werkt goed als je weet wat jouw rol is. Gebruik de 10/80/10-verdeling als kompas voor elke taak die je aan AI geeft.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;margin-top:1rem;">
+      <div style="background:#27292D;border-radius:10px;padding:1rem;text-align:center;">
+        <div style="font-size:1.6rem;font-weight:800;color:#FF8514;line-height:1;">10%</div>
+        <div style="font-weight:700;color:#FFF8F2;margin:0.35rem 0 0.4rem;font-size:0.88rem;">Jouw input</div>
+        <div style="color:#FFF8F2;font-size:0.82rem;opacity:0.8;line-height:1.6;">Een concrete, specifieke prompt. Hoe meer context, hoe beter het resultaat.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#FF8514,#FF4D00);border-radius:10px;padding:1rem;text-align:center;">
+        <div style="font-size:1.6rem;font-weight:800;color:#fff;line-height:1;">80%</div>
+        <div style="font-weight:700;color:#fff;margin:0.35rem 0 0.4rem;font-size:0.88rem;">AI doet het werk</div>
+        <div style="color:#fff;font-size:0.82rem;opacity:0.92;line-height:1.6;">Schrijven, samenvatten, analyseren, vertalen. Hier zit de tijdwinst.</div>
+      </div>
+      <div style="background:#27292D;border-radius:10px;padding:1rem;text-align:center;">
+        <div style="font-size:1.6rem;font-weight:800;color:#FF8514;line-height:1;">10%</div>
+        <div style="font-weight:700;color:#FFF8F2;margin:0.35rem 0 0.4rem;font-size:0.88rem;">Jouw review</div>
+        <div style="color:#FFF8F2;font-size:0.82rem;opacity:0.8;line-height:1.6;">Nakijken, bijsturen, aanpassen. Jij blijft altijd eindverantwoordelijk.</div>
+      </div>
+    </div>
   </div>
 
   <div class="tip-box waarschuwing">
@@ -168,7 +182,7 @@
     </div>
     <div class="flashcard" onclick="toggleFlashcard(this)">
       <div class="fc-term">4 · Rol van de AI</div>
-      <div class="fc-hint">Welke 'identiteit' geef je de AI? Klik om te leren.</div>
+      <div class="fc-hint">Welke identiteit geef je de AI? Klik om te leren.</div>
       <div class="fc-uitleg">
         <p>Geef AI een identiteit. Dit verhoogt de kwaliteit drastisch: AI past zijn manier van schrijven en redeneren aan.</p>
         <p style="margin-top:0.6rem"><strong>Sterke voorbeelden:</strong></p>
@@ -208,8 +222,22 @@
     </div>
   </div>
 
-  <div class="tip-box" style="margin-top:1.25rem;">
-    <strong>Sneltemplate:</strong> "Je bent een [rol]. Maak [output], met als doel [doel]. Schrijf dit in [vorm/lengte] en in een stijl die past bij [doelgroep]. Baseer je op: [referentie]."
+  <div class="content-card" style="margin-top:1.25rem;">
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.6rem;">De promptformule</h3>
+    <p>Gebruik deze formule als startpunt voor elke prompt. Vul in wat je weet en laat weg wat niet van toepassing is.</p>
+    <div style="background:#27292D;border-radius:10px;padding:1.1rem 1.25rem;margin-top:0.75rem;">
+      <p style="color:#FF8514;font-weight:700;font-family:'Arimo',sans-serif;font-size:1rem;margin-bottom:0.6rem;">Promptformule</p>
+      <p style="color:#FFF8F2;line-height:2.1;font-size:0.92rem;">
+        Je bent <strong style="color:#FF8514;">[rol]</strong>.<br>
+        Maak <strong style="color:#FF8514;">[output + lengte/vorm]</strong>.<br>
+        Met als doel <strong style="color:#FF8514;">[doel]</strong>.<br>
+        Voor <strong style="color:#FF8514;">[doelgroep / stijl]</strong>.<br>
+        Baseer je op: <strong style="color:#FF8514;">[referentie]</strong>.
+      </p>
+    </div>
+    <div class="tip-box" style="margin-top:0.75rem;">
+      <strong>Concreet voorbeeld:</strong> "Je bent een ervaren klantenservice-expert. Schrijf een reactie van maximaal 100 woorden op een klacht over een vertraagde levering. Doel: begrip tonen en vertrouwen herstellen. Schrijf in een warme, professionele toon voor een particuliere klant. Baseer je op deze klacht: [plak de klacht]."
+    </div>
   </div>
 
   <div class="content-card" style="margin-top:1.25rem;">
@@ -329,28 +357,31 @@
   <div id="nav-screen-typeless"></div>
 </div>
 
-<!-- GEMINI -->
-<div id="screen-gemini" class="screen">
+<!-- CHATGPT IMAGE 2.0 -->
+<div id="screen-chatgptimage" class="screen">
   <div class="module-header">
     <div class="module-num">Onderdeel 3</div>
-    <h2>Gemini: beeld en video met AI</h2>
+    <h2>ChatGPT Image 2.0: AI-beelden genereren</h2>
   </div>
 
   <div class="content-card">
-    <p>Gemini is de AI-assistent van Google. Je gebruikt Gemini voor dezelfde soort taken als Claude: teksten schrijven, informatie analyseren, samenvatten en vertalen. Maar waar Gemini écht in uitblinkt (naast de chatfunctie) is beeld en video genereren.</p>
+    <p>ChatGPT Image 2.0 is de beeldgenerator van OpenAI, ingebouwd in ChatGPT. Je typt wat je wil zien en ChatGPT maakt er een afbeelding van. Het resultaat is zo realistisch dat het nauwelijks van echte foto's te onderscheiden is.</p>
+    <p style="margin-top:0.75rem;">ChatGPT Image 2.0 werkt rechtstreeks in de chat: je stelt vragen, geeft instructies, uploadt een referentieafbeelding en de afbeelding verschijnt in het gesprek. Aanpassen doe je gewoon met een vervolgzin.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem;">
       <div style="background:#27292D;border-radius:10px;padding:1rem;">
-        <p style="font-weight:700;color:#FF8514;margin-bottom:0.4rem;">&#128444; Afbeeldingen (NanoBanana)</p>
+        <p style="font-weight:700;color:#FF8514;margin-bottom:0.4rem;">&#127916; Afbeeldingen genereren</p>
         <ul style="padding-left:1.1rem;color:#FFF8F2;font-size:0.88rem;line-height:1.9;opacity:0.9">
-          <li>Nieuwe afbeeldingen genereren op basis van een prompt</li>
-          <li>Bestaande foto's aanpassen of "photoshoppen" via tekst</li>
+          <li>Poster, banner of social media visual</li>
+          <li>Productshots en mockups</li>
+          <li>Illustraties op basis van een beschrijving</li>
         </ul>
       </div>
       <div style="background:#27292D;border-radius:10px;padding:1rem;">
-        <p style="font-weight:700;color:#FF8514;margin-bottom:0.4rem;">&#127916; Video (Veo)</p>
+        <p style="font-weight:700;color:#FF8514;margin-bottom:0.4rem;">&#128247; Foto's bewerken</p>
         <ul style="padding-left:1.1rem;color:#FFF8F2;font-size:0.88rem;line-height:1.9;opacity:0.9">
-          <li>Korte, realistische AI-video's genereren op tekstprompts</li>
-          <li>Productshots, korte scènes of social snippets</li>
+          <li>Achtergrond vervangen of aanpassen</li>
+          <li>Stijl wijzigen via tekst</li>
+          <li>Referentieafbeelding uploaden als basis</li>
         </ul>
       </div>
     </div>
@@ -362,75 +393,114 @@
       <div class="stap-item">
         <div class="stap-num">1</div>
         <div class="stap-content">
-          <strong>Ga naar gemini.google.com</strong>
-          <p>Log in met je Google-account of maak een nieuw account aan.</p>
+          <strong>Ga naar chatgpt.com</strong>
+          <p>Maak een gratis account aan via e-mailadres, Google of Microsoft. Je bent direct klaar om te starten.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-num">2</div>
         <div class="stap-content">
           <strong>Kies een plan</strong>
-          <p>Het gratis plan geeft je toegang tot de basisfunctionaliteit. Voor afbeeldingen en video's (NanoBanana en Veo) heb je een betaald plan nodig: <strong>Google AI Pro</strong> met proefperiode of <strong>AI Plus</strong>.</p>
+          <p>Een gratis account geeft beperkte toegang tot beeldgeneratie. Voor hogere kwaliteit en meer generaties heb je een betaald plan nodig. Zie chatgpt.com voor actuele plannen en prijzen.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-num">3</div>
         <div class="stap-content">
-          <strong>Accepteer de voorwaarden</strong>
-          <p>Volg de vervolgstappen en je bent klaar om te beginnen.</p>
+          <strong>Controleer welk model actief is</strong>
+          <p>ChatGPT Image 2.0 werkt via GPT-4o. Bovenaan een nieuw gesprek zie je welk model actief is. Kies GPT-4o als dat nog niet het geval is.</p>
         </div>
       </div>
-    </div>
-    <div class="tip-box" style="margin-top:1rem;">
-      <strong>Tip van Sonny:</strong> activeer de gratis proefperiode van Google AI Pro en annuleer direct daarna. Je behoudt de volledige maand toegang en betaalt niets als je het abonnement vergeet op te zeggen. Je kunt het later altijd opnieuw activeren.
     </div>
   </div>
 
   <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Afbeeldingen maken</h3>
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Een afbeelding genereren: stap voor stap</h3>
     <div class="stappen-lijst">
       <div class="stap-item">
         <div class="stap-num">1</div>
         <div class="stap-content">
-          <strong>Open een chat en activeer "Afbeeldingen maken"</strong>
-          <p>Druk op "Tools" en controleer of Afbeeldingen maken is ingeschakeld.</p>
+          <strong>Start een nieuw gesprek op chatgpt.com</strong>
+          <p>Open een nieuwe chat. Je hoeft niets extra in te schakelen: beeldgeneratie zit standaard in GPT-4o.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-num">2</div>
         <div class="stap-content">
-          <strong>Geef een duidelijke prompt</strong>
-          <p>Voorbeelden: "Maak een fotorealistische afbeelding van een team dat samenwerkt in een modern kantoor" of "Maak een illustratie van een robot die een presentatie geeft."</p>
+          <strong>Beschrijf wat je wil zien</strong>
+          <p>Typ een concrete omschrijving. Goede prompts bevatten: wat er op de afbeelding staat, welke sfeer of stijl je wil, en het formaat of gebruik. Voorbeeld: "Maak een professionele LinkedIn-banner voor een AI-consultant. Minimalistische stijl, donkerblauwe achtergrond, moderne typografie, horizontaal formaat."</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-num">3</div>
         <div class="stap-content">
-          <strong>Pas aan met vervolgprompts</strong>
-          <p>Niet tevreden? Geef aanwijzingen: "Maak de sfeer warmer", "Voeg meer mensen toe" of "Maak het meer cartoonachtig."</p>
+          <strong>De afbeelding verschijnt in de chat</strong>
+          <p>Na een paar seconden genereert ChatGPT de afbeelding direct in het gesprek. Je kunt er meteen op reageren.</p>
         </div>
       </div>
       <div class="stap-item">
         <div class="stap-num">4</div>
         <div class="stap-content">
-          <strong>Download en gebruik</strong>
-          <p>Gebruik de afbeelding in presentaties, social media, documenten of e-books.</p>
+          <strong>Stuur bij met een vervolgprompt</strong>
+          <p>Niet tevreden? Geef een concrete aanwijzing. Voorbeelden: "Maak de achtergrond lichter", "Voeg een subtiel oranje accent toe" of "Maak het meer fotorealistisch in plaats van illustratief."</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-num">5</div>
+        <div class="stap-content">
+          <strong>Download de afbeelding</strong>
+          <p>Klik op de afbeelding en daarna op het download-icoon. De afbeelding staat direct klaar voor gebruik in presentaties, social media of andere toepassingen.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Foto's bewerken met tekst</h3>
-    <p>Upload een bestaande foto en geef tekstopdrachten om hem aan te passen. Voorbeelden:</p>
-    <ul style="padding-left:1.2rem;margin-top:0.5rem;line-height:2">
-      <li>"Verander de achtergrond zodat het lijkt alsof ik bij de Eiffeltoren sta."</li>
-      <li>"Voeg een AI-robot toe aan de groepsfoto."</li>
-      <li>"Maak de sfeer professioneler, alsof het een bedrijfsfoto is."</li>
-    </ul>
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Werken met een referentieafbeelding</h3>
+    <p>Je kunt een bestaande afbeelding of foto uploaden en ChatGPT vragen om iets soortgelijks te maken, of om de foto te bewerken. Dit is ideaal als je een huisstijl of een specifieke look wil aanhouden.</p>
+    <div class="stappen-lijst" style="margin-top:0.75rem;">
+      <div class="stap-item">
+        <div class="stap-num">1</div>
+        <div class="stap-content">
+          <strong>Klik op het paperclip-icoon in de chat</strong>
+          <p>Upload jouw referentieafbeelding, logo of foto.</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-num">2</div>
+        <div class="stap-content">
+          <strong>Geef een instructie bij de upload</strong>
+          <p>Voorbeelden: "Gebruik deze foto als stijlreferentie en maak een soortgelijke afbeelding van een vergaderzaal" of "Vervang de achtergrond van deze productfoto door een strak witte studiofoto."</p>
+        </div>
+      </div>
+      <div class="stap-item">
+        <div class="stap-num">3</div>
+        <div class="stap-content">
+          <strong>Beoordeel en stuur bij</strong>
+          <p>Gebruik vervolgprompts om het resultaat verder te verfijnen totdat het past bij wat je nodig hebt.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:0.75rem;">
+      <strong>Tip van Sonny:</strong> bij de workshop zagen we hoe realistisch AI-afbeeldingen kunnen zijn. Gebruik dit voor professionele visuals, maar wees je bewust van de verantwoordelijkheid: geef bij twijfel aan wanneer een afbeelding AI-gegenereerd is.
+    </div>
   </div>
 
-  <div id="nav-screen-gemini"></div>
+  <div class="content-card" style="margin-top:1rem;">
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.6rem;">Wanneer gebruik je ChatGPT Image 2.0?</h3>
+    <ul style="padding-left:1.2rem;line-height:2">
+      <li>Social media visuals en banners genereren zonder grafisch ontwerper</li>
+      <li>Poster of uitnodiging maken op basis van een korte beschrijving</li>
+      <li>Productfoto-achtergrond vervangen of professioneler maken</li>
+      <li>Illustraties toevoegen aan presentaties of rapporten</li>
+      <li>Referentieafbeelding uploaden en een vergelijkbare variant laten genereren</li>
+    </ul>
+    <div class="tip-box waarschuwing" style="margin-top:0.75rem;">
+      <strong>Let op:</strong> ChatGPT Image 2.0 is geen vervanging voor een grafisch ontwerper bij complexe merkidentiteiten. Gebruik het voor snelle, functionele visuals en laat kritisch merkwerk door een professional afmaken.
+    </div>
+  </div>
+
+  <div id="nav-screen-chatgptimage"></div>
 </div>
 
 <!-- PERPLEXITY & COMET -->
@@ -481,7 +551,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
       <div style="background:#27292D;border-radius:10px;padding:1rem;">
         <p style="font-weight:700;color:#FF8514;margin-bottom:0.4rem;">Snel zoeken (Google-stijl)</p>
-        <p style="color:#FFF8F2;font-size:0.88rem;opacity:0.9">Korte zoekopdrachten zoals "beste elektrische auto 2025" of "verschil bv en eenmanszaak". Je krijgt direct een bruikbaar antwoord, plus de optie om door te vragen.</p>
+        <p style="color:#FFF8F2;font-size:0.88rem;opacity:0.9">Korte zoekopdrachten zoals "beste elektrische auto" of "verschil bv en eenmanszaak". Je krijgt direct een bruikbaar antwoord, plus de optie om door te vragen.</p>
       </div>
       <div style="background:#27292D;border-radius:10px;padding:1rem;">
         <p style="font-weight:700;color:#FF8514;margin-bottom:0.4rem;">Opdrachten geven (AI-stijl)</p>
@@ -519,104 +589,10 @@
   <div id="nav-screen-perplexity"></div>
 </div>
 
-<!-- GAMMA.APP -->
-<div id="screen-gamma" class="screen">
-  <div class="module-header">
-    <div class="module-num">Onderdeel 5</div>
-    <h2>Gamma.app: presentaties in minuten</h2>
-  </div>
-
-  <div class="content-card">
-    <p>Gamma.app is een AI-tool om presentaties, documenten en webachtige pagina's te maken op basis van een korte tekst of bestaande bestanden. Je hoeft zelf vrijwel geen ontwerp te doen: de AI regelt layout, structuur en basiscontent per slide.</p>
-    <p style="margin-top:0.75rem;"><strong>Je kunt Gamma gebruiken voor:</strong></p>
-    <ul style="padding-left:1.2rem;margin-top:0.4rem;line-height:2">
-      <li>Salesdecks, investor decks, keynotes</li>
-      <li>Trainingspresentaties en e-learning</li>
-      <li>One-pagers en interne memo's</li>
-      <li>Rapporten en visuals voor klanten</li>
-    </ul>
-  </div>
-
-  <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Account aanmaken</h3>
-    <div class="stappen-lijst">
-      <div class="stap-item">
-        <div class="stap-num">1</div>
-        <div class="stap-content">
-          <strong>Ga naar gamma.app</strong>
-          <p>Klik op "Get Started" en log in met Google of e-mail.</p>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-num">2</div>
-        <div class="stap-content">
-          <strong>Verifieer je e-mailadres</strong>
-          <p>Volg de vervolgstappen om je profiel te activeren.</p>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-num">3</div>
-        <div class="stap-content">
-          <strong>Je ontvangt 400 gratis credits</strong>
-          <p>Goed voor ongeveer 10 presentaties. Daarna kun je credits bijkopen of upgraden naar een betaald plan.</p>
-        </div>
-      </div>
-    </div>
-    <div class="tip-box" style="margin-top:0.75rem;">
-      <strong>Tip van Sonny:</strong> maak eenvoudig een nieuw account aan met een ander e-mailadres voor opnieuw 400 gratis credits. ;)
-    </div>
-  </div>
-
-  <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Een presentatie maken</h3>
-    <div class="stappen-lijst">
-      <div class="stap-item">
-        <div class="stap-num">1</div>
-        <div class="stap-content">
-          <strong>Ga naar het tabje "Gammas" en klik op "Create New"</strong>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-num">2</div>
-        <div class="stap-content">
-          <strong>Kies een inputmethode</strong>
-          <p><strong>Generate</strong> (meest gebruikt): genereer via een prompt. <strong>Paste in text</strong>: plak bestaande tekst erin. <strong>Import file</strong>: upload een bestand.</p>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-num">3</div>
-        <div class="stap-content">
-          <strong>Kies het format en geef je prompt</strong>
-          <p>Kies Presentation, Document of Webpage. Geef dan een duidelijke prompt: "Maak een presentatie over AI-kansen voor mkb-bedrijven, 10 slides, Nederlandse taal."</p>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-num">4</div>
-        <div class="stap-content">
-          <strong>Gamma genereert een outline, pas aan en genereer</strong>
-          <p>Bekijk de outline, pas eventueel aan, en laat Gamma de volledige presentatie genereren. Daarna kun je tekst, visuals en stijl naar wens aanpassen.</p>
-        </div>
-      </div>
-      <div class="stap-item">
-        <div class="stap-num">5</div>
-        <div class="stap-content">
-          <strong>Delen of exporteren</strong>
-          <p>Deel via een link of exporteer naar PDF, PowerPoint of andere formaten via het driepuntjes-menu rechtsboven.</p>
-        </div>
-      </div>
-    </div>
-    <div class="tip-box waarschuwing" style="margin-top:0.75rem;">
-      <strong>Let op:</strong> Gamma geeft een solide basis, maar voeg altijd je eigen stijl, nuance en expertise toe. De 80/20-regel geldt hier ook.
-    </div>
-  </div>
-
-  <div id="nav-screen-gamma"></div>
-</div>
-
 <!-- NOTEBOOKLM -->
 <div id="screen-notebooklm" class="screen">
   <div class="module-header">
-    <div class="module-num">Onderdeel 6</div>
+    <div class="module-num">Onderdeel 5</div>
     <h2>NotebookLM: jouw eigen kennisbank</h2>
   </div>
 
@@ -637,7 +613,7 @@
         <p style="font-size:0.88rem;">Visuele overzichtsstructuren van de belangrijkste concepten uit je documenten.</p>
       </div>
       <div style="background:rgba(255,133,20,0.06);border:1px solid rgba(255,133,20,0.2);border-radius:10px;padding:0.9rem;">
-        <p style="font-weight:700;margin-bottom:0.4rem;">&#128220; Flashcards & quizzes</p>
+        <p style="font-weight:700;margin-bottom:0.4rem;">&#128220; Flashcards en quizzes</p>
         <p style="font-size:0.88rem;">Direct te gebruiken voor studie, training en workshops op basis van jouw eigen materiaal.</p>
       </div>
       <div style="background:rgba(255,133,20,0.06);border:1px solid rgba(255,133,20,0.2);border-radius:10px;padding:0.9rem;">
@@ -708,84 +684,39 @@
   <div id="nav-screen-notebooklm"></div>
 </div>
 
-<!-- AUTOMATISERING -->
-<div id="screen-automatisering" class="screen">
-  <div class="module-header">
-    <div class="module-num">Onderdeel 7</div>
-    <h2>Automatisering op maat</h2>
-  </div>
-
-  <div class="content-card">
-    <p>Alles wat je tot nu hebt gezien, werkt op het moment dat <em>jij</em> iets vraagt. Maar AI kan ook automatisch dingen voor je doen, zonder dat jij erbij hoeft te zijn. Dit heet maatwerk AI-tooling, en het is een vak apart.</p>
-    <p style="margin-top:0.75rem;">Denk aan systemen die automatisch binnenkomende e-mails lezen, categoriseren en de juiste mensen op de hoogte stellen. Of een chatbot op je website die klantvragen dag en nacht beantwoordt. Of vergaderingen die automatisch een samenvatting genereren in je mail.</p>
-  </div>
-
-  <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">n8n: het brein van je AI-apps</h3>
-    <p>n8n is een open-source workflow automation tool. Hiermee bouw je de logica achter je AI-oplossingen:</p>
-    <ul style="padding-left:1.2rem;margin-top:0.5rem;line-height:2">
-      <li>Workflows die stappen uitvoeren (data ophalen, documenten genereren, berichten versturen)</li>
-      <li>AI-agents die beslissingen nemen en meerdere taken combineren</li>
-      <li>Koppelingen met je systemen, databases en apps</li>
-    </ul>
-    <p style="margin-top:0.75rem;">n8n is het brein en de motor die alles aanstuurt.</p>
-  </div>
-
-  <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Cursor: de voorkant voor je apps</h3>
-    <p>Cursor is een AI-code editor waarmee je de interface bouwt waar de gebruiker mee werkt: websites, webapps, dashboards en portals. Cursor begrijpt je volledige project en maakt het makkelijk om jouw app te koppelen aan n8n.</p>
-    <p style="margin-top:0.75rem;"><strong>Samen werken ze zo:</strong></p>
-    <div style="background:#27292D;border-radius:10px;padding:1rem;margin-top:0.5rem;text-align:center;">
-      <span style="color:#FF8514;font-weight:700;">Cursor (voorkant)</span>
-      <span style="color:#FFF8F2;margin:0 0.75rem;">&#8594;</span>
-      <span style="color:#FF8514;font-weight:700;">n8n (brein)</span>
-      <span style="color:#FFF8F2;margin:0 0.75rem;">&#8594;</span>
-      <span style="color:#FFF8F2;font-weight:700;">Resultaat voor de gebruiker</span>
-    </div>
-  </div>
-
-  <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Praktijkvoorbeelden</h3>
-    <ul style="padding-left:1.2rem;line-height:2.2">
-      <li>Volledig geautomatiseerde notulen-workflows: elke vergadering krijgt automatisch een samenvatting</li>
-      <li>AI-agents op WhatsApp die klantvragen kunnen beantwoorden</li>
-      <li>Documentgeneratie voor repetitieve documenten (contracten, offertes, rapporten)</li>
-      <li>Nieuwe aanmeldingen automatisch verwerken en bevestigen</li>
-    </ul>
-  </div>
-
-  <div class="content-card" style="margin-top:1rem;">
-    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Twee routes</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
-      <div style="background:rgba(255,133,20,0.06);border:1px solid rgba(255,133,20,0.2);border-radius:10px;padding:1rem;">
-        <p style="font-weight:700;margin-bottom:0.5rem;">&#128218; Zelf leren</p>
-        <p style="font-size:0.88rem;line-height:1.7">Stap voor stap bouwen via tutorials op YouTube. Goed als je technisch aangelegd bent en de tijd hebt om te investeren.</p>
-        <p style="font-size:0.82rem;margin-top:0.6rem;color:rgba(42,34,26,0.6)">Zoek op YouTube: "n8n beginners" of "Cursor AI editor"</p>
-      </div>
-      <div style="background:#27292D;border-radius:10px;padding:1rem;">
-        <p style="font-weight:700;color:#FF8514;margin-bottom:0.5rem;">&#129302; Samen met Umely</p>
-        <p style="font-size:0.88rem;color:#FFF8F2;line-height:1.7;opacity:0.9">Wij bouwen maatwerk AI-apps dagelijks professioneel. Van een eenvoudige workflow tot geavanceerde AI-agents. Binnen 0-2 weken een werkende MVP.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="tip-box waarschuwing">
-    <strong>Eerlijk gezegd:</strong> dit bouwen is specialistenwerk. Het is geen kant-en-klaar product maar een bouwpakket. Afhankelijk van je technische niveau heb je mogelijk externe expertise nodig. En dat is prima: weten wanneer je hulp vraagt is ook vakmanschap.
-  </div>
-
-  <div id="nav-screen-automatisering"></div>
-</div>
-
 <!-- CLAUDE -->
 <div id="screen-claude" class="screen">
   <div class="module-header">
-    <div class="module-num">Onderdeel 8</div>
+    <div class="module-num">Onderdeel 6</div>
     <h2>Claude: jouw AI-assistent voor dagelijks werk</h2>
   </div>
 
   <div class="content-card">
-    <p>Claude is een AI-assistent gemaakt door Anthropic, een Amerikaans AI-veiligheidsbedrijf. Claude is ontworpen om eerlijk, behulpzaam en veilig te zijn. Je gebruikt Claude via je browser of de app op je telefoon of computer; ga naar claude.ai om te beginnen.</p>
-    <p style="margin-top:0.75rem;">Claude is getraind op een enorme hoeveelheid tekst en kan je helpen met vrijwel alles wat te maken heeft met taal: schrijven, analyseren, uitleggen, samenvatten, vertalen en redeneren.</p>
+    <p>Claude is een AI-assistent gemaakt door Anthropic, een Amerikaans AI-veiligheidsbedrijf. Claude is ontworpen om eerlijk, behulpzaam en veilig te zijn. Je gebruikt Claude via je browser of de app op je telefoon of computer: ga naar claude.ai om te beginnen.</p>
+    <p style="margin-top:0.75rem;">Claude is bijzonder sterk in redeneren, nuance en het verwerken van lange documenten. Dat maakt Claude de beste keuze voor schrijven, analyseren, samenvatten en sparren.</p>
+  </div>
+
+  <div class="content-card" style="margin-top:1rem;">
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Waarom Claude?</h3>
+    <p style="margin-bottom:0.75rem;">Claude verschilt op vier punten van andere AI-tools:</p>
+    <div style="display:grid;gap:0.6rem;">
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <span style="background:#FF8514;color:#fff;font-weight:800;font-size:0.78rem;padding:0.2rem 0.5rem;border-radius:6px;flex-shrink:0;margin-top:0.1rem;">01</span>
+        <div><strong>Sterker in redeneren en lange context</strong><p style="font-size:0.88rem;margin-top:0.25rem;">Claude heeft een groot contextvenster en is uitzonderlijk sterk in nuance, redeneren en het verwerken van lange documenten. Plak een compleet rapport erin en Claude begrijpt de samenhang.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <span style="background:#FF8514;color:#fff;font-weight:800;font-size:0.78rem;padding:0.2rem 0.5rem;border-radius:6px;flex-shrink:0;margin-top:0.1rem;">02</span>
+        <div><strong>Personalisatie via Skills</strong><p style="font-size:0.88rem;margin-top:0.25rem;">Claude Skills zijn voorinstellingen die Claude volledig trainen op hoe jij werkt: jouw toon, jouw format, jouw werkwijze. Zo hoef je je stijl niet elke keer opnieuw uit te leggen.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <span style="background:#FF8514;color:#fff;font-weight:800;font-size:0.78rem;padding:0.2rem 0.5rem;border-radius:6px;flex-shrink:0;margin-top:0.1rem;">03</span>
+        <div><strong>Verbonden met je computer en software</strong><p style="font-size:0.88rem;margin-top:0.25rem;">Via Claude Connectors en Cowork koppel je Claude direct aan je eigen software en computer. Claude leest je inbox, bekijkt je agenda en kan taken uitvoeren in jouw apps.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <span style="background:#FF8514;color:#fff;font-weight:800;font-size:0.78rem;padding:0.2rem 0.5rem;border-radius:6px;flex-shrink:0;margin-top:0.1rem;">04</span>
+        <div><strong>Native in Word, Excel en PowerPoint</strong><p style="font-size:0.88rem;margin-top:0.25rem;">Claude werkt direct binnen Microsoft Office-applicaties. Geen kopieren en plakken: Claude zit in je bestaande werkomgeving.</p></div>
+      </div>
+    </div>
   </div>
 
   <div class="content-card" style="margin-top:1rem;">
@@ -842,17 +773,72 @@
   </div>
 
   <div class="content-card" style="margin-top:1rem;">
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Zakelijk gebruik: Claude Pro of Teams?</h3>
+    <p>Gebruik je Claude voor klantdata of gevoelige bedrijfsinformatie? Dan maakt het verschil welk account je gebruikt.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem;">
+      <div style="background:rgba(255,133,20,0.06);border:1px solid rgba(255,133,20,0.2);border-radius:10px;padding:1rem;">
+        <p style="font-weight:700;margin-bottom:0.5rem;font-family:'Arimo',sans-serif;">Claude Pro</p>
+        <ul style="padding-left:1.1rem;font-size:0.86rem;line-height:1.9;color:#2A221A;">
+          <li>Consumentenaccount</li>
+          <li>Data kan worden gebruikt voor AI-training (opt-out vereist)</li>
+          <li>Geen verwerkersovereenkomst (DPA)</li>
+          <li>Voldoende voor persoonlijk en niet-gevoelig gebruik</li>
+        </ul>
+      </div>
+      <div style="background:#27292D;border-radius:10px;padding:1rem;">
+        <p style="font-weight:700;color:#FF8514;margin-bottom:0.5rem;font-family:'Arimo',sans-serif;">Claude Teams (aanbevolen)</p>
+        <ul style="padding-left:1.1rem;font-size:0.86rem;line-height:1.9;color:#FFF8F2;opacity:0.92;">
+          <li>Zakelijk account</li>
+          <li>Data NOOIT gebruikt voor training (contractueel vastgelegd)</li>
+          <li>Automatisch DPA inbegrepen (AVG-compliant)</li>
+          <li>ISO 27001 en SOC 2 gecertificeerd</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-box waarschuwing" style="margin-top:0.75rem;">
+      <strong>Conclusie:</strong> zakelijk klantdata verwerken via Claude Pro is juridisch onvoldoende. Voor organisaties die met klant- of persoonsdata werken, is Claude Teams de juiste keuze.
+    </div>
+  </div>
+
+  <div class="content-card" style="margin-top:1rem;">
     <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Extra: Projects</h3>
     <p>Met Projects in Claude kun je een vaste context instellen die Claude in elk gesprek onthoudt. Denk aan je functie, je bedrijf, je schrijfstijl of klantinformatie. Zo hoef je niet elke keer opnieuw uit te leggen wie je bent en wat je doet.</p>
     <p style="margin-top:0.5rem;">Je kunt ook documenten toevoegen aan een Project, zodat Claude altijd toegang heeft tot jouw eigen informatie.</p>
   </div>
 
   <div class="tip-box waarschuwing">
-    <strong>Belangrijke beperking (hallucinations):</strong> Claude kan soms dingen verzinnen die niet kloppen. Dit noemen we "hallucinations." Het gebeurt vooral bij specifieke feiten, cijfers, namen en recente gebeurtenissen. Controleer altijd even of belangrijke informatie klopt voordat je er iets mee doet. Gebruik Claude als startpunt, niet als de enige bron.
+    <strong>Belangrijke beperking (hallucinations):</strong> Claude kan soms dingen verzinnen die niet kloppen. Dit noemen we "hallucinations." Het gebeurt vooral bij specifieke feiten, cijfers, namen en recente gebeurtenissen. Controleer altijd of belangrijke informatie klopt voordat je er iets mee doet. Gebruik Claude als startpunt, niet als enige bron.
   </div>
 
   <div class="tip-box">
     <strong>Gebruik Claude niet voor:</strong> actuele nieuwsfeiten, live marktinformatie of recente gebeurtenissen. Voor die situaties is <strong>Perplexity</strong> de betere keuze: die zoekt live op het internet met bronvermelding.
+  </div>
+
+  <div class="content-card" style="margin-top:1rem;">
+    <h3 style="font-family:'Arimo',sans-serif;font-size:1.15rem;margin-bottom:0.75rem;">Welke tool kies je wanneer?</h3>
+    <p>Gebruik dit overzicht als snelle naslag om de juiste tool te kiezen.</p>
+    <div style="display:grid;gap:0.5rem;margin-top:0.75rem;">
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0.75rem;align-items:start;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <div style="font-weight:700;color:#FF8514;font-size:0.88rem;">&#129302; Claude</div>
+        <div style="font-size:0.88rem;">Schrijven, herschrijven, samenvatten, uitleggen, analyseren, sparren, vertalen. Alles wat met taal en redeneren te maken heeft.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0.75rem;align-items:start;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <div style="font-weight:700;color:#FF8514;font-size:0.88rem;">&#127908; Typeless</div>
+        <div style="font-size:0.88rem;">Meer context meegeven aan Claude via inspreken. Gebruik als je situatie veel uitleg vraagt en sneller wil werken dan via typen.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0.75rem;align-items:start;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <div style="font-weight:700;color:#FF8514;font-size:0.88rem;">&#127748; ChatGPT Image</div>
+        <div style="font-size:0.88rem;">Afbeeldingen en visuals genereren, foto's bewerken, referentiebeelden aanpassen. Geen grafisch ontwerper nodig voor functionele visuals.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0.75rem;align-items:start;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <div style="font-weight:700;color:#FF8514;font-size:0.88rem;">&#128269; Perplexity</div>
+        <div style="font-size:0.88rem;">Actuele informatie, live internet, bronvermelding. Gebruik als je betrouwbare en recente informatie nodig hebt die Claude niet kan geven.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0.75rem;align-items:start;background:rgba(255,133,20,0.06);border-radius:8px;padding:0.75rem;">
+        <div style="font-weight:700;color:#FF8514;font-size:0.88rem;">&#128218; NotebookLM</div>
+        <div style="font-size:0.88rem;">Vragen stellen aan jouw eigen documenten, AI-podcast genereren, kennisbank opbouwen. Ideaal voor grote hoeveelheden eigen materiaal.</div>
+      </div>
+    </div>
   </div>
 
   <div id="nav-screen-claude"></div>
